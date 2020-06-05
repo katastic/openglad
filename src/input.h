@@ -28,10 +28,8 @@
 #include <string>
 #include "video.h"
 
-
-
+// THESE ARE SDL 2 <--- SO WTF is going on here? Are the old make files SDL1? 
 #define SDLKey SDL_Keycode
-
 #define KEYSTATE_UNKNOWN SDL_SCANCODE_UNKNOWN
 #define KEYSTATE_a SDL_SCANCODE_A
 #define KEYSTATE_b SDL_SCANCODE_B

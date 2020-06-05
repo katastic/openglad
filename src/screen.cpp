@@ -1,5 +1,5 @@
 /* Copyright (C) 1995-2002  FSGames. Ported by Sean Ford and Yan Shosh
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -33,6 +33,8 @@
 #include <string>
 #include <cstring>
 
+#include "common.h"
+
 using namespace std;
 
 // From picker.cpp
@@ -42,8 +44,8 @@ extern Sint32 calculate_level(Uint32 temp_exp);
 #define MAX_VIEWS 5
 #define S_UP 0 //12 //0
 #define S_LEFT 0 //12 //0
-#define S_DOWN 200 //188 // 200
-#define S_RIGHT 320 // 228
+#define S_DOWN SCREEN_H //188 // 200
+#define S_RIGHT SCREEN_W // 228
 #define S_WIDTH (S_RIGHT - S_LEFT)
 #define S_HEIGHT (S_DOWN - S_UP)
 //#define BUF_SIZE (unsigned) ((S_DOWN-S_UP)*(S_RIGHT-S_LEFT))
@@ -79,7 +81,7 @@ screen::screen(short howmany)
 {
     // Set the global here so objects we construct here can use it
     myscreen = this;
-    
+
 	Sint32 i, j;
 	text& first_text = text_normal;
 	Sint32 left = 66;
@@ -104,14 +106,14 @@ screen::screen(short howmany)
 	draw_text_bar(64, 64, 256, 106); // draw box for text
 
 	first_text.write_xy(left, 70, "Loading Graphics...", DARK_BLUE, 1);
-	buffer_to_screen(0, 0, 320, 200);
+	buffer_to_screen(0, 0, SCREEN_W, SCREEN_H);
     // FIXME: Loader used to be created here...  but now it's in level_data.
 	first_text.write_xy(left, 70, "Loading Graphics...Done", DARK_BLUE, 1);
 	first_text.write_xy(left, 78, "Loading Gameplay Info...", DARK_BLUE, 1);
-	buffer_to_screen(0, 0, 320, 200);
-	
+	buffer_to_screen(0, 0, SCREEN_W, SCREEN_H);
+
 	update_overscan_setting();
-	
+
 	palmode = 0;
 
 	end = 0;
@@ -119,11 +121,11 @@ screen::screen(short howmany)
 
 	redrawme = 1;
 	cyclemode = 1; //color cycling on by default
-	
+
 	enemy_freeze = 0;
 
 	level_done = 0;
-	
+
 	retry = false;
 
 	// Load map data from a pixie format
@@ -131,28 +133,28 @@ screen::screen(short howmany)
 	//load_map_data(pixdata);
 	first_text.write_xy(left, 78, "Loading Gameplay Info...Done", DARK_BLUE, 1);
 	first_text.write_xy(left, 86, "Initializing Display...", DARK_BLUE, 1);
-	buffer_to_screen(0, 0, 320, 200);
+	buffer_to_screen(0, 0, SCREEN_W, SCREEN_H);
 
 
 	// Set up the viewscreen poshorters
 	numviews = howmany; // # of viewscreens
 	for (i=0; i < MAX_VIEWS; i++)
 		viewob[i] = NULL;
-    
+
     initialize_views();
 
 	first_text.write_xy(left, 86, "Initializing Display...Done", DARK_BLUE, 1);
 	first_text.write_xy(left, 94, "Initializing Sound...", DARK_BLUE, 1);
-	buffer_to_screen(0, 0, 320, 200);
-	
+	buffer_to_screen(0, 0, SCREEN_W, SCREEN_H);
+
 
 	// Init the sound data
     soundp = new soundob();
     if(!cfg.is_on("sound", "sound"))
         soundp->set_sound(1);
     first_text.write_xy(left, 94, "Initializing Sound...Done", DARK_BLUE, 1);
-    
-	buffer_to_screen(0, 0, 320, 200);
+
+	buffer_to_screen(0, 0, SCREEN_W, SCREEN_H);
 
 	// Let's set the special names for all walkers ..
 	for (i=0; i < NUM_FAMILIES; i++)
@@ -291,11 +293,11 @@ void screen::ready_for_battle(short howmany)
 
 	// Clean stuff up
 	cleanup(howmany);
-    
+
     initialize_views();
 
 	end = 0;
-	
+
 	retry = false;
 
 	redrawme = 1;
@@ -346,7 +348,7 @@ void screen::reset(short howmany)
 	end = 0;
 
 	redrawme = 1;
-	
+
 	save_data.reset();
 	level_data.clear();
 
@@ -752,10 +754,10 @@ short screen::act()
 
 	if (level_done == 2)
 		return endgame(0, level_data.id + 1);  // No exits and no enemies: Go to next sequential level.
-    
+
     if(end)
         return 1;
-    
+
 	// Make sure we're all pointing to legal targets
 	for(auto e = level_data.oblist.begin(); e != level_data.oblist.end(); e++)
 	{
@@ -769,7 +771,7 @@ short screen::act()
         if (ob->collide_ob && ob->collide_ob->dead)
             ob->collide_ob = NULL;
 	}
-	
+
 	for(auto e = level_data.weaplist.begin(); e != level_data.weaplist.end(); e++)
 	{
 	    walker* ob = *e;
@@ -791,7 +793,7 @@ short screen::act()
 		if (ob && ob->dead && ob->myguy == NULL)
 		{
 		    // Delete the dead thing safely
-		    
+
 			// Is it a player?
 			if(ob->user != -1)
 			{
@@ -802,22 +804,22 @@ short screen::act()
                         viewob[i]->control = NULL;
 			    }
 			}
-			
+
 			// Save dead guys to be deleted later.  Delete everything else right now.  This is so the "owner" of weapons remains valid.
             level_data.dead_list.push_back(ob);
-            
+
             //level_data.remove_ob(ob);
             // Remove from the list directly here so we can preserve our iterator
 			if(ob->query_order() == ORDER_LIVING)
                 level_data.numobs--;
-            
+
             e = level_data.oblist.erase(e);
             continue;
 		}
-		
+
 		e++;
 	}
-	
+
 	for(auto e = level_data.fxlist.begin(); e != level_data.fxlist.end();)
 	{
 	    walker* ob = *e;
@@ -827,10 +829,10 @@ short screen::act()
 			e = level_data.fxlist.erase(e);
 			continue;
 		}
-		
+
 		e++;
 	}
-	
+
 	for(auto e = level_data.weaplist.begin(); e != level_data.weaplist.end();)
 	{
 	    walker* ob = *e;
@@ -840,7 +842,7 @@ short screen::act()
             e = level_data.weaplist.erase(e);
             continue;
 		}
-		
+
 		e++;
 	}
 
@@ -858,18 +860,18 @@ short screen::endgame(short ending, short nextlevel)
 {
     if(end)
         return 1;
-	
-	
+
+
 	std::map<int, guy*> before;
 	std::map<int, walker*> after;
-	
+
 	// Get guys from before battle
 	for(int i = 0; i < save_data.team_size; i++)
     {
         if(save_data.team_list[i] != NULL)
             before.insert(make_pair(save_data.team_list[i]->id, save_data.team_list[i]));
     }
-	
+
     // Get guys from the battle
     for(auto e = level_data.oblist.begin(); e != level_data.oblist.end(); e++)
 	{
@@ -877,17 +879,17 @@ short screen::endgame(short ending, short nextlevel)
 		if (ob && ob->myguy)
 			after.insert(make_pair(ob->myguy->id, ob));
 	}
-	
+
 	// Let's show the results!
     retry = results_screen(ending, nextlevel, before, after);
-    
+
     if(retry)
     {
         // Retry without updating the roster and saving the game
         end = 1;
         return 1;
     }
-    
+
 	if (ending == 1)  // 1 = lose, for some reason
 	{
 		if (nextlevel == -1) // generic defeat
@@ -907,7 +909,7 @@ short screen::endgame(short ending, short nextlevel)
 	{
         Uint32 bonuscash[4] = {0, 0, 0, 0};
         Uint32 allbonuscash = 0;
-        
+
 		// Update all the money!
 		for (int i=0; i < 4; i++)
 		{
@@ -926,22 +928,22 @@ short screen::endgame(short ending, short nextlevel)
 				bonuscash[i] = 0;
 			allbonuscash = 0;
 		}
-	    
+
 		// Beat that level
 		save_data.add_level_completed(save_data.current_campaign, save_data.scen_num); // this scenario is completed ..
 		if (nextlevel != -1)
 			save_data.scen_num = nextlevel;    // Fake jumping to next level ..
-        
+
         // Grab our team out of the level
         save_data.update_guys(level_data.oblist);
-        
+
         // Autosave because we won
 		save_data.save("save0");
 
 		end = 1;
 	}
 
-    
+
 	return 1;
 }
 
@@ -1036,7 +1038,7 @@ walker  *screen::find_far_foe(walker  *ob)
 	    walker* foe = *e;
 		if (foe == NULL || foe->dead)
 			continue;
-        
+
 		// Check for valid objects ..
 		if (ob->is_friendly(foe) == 0)
 		{
@@ -1150,7 +1152,7 @@ void screen::draw_panels(short howmany)
 
 
 	redraw(); // repaint the screen area ..
-	buffer_to_screen(0, 0, 320, 200);
+	buffer_to_screen(0, 0, SCREEN_W, SCREEN_H);
 }
 
 // This can be slow, so don't call it much
@@ -1186,9 +1188,9 @@ std::list<walker*> screen::find_in_range(std::list<walker*>& somelist, Sint32 ra
 {
 	//short obx, oby;
     std::list<walker*> result;
-    
+
 	*howmany = 0;
-	
+
 	if(!ob)
 		return result;
 
@@ -1241,7 +1243,7 @@ std::list<walker*> screen::find_foes_in_range(std::list<walker*>& somelist, Sint
 {
     std::list<walker*> result;
     *howmany = 0;
-    
+
 	if(!ob)
 		return result;
 
@@ -1270,7 +1272,7 @@ std::list<walker*> screen::find_friends_in_range(std::list<walker*>& somelist, S
 {
     std::list<walker*> result;
     *howmany = 0;
-    
+
 	if(!ob)
 		return result;
 
@@ -1296,7 +1298,7 @@ std::list<walker*> screen::find_foe_weapons_in_range(std::list<walker*>& somelis
 {
     std::list<walker*> result;
     *howmany = 0;
-    
+
 	if(!ob)
 		return result;
 

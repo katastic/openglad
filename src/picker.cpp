@@ -14,6 +14,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#include "common.h"
+
 #include "version.h"
 #include "graph.h"
 #include "button.h"
@@ -191,7 +193,7 @@ void picker_quit()
 			delete backdrops[i];
 			backdrops[i] = NULL;
 		}
-		
+
         backpics[i].free();
 	}
 
@@ -238,7 +240,7 @@ button mainmenu_buttons[] =
         button("QUIT ", KEYSTATE_ESCAPE, 120, 175, 60, 20, QUIT_MENU, 0 , MenuNav::UpLeft(7, 10)),
         button("", KEYSTATE_UNKNOWN, 90, 175, 20, 20, MAIN_OPTIONS, -1, MenuNav::UpRight(7, 9))
     };
-    
+
 #define OPTIONS_BUTTON_INDEX 10
 
 #else // DISABLE_MULTIPLAYER
@@ -254,7 +256,7 @@ button mainmenu_buttons[] =
         button("QUIT ", KEYSTATE_ESCAPE, 120, 154, 60, 20, QUIT_MENU, 0, MenuNav::UpLeft(3, 5)),
         button("", KEYSTATE_UNKNOWN, 90, 154, 20, 20, MAIN_OPTIONS, -1, MenuNav::UpRight(3, 4))
     };
-    
+
 #define OPTIONS_BUTTON_INDEX 5
 #endif
 
@@ -522,7 +524,7 @@ void draw_highlight_interior(const button& b)
 {
     if(!menu_nav_enabled)
         return;
-    
+
     float t = (1.0f + sinf(SDL_GetTicks()/300.0f))/2.0f;
     float size = 3;
     myscreen->draw_box(b.x + t*size, b.y + t*size, b.x + b.sizex - t*size, b.y + b.sizey - t*size, YELLOW, 0);
@@ -532,7 +534,7 @@ void draw_highlight(const button& b)
 {
     if(!menu_nav_enabled)
         return;
-    
+
     float t = (1.0f + sinf(SDL_GetTicks()/300.0f))/2.0f;
     float size = 3;
     myscreen->draw_box(b.x - t*size, b.y - t*size, b.x + b.sizex + t*size, b.y + b.sizey + t*size, YELLOW, 0);
@@ -550,7 +552,7 @@ bool handle_menu_nav(button* buttons, int& highlighted_button, Sint32& retvalue,
         while(isPlayerHoldingKey(0, KEY_UP))
             get_input_events(POLL);
         next_button = buttons[highlighted_button].nav.up;
-        
+
         pressed = true;
     }
     if(isPlayerHoldingKey(0, KEY_DOWN))
@@ -558,7 +560,7 @@ bool handle_menu_nav(button* buttons, int& highlighted_button, Sint32& retvalue,
         while(isPlayerHoldingKey(0, KEY_DOWN))
             get_input_events(POLL);
         next_button = buttons[highlighted_button].nav.down;
-        
+
         pressed = true;
     }
     if(isPlayerHoldingKey(0, KEY_LEFT))
@@ -566,7 +568,7 @@ bool handle_menu_nav(button* buttons, int& highlighted_button, Sint32& retvalue,
         while(isPlayerHoldingKey(0, KEY_LEFT))
             get_input_events(POLL);
         next_button = buttons[highlighted_button].nav.left;
-        
+
         pressed = true;
     }
     if(isPlayerHoldingKey(0, KEY_RIGHT))
@@ -574,14 +576,14 @@ bool handle_menu_nav(button* buttons, int& highlighted_button, Sint32& retvalue,
         while(isPlayerHoldingKey(0, KEY_RIGHT))
             get_input_events(POLL);
         next_button = buttons[highlighted_button].nav.right;
-        
+
         pressed = true;
     }
     if(isPlayerHoldingKey(0, KEY_FIRE))
     {
         while(isPlayerHoldingKey(0, KEY_FIRE))
             get_input_events(POLL);
-        
+
         if(!menu_nav_enabled)
             pressed = true;
         else
@@ -598,15 +600,15 @@ bool handle_menu_nav(button* buttons, int& highlighted_button, Sint32& retvalue,
             }
             else
                 retvalue = OK;
-            
+
             pressed = true;
             activated = true;
         }
     }
-    
+
     if(next_button >= 0 && !buttons[next_button].hidden)
         highlighted_button = next_button;
-    
+
     // Turn menu_nav on if something was pressed.
     if(pressed)
     {
@@ -619,7 +621,7 @@ bool handle_menu_nav(button* buttons, int& highlighted_button, Sint32& retvalue,
         if(SDL_GetTicks() - menu_nav_enabled_time > 5000)
             menu_nav_enabled = MENU_NAV_DEFAULT;
     }
-    
+
     return activated;
 }
 
@@ -629,7 +631,7 @@ bool reset_buttons(vbutton*& localbuttons, button* buttons, int num_buttons, Sin
     {
         delete(localbuttons);
         localbuttons = init_buttons(buttons, num_buttons);
-        
+
         retvalue = 0;
         return true;
     }
@@ -640,7 +642,7 @@ void redraw_mainmenu()
 {
     int count = 0;
 	char message[80];
-    
+
     main_title_logo_pix->set_frame(0);
     main_title_logo_pix->drawMix(15,  8, myscreen->viewob[0]);
     main_title_logo_pix->set_frame(1);
@@ -650,7 +652,7 @@ void redraw_mainmenu()
     main_columns_pix->set_frame(1);
     main_columns_pix->drawMix(242,40, myscreen->viewob[0]);
     //main_columns_pix->next_frame();
-    
+
     #ifndef DISABLE_MULTIPLAYER
     if (myscreen->save_data.numplayers==4)
     {
@@ -710,7 +712,7 @@ void redraw_mainmenu()
 
     sprintf(message, "Difficulty: %s", difficulty_names[current_difficulty]);
     allbuttons[2]->label = message;
-    
+
     #endif
 
     count = 0;
@@ -721,7 +723,7 @@ void redraw_mainmenu()
     }
     allbuttons[0]->set_graphic(FAMILY_NORMAL1);
     allbuttons[OPTIONS_BUTTON_INDEX]->set_graphic(FAMILY_WRENCH);
-    
+
     draw_version_number();
 }
 
@@ -736,21 +738,21 @@ Sint32 mainmenu(Sint32 arg1)
 
 	if(localbuttons != NULL)
 		delete localbuttons; //we'll make a new set
-    
+
 	button* buttons = mainmenu_buttons;
 	int num_buttons = ARRAY_SIZE(mainmenu_buttons);
 	int highlighted_button = 1;
 	localbuttons = init_buttons(buttons, num_buttons);
-	
+
 	allbuttons[0]->set_graphic(FAMILY_NORMAL1);
     allbuttons[OPTIONS_BUTTON_INDEX]->set_graphic(FAMILY_WRENCH);
-	
+
 	redraw_mainmenu();
 
 	clear_keyboard();
 	reset_timer();
 	while (query_timer() < 1);
-	
+
 	myscreen->fadeblack(1);
 
 	grab_mouse();
@@ -760,16 +762,16 @@ Sint32 mainmenu(Sint32 arg1)
 	    // Input
 		if(leftmouse(buttons))
 			retvalue = localbuttons->leftclick();
-        
+
         handle_menu_nav(buttons, highlighted_button, retvalue);
-        
+
         // Reset buttons
         if(reset_buttons(localbuttons, buttons, num_buttons, retvalue))
         {
             allbuttons[0]->set_graphic(FAMILY_NORMAL1);
             allbuttons[OPTIONS_BUTTON_INDEX]->set_graphic(FAMILY_WRENCH);
         }
-		
+
 		// Draw
 		myscreen->clearbuffer();
         draw_buttons(buttons, num_buttons);
@@ -778,7 +780,7 @@ Sint32 mainmenu(Sint32 arg1)
         myscreen->buffer_to_screen(0,0,320,200);
         SDL_Delay(10);
 	}
-	
+
 	return retvalue;
 }
 
@@ -791,7 +793,7 @@ Sint32 beginmenu(Sint32 arg1)
         if(!yes_or_no_prompt("NEW GAME", "There is already a game loaded.\nDo you want to restart?", false))
             return REDRAW;
     }
-    
+
 	myscreen->clear();
 
 	// Starting new game ..
@@ -806,7 +808,7 @@ Sint32 beginmenu(Sint32 arg1)
     // Reset the save data so we have a fresh, new team
 	myscreen->save_data.reset();
 	current_guy = NULL;
-	
+
 	// Clear the labeling counter
 	for (int i = 0; i < NUM_FAMILIES; i++)
 		numbought[i] = 0;
@@ -915,32 +917,32 @@ Sint32 create_team_menu(Sint32 arg1)
 		delete localbuttons;
 
 	myscreen->fadeblack(0);
-	
+
 	text& mytext = myscreen->text_normal;
-	
+
 	button* buttons = createmenu_buttons;
 	int num_buttons = 9;
 	int highlighted_button = 1;
 	localbuttons = init_buttons(buttons, num_buttons);
 	draw_backdrop();
 	draw_buttons(buttons, num_buttons);
-	
+
 	int last_level_id = -1;
-	
+
 	myscreen->fadeblack(1);
-	
+
 	while ( !(retvalue & EXIT) )
 	{
 	    // Input
 		if(leftmouse(buttons))
 			retvalue = localbuttons->leftclick();
-        
+
         handle_menu_nav(buttons, highlighted_button, retvalue);
-        
-        
+
+
         // Reset buttons
         bool buttons_were_reset = reset_buttons(localbuttons, buttons, num_buttons, retvalue);
-		
+
         if(last_level_id != myscreen->save_data.scen_num || buttons_were_reset)
         {
             retvalue = 0;
@@ -948,12 +950,12 @@ Sint32 create_team_menu(Sint32 arg1)
             myscreen->level_data.id = last_level_id;
             myscreen->level_data.load();
         }
-        
+
 		// Draw
 		myscreen->clearbuffer();
         draw_backdrop();
         draw_buttons(buttons, num_buttons);
-        
+
         // Level name
         int len = strlen(myscreen->level_data.title.c_str());
         myscreen->draw_rect_filled(buttons[7].x + buttons[7].sizex - 6*len - 2, buttons[7].y - 8 - 1, 6*len + 4, 8, PURE_BLACK, 150);
@@ -962,12 +964,12 @@ Sint32 create_team_menu(Sint32 arg1)
         len = strlen(myscreen->save_data.current_campaign.c_str());
         myscreen->draw_rect_filled(buttons[8].x + buttons[8].sizex - 6*len - 2, buttons[8].y - 8 - 1, 6*len + 4, 8, PURE_BLACK, 150);
         mytext.write_xy(buttons[8].x + buttons[8].sizex - 6*strlen(myscreen->save_data.current_campaign.c_str()), buttons[8].y - 8, WHITE, "%s", myscreen->save_data.current_campaign.c_str());
-        
+
         draw_highlight(buttons[highlighted_button]);
         myscreen->buffer_to_screen(0,0,320,200);
         SDL_Delay(10);
 	}
-	
+
 	return REDRAW;
 }
 
@@ -982,7 +984,7 @@ Sint32 create_view_menu(Sint32 arg1)
 
 	if (localbuttons)
 		delete (localbuttons);
-    
+
 	button* buttons = viewteam_buttons;
 	int num_buttons = 2;
 	int highlighted_button = 1;
@@ -993,12 +995,12 @@ Sint32 create_view_menu(Sint32 arg1)
 	    // Input
 		if(leftmouse(buttons))
 			retvalue = localbuttons->leftclick();
-        
+
         handle_menu_nav(buttons, highlighted_button, retvalue);
-        
+
         // Reset buttons
         reset_buttons(localbuttons, buttons, num_buttons, retvalue);
-		
+
 		// Draw
 		myscreen->clearbuffer();
         draw_backdrop();
@@ -1016,7 +1018,7 @@ Sint32 create_view_menu(Sint32 arg1)
 std::string get_class_description(unsigned char family)
 {
     std::string result;
-    
+
     switch(family)
     {
     case FAMILY_SOLDIER:
@@ -1178,7 +1180,7 @@ std::string get_class_description(unsigned char family)
     default:
         break;
     }
-    
+
     return result;
 }
 
@@ -1220,53 +1222,53 @@ Sint32 create_hire_menu(Sint32 arg1)
 #define STAT_LEVELED LIGHT_BLUE   // color for leveled up stat text
 #define STAT_DISABLED BLACK   // color for disabled stat text
 #define STAT_DERIVED DARK_BLUE + 3
-    
+
     SDL_Rect stat_box = {196, 50 - 6 - 32, 104, 82 + 32};
     SDL_Rect stat_box_inner = {stat_box.x + 4, stat_box.y + 4 + 6, stat_box.w - 8, stat_box.h - 8 - 6};
     SDL_Rect stat_box_content = {stat_box_inner.x + 4, stat_box_inner.y + 4, stat_box_inner.w - 8, stat_box_inner.h - 8};
-    
+
     SDL_Rect cost_box = {196, 130, 104, 31};
     SDL_Rect cost_box_inner = {cost_box.x + 4, cost_box.y + 4, cost_box.w - 8, cost_box.h - 8};
     SDL_Rect cost_box_content = {cost_box_inner.x + 4, cost_box_inner.y + 4, cost_box_inner.w - 8, cost_box_inner.h - 8};
-    
+
     SDL_Rect description_box = {11, 71, 180, 90};
     SDL_Rect description_box_inner = {description_box.x + 4, description_box.y + 4, description_box.w - 8, description_box.h - 8};
     SDL_Rect description_box_content = {description_box_inner.x + 4, description_box_inner.y + 4, description_box_inner.w - 8, description_box_inner.h - 8};
-    
+
     SDL_Rect name_box = {description_box.x + description_box.w/2 - (126-34)/2, description_box.y - 71 + 8, 126 - 34, 24 - 8};
     SDL_Rect name_box_inner = {name_box.x + 2, name_box.y + 2, name_box.w - 4, name_box.h - 4};
-    
+
     hiremenu_buttons[0].x = description_box.x + description_box.w/2 - hiremenu_buttons[0].sizex - 4 - 30;
     hiremenu_buttons[0].y = name_box.y + name_box.h + (description_box.y - (name_box.y + name_box.h))/2 - hiremenu_buttons[0].sizey/2;
-    
+
     hiremenu_buttons[1].x = description_box.x + description_box.w/2 + 4 + 30;
     hiremenu_buttons[1].y = name_box.y + name_box.h + (description_box.y - (name_box.y + name_box.h))/2 - hiremenu_buttons[1].sizey/2;
-    
+
     hiremenu_buttons[2].hidden = (myscreen->save_data.numplayers == 1);
-    
+
 	myscreen->clearbuffer();
 
 	if (localbuttons)
 		delete (localbuttons);
-    
+
 	#ifdef DISABLE_MULTIPLAYER
 	hiremenu_buttons[2].hidden = true;
 	#endif
-    
+
 	button* buttons = hiremenu_buttons;
 	int num_buttons = 5;
 	int highlighted_button = 1;
 	localbuttons = init_buttons(buttons, num_buttons);
-	
+
     cycle_guy(0);
     change_hire_teamnum(0);
-    
-    
+
+
     unsigned char last_family = current_guy->family;
     std::string description = get_class_description(last_family);
     std::list<std::string> desc = explode(description);
     const char* family_name = get_family_string(last_family);
-	
+
 	grab_mouse();
 
 	while ( !(retvalue & EXIT) )
@@ -1277,68 +1279,68 @@ Sint32 create_hire_menu(Sint32 arg1)
 			retvalue = localbuttons->leftclick();
 		else if (clickvalue == 2)
 			retvalue = localbuttons->rightclick();
-        
+
         handle_menu_nav(buttons, highlighted_button, retvalue);
-        
+
         // Reset buttons
         if(retvalue == OK || retvalue == REDRAW)
         {
             if (localbuttons)
                 delete (localbuttons);
-            
+
             localbuttons = init_buttons(buttons, num_buttons);
 
             // Update our team-number display ..
             change_hire_teamnum(0);
-            
+
             retvalue = 0;
         }
-		
+
 		// Draw
 		myscreen->clearbuffer();
-		
+
         draw_backdrop();
         draw_buttons(buttons, num_buttons);
-        
+
         if (!current_guy)
             cycle_guy(0);
-        
+
         // Name box
         myscreen->draw_button(name_box, 1);
         myscreen->draw_button_inverted(name_box_inner);
-        
+
         text& mytext = myscreen->text_normal;
         mytext.write_xy(name_box.x + name_box.w/2 - 3*strlen(family_name), name_box.y + 6, family_name, (unsigned char) DARK_BLUE, 1);
-        
+
 		show_guy(query_timer()-start_time, 0, description_box.x + description_box.w/2, name_box.y + name_box.h + (description_box.y - (name_box.y + name_box.h))/2); // 0 means current_guy
         change_hire_teamnum(0);
-        
-        
+
+
         // Description box
         myscreen->draw_button(description_box, 1);
         myscreen->draw_button_inverted(description_box_inner);
-        
+
         if(current_guy->family != last_family)
         {
             // Update description
             last_family = current_guy->family;
             description = get_class_description(last_family);
             desc = explode(description);
-            
+
             family_name = get_family_string(last_family);
         }
-        
+
         int i = 0;
         for(std::list<std::string>::iterator e = desc.begin(); e != desc.end(); e++)
         {
             mytext.write_xy(description_box_content.x, description_box_content.y + i*10, DARK_BLUE, "%s", e->c_str());
             i++;
         }
-        
+
         // Cost box
         myscreen->draw_button(cost_box, 1);
         myscreen->draw_button_inverted(cost_box_inner);
-        
+
         sprintf(message, "CASH: %u", myscreen->save_data.m_totalcash[current_team_num]);
         mytext.write_xy(cost_box_content.x, cost_box_content.y, message,(unsigned char) DARK_BLUE, 1);
         current_cost = calculate_hire_cost();
@@ -1357,23 +1359,23 @@ Sint32 create_hire_menu(Sint32 arg1)
         // Stat box content
         linesdown = 0;
         int line_height = 10;
-        
+
         showcolor = STAT_COLOR;
-        
+
         // Strength
         sprintf(message, "%d", current_guy->strength);
         mytext.write_xy(stat_box_content.x, stat_box_content.y + linesdown*line_height, "STR:",
                          (unsigned char) STAT_COLOR, 1);
-        
+
         mytext.write_xy(stat_box_content.x + STAT_NUM_OFFSET, stat_box_content.y + linesdown*line_height, message, showcolor, 1);
         mytext.write_xy(stat_box_content.x + STAT_NUM_OFFSET + 18, stat_box_content.y + linesdown*line_height, get_training_cost_rating(last_family, 0), showcolor, 1);
-        
+
         linesdown++;
         // Dexterity
         sprintf(message, "%d", current_guy->dexterity);
         mytext.write_xy(stat_box_content.x, stat_box_content.y + linesdown*line_height, "DEX:",
                          (unsigned char) STAT_COLOR, 1);
-        
+
         mytext.write_xy(stat_box_content.x + STAT_NUM_OFFSET, stat_box_content.y + linesdown*line_height, message, showcolor, 1);
         mytext.write_xy(stat_box_content.x + STAT_NUM_OFFSET + 18, stat_box_content.y + linesdown*line_height, get_training_cost_rating(last_family, 1), showcolor, 1);
 
@@ -1382,7 +1384,7 @@ Sint32 create_hire_menu(Sint32 arg1)
         sprintf(message, "%d", current_guy->constitution);
         mytext.write_xy(stat_box_content.x, stat_box_content.y + linesdown*line_height, "CON:",
                          (unsigned char) STAT_COLOR, 1);
-        
+
         mytext.write_xy(stat_box_content.x + STAT_NUM_OFFSET, stat_box_content.y + linesdown*line_height, message, showcolor, 1);
         mytext.write_xy(stat_box_content.x + STAT_NUM_OFFSET + 18, stat_box_content.y + linesdown*line_height, get_training_cost_rating(last_family, 2), showcolor, 1);
 
@@ -1391,7 +1393,7 @@ Sint32 create_hire_menu(Sint32 arg1)
         sprintf(message, "%d", current_guy->intelligence);
         mytext.write_xy(stat_box_content.x, stat_box_content.y + linesdown*line_height, "INT:",
                          (unsigned char) STAT_COLOR, 1);
-        
+
         mytext.write_xy(stat_box_content.x + STAT_NUM_OFFSET, stat_box_content.y + linesdown*line_height, message, showcolor, 1);
         mytext.write_xy(stat_box_content.x + STAT_NUM_OFFSET + 18, stat_box_content.y + linesdown*line_height, get_training_cost_rating(last_family, 3), showcolor, 1);
 
@@ -1400,32 +1402,32 @@ Sint32 create_hire_menu(Sint32 arg1)
         sprintf(message, "%d", current_guy->armor);
         mytext.write_xy(stat_box_content.x, stat_box_content.y + linesdown*line_height, "ARMOR:",
                          (unsigned char) STAT_COLOR, 1);
-        
+
         mytext.write_xy(stat_box_content.x + STAT_NUM_OFFSET, stat_box_content.y + linesdown*line_height, message, showcolor, 1);
-		
+
 		// Separator bar
 		SDL_Rect r = {stat_box_content.x + 10, stat_box_content.y + (linesdown+1)*line_height - 2, stat_box_content.w - 20, 2};
 		myscreen->draw_button_inverted(r);
-		
+
 		int derived_offset = 3*STAT_NUM_OFFSET/4;
         linesdown++;
         mytext.write_xy(stat_box_content.x, stat_box_content.y + linesdown*line_height + 4, "HP:", STAT_DERIVED, 1);
         mytext.write_xy(stat_box_content.x + derived_offset - 9, stat_box_content.y + linesdown*line_height + 4, HIGH_HP_COLOR, "%.0f", ceilf(myscreen->level_data.myloader->hitpoints[PIX(ORDER_LIVING, last_family)] + current_guy->get_hp_bonus()));
-        
+
         mytext.write_xy(stat_box_content.x + derived_offset + 18, stat_box_content.y + linesdown*line_height + 4, "MP:", STAT_DERIVED, 1);
         mytext.write_xy(stat_box_content.x + 2*derived_offset + 18 - 9, stat_box_content.y + linesdown*line_height + 4, MAX_MP_COLOR, "%.0f", ceilf(current_guy->get_mp_bonus()));
-		
+
 		linesdown++;
         mytext.write_xy(stat_box_content.x, stat_box_content.y + linesdown*line_height + 4, "ATK:", STAT_DERIVED, 1);
         mytext.write_xy(stat_box_content.x + derived_offset - 3, stat_box_content.y + linesdown*line_height + 4, showcolor, "%.0f", myscreen->level_data.myloader->damage[PIX(ORDER_LIVING, last_family)] + current_guy->get_damage_bonus());
-        
+
         mytext.write_xy(stat_box_content.x + derived_offset + 18, stat_box_content.y + linesdown*line_height + 4, "DEF:", STAT_DERIVED, 1);
         mytext.write_xy(stat_box_content.x + 2*derived_offset + 18 - 3, stat_box_content.y + linesdown*line_height + 4, showcolor, "%.0f", current_guy->get_armor_bonus());
-		
+
 		linesdown++;
         mytext.write_xy(stat_box_content.x, stat_box_content.y + linesdown*line_height + 4, "SPD:", STAT_DERIVED, 1);
         mytext.write_xy(stat_box_content.x + derived_offset, stat_box_content.y + linesdown*line_height + 4, showcolor, "%.1f", myscreen->level_data.myloader->stepsizes[PIX(ORDER_LIVING, last_family)] + current_guy->get_speed_bonus());
-        
+
 		linesdown++;
         mytext.write_xy(stat_box_content.x, stat_box_content.y + linesdown*line_height + 4, "ATK SPD:", STAT_DERIVED, 1);
         // The 10.0f/fire_frequency is somewhat arbitrary, but it makes for good comparison info.
@@ -1433,25 +1435,25 @@ Sint32 create_hire_menu(Sint32 arg1)
         if(fire_freq < 1)
             fire_freq = 1;
         mytext.write_xy(stat_box_content.x + derived_offset + 21, stat_box_content.y + linesdown*line_height + 4, showcolor, "%.1f", 10.0f/fire_freq);
-        
-        
-		
+
+
+
         draw_highlight(buttons[highlighted_button]);
         myscreen->buffer_to_screen(0,0,320,200);
         SDL_Delay(10);
-        
+
         if(arg1 == 1)
         {
             // Show popup on new game
             arg1 = -1;
             popup_dialog("HIRE TROOPS", "Get your team started here\nby hiring some fresh recruits.");
-            
+
             if(localbuttons)
                 delete (localbuttons);
             localbuttons = init_buttons(buttons, num_buttons);
         }
 	}
-	
+
 	myscreen->clearbuffer();
 	//myscreen->clearscreen();
 	return REDRAW;
@@ -1465,14 +1467,14 @@ Sint32 create_train_menu(Sint32 arg1)
 	Sint32 start_time = query_timer();
 	Uint32 current_cost;
 	Sint32 clickvalue;
-	
+
     SDL_Rect stat_box = {38, 66, 82, 94};
     SDL_Rect stat_box_inner = {stat_box.x + 4, stat_box.y + 4, stat_box.w - 8, stat_box.h - 8};
     SDL_Rect stat_box_content = {stat_box_inner.x + 4, stat_box_inner.y + 4, stat_box_inner.w - 8, stat_box_inner.h - 8};
-    
+
     SDL_Rect info_box_inner = {176, 34, 304-176, 112+22-34};
     SDL_Rect info_box_content = {info_box_inner.x + 4, info_box_inner.y + 4, info_box_inner.w - 8, info_box_inner.h - 8};
-    
+
 	if (arg1)
 		arg1 = 1;
 
@@ -1480,7 +1482,7 @@ Sint32 create_train_menu(Sint32 arg1)
 	if (myscreen->save_data.team_size < 1)
 	{
 		popup_dialog("NEED A TEAM!", "You need to\nhire a team\nto train");
-		
+
 		return OK;
 	}
 
@@ -1488,16 +1490,16 @@ Sint32 create_train_menu(Sint32 arg1)
 
 	if (localbuttons)
 		delete localbuttons;
-	
+
 	#ifdef DISABLE_MULTIPLAYER
 	trainmenu_buttons[18].hidden = true;
 	#endif
-    
+
 	button* buttons = trainmenu_buttons;
 	int num_buttons = 20;
 	int highlighted_button = 1;
 	localbuttons = init_buttons(buttons, num_buttons);
-	
+
 	for (i=2; i < 14; i++)
 	{
 		if (!(i%2)) // 2, 4, ..., 12
@@ -1506,18 +1508,18 @@ Sint32 create_train_menu(Sint32 arg1)
 			allbuttons[i]->set_graphic(FAMILY_PLUS);
 	}
 
-	
+
 	guy** ourteam = myscreen->save_data.team_list;
-	
+
 	// Set to first guy on list using global variable ..
 	cycle_team_guy(0);
     guy* here = ourteam[editguy];
     current_cost = calculate_train_cost(here);
 
 	grab_mouse();
-	
+
     clear_keyboard();
-    
+
     clear_key_press_event();
 
 	while ( !(retvalue & EXIT) )
@@ -1528,9 +1530,9 @@ Sint32 create_train_menu(Sint32 arg1)
 			retvalue = localbuttons->leftclick();
 		else if (clickvalue == 2)
 			retvalue = localbuttons->rightclick();
-        
+
         handle_menu_nav(buttons, highlighted_button, retvalue);
-        
+
         // Reset buttons
         if(localbuttons && (retvalue == OK || retvalue == REDRAW))
         {
@@ -1538,7 +1540,7 @@ Sint32 create_train_menu(Sint32 arg1)
             {
 				delete(localbuttons);
 				localbuttons = init_buttons(buttons, num_buttons);
-				
+
 				for (i=2; i < 14; i++)
 				{
 					if (!(i%2)) // 2, 4, ..., 12
@@ -1548,7 +1550,7 @@ Sint32 create_train_menu(Sint32 arg1)
 				}
 				cycle_team_guy(0);
             }
-            
+
             if (!current_guy)
                 cycle_team_guy(0);
             if (here != ourteam[editguy])
@@ -1556,30 +1558,30 @@ Sint32 create_train_menu(Sint32 arg1)
             current_cost = calculate_train_cost(here);
             retvalue = 0;
         }
-		
+
         //current_cost = calculate_train_cost(here);
-        
+
 		// Draw
 		myscreen->clearbuffer();
-		
+
         draw_backdrop();
         draw_buttons(buttons, num_buttons);
-        
+
 		show_guy(query_timer()-start_time, 1); // 1 means ourteam[editguy]
-		
+
 
         linesdown = 0;
 
         myscreen->draw_button(34,  8, 126, 24, 1, 1);  // name box
         myscreen->draw_text_bar(36, 10, 124, 22);
-        
+
         text& mytext = myscreen->text_normal;
         mytext.write_xy(80 - mytext.query_width(current_guy->name)/2, 14,
                          current_guy->name,(unsigned char) DARK_BLUE, 1);
         myscreen->draw_button(38, 66, 120, 160, 1, 1); // stats box
         myscreen->draw_text_bar(42, 70, 116, 156);
 
-        
+
         bool level_increased = (old_guy->get_level() < current_guy->get_level());
         bool stat_increased;
         if(level_increased)
@@ -1667,16 +1669,16 @@ Sint32 create_train_menu(Sint32 arg1)
         // Info box
         myscreen->draw_button(174, 32, 306, 114+22, 1, 1); // info box
         myscreen->draw_text_bar(176, 34, 304, 112+22); // main text box
-        
+
         showcolor = DARK_BLUE;
         linesdown = 0;
         int line_height = 10;
-		
+
 		int derived_offset = 3*STAT_NUM_OFFSET/4;
-		
+
         sprintf(message, "Total Kills: %d", current_guy->kills);
         mytext.write_xy(180, info_box_content.y + linesdown*line_height, message, DARK_BLUE, 1);
-        
+
         linesdown++;
         if (current_guy->total_hits && current_guy->total_shots) // have we at least hit something? :)
         {
@@ -1689,36 +1691,36 @@ Sint32 create_train_menu(Sint32 arg1)
             sprintf(message, "   Accuracy: N/A ");
             mytext.write_xy(180, info_box_content.y + linesdown*line_height, message, DARK_BLUE, 1);
         }
-        
+
         linesdown++;
         sprintf(message, " EXPERIENCE: %u", current_guy->exp);
         mytext.write_xy(180, info_box_content.y + linesdown*line_height, message,(unsigned char) DARK_BLUE, 1);
-        
-        
+
+
         linesdown++;
 		// Separator bar
 		SDL_Rect r = {info_box_content.x + 10, info_box_content.y + Sint32(linesdown*line_height) - 2, info_box_content.w - 20, 2};
 		myscreen->draw_button_inverted(r);
-        
+
         linesdown += 0.4f;
-        
+
         mytext.write_xy(info_box_content.x, info_box_content.y + linesdown*line_height, "HP:", STAT_DERIVED, 1);
         mytext.write_xy(info_box_content.x + derived_offset - 9, info_box_content.y + linesdown*line_height, HIGH_HP_COLOR, "%.0f", ceilf(myscreen->level_data.myloader->hitpoints[PIX(ORDER_LIVING, current_guy->family)] + current_guy->get_hp_bonus()));
-        
+
         mytext.write_xy(info_box_content.x + derived_offset + 18, info_box_content.y + linesdown*line_height, "MP:", STAT_DERIVED, 1);
         mytext.write_xy(info_box_content.x + 2*derived_offset + 18 - 9, info_box_content.y + linesdown*line_height, MAX_MP_COLOR, "%.0f", ceilf(current_guy->get_mp_bonus()));
-		
+
 		linesdown++;
         mytext.write_xy(info_box_content.x, info_box_content.y + linesdown*line_height, "ATK:", STAT_DERIVED, 1);
         mytext.write_xy(info_box_content.x + derived_offset - 3, info_box_content.y + linesdown*line_height, showcolor, "%.0f", myscreen->level_data.myloader->damage[PIX(ORDER_LIVING, current_guy->family)] + current_guy->get_damage_bonus());
-        
+
         mytext.write_xy(info_box_content.x + derived_offset + 18, info_box_content.y + linesdown*line_height, "DEF:", STAT_DERIVED, 1);
         mytext.write_xy(info_box_content.x + 2*derived_offset + 18 - 3, info_box_content.y + linesdown*line_height, showcolor, "%.0f", current_guy->get_armor_bonus());
-		
+
 		linesdown++;
         mytext.write_xy(info_box_content.x, info_box_content.y + linesdown*line_height, "SPD:", STAT_DERIVED, 1);
         mytext.write_xy(info_box_content.x + derived_offset, info_box_content.y + linesdown*line_height, showcolor, "%.1f", myscreen->level_data.myloader->stepsizes[PIX(ORDER_LIVING, current_guy->family)] + current_guy->get_speed_bonus());
-        
+
 		linesdown++;
         mytext.write_xy(info_box_content.x, info_box_content.y + linesdown*line_height, "ATK SPD:", STAT_DERIVED, 1);
         float fire_freq = myscreen->level_data.myloader->fire_frequency[PIX(ORDER_LIVING, current_guy->family)] - current_guy->get_fire_frequency_bonus();
@@ -1726,17 +1728,17 @@ Sint32 create_train_menu(Sint32 arg1)
             fire_freq = 1;
         // The 10.0f/fire_frequency is somewhat arbitrary, but it makes for good comparison info.
         mytext.write_xy(info_box_content.x + derived_offset + 21, info_box_content.y + linesdown*line_height, showcolor, "%.1f", 10.0f/fire_freq);
-        
-        
+
+
         linesdown++;
 		// Separator bar
 		SDL_Rect r2 = {info_box_content.x + 10, info_box_content.y + Sint32(linesdown*line_height) - 2, info_box_content.w - 20, 2};
 		myscreen->draw_button_inverted(r2);
-        
+
         linesdown += 0.4f;
         sprintf(message, "CASH: %u", myscreen->save_data.m_totalcash[current_guy->teamnum]);
         mytext.write_xy(180, info_box_content.y + linesdown*line_height, message,(unsigned char) DARK_BLUE, 1);
-        
+
         linesdown++;
         mytext.write_xy(180, info_box_content.y + linesdown*line_height, "COST: ", DARK_BLUE, 1);
         sprintf(message, "      %u", current_cost );
@@ -1772,7 +1774,7 @@ Sint32 create_load_menu(Sint32 arg1)
 
 	if (localbuttons)
 		delete (localbuttons);
-    
+
 	button* buttons = loadteam_buttons;
 	int num_buttons = 11;
 	int highlighted_button = 10;
@@ -1789,21 +1791,21 @@ Sint32 create_load_menu(Sint32 arg1)
                 return REDRAW;
             }
         }
-        
+
         handle_menu_nav(buttons, highlighted_button, retvalue);
         if(retvalue == REDRAW)
         {
             return REDRAW;
         }
-        
+
         // Reset buttons
         reset_buttons(localbuttons, buttons, num_buttons, retvalue);
-		
+
 		// Draw
 		myscreen->clearbuffer();
         draw_backdrop();
         draw_buttons(buttons, num_buttons);
-        
+
         myscreen->draw_button(15,  9, 255, 199, 1, 1);
         myscreen->draw_text_bar(19, 13, 251, 21);
         strcpy(message, "Gladiator: Load Game");
@@ -1825,12 +1827,12 @@ Sint32 create_load_menu(Sint32 arg1)
                            allbuttons[10]->yloc-1,
                            allbuttons[10]->xend,
                            allbuttons[10]->yend, 0, 0, 1);
-                           
+
         draw_highlight(buttons[highlighted_button]);
         myscreen->buffer_to_screen(0,0,320,200);
         SDL_Delay(10);
 	}
-	
+
 	return REDRAW;
 }
 
@@ -1838,17 +1840,17 @@ Sint32 create_load_menu(Sint32 arg1)
 void timed_dialog(const char* message, float delay_seconds)
 {
     Log("%s\n", message);
-    
+
     myscreen->darken_screen();
-    
+
 	text& gladtext = myscreen->text_normal;
-	
+
 	int pix_per_char = 6;
 	int len = strlen(message);
 	int width = len * pix_per_char;
     int leftside  = 160 - width/2 - 12;
     int rightside = 160 + width/2 + 12;
-    
+
     myscreen->draw_button(leftside, 80, rightside, 110, 1);
     gladtext.write_xy(160 - width/2, 94, message, (unsigned char) DARK_BLUE, 1);
 
@@ -1856,17 +1858,17 @@ void timed_dialog(const char* message, float delay_seconds)
 
 	grab_mouse();
     clear_keyboard();
-    
+
     clear_key_press_event();
-	
+
 	Uint32 start_time = SDL_GetTicks();
 	while ((SDL_GetTicks() - start_time)/1000.0f < delay_seconds)
 	{
 		get_input_events(POLL);
-        
+
         if(query_mouse().left || query_key_press_event())
             break;
-        
+
         SDL_Delay(10);
 	}
 }
@@ -1875,16 +1877,16 @@ void timed_dialog(const char* message, float delay_seconds)
 bool yes_or_no_prompt(const char* title, const char* message, bool default_value)
 {
     Log("%s, %s: \n", title, message);
-    
+
     myscreen->darken_screen();
-    
+
 	text& gladtext = myscreen->text_normal;
-	
+
 	int pix_per_char = 6;
-	
+
 	// Break message into lines
     std::list<std::string> ls = explode(message, '\n');
-    
+
     // Get the max dimensions needed to display it
     int w = strlen(title)*9;
     int h = 30 + 10*ls.size();
@@ -1893,17 +1895,17 @@ bool yes_or_no_prompt(const char* title, const char* message, bool default_value
         if(int(e->size()*pix_per_char) > w)
             w = e->size()*pix_per_char;
     }
-    
+
     // Centered bounds
     int leftside  = 160 - w/2 - 12;
     int rightside = 160 + w/2 + 12;
     int j = 0;
-	
+
 	int dumbcount;
 
 	if (localbuttons)
 		delete (localbuttons);
-    
+
 	button* buttons = yes_or_no_buttons;
 	int num_buttons = 2;
 	int highlighted_button = (default_value? 0 : 1);
@@ -1911,14 +1913,14 @@ bool yes_or_no_prompt(const char* title, const char* message, bool default_value
 
 	grab_mouse();
     clear_keyboard();
-    
+
     clear_key_press_event();
-	
+
     int retvalue = 0;
 	while (retvalue == 0)
 	{
 		get_input_events(POLL);
-        
+
 	    // Input
         if(query_key_press_event())
         {
@@ -1929,16 +1931,16 @@ bool yes_or_no_prompt(const char* title, const char* message, bool default_value
             else if(keystates[KEYSTATE_ESCAPE])
                 break;
         }
-        
+
 		if(leftmouse(buttons))
 			retvalue = localbuttons->leftclick();
-        
+
         handle_menu_nav(buttons, highlighted_button, retvalue);
-        
-        
+
+
         // Reset buttons
         reset_buttons(localbuttons, buttons, num_buttons, retvalue);
-        
+
 		// Draw
 		dumbcount = myscreen->draw_dialog(leftside, 80 - h/2, rightside, 80 + h/2, title);
 		j = 0;
@@ -1947,14 +1949,14 @@ bool yes_or_no_prompt(const char* title, const char* message, bool default_value
             gladtext.write_xy(dumbcount + 3*pix_per_char/2, 104 - h/2 + 10*j, e->c_str(), (unsigned char) DARK_BLUE, 1);
             j++;
         }
-        
+
         draw_buttons(buttons, num_buttons);
-        
+
         draw_highlight_interior(buttons[highlighted_button]);
         myscreen->buffer_to_screen(0,0,320,200);
         SDL_Delay(10);
 	}
-	
+
     if(retvalue == YES)
     {
         Log("YES\n");
@@ -1972,16 +1974,16 @@ bool yes_or_no_prompt(const char* title, const char* message, bool default_value
 bool no_or_yes_prompt(const char* title, const char* message, bool default_value)
 {
     Log("%s, %s: \n", title, message);
-    
+
     myscreen->darken_screen();
-    
+
 	text& gladtext = myscreen->text_normal;
-	
+
 	int pix_per_char = 6;
-	
+
 	// Break message into lines
     std::list<std::string> ls = explode(message, '\n');
-    
+
     // Get the max dimensions needed to display it
     int w = strlen(title)*9;
     int h = 30 + 10*ls.size();
@@ -1990,17 +1992,17 @@ bool no_or_yes_prompt(const char* title, const char* message, bool default_value
         if(int(e->size()*pix_per_char) > w)
             w = e->size()*pix_per_char;
     }
-    
+
     // Centered bounds
     int leftside  = 160 - w/2 - 12;
     int rightside = 160 + w/2 + 12;
     int j = 0;
-    
+
 	int dumbcount;
 
 	if (localbuttons)
 		delete (localbuttons);
-    
+
 	button* buttons = no_or_yes_buttons;
 	int num_buttons = 2;
 	int highlighted_button = (default_value? 1 : 0);
@@ -2008,14 +2010,14 @@ bool no_or_yes_prompt(const char* title, const char* message, bool default_value
 
 	grab_mouse();
     clear_keyboard();
-    
+
     clear_key_press_event();
-	
+
     int retvalue = 0;
 	while (retvalue == 0)
 	{
 		get_input_events(POLL);
-        
+
 	    // Input
         if(query_key_press_event())
         {
@@ -2026,16 +2028,16 @@ bool no_or_yes_prompt(const char* title, const char* message, bool default_value
             else if(keystates[KEYSTATE_ESCAPE])
                 break;
         }
-        
+
 		if(leftmouse(buttons))
 			retvalue = localbuttons->leftclick();
-        
+
         handle_menu_nav(buttons, highlighted_button, retvalue);
-        
-        
+
+
         // Reset buttons
         reset_buttons(localbuttons, buttons, num_buttons, retvalue);
-		
+
 		// Draw
 		dumbcount = myscreen->draw_dialog(leftside, 80 - h/2, rightside, 80 + h/2, title);
 		j = 0;
@@ -2044,14 +2046,14 @@ bool no_or_yes_prompt(const char* title, const char* message, bool default_value
             gladtext.write_xy(dumbcount + 3*pix_per_char/2, 104 - h/2 + 10*j, e->c_str(), (unsigned char) DARK_BLUE, 1);
             j++;
         }
-        
+
         draw_buttons(buttons, num_buttons);
-        
+
         draw_highlight_interior(buttons[highlighted_button]);
         myscreen->buffer_to_screen(0,0,320,200);
         SDL_Delay(10);
 	}
-	
+
     if(retvalue == YES)
     {
         Log("YES\n");
@@ -2068,16 +2070,16 @@ bool no_or_yes_prompt(const char* title, const char* message, bool default_value
 void popup_dialog(const char* title, const char* message)
 {
     Log("%s, %s\n", title, message);
-    
+
     myscreen->darken_screen();
-    
+
 	text& gladtext = myscreen->text_normal;
-	
+
 	int pix_per_char = 6;
-	
+
 	// Break message into lines
     std::list<std::string> ls = explode(message, '\n');
-    
+
     // Get the max dimensions needed to display it
     int w = strlen(title)*9;
     int h = 30 + 10*ls.size();
@@ -2086,20 +2088,20 @@ void popup_dialog(const char* title, const char* message)
         if(int(e->size()*pix_per_char) > w)
             w = e->size()*pix_per_char;
     }
-    
+
     // Centered bounds
     int leftside  = 160 - w/2 - 12;
     int rightside = 160 + w/2 + 12;
-    
+
     // Draw background
     int dumbcount;
-    
+
     // Draw message
     int j = 0;
 
 	if (localbuttons)
 		delete (localbuttons);
-    
+
 	button* buttons = popup_dialog_buttons;
 	int num_buttons = 1;
 	int highlighted_button = 0;
@@ -2107,9 +2109,9 @@ void popup_dialog(const char* title, const char* message)
 
 	grab_mouse();
     clear_keyboard();
-    
+
     clear_key_press_event();
-	
+
     int retvalue = 0;
 	while (retvalue == 0)
 	{
@@ -2120,16 +2122,16 @@ void popup_dialog(const char* title, const char* message)
             if(keystates[KEYSTATE_RETURN] || keystates[KEYSTATE_SPACE] || keystates[KEYSTATE_ESCAPE])
                 break;
         }
-        
+
 		if(leftmouse(buttons))
 			retvalue = localbuttons->leftclick();
-        
+
         handle_menu_nav(buttons, highlighted_button, retvalue);
-        
-        
+
+
         // Reset buttons
         reset_buttons(localbuttons, buttons, num_buttons, retvalue);
-		
+
 		// Draw
 		dumbcount = myscreen->draw_dialog(leftside, 80 - h/2, rightside, 80 + h/2, title);
 		j = 0;
@@ -2138,9 +2140,9 @@ void popup_dialog(const char* title, const char* message)
             gladtext.write_xy(dumbcount + 3*pix_per_char/2 + w/2 - e->size()*pix_per_char/2, 104 - h/2 + 10*j, e->c_str(), (unsigned char) DARK_BLUE, 1);
             j++;
         }
-		
+
         draw_buttons(buttons, num_buttons);
-        
+
         draw_highlight_interior(buttons[highlighted_button]);
         myscreen->buffer_to_screen(0,0,320,200);
         SDL_Delay(10);
@@ -2160,12 +2162,12 @@ Sint32 create_save_menu(Sint32 arg1)
 
 	if (localbuttons)
 		delete (localbuttons);
-    
+
 	button* buttons = saveteam_buttons;
 	int num_buttons = 11;
 	int highlighted_button = 10;
 	localbuttons = init_buttons(buttons, num_buttons);
-	
+
 
 	while ( !(retvalue & EXIT) )
 	{
@@ -2178,21 +2180,21 @@ Sint32 create_save_menu(Sint32 arg1)
                 return REDRAW;
             }
         }
-        
+
         handle_menu_nav(buttons, highlighted_button, retvalue);
         if(retvalue == REDRAW)
         {
             return REDRAW;
         }
-        
+
         // Reset buttons
         reset_buttons(localbuttons, buttons, num_buttons, retvalue);
-		
+
 		// Draw
 		myscreen->clearbuffer();
         draw_backdrop();
         draw_buttons(buttons, num_buttons);
-        
+
         myscreen->draw_button(15,  9, 255, 199, 1, 1);
         myscreen->draw_text_bar(19, 13, 251, 21);
         strcpy(message, "Gladiator: Save Game");
@@ -2214,7 +2216,7 @@ Sint32 create_save_menu(Sint32 arg1)
                            allbuttons[10]->yloc-1,
                            allbuttons[10]->xend,
                            allbuttons[10]->yend, 0, 0, 1);
-                           
+
         draw_highlight(buttons[highlighted_button]);
         myscreen->buffer_to_screen(0,0,320,200);
         SDL_Delay(10);
@@ -2235,7 +2237,7 @@ Sint32 increase_stat(Sint32 whatstat, Sint32 howmuch)
                || old_guy->constitution < current_guy->constitution
                || old_guy->intelligence < current_guy->intelligence
                || old_guy->armor < current_guy->armor);
-    
+
 	switch(whatstat)
 	{
 		case BUT_STR:
@@ -2268,7 +2270,7 @@ Sint32 increase_stat(Sint32 whatstat, Sint32 howmuch)
 		default:
 			break;
 	}
-	
+
 	return OK;
 }
 
@@ -2284,7 +2286,7 @@ Sint32 decrease_stat(Sint32 whatstat, Sint32 howmuch)
                || old_guy->constitution < current_guy->constitution
                || old_guy->intelligence < current_guy->intelligence
                || old_guy->armor < current_guy->armor);
-    
+
 	switch(whatstat)
 	{
 		case BUT_STR:
@@ -2322,7 +2324,7 @@ Sint32 decrease_stat(Sint32 whatstat, Sint32 howmuch)
 		default:
 			break;
 	}
-	
+
 	return OK;
 }
 
@@ -2361,15 +2363,15 @@ Uint32 calculate_hire_cost()
 	               * (Sint32)statcosts[myfamily][BUT_INT]);
 	temp += (Sint32)((pow( (Sint32)(ob->armor - statlist[myfamily][BUT_ARMOR]), RAISE))
 	               * (Sint32)statcosts[myfamily][BUT_ARMOR]);
-    
+
 	if (ob->get_level() < statlist[myfamily][BUT_LEVEL])
 		ob->upgrade_to_level(statlist[myfamily][BUT_LEVEL]);
-		
+
 	if ((Sint32) calculate_exp(ob->get_level()) < 0) // overflow
 		ob->upgrade_to_level(1);
-    
+
 	temp += (Sint32) (calculate_exp(ob->get_level()));
-	
+
 	if (temp < 0)
 	{
 		//guytemp = new guy(current_guy->family);
@@ -2408,7 +2410,7 @@ Uint32 calculate_train_cost(guy  *oldguy)
 		ob->armor = oldguy->armor;
 
 	// Now figure out costs ..
-    
+
 	// Add on extra level cost ..
 	if (ob->get_level() < oldguy->get_level())
 		ob->upgrade_to_level(oldguy->get_level());
@@ -2441,7 +2443,7 @@ Uint32 calculate_train_cost(guy  *oldguy)
 	temp -= (Sint32)((pow( (Sint32)(oldguy->armor - statlist[myfamily][BUT_ARMOR]), RAISE))
 	               * (Sint32)statcosts[myfamily][BUT_ARMOR]);
     }
-    
+
 
 	if (temp < 0)
 	{
@@ -2458,61 +2460,61 @@ Uint32 calculate_train_cost(guy  *oldguy)
 #define GET_RAND_ELEM(array) (array[rand()%ARRAY_SIZE(array)])
 
 const char* archer_names[] = {
-    "Robin", "Green Arrow", 
-    "Legolas", 
+    "Robin", "Green Arrow",
+    "Legolas",
     "Yeoman", "Strider", "Longshot", "Bowyer", "Hunter", "Archy"
 };
 
 const char* cleric_names[] = {
-    "Tuck", 
+    "Tuck",
     "Brother", "Pater", "Drake", "Friar", "Francis", "John Paul", "Medic"
 };
 
 const char* druid_names[] = {
-    "Roland", 
-    "Merlin", 
+    "Roland",
+    "Merlin",
     "Hippy", "Green Thumb", "Treefall", "Rain"
 };
 
 const char* elf_names[] = {
-    "Legolas", "Took", "Elrond", 
-    "Tanis", 
+    "Legolas", "Took", "Elrond",
+    "Tanis",
     "Acorn", "Lightfoot", "Treewee"
 };
 
 const char* mage_names[] = {
-    "Gandalf", "Saruman", "Radagast", "Alatar", "Pallando", 
-    "Raistlin", "Fizban", "Mordenkainen", 
-    "Merlin", 
-    "Harry", 
-    "Manannan", "Mordack", 
+    "Gandalf", "Saruman", "Radagast", "Alatar", "Pallando",
+    "Raistlin", "Fizban", "Mordenkainen",
+    "Merlin",
+    "Harry",
+    "Manannan", "Mordack",
     "Jace"
 };
 
 const char* soldier_names[] = {
-    "Lothar", 
-    "Arthur", "Uther", 
-    "Achilles", "Lu Bu", "Wallace", "Leonidas", "Attila", "Alexander", "Ajax", "Nestor", "Priam", "Hector", 
+    "Lothar",
+    "Arthur", "Uther",
+    "Achilles", "Lu Bu", "Wallace", "Leonidas", "Attila", "Alexander", "Ajax", "Nestor", "Priam", "Hector",
     "Tom", "Bigfoot"
 };
 
 const char* thief_names[] = {
-    "Shinobi", 
-    "Dismas", 
+    "Shinobi",
+    "Dismas",
     "Shadow", "Stabby", "Swiftstrike", "Scourge", "Rogue"
 };
 
 const char* orc_names[] = {
-    "Grom", 
-    "Thrull", 
-    "Vernix", "Lanugo", 
+    "Grom",
+    "Thrull",
+    "Vernix", "Lanugo",
     "Grok", "Horde", "Grog", "Krosh"
 };
 
 const char* barbarian_names[] = {
-    "Thor", 
-    "Conan", 
-    "Beowulf", "Cronus", "Pallas", "Atlas", "Prometheus", 
+    "Thor",
+    "Conan",
+    "Beowulf", "Cronus", "Pallas", "Atlas", "Prometheus",
     "Titan"
 };
 
@@ -2521,24 +2523,24 @@ const char* elemental_names[] = {
 };
 
 const char* skeleton_names[] = {
-    "Drybones", 
-    "Blackbeard", 
+    "Drybones",
+    "Blackbeard",
     "Boney", "Femur", "Patella", "Humerus", "Scapula"
 };
 
 const char* slime_names[] = {
-    "Grimer", 
+    "Grimer",
     "Goop", "Slurp", "Glopp", "Sludge", "Blob"
 };
 
 const char* faerie_names[] = {
-    "Tink", 
+    "Tink",
     "Gem", "Glitter", "Jewel", "Blossom", "Ruby", "Muffin", "Flutter", "Sparkle", "Sprint", "Sprite", "Eve", "Twinkle", "Violet", "Daisy", "Lily"
 };
 
 const char* ghost_names[] = {
-    "Casper", 
-    "Slimer", 
+    "Casper",
+    "Slimer",
     "Reaper", "Ecto", "Pepper", "Boo", "Banshee", "Nyx"
 };
 
@@ -2589,13 +2591,13 @@ bool has_name_in_team(const char* name)
 {
     guy** ourteam = myscreen->save_data.team_list;
     int team_size = myscreen->save_data.team_size;
-    
+
     for(int i = 0; i < team_size; i++)
     {
         if(strcmp(ourteam[i]->name, name) == 0)
             return true;
     }
-    
+
     return false;
 }
 
@@ -2603,7 +2605,7 @@ const char* get_new_name(unsigned char family)
 {
     static char new_name_buffer[50];
     const char* result = get_random_name(family);
-    
+
     // Try a few times to get a unique name
     int i = 0;
     while(has_name_in_team(result) && i < 10)
@@ -2611,7 +2613,7 @@ const char* get_new_name(unsigned char family)
         result = get_random_name(family);
         i++;
     }
-    
+
     // A bare name is a duplicate?
     if(has_name_in_team(result))
     {
@@ -2623,10 +2625,10 @@ const char* get_new_name(unsigned char family)
             i++;
         }
         while(has_name_in_team(new_name_buffer));
-        
+
         result = new_name_buffer;
     }
-    
+
     return result;
 }
 
@@ -2666,7 +2668,7 @@ Sint32 cycle_guy(Sint32 whichway)
 	//myscreen->buffer_to_screen(52, 24, 108, 64);
 
 	grab_mouse();
-	
+
 	return OK;
 }
 
@@ -2709,9 +2711,9 @@ Sint32 cycle_team_guy(Sint32 whichway)
 {
 	if (myscreen->save_data.team_size < 1)
 		return -1;
-    
+
     guy** ourteam = myscreen->save_data.team_list;
-    
+
 	editguy += whichway;
 	if (editguy < 0)
 	{
@@ -2783,11 +2785,11 @@ Sint32 name_guy(Sint32 arg)  // 0 == current_guy, 1 == ourteam[editguy]
 		return REDRAW;
 
 	release_mouse();
-	
+
 	myscreen->draw_button(174,  8, 306, 30, 1, 1); // text box
 	nametext.write_xy(176, 12, "NAME THIS CHARACTER:", DARK_BLUE, 1);
 	myscreen->buffer_to_screen(0, 0, 320, 200);
-	
+
 	clear_keyboard();
 	char* new_text = nametext.input_string(176, 20, 11, someguy->name);
 	if(new_text == NULL)
@@ -2819,7 +2821,7 @@ Sint32 add_guy(Sint32 ignoreme)
 		return OK;
 
 	myscreen->save_data.m_totalcash[current_team_num] -= cost;
-    
+
     guy** ourteam = myscreen->save_data.team_list;
 	for (i=0; i < MAX_TEAM_SIZE; i++)
     {
@@ -2830,11 +2832,11 @@ Sint32 add_guy(Sint32 ignoreme)
 			myscreen->save_data.team_size++;
 			current_guy = NULL;
 			release_mouse();
-			
+
 			std::string name = ourteam[i]->name;
 			if(prompt_for_string("NAME THIS CHARACTER", name))
                 strncpy(ourteam[i]->name, name.c_str(), 12);
-            
+
 			grab_mouse();
 
 			// Increment the next guy's number
@@ -2884,7 +2886,7 @@ Sint32 edit_guy(Sint32 arg1)
 		statscopy(here, current_guy);
 		return OK;
 	}
-    
+
     Uint32 cost = calculate_train_cost(here);
 	if ( (cost > myscreen->save_data.m_totalcash[current_guy->teamnum]) ||  // compare cost of here to current_guy
 	        (cost < 0) )
@@ -2920,12 +2922,12 @@ Sint32 do_save(Sint32 arg1)
 {
 	release_mouse();
 	clear_keyboard();
-	
+
 	std::string name = allbuttons[arg1-1]->label;
 	if(prompt_for_string("NAME YOUR SAVED GAME", name))
     {
         myscreen->save_data.save_name = name;
-        
+
         char newname[8];
         snprintf(newname, 8, "save%d", arg1);
         if(myscreen->save_data.save(newname))
@@ -2935,7 +2937,7 @@ Sint32 do_save(Sint32 arg1)
     }
     else
         timed_dialog("SAVE CANCELED");
-    
+
 	grab_mouse();
 
 	return REDRAW;
@@ -2951,7 +2953,7 @@ Sint32 do_load(Sint32 arg1)
         timed_dialog("GAME LOADED");
     else
         timed_dialog("LOAD FAILED");
-    
+
 	return REDRAW;
 }
 
@@ -2967,7 +2969,7 @@ const char* get_saved_name(const char * filename)
 
 	// This only uses the first segment of the save format.
 	// See load_team_list() for full format
-	
+
 	// Format of a team list file is:
 	// 3-byte header: 'GTL'
 	// 1-byte version number (from graph.h)
@@ -3027,7 +3029,7 @@ Sint32 delete_all()
         delete myscreen->save_data.team_list[i];
         myscreen->save_data.team_list[i] = NULL;
     }
-    
+
     myscreen->save_data.team_size = 0;
 
 	return counter;
@@ -3040,19 +3042,19 @@ Sint32 go_menu(Sint32 arg1)
 
 	if (arg1)
 		arg1 = 1;
-    
+
     do
     {
         // Make sure we have a valid team
         if (myscreen->save_data.team_size < 1)
         {
             popup_dialog("NEED A TEAM!", "Please hire a\nteam before\nstarting the level");
-            
+
             return REDRAW;
         }
         myscreen->save_data.save("save0");
         release_mouse();
-        
+
         //*******************************
         // Fade out from MENU loop
         //*******************************
@@ -3068,7 +3070,7 @@ Sint32 go_menu(Sint32 arg1)
         myscreen->ready_for_battle(myscreen->save_data.numplayers);
 
         glad_main(myscreen->save_data.numplayers);
-        
+
         //*******************************
         // Fade out from ACTION loop
         //*******************************
@@ -3121,7 +3123,7 @@ void statscopy(guy *dest, guy *source)
 	dest->total_hits   = source->total_hits;
 	dest->total_shots  = source->total_shots;
 	dest->teamnum = source->teamnum;
-	
+
 	dest->scen_damage = source->scen_damage;
 	dest->scen_kills = source->scen_kills;
 	dest->scen_damage_taken = source->scen_damage_taken;
@@ -3146,12 +3148,12 @@ void draw_toggle_effect_button(button& b, const std::string& category, const std
 {
     if(b.hidden || b.no_draw)
         return;
-    
+
     if(cfg.is_on(category, setting))
         myscreen->draw_button_colored(b.x-1, b.y-1, b.x + b.sizex, b.y + b.sizey, 1, LIGHT_GREEN);
     else
         myscreen->draw_button_colored(b.x-1, b.y-1, b.x + b.sizex, b.y + b.sizey, 1, RED);
-    
+
     text& mytext = myscreen->text_normal;
     mytext.write_xy_center(b.x + b.sizex/2, b.y + b.sizey/2 - 3, DARK_BLUE, "%s", b.label.c_str());
 }
@@ -3159,23 +3161,23 @@ void draw_toggle_effect_button(button& b, const std::string& category, const std
 Sint32 main_options()
 {
     text& mytext = myscreen->text_normal;
-    
+
 	if(localbuttons != NULL)
 		delete localbuttons; //we'll make a new set
-    
+
     #if defined(OUYA) || defined(ANDROID)
     main_options_buttons[3].hidden = main_options_buttons[3].no_draw = true;
     main_options_buttons[2].nav.right = -1;
     main_options_buttons[5].nav.up = 2;
     #endif
-    
+
 	button* buttons = main_options_buttons;
 	int num_buttons = ARRAY_SIZE(main_options_buttons);
 	int highlighted_button = 0;
 	localbuttons = init_buttons(buttons, num_buttons);
 
 	clear_keyboard();
-    
+
     Sint32 retvalue = 0;
 	while(!(retvalue & EXIT))
 	{
@@ -3185,34 +3187,34 @@ Sint32 main_options()
 			if(localbuttons->leftclick() == EXIT)
                 break;
         }
-        
+
         handle_menu_nav(buttons, highlighted_button, retvalue);
         if(retvalue == EXIT)
             break;
-        
+
         // Reset buttons
         reset_buttons(localbuttons, buttons, num_buttons, retvalue);
         buttons[2].label = cfg.get_setting("graphics", "render");
         allbuttons[2]->label = buttons[2].label;
-		
+
 		// Draw
 		myscreen->clear_window();  // Clearing entire window because the overscan may have been adjusted.
-		
+
 		myscreen->draw_button(0, 0, 320, 200, 0);
 		myscreen->draw_button_inverted(4, 4, 312, 192);
-		
-        
+
+
         draw_buttons(buttons, num_buttons);
-        
+
 		draw_toggle_effect_button(buttons[1], "sound", "sound");
 		myscreen->hor_line(60, buttons[2].y - BUTTON_PADDING/2, 200, PURE_WHITE);
-		
+
 		mytext.write_xy(20, buttons[2].y + 3, DARK_BLUE, "Rendering engine:");
 		mytext.write_xy(20, buttons[2].y + 3 + 10, DARK_BLUE, " (needs restart)");
 		draw_toggle_effect_button(buttons[3], "graphics", "fullscreen");
 		mytext.write_xy(20, buttons[4].y + 3, DARK_BLUE, "Overscan adjust:");
 		myscreen->hor_line(60, buttons[6].y - BUTTON_PADDING/2, 200, PURE_WHITE);
-		
+
 		mytext.write_xy(20, buttons[6].y + 3, DARK_BLUE, "Effects:");
 		draw_toggle_effect_button(buttons[6], "effects", "mini_hp_bar");
 		draw_toggle_effect_button(buttons[7], "effects", "hit_flash");
@@ -3222,15 +3224,15 @@ Sint32 main_options()
 		draw_toggle_effect_button(buttons[11], "effects", "damage_numbers");
 		draw_toggle_effect_button(buttons[12], "effects", "heal_numbers");
 		draw_toggle_effect_button(buttons[13], "effects", "gore");
-        
+
         draw_highlight(buttons[highlighted_button]);
         myscreen->buffer_to_screen(0,0,320,200);
         SDL_Delay(10);
 	}
-	
+
 	myscreen->soundp->set_sound(!cfg.is_on("sound", "sound"));
 	cfg.save_settings();
-    
+
     return REDRAW;
 }
 
@@ -3238,7 +3240,7 @@ Sint32 overscan_adjust(Sint32 arg)
 {
     overscan_percentage -= arg/100.0f;
     update_overscan_setting();
-    
+
     return REDRAW;
 }
 
@@ -3285,11 +3287,11 @@ Sint32 create_detail_menu(guy *arg1)
 
    if (localbuttons)
        delete localbuttons;
-    
+
 	button* buttons = details_buttons;
 	int num_buttons = 2;
 	int highlighted_button = 0;
-	
+
 	buttons[1].hidden = !(thisguy->family == FAMILY_MAGE && thisguy->get_level() >= 6) && !(thisguy->family == FAMILY_ORC && thisguy->get_level() >= 5);
 	localbuttons = init_buttons(buttons, num_buttons);
 
@@ -3299,16 +3301,16 @@ Sint32 create_detail_menu(guy *arg1)
    while ( !(retvalue & EXIT) )
    {
        show_guy(query_timer()-start_time, 1); // 1 means ourteam[editguy]
-    
+
        bool pressed = handle_menu_nav(buttons, highlighted_button, retvalue);
-       
+
        MouseState& detailmouse = query_mouse();
        bool do_click = false;
        if(leftmouse(buttons))
        {
            do_click = true;
        }
-       
+
        bool do_promote = !buttons[1].hidden && ((do_click && detailmouse.x >= 160 &&
                    detailmouse.x <= 315 &&
                    detailmouse.y >= 4   &&
@@ -3338,17 +3340,17 @@ Sint32 create_detail_menu(guy *arg1)
                return REDRAW;
            } // end of orc->orc-captain
        }
-        
+
         if(do_click)
             retvalue=localbuttons->leftclick(buttons);
-       
-       
-    
+
+
+
         draw_backdrop();
 
        myscreen->draw_button(34,  8, 126, 24, 1, 1);  // name box
        myscreen->draw_text_bar(36, 10, 124, 22);
-       
+
        text& mytext = myscreen->text_normal;
        mytext.write_xy(80 - mytext.query_width(current_guy->name)/2, 14,
                         current_guy->name,(unsigned char) DARK_BLUE, 1);
@@ -3738,8 +3740,8 @@ Sint32 create_detail_menu(guy *arg1)
        }
 
        show_guy(0, 1);
-       
-       
+
+
        draw_buttons(buttons, num_buttons);
        draw_highlight_interior(buttons[highlighted_button]);
        myscreen->buffer_to_screen(0, 0, 320, 200);
@@ -3755,7 +3757,7 @@ int get_scen_num_from_filename(const char* name)
 {
    if(!name)
     return -1;
-    
+
    const char* n = name;
    while(isalpha(*n))
    {
@@ -3783,9 +3785,9 @@ Sint32 do_pick_campaign(Sint32 arg1)
 Sint32 do_set_scen_level(Sint32 arg1)
 {
    Sint32 templevel = myscreen->save_data.scen_num;
-   
+
    templevel = pick_level(myscreen, myscreen->level_data.id);
-   
+
    // Have some feedback if the level changed
    if(templevel != myscreen->level_data.id)
    {
@@ -3795,7 +3797,7 @@ Sint32 do_set_scen_level(Sint32 arg1)
        {
             myscreen->clearbuffer();
             popup_dialog("Load Failed", "Invalid level file.");
-            
+
            myscreen->level_data.id = old_id;
            if(!myscreen->level_data.load())
            {
@@ -3906,7 +3908,7 @@ Sint32 change_allied()
 
    // Update our button display
    allbuttons[7]->label = message;
-   
+
    //buffers: allbuttons[7]->vdisplay();
    //buffers: myscreen->buffer_to_screen(0, 0, 320, 200);
 

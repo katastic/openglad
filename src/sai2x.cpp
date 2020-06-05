@@ -1,3 +1,5 @@
+#include "common.h"
+
 #include "SDL.h"
 #include "sai2x.h"
 #include "util.h"
@@ -52,9 +54,9 @@ int Init_2xSaI()
 
 
 void Super2xSaI_ex2(
-	unsigned char* src, 
-	int srcx, int srcy, 
-	int srcw, int srch, 
+	unsigned char* src,
+	int srcx, int srcy,
+	int srcw, int srch,
 	int src_pitch,
 	int src_height,
 	unsigned char* dst,
@@ -67,7 +69,7 @@ void Super2xSaI_ex2(
 
 	src_pitch=src_pitch/4;
 	dst_pitch=dst_pitch/4;
-	
+
 	if (srcx + srcw >= src_pitch)
 	{
 		srcw = src_pitch - srcx;
@@ -78,12 +80,12 @@ void Super2xSaI_ex2(
     int xbeforelast1 = src_pitch - 1 - srcx;
     int xbeforelast2 = src_pitch - 2 - srcx;
 
-	for (int y = 0; y < srch; y++) 
+	for (int y = 0; y < srch; y++)
 	{
 		Uint32* bP = (Uint32*) srcPtr;
 		Uint32* dP = (Uint32*) dstPtr;
-	
-		for (int x = 0; x < srcw; x++) 
+
+		for (int x = 0; x < srcw; x++)
 		{
            Uint32 color4, color5, color6;
            Uint32 color1, color2, color3;
@@ -92,7 +94,7 @@ void Super2xSaI_ex2(
 						colorS1, colorS2;
            Uint32 product1a, product1b,
  					  product2a, product2b;
- 
+
 			int add1, add2;
 			int sub1;
 			int nextl1, nextl2;
@@ -118,12 +120,12 @@ void Super2xSaI_ex2(
 
 			if (y >= ybeforelast2)
 				nextl2 = 0;
-			else 
+			else
 				nextl2 = src_pitch;
 
 			if (y >= ybeforelast1)
 				nextl1 = 0;
-			else 
+			else
 				nextl1 = src_pitch;
 
             colorB0 = *(bP- prevl1 - sub1);
@@ -214,16 +216,16 @@ void Super2xSaI_ex2(
 			dP += 2;
 
 		}
-		srcPtr +=   src_pitch*4; 
-		dstPtr += 2*dst_pitch*4; 
+		srcPtr +=   src_pitch*4;
+		dstPtr += 2*dst_pitch*4;
 	}
 }
 
 
 void Scale_SuperEagle(
-	unsigned char* src, 
-	int srcx, int srcy, 
-	int srcw, int srch, 
+	unsigned char* src,
+	int srcx, int srcy,
+	int srcw, int srch,
 	int src_pitch,
 	int src_height,
 	unsigned char* dst,
@@ -259,7 +261,7 @@ void Scale_SuperEagle(
 
 	src_pitch=src_pitch/4;
 	dst_pitch=dst_pitch/4;
-	
+
 	if (srcx + srcw >= src_pitch)
 	{
 		srcw = src_pitch - srcx;
@@ -316,12 +318,12 @@ void Scale_SuperEagle(
 
 			if (y >= ybeforelast2)
 				nextl2 = 0;
-			else 
+			else
 				nextl2 = src_pitch;
 
 			if (y >= ybeforelast1)
 				nextl1 = 0;
-			else 
+			else
 				nextl1 = src_pitch;
 
 
@@ -386,7 +388,7 @@ void Scale_SuperEagle(
    			   //manip.copy(product1a, color5);
 			   //product2b = product1a;
 
- 
+
                if ((colorB1 == color5) ||  (color3 == colorS1))
                {
                    product1b = INTERPOLATE (color5, color6);
@@ -485,7 +487,7 @@ void Scale_SuperEagle(
 
 
 
-void Super2xSaI_ex(unsigned char *src, Uint32 src_pitch, unsigned char *unused, unsigned char *dest, Uint32 dest_pitch, Uint32 width, Uint32 height) 
+void Super2xSaI_ex(unsigned char *src, Uint32 src_pitch, unsigned char *unused, unsigned char *dest, Uint32 dest_pitch, Uint32 width, Uint32 height)
 {
 
 
@@ -499,10 +501,10 @@ void Super2xSaI_ex(unsigned char *src, Uint32 src_pitch, unsigned char *unused, 
 	src_line[1] = src;
 	src_line[2] = src + src_pitch;
 	src_line[3] = src + src_pitch * 2;
-	
+
 	dst_line[0] = (unsigned char*) dest;
 	dst_line[1] = (unsigned char*) dest + dest_pitch;
-	
+
 	x = 0, y = 0;
 	Uint32 *lbp;
 	lbp = (Uint32*)src_line[0];
@@ -514,9 +516,9 @@ void Super2xSaI_ex(unsigned char *src, Uint32 src_pitch, unsigned char *unused, 
 	color[12] = *lbp;    color[13] = color[12];   color[14] = *(lbp + 1); color[15] = *(lbp + 2);
 
 	for (y = 0; y < height; y++) {
-	
+
 		/* Todo: x = width - 2, x = width - 1 */
-		
+
 		for (x = 0; x < width; x++) {
 			Uint32 product1a, product1b, product2a, product2b;
 
@@ -548,7 +550,7 @@ void Super2xSaI_ex(unsigned char *src, Uint32 src_pitch, unsigned char *unused, 
 					product1b = color[5];
 				else
 					product1b = INTERPOLATE(color[5], color[6]);
-					
+
 				product2b = product1b;
 
 			}
@@ -581,17 +583,17 @@ void Super2xSaI_ex(unsigned char *src, Uint32 src_pitch, unsigned char *unused, 
 				product1a = INTERPOLATE(color[9], color[5]);
 			else
 				product1a = color[5];
-	
+
 			*((Uint32 *) (&dst_line[0][x * 8])) = product1a;
 			*((Uint32 *) (&dst_line[0][x * 8 + 4])) = product1b;
 			*((Uint32 *) (&dst_line[1][x * 8])) = product2a;
 			*((Uint32 *) (&dst_line[1][x * 8 + 4])) = product2b;
-			
+
 			/* Move color matrix forward */
 			color[0] = color[1]; color[4] = color[5]; color[8] = color[9];   color[12] = color[13];
 			color[1] = color[2]; color[5] = color[6]; color[9] = color[10];  color[13] = color[14];
 			color[2] = color[3]; color[6] = color[7]; color[10] = color[11]; color[14] = color[15];
-			
+
 			if (x < width - 3) {
 				x += 3;
 				color[3] = *(((Uint32*)src_line[0]) + x);
@@ -605,14 +607,14 @@ void Super2xSaI_ex(unsigned char *src, Uint32 src_pitch, unsigned char *unused, 
 		/* We're done with one line, so we shift the source lines up */
 		src_line[0] = src_line[1];
 		src_line[1] = src_line[2];
-		src_line[2] = src_line[3];		
+		src_line[2] = src_line[3];
 
 		/* Read next line */
 		if (y + 3 >= height)
 			src_line[3] = src_line[2];
 		else
 			src_line[3] = src_line[2] + src_pitch;
-			
+
 		/* Then shift the color matrix up */
 		Uint32 *lbp;
 		lbp = (Uint32*)src_line[0];
@@ -623,7 +625,7 @@ void Super2xSaI_ex(unsigned char *src, Uint32 src_pitch, unsigned char *unused, 
 		color[8] = *lbp; color[9] = color[9]; color[10] = *(lbp + 1); color[11] = *(lbp + 2);
 		lbp = (Uint32*)src_line[3];
 		color[12] = *lbp; color[13] = color[12]; color[14] = *(lbp + 1); color[15] = *(lbp + 2);
-		
+
 		if (y < height - 1) {
 			dst_line[0] = (unsigned char*) dest + dest_pitch*(y*2+2);
 			dst_line[1] = (unsigned char*) dest + dest_pitch*(y*2+3);
@@ -658,14 +660,14 @@ void Super2xSaI(SDL_Surface *src, SDL_Surface *dest, int s_x, int s_y, int d_x, 
 		/* Image is too small to be 2xSaI'ed. */
 		Log("Error: surface to copy is to small, TODO here\n");
 		return;
-	}	
-	
+	}
+
 	Super2xSaI_ex(
-			(unsigned char*) src->pixels + src->pitch*s_y + s_x*sbpp, 
-			src->pitch, 
-			NULL, 
-			(unsigned char*) dest->pixels + dest->pitch*d_y +d_x*dbpp, 
-			dest->pitch, 
+			(unsigned char*) src->pixels + src->pitch*s_y + s_x*sbpp,
+			src->pitch,
+			NULL,
+			(unsigned char*) dest->pixels + dest->pitch*d_y +d_x*dbpp,
+			dest->pitch,
 			w, h);
 	return;
 }
@@ -688,7 +690,7 @@ Screen::Screen( RenderEngine engine, int width, int height, int fullscreen)
 	default:
 		break;
 	}
-    
+
     int w, h;
     #ifdef ANDROID
     w = 0;
@@ -702,28 +704,28 @@ Screen::Screen( RenderEngine engine, int width, int height, int fullscreen)
     Uint32 window_flags = SDL_WINDOW_SHOWN;
     if(fullscreen)
         window_flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
-    
+
     #ifdef __IPHONEOS__
     window_flags |= SDL_WINDOW_BORDERLESS;
     #endif
-    
+
     window = SDL_CreateWindow("Gladiator",
                         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                         w, h,
                         window_flags);
     if(window == NULL)
         exit(1);
-    
+
     SDL_GetWindowSize(window, &w, &h);
     window_w = w;
     window_h = h;
-    
+
     update_overscan_setting();
-    
+
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
-    
-    render = SDL_CreateRGBSurface(SDL_SWSURFACE, 320, 200, 32, 0, 0, 0, 0);
-	render_tex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, 320, 200);
+
+    render = SDL_CreateRGBSurface(SDL_SWSURFACE, SCREEN_W, SCREEN_H, 32, 0, 0, 0, 0);
+	render_tex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_W, SCREEN_H);
     render2 = NULL;  // To be initialized when we actually need it
     render2_tex = NULL;
 }
@@ -734,7 +736,7 @@ Screen::~Screen()
 	SDL_DestroyTexture(render2_tex);
 	SDL_FreeSurface(render);
 	SDL_FreeSurface(render2);
-	
+
 	SDL_DestroyRenderer(renderer);
 	//SDL_DestroyWindow(window);
 }
@@ -760,43 +762,43 @@ void Screen::swap(int x, int y, int w, int h)
 {
     SDL_Surface* source_surface = render;
     SDL_Texture* dest_texture = render_tex;
-    
+
 	switch(Engine) {
 		case SAI:
                 if(render2 == NULL)
                 {
-                    render2 = SDL_CreateRGBSurface(SDL_SWSURFACE, 640, 400, 32, 0, 0, 0, 0);
-                    render2_tex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, 640, 400);
+                    render2 = SDL_CreateRGBSurface(SDL_SWSURFACE, SCREEN_W, SCREEN_H, 32, 0, 0, 0, 0);
+                    render2_tex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_W, SCREEN_H);
                 }
                 SDL_LockSurface( render2 );
                 Super2xSaI_ex2(
                         (unsigned char*) render->pixels, x, y, w, h, render->pitch, render->h,
                         (unsigned char*) render2->pixels, 2*x, 2*y, render2->pitch);
                 SDL_UnlockSurface( render2 );
-                
+
                 source_surface = render2;
                 dest_texture = render2_tex;
             break;
 		case EAGLE:
                 if(render2 == NULL)
                 {
-                    render2 = SDL_CreateRGBSurface(SDL_SWSURFACE, 640, 400, 32, 0, 0, 0, 0);
-                    render2_tex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, 640, 400);
+                    render2 = SDL_CreateRGBSurface(SDL_SWSURFACE, SCREEN_W, SCREEN_H, 32, 0, 0, 0, 0);
+                    render2_tex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_W, SCREEN_H);
                 }
                 SDL_LockSurface( render2 );
                 Scale_SuperEagle((unsigned char*) render->pixels, x, y, w, h, render->pitch, render->h,
                                  (unsigned char*) render2->pixels, 2*x, 2*y, render2->pitch);
                 SDL_UnlockSurface( render2 );
-                
+
                 source_surface = render2;
                 dest_texture = render2_tex;
 			break;
         default:
             break;
 	}
-	
+
     SDL_UpdateTexture(dest_texture, NULL, source_surface->pixels, source_surface->pitch);
-    
+
     SDL_Rect dest = {int(viewport_offset_x), int(viewport_offset_y), int(viewport_w), int(viewport_h)};
 
     SDL_RenderCopy(renderer, dest_texture, NULL, &dest);
@@ -807,11 +809,11 @@ void Screen::clear_window()
 {
     SDL_Surface* source_surface = render;
     SDL_Texture* dest_texture = render_tex;
-    
+
     SDL_FillRect(source_surface, NULL, 0x000000);
-    
+
     SDL_UpdateTexture(dest_texture, NULL, source_surface->pixels, source_surface->pitch);
-    
+
     SDL_Rect dest = {0, 0, int(window_w), int(window_h)};
 
     SDL_RenderCopy(renderer, dest_texture, NULL, &dest);

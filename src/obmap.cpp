@@ -18,6 +18,8 @@
 #include "graph.h"
 #include <cmath>
 #include <algorithm>
+#include "common.h"
+
 
 bool debug_draw_obmap = false;
 
@@ -33,7 +35,7 @@ short collide(short x,  short y,  short xsize,  short ysize,
 obmap::obmap()
 {
 	obmapres = OBRES;
-	
+
 	pos_to_walker.clear();
 	walker_to_pos.clear();
 }
@@ -54,7 +56,7 @@ void obmap::draw()
         myscreen->draw_box(cx - OBRES/2, cy - OBRES/2, cx + OBRES/2, cy + OBRES/2, YELLOW, false);
         t.write_xy_center(cx, cy, YELLOW, "%d", e->second.size());
     }
-    
+
     // Draw a box for each walker
     for(auto e = walker_to_pos.begin(); e != walker_to_pos.end(); e++)
     {
@@ -89,7 +91,7 @@ void obmap::draw()
                 r.h += f->second - (r.y + r.h);
             }
         }
-        
+
         if(!unset)
         {
             // Draw the rect
@@ -138,7 +140,7 @@ short obmap::query_list(walker  *ob, short x, short y)
 short obmap::remove(walker  *ob)  // This goes in walker's destructor
 {
     // Find all of the instances of the object and remove them from the map
-    
+
     // Get the list of positions that the walker occupies
     auto e = walker_to_pos.find(ob);
     if(e != walker_to_pos.end())
@@ -148,18 +150,18 @@ short obmap::remove(walker  *ob)  // This goes in walker's destructor
         {
             // Get the pile
             auto g = pos_to_walker.find(*f);
-            
+
             // Find our guy in this pile and remove him
             auto h = std::find(g->second.begin(), g->second.end(), ob);
             if(h != g->second.end())
                 g->second.erase(h);
         }
-        
+
         // Erase the walker from the walker map too
         walker_to_pos.erase(e);
         return true;
     }
-    
+
     return false;
 }
 
@@ -184,15 +186,15 @@ short obmap::add(walker  *ob, short x, short y)  // This goes in walker's constr
 		{
 		    // Store this position
 		    pos.push_back(std::make_pair(numx, numy));
-		    
+
 		    // Put the walker here too
 		    pos_to_walker[std::make_pair(numx, numy)].push_back(ob);
 		}
 	}
-	
+
 	// Now record where he is
 	walker_to_pos.insert(std::make_pair(ob, pos));
-		
+
 	return 1;
 }
 
@@ -250,7 +252,7 @@ short ob_pass_check(short x, short y, walker  *ob, const std::list<walker*>& pil
 
 	myorder = ob->query_order();
 	//myteam  = ob->team_num;
-	
+
 	if(!ob)
         return 1;
 
@@ -261,7 +263,7 @@ short ob_pass_check(short x, short y, walker  *ob, const std::list<walker*>& pil
 	    if (w != ob && !w->dead)
         {
             targetorder = w->query_order();
-            
+
             // Let our own team's weapons pass over us
             if((targetorder == ORDER_WEAPON || myorder == ORDER_WEAPON) && ob->is_friendly(w))
                 continue;
@@ -325,7 +327,7 @@ short ob_pass_check(short x, short y, walker  *ob, const std::list<walker*>& pil
             }
         }
 	}
-	
+
 	return 1;
 }
 

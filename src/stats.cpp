@@ -197,10 +197,10 @@ void statistics::set_command(short whatcommand, short iterations,
 // Do the current command
 short statistics::do_command()
 {
-	command *here;
+//	command *here;
 	short commandtype, com1, com2;
 	short i;
-	
+
 	walker * target;
 	short deltax, deltay;
 	Sint32 distance;
@@ -222,11 +222,11 @@ short statistics::do_command()
 	// Get next command;
 	if (commands.empty())
         return 0;
-    
+
     commandtype = commands.front().commandtype;
     com1 = commands.front().com1;
     com2 = commands.front().com2;
-    
+
     short result = 1;
 
 	switch (commandtype)
@@ -281,7 +281,7 @@ short statistics::do_command()
 					}
 				}
 			}
-			
+
 			// Do we have a leader now?
 			if(controller->leader)
 			{
@@ -303,7 +303,7 @@ short statistics::do_command()
 				if (newy)
 					newy = (short) (newy / abs(newy));
 			}  // end of if we had a foe ..
-			
+
 			controller->walkstep(newx, newy);
 			if (commands.front().commandcount < 2)
             {
@@ -404,21 +404,21 @@ short statistics::do_command()
 		default:
 			break;
 	}
-	
+
 	// NOTE: The first command might be a different command than it was before the switch statement.
 	// That would make this code decrement the wrong command.
 	if(!commands.empty())
 	{
         commands.front().commandcount--;       // reduce # of times left
-        
+
         if(commands.front().commandcount < 1) // Last iteration!
         {
             commands.front().commandcount = 0;
-            
+
 			commands.pop_front();
         }
 	}
-	
+
 	return result;
 }
 
@@ -511,7 +511,7 @@ void statistics::hit_response(walker  *who)
 				}
 				myscreen->find_foes_in_range(myscreen->level_data.oblist,
 				                                       200, &howmany, controller);
-                
+
 				if (howmany) // foes within range?
 				{
 					if (possible_specials[3]) // can we summon illusion?
@@ -609,7 +609,7 @@ void statistics::yell_for_help(walker *foe)
 	char message[80];
 
 	controller->yo_delay += 80;
-	
+
 	// Get AI-controlled allies to target my foe
 	std::list<walker*> helplist = myscreen->find_friends_in_range(
 	               myscreen->level_data.oblist, 160, &howmany, controller);
@@ -623,7 +623,7 @@ void statistics::yell_for_help(walker *foe)
 		//if (w->query_act_type() != ACT_CONTROL)
 		//  w->stats->force_command(COMMAND_FOLLOW, 80, 0, 0);
 	}
-	
+
 	// Force run in the opposite direction
 	deltax = -(foe->xpos - controller->xpos);
 	if (deltax)
@@ -1085,13 +1085,13 @@ bool statistics::walk_to_foe()
 	{
 	    controller->path_check_counter = 5 + rand()%10;
 	    controller->path_to_foe.clear();
-	    
+
 		xdest = foe->xpos;
 		ydest = foe->ypos;
 
 		xdelta = xdest - controller->xpos;
 		ydelta = ydest - controller->ypos;
-        
+
 		tempdistance = (Uint32) controller->distance_to_ob(foe);
 		// Do simpler pathing if the distance is short or if there are too many walkers (pathfinding is expensive)
 		if (tempdistance < PATHING_MIN_DISTANCE || myscreen->level_data.myobmap->size() > PATHING_SHORT_CIRCUIT_OBJECT_LIMIT)

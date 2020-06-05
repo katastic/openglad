@@ -1,0 +1,1560 @@
+# depslib dependency file v1.0
+1474046849 source:/home/novous/Desktop/openglad-master/src/button.cpp
+	"button.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/button.h
+	"base.h"
+	"obmap.h"
+	"gloader.h"
+	"pixien.h"
+	"text.h"
+	"screen.h"
+	<math.h>
+	"input.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/base.h
+	<stdio.h>
+	<stdlib.h>
+	<string>
+	<fstream>
+	<math.h>
+	<ctype.h>
+	"sounds.h"
+	"SDL.h"
+	"input.h"
+	"util.h"
+	"gparser.h"
+	"pal32.h"
+	"pixdefs.h"
+	"soundob.h"
+	"pixie_data.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/sounds.h
+
+1511371531 /usr/include/SDL2/SDL.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_assert.h"
+	"SDL_atomic.h"
+	"SDL_audio.h"
+	"SDL_clipboard.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_filesystem.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_haptic.h"
+	"SDL_hints.h"
+	"SDL_loadso.h"
+	"SDL_log.h"
+	"SDL_messagebox.h"
+	"SDL_mutex.h"
+	"SDL_power.h"
+	"SDL_render.h"
+	"SDL_rwops.h"
+	"SDL_system.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_version.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<math.h>
+	<float.h>
+	<iconv.h>
+	<sal.h>
+	"begin_code.h"
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_config.h
+	"SDL_platform.h"
+
+1511371531 /usr/include/SDL2/SDL_platform.h
+	"AvailabilityMacros.h"
+	"TargetConditionals.h"
+	<winapifamily.h>
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/begin_code.h
+
+1511371531 /usr/include/SDL2/close_code.h
+
+1511371531 /usr/include/SDL2/SDL_assert.h
+	"SDL_config.h"
+	"begin_code.h"
+	<signal.h>
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_atomic.h
+	"SDL_stdinc.h"
+	"SDL_platform.h"
+	"begin_code.h"
+	<mbarrier.h>
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_atomic.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_clipboard.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_cpuinfo.h
+	"SDL_stdinc.h"
+	<intrin.h>
+	<intrin.h>
+	<altivec.h>
+	<mmintrin.h>
+	<mm3dnow.h>
+	<xmmintrin.h>
+	<emmintrin.h>
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_quit.h"
+	"SDL_gesture.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_video.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_pixels.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_rect.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_pixels.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_surface.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_blendmode.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_blendmode.h
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keycode.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_keycode.h
+	"SDL_stdinc.h"
+	"SDL_scancode.h"
+
+1511371531 /usr/include/SDL2/SDL_scancode.h
+	"SDL_stdinc.h"
+
+1511371531 /usr/include/SDL2/SDL_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_gamecontroller.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1511371531 /usr/include/SDL2/SDL_gesture.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_touch.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_filesystem.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_haptic.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_hints.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_log.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_messagebox.h
+	"SDL_stdinc.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_power.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_render.h
+	"SDL_stdinc.h"
+	"SDL_rect.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_system.h
+	"SDL_stdinc.h"
+	"SDL_keyboard.h"
+	"SDL_render.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511371531 /usr/include/SDL2/SDL_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/input.h
+	"SDL.h"
+	<ctype.h>
+	<string>
+	"video.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/video.h
+	"base.h"
+	"text.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/text.h
+	"base.h"
+	"pixie_data.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/pixie_data.h
+
+1474046849 /home/novous/Desktop/openglad-master/src/util.h
+	"SDL.h"
+	<ctype.h>
+	<string>
+	"io.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/io.h
+	"SDL.h"
+	<list>
+	<vector>
+	<string>
+
+1474046849 /home/novous/Desktop/openglad-master/src/gparser.h
+	<string>
+	<map>
+
+1474046849 /home/novous/Desktop/openglad-master/src/pal32.h
+	"SDL_types.h"
+
+1511371531 /usr/include/SDL2/SDL_types.h
+	"SDL_stdinc.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/pixdefs.h
+
+1474046849 /home/novous/Desktop/openglad-master/src/soundob.h
+	"SDL_mixer.h"
+
+1453850007 /usr/include/SDL2/SDL_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/obmap.h
+	"base.h"
+	<map>
+	<list>
+
+1474046849 /home/novous/Desktop/openglad-master/src/gloader.h
+	"base.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/pixien.h
+	"base.h"
+	"pixie.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/pixie.h
+	"base.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/screen.h
+	"base.h"
+	"video.h"
+	"gloader.h"
+	"obmap.h"
+	"smooth.h"
+	<map>
+	<string>
+	<set>
+	"level_data.h"
+	"save_data.h"
+	"text.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/smooth.h
+	"SDL.h"
+	"pixie_data.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/level_data.h
+	"SDL.h"
+	<list>
+	<string>
+	"smooth.h"
+	"pixie_data.h"
+	"pixdefs.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/save_data.h
+	"SDL.h"
+	<string>
+	<map>
+	<set>
+	<list>
+	"walker.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/walker.h
+	"base.h"
+	"pixien.h"
+	"obmap.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/campaign_picker.cpp
+	"campaign_picker.h"
+	"io.h"
+	"yam.h"
+	"pixie.h"
+	"text.h"
+	"guy.h"
+	"screen.h"
+	"button.h"
+	<vector>
+	<string>
+
+1474046849 /home/novous/Desktop/openglad-master/src/campaign_picker.h
+	"screen.h"
+	<map>
+	<string>
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/yam/yam.h
+	"yaml.h"
+	<list>
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/libyaml/include/yaml.h
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+
+1474046849 /home/novous/Desktop/openglad-master/src/guy.h
+	"base.h"
+	"stats.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/stats.h
+	"base.h"
+	<list>
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/effect.cpp
+	"effect.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/effect.h
+	"base.h"
+	"obmap.h"
+	"screen.h"
+	"stats.h"
+	"walker.h"
+	"guy.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libyaml/src/api.c
+	"yaml_private.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/libyaml/src/yaml_private.h
+	"config.h"
+	"yaml.h"
+	<assert.h>
+	<limits.h>
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/libyaml/src/config.h
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libyaml/src/dumper.c
+	"yaml_private.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libyaml/src/emitter.c
+	"yaml_private.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libyaml/src/loader.c
+	"yaml_private.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libyaml/src/parser.c
+	"yaml_private.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libyaml/src/reader.c
+	"yaml_private.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libyaml/src/scanner.c
+	"yaml_private.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libyaml/src/writer.c
+	"yaml_private.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/mkstemp.c
+	<sys/types.h>
+	<sys/stat.h>
+	<assert.h>
+	<ctype.h>
+	<errno.h>
+	<fcntl.h>
+	<io.h>
+	<stdio.h>
+	<stdlib.h>
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_add.c
+	"zipint.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/libzip/zipint.h
+	<zlib.h>
+	<io.h>
+	"zip.h"
+	"config.h"
+	<windows.h>
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/physfs/zlib123/zlib.h
+	"zconf.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/physfs/zlib123/zconf.h
+	<windows.h>
+	<sys/types.h>
+	<unistd.h>
+	<unixio.h>
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/libzip/zip.h
+	"zipconf.h"
+	<sys/types.h>
+	<stdio.h>
+	<time.h>
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/libzip/zipconf.h
+	<inttypes.h>
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/libzip/config.h
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_add_dir.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_add_entry.c
+	<stdlib.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_close.c
+	"zipint.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<strings.h>
+	<errno.h>
+	<unistd.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<io.h>
+	<fcntl.h>
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_delete.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_dir_add.c
+	<stdlib.h>
+	<string.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_dirent.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<errno.h>
+	<sys/types.h>
+	<sys/stat.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_discard.c
+	<stdlib.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_entry.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_err_str.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_error.c
+	<stdlib.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_error_clear.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_error_get.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_error_get_sys_type.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_error_strerror.c
+	<errno.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_error_to_str.c
+	<errno.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_extra_field.c
+	"zipint.h"
+	<errno.h>
+	<stdlib.h>
+	<string.h>
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_extra_field_api.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_fclose.c
+	<stdlib.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_fdopen.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_file_add.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_file_error_clear.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_file_error_get.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_file_get_comment.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_file_get_offset.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<errno.h>
+	<sys/types.h>
+	<sys/stat.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_file_rename.c
+	<string.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_file_replace.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_file_set_comment.c
+	<stdlib.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_file_strerror.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_filerange_crc.c
+	<stdio.h>
+	<errno.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_fopen.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_fopen_encrypted.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_fopen_index.c
+	<errno.h>
+	<stdio.h>
+	<stdlib.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_fopen_index_encrypted.c
+	<errno.h>
+	<stdio.h>
+	<stdlib.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_fread.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_get_archive_comment.c
+	<string.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_get_archive_flag.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_get_compression_implementation.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_get_encryption_implementation.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_get_file_comment.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_get_name.c
+	<string.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_get_num_entries.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_get_num_files.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_memdup.c
+	<stdlib.h>
+	<string.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_name_locate.c
+	<string.h>
+	<strings.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_new.c
+	<stdlib.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_open.c
+	<sys/stat.h>
+	<errno.h>
+	<limits.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_rename.c
+	<string.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_replace.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_set_archive_comment.c
+	<stdlib.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_set_archive_flag.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_set_default_password.c
+	<stdlib.h>
+	<string.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_set_file_comment.c
+	<stdlib.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_set_file_compression.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_set_name.c
+	<stdlib.h>
+	<string.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_source_buffer.c
+	<stdlib.h>
+	<string.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_source_close.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_source_crc.c
+	<stdlib.h>
+	<string.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_source_deflate.c
+	<stdlib.h>
+	<string.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_source_error.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_source_file.c
+	<errno.h>
+	<stdio.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_source_filep.c
+	<sys/stat.h>
+	<errno.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_source_free.c
+	<stdlib.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_source_function.c
+	<stdlib.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_source_layered.c
+	<stdlib.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_source_open.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_source_pkware.c
+	<stdlib.h>
+	<string.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_source_pop.c
+	<stdlib.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_source_read.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_source_stat.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_source_window.c
+	<stdlib.h>
+	<string.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_source_zip.c
+	<stdlib.h>
+	<string.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_source_zip_new.c
+	<stdlib.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_stat.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_stat_index.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_stat_init.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_strerror.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_string.c
+	<stdlib.h>
+	<string.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_unchange.c
+	<stdlib.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_unchange_all.c
+	<stdlib.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_unchange_archive.c
+	<stdlib.h>
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_unchange_data.c
+	"zipint.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/libzip/zip_utf-8.c
+	"zipint.h"
+	<stdlib.h>
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/micropather/micropather.cpp
+	<vector>
+	<memory.h>
+	<stdio.h>
+	"micropather.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/micropather/micropather.h
+	<vector>
+	<float.h>
+	<cstring>
+	<assert.h>
+	<stdlib.h>
+	<cstdint>
+	<stdlib.h>
+	<cstdint>
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/archivers/dir.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"physfs.h"
+	"physfs_internal.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/physfs/physfs.h
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/physfs/physfs_internal.h
+	"physfs.h"
+	<stdlib.h>
+	<assert.h>
+	<malloc.h>
+	<alloca.h>
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/archivers/zip.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<errno.h>
+	<time.h>
+	"physfs.h"
+	"zlib.h"
+	"physfs_internal.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/extras/physfsrwops.c
+	<stdio.h>
+	"physfsrwops.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/physfs/extras/physfsrwops.h
+	"physfs.h"
+	"SDL.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/physfs.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"physfs.h"
+	"physfs_internal.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/physfs_byteorder.c
+	<stdio.h>
+	<stdlib.h>
+	"physfs_internal.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/physfs_unicode.c
+	"physfs.h"
+	"physfs_internal.h"
+	"physfs_casefolding.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/physfs/physfs_casefolding.h
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/platform/beos.cpp
+	"physfs_platforms.h"
+	<os/kernel/OS.h>
+	<os/app/Roster.h>
+	<os/storage/Volume.h>
+	<os/storage/VolumeRoster.h>
+	<os/storage/Directory.h>
+	<os/storage/Entry.h>
+	<os/storage/Path.h>
+	<os/kernel/fs_info.h>
+	<os/device/scsi.h>
+	<os/support/Locker.h>
+	<be/kernel/OS.h>
+	<be/app/Roster.h>
+	<be/storage/Volume.h>
+	<be/storage/VolumeRoster.h>
+	<be/storage/Directory.h>
+	<be/storage/Entry.h>
+	<be/storage/Path.h>
+	<be/kernel/fs_info.h>
+	<be/device/scsi.h>
+	<be/support/Locker.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<errno.h>
+	<unistd.h>
+	"physfs_internal.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/physfs/physfs_platforms.h
+	<TargetConditionals.h>
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/platform/macosx.c
+	"physfs_platforms.h"
+	<Carbon/Carbon.h>
+	<IOKit/storage/IOMedia.h>
+	<IOKit/storage/IOCDMedia.h>
+	<IOKit/storage/IODVDMedia.h>
+	<sys/mount.h>
+	<sys/stat.h>
+	"physfs_internal.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/platform/os2.c
+	"physfs_platforms.h"
+	<os2.h>
+	<stdio.h>
+	<stdlib.h>
+	<errno.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	"physfs_internal.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/platform/pocketpc.c
+	"physfs_platforms.h"
+	<stdio.h>
+	<windows.h>
+	"physfs_internal.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/platform/posix.c
+	"physfs_platforms.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<unistd.h>
+	<ctype.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<pwd.h>
+	<dirent.h>
+	<errno.h>
+	<fcntl.h>
+	<linux/unistd.h>
+	"physfs_internal.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/platform/unix.c
+	"physfs_platforms.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<unistd.h>
+	<sys/types.h>
+	<pwd.h>
+	<sys/stat.h>
+	<sys/param.h>
+	<dirent.h>
+	<time.h>
+	<errno.h>
+	<pthread.h>
+	<sys/ucred.h>
+	<sys/mount.h>
+	<mntent.h>
+	"physfs_internal.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/platform/windows.c
+	"physfs_platforms.h"
+	<windows.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<errno.h>
+	<ctype.h>
+	<time.h>
+	"physfs_internal.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/zlib123/adler32.c
+	"zlib.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/zlib123/compress.c
+	"zlib.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/zlib123/crc32.c
+	<stdio.h>
+	"zutil.h"
+	<limits.h>
+	"crc32.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/physfs/zlib123/zutil.h
+	"zlib.h"
+	<stddef.h>
+	<string.h>
+	<stdlib.h>
+	<errno.h>
+	<alloc.h>
+	<malloc.h>
+	<malloc.h>
+	<unix.h>
+	<stdio.h>
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/physfs/zlib123/crc32.h
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/zlib123/deflate.c
+	"deflate.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/physfs/zlib123/deflate.h
+	"zutil.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/zlib123/gzio.c
+	<stdio.h>
+	"zutil.h"
+	<stdarg.h>
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/zlib123/infback.c
+	"zutil.h"
+	"inftrees.h"
+	"inflate.h"
+	"inffast.h"
+	"inffixed.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/physfs/zlib123/inftrees.h
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/physfs/zlib123/inflate.h
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/physfs/zlib123/inffast.h
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/physfs/zlib123/inffixed.h
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/zlib123/inffast.c
+	"zutil.h"
+	"inftrees.h"
+	"inflate.h"
+	"inffast.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/zlib123/inflate.c
+	"zutil.h"
+	"inftrees.h"
+	"inflate.h"
+	"inffast.h"
+	"inffixed.h"
+	<stdio.h>
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/zlib123/inftrees.c
+	"zutil.h"
+	"inftrees.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/zlib123/trees.c
+	"deflate.h"
+	<ctype.h>
+	"trees.h"
+	<stdio.h>
+
+1474046849 /home/novous/Desktop/openglad-master/src/external/physfs/zlib123/trees.h
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/zlib123/uncompr.c
+	"zlib.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/physfs/zlib123/zutil.c
+	"zutil.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/external/yam/yam.cpp
+	"yam.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/game.cpp
+	"graph.h"
+	"smooth.h"
+	"util.h"
+	"campaign_picker.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/graph.h
+	"base.h"
+	"video.h"
+	"gloader.h"
+	"obmap.h"
+	"screen.h"
+	"view.h"
+	"pixie.h"
+	"pixien.h"
+	"walker.h"
+	"living.h"
+	"weap.h"
+	"treasure.h"
+	"effect.h"
+	"text.h"
+	"stats.h"
+	"guy.h"
+	"radar.h"
+
+1538799910 /home/novous/Desktop/openglad-master/src/view.h
+	"common.h"
+	"base.h"
+	"level_data.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/living.h
+	"base.h"
+	"walker.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/weap.h
+	"base.h"
+	"walker.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/treasure.h
+	"base.h"
+	"walker.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/radar.h
+	"base.h"
+	"level_data.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/glad.cpp
+	"version.h"
+	"graph.h"
+	"colors.h"
+	<time.h>
+	"gparser.h"
+	<string>
+	<cstring>
+	"util.h"
+	"results_screen.h"
+	"OuyaController.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/version.h
+
+1474046849 /home/novous/Desktop/openglad-master/src/colors.h
+
+1474046849 /home/novous/Desktop/openglad-master/src/results_screen.h
+	<map>
+	"guy.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/OuyaController.h
+	"SDL.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/gloader.cpp
+	"gloader.h"
+	"stats.h"
+	"walker.h"
+	"living.h"
+	"treasure.h"
+	"weap.h"
+	"effect.h"
+	<cstring>
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/gparser.cpp
+	"version.h"
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	<cstring>
+	"gparser.h"
+	"util.h"
+	"yam.h"
+	"input.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/graphlib.cpp
+	"graph.h"
+	<string>
+	"util.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/guy.cpp
+	"graph.h"
+	<math.h>
+	<cstring>
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/help.cpp
+	<string.h>
+	<stdio.h>
+	"graph.h"
+	"util.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/intro.cpp
+	"graph.h"
+	<cstring>
+	"input.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/io.cpp
+	"io.h"
+	"input.h"
+	"util.h"
+	"pixdefs.h"
+	"yam.h"
+	"physfs.h"
+	"physfsrwops.h"
+	<string>
+	<algorithm>
+	<stdio.h>
+	<sys/stat.h>
+	<unistd.h>
+	"windows.h"
+	<shlobj.h>
+	<time.h>
+	<direct.h>
+	"zip.h"
+	<sys/stat.h>
+	<dirent.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<errno.h>
+	<libgen.h>
+	<string.h>
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/level_data.cpp
+	"level_data.h"
+	"yam.h"
+	"pixie.h"
+	"gloader.h"
+	"walker.h"
+	"stats.h"
+	"smooth.h"
+	"screen.h"
+	"view.h"
+	<algorithm>
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/level_editor.cpp
+	"screen.h"
+	"view.h"
+	"radar.h"
+	"walker.h"
+	"smooth.h"
+	"input.h"
+	"util.h"
+	"text.h"
+	"stats.h"
+	"level_data.h"
+	"level_picker.h"
+	"campaign_picker.h"
+	"sai2x.h"
+	<cstring>
+	"OuyaController.h"
+	<string>
+	<vector>
+	<stdlib.h>
+
+1474046849 /home/novous/Desktop/openglad-master/src/level_picker.h
+	"screen.h"
+
+1474046849 /home/novous/Desktop/openglad-master/src/sai2x.h
+	"SDL.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/level_picker.cpp
+	"level_picker.h"
+	"level_data.h"
+	"radar.h"
+	"walker.h"
+	"stats.h"
+	"text.h"
+	"guy.h"
+	"button.h"
+	<list>
+	<string>
+	<cstdio>
+	<sys/stat.h>
+	<dirent.h>
+	<cstring>
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/living.cpp
+	"graph.h"
+	"smooth.h"
+	<cstring>
+
+1538799927 source:/home/novous/Desktop/openglad-master/src/obmap.cpp
+	"graph.h"
+	<cmath>
+	<algorithm>
+	"common.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/pal32.cpp
+	"pal32.h"
+	<stdio.h>
+	"SDL_types.h"
+
+1538799892 source:/home/novous/Desktop/openglad-master/src/picker.cpp
+	"common.h"
+	"version.h"
+	"graph.h"
+	"button.h"
+	"pal32.h"
+	"input.h"
+	"util.h"
+	"SDL.h"
+	"gparser.h"
+	"campaign_picker.h"
+	"level_picker.h"
+	<cstring>
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/pixie.cpp
+	"graph.h"
+
+1538799949 source:/home/novous/Desktop/openglad-master/src/pixie_data.cpp
+	"pixie_data.h"
+	<cstdlib>
+	"common.h"
+
+1538799940 source:/home/novous/Desktop/openglad-master/src/pixien.cpp
+	"graph.h"
+	"common.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/radar.cpp
+	"graph.h"
+	"colors.h"
+
+1538643499 source:/home/novous/Desktop/openglad-master/src/results_screen.cpp
+	"results_screen.h"
+	"base.h"
+	"button.h"
+	"text.h"
+	"walker.h"
+	"guy.h"
+	"stats.h"
+	"view.h"
+	<cstring>
+	"OuyaController.h"
+
+1538801146 source:/home/novous/Desktop/openglad-master/src/sai2x.cpp
+	"common.h"
+	"SDL.h"
+	"sai2x.h"
+	"util.h"
+	"input.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/save_data.cpp
+	"save_data.h"
+	"walker.h"
+	"guy.h"
+	"campaign_picker.h"
+	<cstring>
+
+1538801120 source:/home/novous/Desktop/openglad-master/src/screen.cpp
+	"graph.h"
+	"smooth.h"
+	"util.h"
+	"input.h"
+	"view_sizes.h"
+	"results_screen.h"
+	<string>
+	<cstring>
+	"common.h"
+
+1538800242 /home/novous/Desktop/openglad-master/src/view_sizes.h
+	"common.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/smooth.cpp
+	"smooth.h"
+	"base.h"
+	"graph.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/sound.cpp
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	"soundob.h"
+	"SDL_mixer.h"
+	<string>
+	"util.h"
+
+1538800560 source:/home/novous/Desktop/openglad-master/src/stats.cpp
+	"graph.h"
+	"stats.h"
+	<math.h>
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/text.cpp
+	"graph.h"
+	<cstring>
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/treasure.cpp
+	<math.h>
+	"obmap.h"
+	"gloader.h"
+	"screen.h"
+	"treasure.h"
+	"text.h"
+	"stats.h"
+	"guy.h"
+	<algorithm>
+	<cstring>
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/util.cpp
+	"util.h"
+	"version.h"
+	<stdio.h>
+	<time.h>
+	<string.h>
+	<string>
+	<sys/stat.h>
+	"base.h"
+	"windows.h"
+	<shlobj.h>
+	<time.h>
+	<direct.h>
+
+1538801230 source:/home/novous/Desktop/openglad-master/src/video.cpp
+	"graph.h"
+	"sai2x.h"
+	<cstring>
+	"common.h"
+	"../util/savepng.h"
+
+1474046849 /home/novous/Desktop/openglad-master/util/savepng.h
+	"SDL_video.h"
+
+1538800024 source:/home/novous/Desktop/openglad-master/src/view.cpp
+	"input.h"
+	"graph.h"
+	"colors.h"
+	"version.h"
+	"util.h"
+	"view_sizes.h"
+	<algorithm>
+	<cstring>
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/walker.cpp
+	"graph.h"
+	"smooth.h"
+	"micropather.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/src/weap.cpp
+	"graph.h"
+	"smooth.h"
+
+1474046849 source:/home/novous/Desktop/openglad-master/util/savepng.c
+	"SDL.h"
+	"png.h"
+	<stdlib.h>
+
+1538801220 source:/home/novous/Desktop/openglad-master/src/input.cpp
+	"common.h"
+	"input.h"
+	"screen.h"
+	<stdio.h>
+	<time.h>
+	<string.h>
+	<string>
+	"OuyaController.h"
+	"obmap.h"
+	"screen.h"
+	"view.h"
+	"stats.h"
+	"walker.h"
+
+1538914477 /home/novous/Desktop/openglad-master/src/common.h
+

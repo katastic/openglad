@@ -20,6 +20,8 @@
 // input code
 //
 
+#include "common.h"
+
 #include "input.h"
 #include "screen.h"
 #include <stdio.h>
@@ -64,10 +66,10 @@ Sint32 mouse_buttons;
 
 float viewport_offset_x = 0;  // In window coords
 float viewport_offset_y = 0;
-float window_w = 320;
-float window_h = 200;
-float viewport_w = 320;
-float viewport_h = 200;
+float window_w = SCREEN_W; //KAT
+float window_h = SCREEN_H; //KAT
+float viewport_w = SCREEN_W;//KAT
+float viewport_h = SCREEN_H;//KAT
 
 float overscan_percentage = 0.0f;  // Out of 1.0f, percent of total screen dimension that is cut off.  10% (0.10f) is recommended on OUYA.
 
@@ -77,7 +79,7 @@ void update_overscan_setting()
         overscan_percentage = 0.0f;
     else if(overscan_percentage > 0.25f)
         overscan_percentage = 0.25f;
-    
+
     viewport_offset_x = window_w * overscan_percentage/2;
     viewport_offset_y = window_h * overscan_percentage/2;
     viewport_w = window_w * (1.0f - overscan_percentage);
@@ -221,7 +223,7 @@ void get_input_events(bool type)
     SDL_Event event;
 
     //key_press_event = 0;
-    
+
     if (type == POLL)
         while (SDL_PollEvent(&event))
             handle_events(event);
@@ -262,7 +264,7 @@ void draw_touch_controls(screen* vob)
     walker* control = vob->viewob[0]->control;
     if(control == NULL || control->dead)
         return;
-    
+
     if(moving)
     {
         // Touch movement feedback
@@ -271,20 +273,20 @@ void draw_touch_controls(screen* vob)
         vob->fastbox(moving_touch_x - 4, moving_touch_y - 4, 8, 8, 16);
         vob->fastbox(moving_touch_target_x - 2, moving_touch_target_y - 2, 4, 4, 15);
     }
-    
+
     // Touch buttons
     vob->fastbox(FIRE_BUTTON_X, FIRE_BUTTON_Y, BUTTON_DIM, BUTTON_DIM, 25);
-    
+
     //if(has_special)
     if(strcmp(vob->special_name[(int)control->query_family()][(int)control->current_special], "NONE"))
         vob->fastbox(SPECIAL_BUTTON_X, SPECIAL_BUTTON_Y, BUTTON_DIM, BUTTON_DIM, 26);
-    
+
     //if(has_multiple_specials)
     if(control->current_special != 1
                 || (control->current_special + 1 <= NUM_SPECIALS && control->current_special*3+1 <= control->stats->level
                      && strcmp(vob->special_name[(int)control->query_family()][(int)control->current_special + 1],"NONE") != 0))
         vob->fastbox(NEXT_SPECIAL_BUTTON_X, NEXT_SPECIAL_BUTTON_Y, BUTTON_DIM, BUTTON_DIM, 27);
-    
+
     //if(has_alternate)
     if(strcmp(vob->alternate_name[(int)control->query_family()][(int)control->current_special], "NONE") != 0)
         vob->fastbox(ALTERNATE_SPECIAL_BUTTON_X, ALTERNATE_SPECIAL_BUTTON_Y, BUTTON_DIM, BUTTON_DIM, 28);
@@ -295,7 +297,7 @@ void draw_touch_controls(screen* vob)
 void sendFakeKeyDownEvent(int keycode)
 {
     SDL_Event event;
-    
+
     event.type = SDL_KEYDOWN;
     event.key.repeat = false;
     event.key.keysym.sym = keycode;
@@ -307,7 +309,7 @@ void sendFakeKeyDownEvent(int keycode)
 void sendFakeKeyUpEvent(int keycode)
 {
     SDL_Event event;
-    
+
     event.type = SDL_KEYUP;
     event.key.repeat = false;
     event.key.keysym.sym = keycode;
@@ -359,7 +361,7 @@ void handle_key_event(const SDL_Event& event)
         if(raw_key == SDLK_ESCAPE)
             input_continue = true;
         key_press_event = 1;
-        
+
         if(event.key.keysym.sym == SDLK_F10)
             myscreen->save_screenshot();
         else if(event.key.keysym.sym == SDLK_F12 && event.key.keysym.mod & KMOD_CTRL)
@@ -400,26 +402,26 @@ void handle_mouse_event(const SDL_Event& event)
 #ifndef USE_TOUCH_INPUT
         // Mouse event
     case SDL_MOUSEMOTION:
-        mouse_state.x = (event.motion.x - viewport_offset_x) * (320 / viewport_w);
-        mouse_state.y = (event.motion.y - viewport_offset_y) * (200 / viewport_h);
+        mouse_state.x = (event.motion.x - viewport_offset_x) * (SCREEN_W / viewport_w);
+        mouse_state.y = (event.motion.y - viewport_offset_y) * (SCREEN_H / viewport_h);
         break;
     case SDL_MOUSEBUTTONUP:
         if (event.button.button == SDL_BUTTON_LEFT)
             mouse_state.left = 0;
         if (event.button.button == SDL_BUTTON_RIGHT)
             mouse_state.right = 0;
-        
-        mouse_state.x = (event.button.x - viewport_offset_x) * (320 / viewport_w);
-        mouse_state.y = (event.button.y - viewport_offset_y) * (200 / viewport_h);
+
+        mouse_state.x = (event.button.x - viewport_offset_x) * (SCREEN_W / viewport_w);
+        mouse_state.y = (event.button.y - viewport_offset_y) * (SCREEN_H / viewport_h);
         break;
     case SDL_MOUSEBUTTONDOWN:
         if (event.button.button == SDL_BUTTON_LEFT)
             mouse_state.left = 1;
         else if (event.button.button == SDL_BUTTON_RIGHT)
             mouse_state.right = 1;
-        
-        mouse_state.x = (event.button.x - viewport_offset_x) * (320 / viewport_w);
-        mouse_state.y = (event.button.y - viewport_offset_y) * (200 / viewport_h);
+
+        mouse_state.x = (event.button.x - viewport_offset_x) * (SCREEN_W / viewport_w);
+        mouse_state.y = (event.button.y - viewport_offset_y) * (SCREEN_H / viewport_h);
         break;
 #else
 #ifdef FAKE_TOUCH_EVENTS
@@ -463,19 +465,19 @@ void handle_mouse_event(const SDL_Event& event)
         // Mouse event
     case SDL_FINGERMOTION:
         {
-        int x = (event.tfinger.x * window_w - viewport_offset_x) * (320 / viewport_w);
-        int y = (event.tfinger.y * window_h - viewport_offset_y) * (200 / viewport_h);
-        
+        int x = (event.tfinger.x * window_w - viewport_offset_x) * (SCREEN_W / viewport_w);
+        int y = (event.tfinger.y * window_h - viewport_offset_y) * (SCREEN_H / viewport_h);
+
         scroll_amount = y - mouse_state.y;
-        
+
         mouse_state.x = x;
         mouse_state.y = y;
-        
+
         if(moving && event.tfinger.fingerId == movingTouch)
         {
             moving_touch_target_x = x;
             moving_touch_target_y = y;
-            
+
             touch_keystate[0][KEY_UP] = false;
             touch_keystate[0][KEY_UP_RIGHT] = false;
             touch_keystate[0][KEY_RIGHT] = false;
@@ -484,7 +486,7 @@ void handle_mouse_event(const SDL_Event& event)
             touch_keystate[0][KEY_DOWN_LEFT] = false;
             touch_keystate[0][KEY_LEFT] = false;
             touch_keystate[0][KEY_UP_LEFT] = false;
-            
+
             if(abs(x - moving_touch_x) > MOVE_DEAD_ZONE || abs(y - moving_touch_y) > MOVE_DEAD_ZONE)
             {
                 float offset = -M_PI + M_PI/8;
@@ -512,8 +514,8 @@ void handle_mouse_event(const SDL_Event& event)
         break;
     case SDL_FINGERUP:
         {
-            int x = (event.tfinger.x * window_w - viewport_offset_x) * (320 / viewport_w);
-            int y = (event.tfinger.y * window_h - viewport_offset_y) * (200 / viewport_h);
+            int x = (event.tfinger.x * window_w - viewport_offset_x) * (SCREEN_W / viewport_w);
+            int y = (event.tfinger.y * window_h - viewport_offset_y) * (SCREEN_H / viewport_h);
             if(tapping)
             {
                 tapping = false;
@@ -524,11 +526,11 @@ void handle_mouse_event(const SDL_Event& event)
                 start_tap_x = x;
                 start_tap_y = y;
             }
-            
+
             if(moving && event.tfinger.fingerId == movingTouch)
             {
                 moving = false;
-                
+
                 touch_keystate[0][KEY_UP] = false;
                 touch_keystate[0][KEY_UP_RIGHT] = false;
                 touch_keystate[0][KEY_RIGHT] = false;
@@ -543,21 +545,21 @@ void handle_mouse_event(const SDL_Event& event)
                 firing = false;
                 touch_keystate[0][KEY_FIRE] = false;
             }
-            
+
             mouse_state.left = 0;
         }
         break;
     case SDL_FINGERDOWN:
         {
             tapping = true;
-            
-            int x = (event.tfinger.x * window_w - viewport_offset_x) * (320 / viewport_w);
-            int y = (event.tfinger.y * window_h - viewport_offset_y) * (200 / viewport_h);
-            
+
+            int x = (event.tfinger.x * window_w - viewport_offset_x) * (SCREEN_W / viewport_w);
+            int y = (event.tfinger.y * window_h - viewport_offset_y) * (SCREEN_H / viewport_h);
+
             start_tap_x = x;
             start_tap_y = y;
             input_continue = false;
-            
+
             if(!firing && FIRE_BUTTON_X <= x && x <= FIRE_BUTTON_X + BUTTON_DIM
                 && FIRE_BUTTON_Y <= y && y <= FIRE_BUTTON_Y + BUTTON_DIM)
             {
@@ -594,7 +596,7 @@ void handle_mouse_event(const SDL_Event& event)
                 if(strcmp(myscreen->alternate_name[(int)myscreen->viewob[0]->control->query_family()][(int)myscreen->viewob[0]->control->current_special], "NONE") != 0)
                     sendFakeKeyDownEvent(player_keys[0][KEY_SHIFTER]);
             }
-            else if(!moving && x < 320/2 - BUTTON_DIM/2 && y > BUTTON_DIM*2)  // Only move with the lower left corner of the screen (and offset for other buttons)
+            else if(!moving && x < SCREEN_W/2 - BUTTON_DIM/2 && y > BUTTON_DIM*2)  // Only move with the lower left corner of the screen (and offset for other buttons)
             {
                 moving_touch_x = x;
                 moving_touch_y = y;
@@ -609,12 +611,12 @@ void handle_mouse_event(const SDL_Event& event)
                 moving = true;
                 movingTouch = event.tfinger.fingerId;
             }
-            
-            
+
+
             key_press_event = 1;
             mouse_state.left = 1;
-            mouse_state.x = event.tfinger.x * 320;
-            mouse_state.y = event.tfinger.y * 200;
+            mouse_state.x = event.tfinger.x * SCREEN_W;
+            mouse_state.y = event.tfinger.y * SCREEN_H;
         }
         break;
 #endif
@@ -662,7 +664,7 @@ void handle_events(const SDL_Event& event)
 {
     switch (event.type)
     {
-    case SDL_WINDOWEVENT:   
+    case SDL_WINDOWEVENT:
         handle_window_event(event);
     break;
     case SDL_TEXTINPUT:
@@ -724,7 +726,7 @@ void handle_events(const SDL_Event& event)
         else if(event.type == OuyaControllerManager::AXIS_EVENT)
         {
             const OuyaController& c = OuyaControllerManager::getController(event.user.code);
-            
+
             // This should not be in an event or else it's jerky.
             float v = c.getAxisValue(OuyaController::AXIS_LS_Y) + c.getAxisValue(OuyaController::AXIS_RS_Y);
             if(fabs(v) > OuyaController::DEADZONE)
@@ -856,9 +858,9 @@ void clear_keyboard()
     text_input_event = 0;
     free(raw_text_input);
     raw_text_input = NULL;
-    
+
     input_continue = false;
-    
+
     #ifdef USE_TOUCH_INPUT
     tapping = false;
     #endif
@@ -1212,7 +1214,7 @@ bool ouyaJoystickInDirection(int player, int key_enum)
     const OuyaController& c = OuyaControllerManager::getController(player);
     if(!c.isStickBeyondDeadzone(OuyaController::AXIS_LS_X))
         return false;
-    
+
     switch(key_enum)
     {
     case KEY_UP:
@@ -1284,7 +1286,7 @@ bool isPlayerHoldingKey(int player_index, int key_enum)
         return false;
     }
     #endif
-    
+
     // FIXME: Enable gamepads for Android/iOS, but be careful not to use accelerometer...
     #ifdef USE_TOUCH_INPUT
         return touch_keystate[player_index][key_enum];
@@ -1302,11 +1304,11 @@ bool didPlayerPressKey(int player_index, int key_enum, const SDL_Event& event)
     const OuyaController& c = OuyaControllerManager::getController(player_index);
     if(event.user.code != player_index)
         return false;
-    
+
     if(event.type == OuyaControllerManager::BUTTON_DOWN_EVENT)
     {
         OuyaController::ButtonEnum button = OuyaController::ButtonEnum(int(event.user.data1));
-        
+
         switch(key_enum)
         {
         case KEY_UP:
@@ -1373,9 +1375,9 @@ bool didPlayerReleaseKey(int player_index, int key_enum, const SDL_Event& event)
         return false;
     if(event.user.code != player_index)
         return false;
-    
+
     OuyaController::ButtonEnum button = OuyaController::ButtonEnum(int(event.user.data1));
-    
+
     switch(key_enum)
     {
     case KEY_UP:

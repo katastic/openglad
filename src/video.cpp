@@ -20,12 +20,15 @@
 #include "sai2x.h"
 #include <cstring>
 
-#define VIDEO_BUFFER_WIDTH 320
-#define VIDEO_WIDTH 320
+#include "common.h"
+
+#define VIDEO_BUFFER_WIDTH SCREEN_W
+#define VIDEO_WIDTH SCREEN_W
 #define VIDEO_SIZE 64000
-#define CX_SCREEN 320
-#define CY_SCREEN 200
+#define CX_SCREEN SCREEN_W
+#define CY_SCREEN SCREEN_H
 #define ASSERT(x) if (!(x)) return 0;
+
 
 
 unsigned char * videoptr = (unsigned char*) VIDEO_LINEAR;
@@ -54,7 +57,7 @@ video::video()
 		render = EAGLE;
 	else if(qresult == "double")
 		render = DOUBLE;
-	
+
 	fadeDuration = 500;
 
 	// Load our palettes ..
@@ -76,8 +79,8 @@ video::video()
 	//	bluepalette[i*3+0] /= 2;
 	//	bluepalette[i*3+1] /= 2;
 	//}
-	
-	E_Screen = new Screen(render, 640, 400, fullscreen);
+
+	E_Screen = new Screen(render, SCREEN_W, SCREEN_H, fullscreen);
 }
 
 video::~video()
@@ -96,9 +99,9 @@ void video::set_fullscreen(bool fullscreen)
     else
     {
         SDL_SetWindowFullscreen(E_Screen->window, 0);
-        SDL_SetWindowSize(E_Screen->window, 640, 400);
+        SDL_SetWindowSize(E_Screen->window, SCREEN_W, SCREEN_H);
     }
-    
+
     int w, h;
     SDL_GetWindowSize(E_Screen->window, &w, &h);
     window_w = w;
@@ -237,7 +240,7 @@ void video::draw_button_colored(Sint32 x1, Sint32 y1, Sint32 x2, Sint32 y2, bool
 	Sint32 ylength = y2 - y1 + 1;
 	Sint32 i;
 	Sint32 tobuffer = 1;
-    
+
     if(use_border)
     {
         // Fill
@@ -299,9 +302,9 @@ void video::draw_text_bar(Sint32 x1, Sint32 y1, Sint32 x2, Sint32 y2)
 
 void video::darken_screen()
 {
-    for(int i = 0; i < 320; i++)
+    for(int i = 0; i < SCREEN_W; i++)
     {
-        for(int j = 0; j < 200; j++)
+        for(int j = 0; j < SCREEN_H; j++)
         {
             pointb(i, j, PURE_BLACK, 100);
         }
@@ -340,7 +343,7 @@ Uint32 get_Uint32_color(unsigned char color)
 {
     int r,g,b;
 	query_palette_reg(color,&r,&g,&b);
-	
+
 	return SDL_MapRGB(E_Screen->render->format, r*4, g*4, b*4);
 }
 
@@ -387,7 +390,7 @@ void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 {
     if(x < 0 || y < 0 || x >= surface->w || y >= surface->h)
         return;
-    
+
     int bpp = surface->format->BytesPerPixel;
     /* Here p is the address to the pixel we want to set */
     Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
@@ -427,7 +430,7 @@ void video::pointb(Sint32 x, Sint32 y, unsigned char color)
 	int c;
 
 	//buffers: this does bound checking (just to be safe)
-	if(x<0 || x>319 || y<0 || y>199)
+	if(x<0 || x>(SCREEN_W-1) || y<0 || y>(SCREEN_H-1)) //KAT <--- THESE ARE THE PIXEL BOUNDRY FUNCTIONS!!!!!!!!!
 		return;
 
 	query_palette_reg(color,&r,&g,&b);
@@ -445,30 +448,30 @@ void blend_pixel(SDL_Surface* surface, int x, int y, Uint32 color, Uint8 alpha)
     switch (surface->format->BytesPerPixel)
     {
         case 1: { /* Assuming 8-bpp */
-            
+
                 Uint8 *pixel = (Uint8 *)surface->pixels + y*surface->pitch + x;
-                
+
                 Uint8 dR = surface->format->palette->colors[*pixel].r;
                 Uint8 dG = surface->format->palette->colors[*pixel].g;
                 Uint8 dB = surface->format->palette->colors[*pixel].b;
                 Uint8 sR = surface->format->palette->colors[color].r;
                 Uint8 sG = surface->format->palette->colors[color].g;
                 Uint8 sB = surface->format->palette->colors[color].b;
-                
+
                 dR = dR + ((sR-dR)*alpha >> 8);
                 dG = dG + ((sG-dG)*alpha >> 8);
                 dB = dB + ((sB-dB)*alpha >> 8);
-            
+
                 *pixel = SDL_MapRGB(surface->format, dR, dG, dB);
-                
+
         }
         break;
 
-        case 2: { /* Probably 15-bpp or 16-bpp */		
-            
+        case 2: { /* Probably 15-bpp or 16-bpp */
+
                 Uint16 *pixel = (Uint16 *)surface->pixels + y*surface->pitch/2 + x;
                 Uint32 dc = *pixel;
-            
+
                 R = ((dc & Rmask) + (( (color & Rmask) - (dc & Rmask) ) * alpha >> 8)) & Rmask;
                 G = ((dc & Gmask) + (( (color & Gmask) - (dc & Gmask) ) * alpha >> 8)) & Gmask;
                 B = ((dc & Bmask) + (( (color & Bmask) - (dc & Bmask) ) * alpha >> 8)) & Bmask;
@@ -476,7 +479,7 @@ void blend_pixel(SDL_Surface* surface, int x, int y, Uint32 color, Uint8 alpha)
                     A = ((dc & Amask) + (( (color & Amask) - (dc & Amask) ) * alpha >> 8)) & Amask;
 
                 *pixel= R | G | B | A;
-                
+
         }
         break;
 
@@ -486,34 +489,34 @@ void blend_pixel(SDL_Surface* surface, int x, int y, Uint32 color, Uint8 alpha)
             Uint8 gshift8=surface->format->Gshift/8;
             Uint8 bshift8=surface->format->Bshift/8;
             Uint8 ashift8=surface->format->Ashift/8;
-            
-            
-            
+
+
+
                 Uint8 dR, dG, dB, dA=0;
                 Uint8 sR, sG, sB, sA=0;
-                
+
                 pix = (Uint8 *)surface->pixels + y * surface->pitch + x*3;
-                
-                dR = *((pix)+rshift8); 
+
+                dR = *((pix)+rshift8);
                 dG = *((pix)+gshift8);
                 dB = *((pix)+bshift8);
                 dA = *((pix)+ashift8);
-                
+
                 sR = (color>>surface->format->Rshift)&0xff;
                 sG = (color>>surface->format->Gshift)&0xff;
                 sB = (color>>surface->format->Bshift)&0xff;
                 sA = (color>>surface->format->Ashift)&0xff;
-                
+
                 dR = dR + ((sR-dR)*alpha >> 8);
                 dG = dG + ((sG-dG)*alpha >> 8);
                 dB = dB + ((sB-dB)*alpha >> 8);
                 dA = dA + ((sA-dA)*alpha >> 8);
 
-                *((pix)+rshift8) = dR; 
+                *((pix)+rshift8) = dR;
                 *((pix)+gshift8) = dG;
                 *((pix)+bshift8) = dB;
                 *((pix)+ashift8) = dA;
-                
+
         }
         break;
 
@@ -524,7 +527,7 @@ void blend_pixel(SDL_Surface* surface, int x, int y, Uint32 color, Uint8 alpha)
             G = color & Gmask;
             B = color & Bmask;
             A = 0;  // keep this as 0 to avoid corruption of non-alpha surfaces
-            
+
             // Blend and keep dest alpha
             if( alpha != SDL_ALPHA_OPAQUE )
             {
@@ -534,7 +537,7 @@ void blend_pixel(SDL_Surface* surface, int x, int y, Uint32 color, Uint8 alpha)
             }
             if(Amask)
                 A = (dc & Amask);
-            
+
             *pixel = R | G | B | A;
         break;
     }
@@ -546,13 +549,13 @@ void video::pointb(Sint32 x, Sint32 y, unsigned char color, unsigned char alpha)
 	int c;
 
 	//buffers: this does bound checking (just to be safe)
-	if(x<0 || x>319 || y<0 || y>199)
+	if(x<0 || x>(SCREEN_W-1) || y<0 || y>(SCREEN_H-1)) //KAT <--- THESE ARE THE PIXEL BOUNDRY FUNCTIONS!!!!!!!!!
 		return;
 
 	query_palette_reg(color,&r,&g,&b);
 
 	c = SDL_MapRGB(E_Screen->render->format, r*4, g*4, b*4);
-	
+
     blend_pixel(E_Screen->render, x, y, c, alpha);
 }
 
@@ -575,8 +578,8 @@ void video::pointb(int offset, unsigned char color)
 {
 	int x, y;
 
-	y = offset/320;
-	x = offset - y*320;
+	y = offset/SCREEN_W;
+	x = offset - y*SCREEN_H;
 
 	pointb(x,y,color);
 }
@@ -597,7 +600,7 @@ void video::hor_line(Sint32 x, Sint32 y, Sint32 length, unsigned char color, Sin
 		hor_line(x,y,length,color);
 		return;
 	}
-	
+
 	for (i = 0; i < length; i++)
 		pointb(x+i,y,color);
 }
@@ -628,7 +631,7 @@ void video::ver_line(Sint32 x, Sint32 y, Sint32 length, unsigned char color, Sin
 		ver_line(x,y,length,color);
 		return;
 	}
-	
+
 	for (i = 0; i < length; i++)
 		pointb(x,y+i,color);
 }
@@ -639,13 +642,13 @@ void video::draw_line(Sint32 x1, Sint32 y1, Sint32 x2, Sint32 y2, unsigned char 
     SDL_Surface* Surface = E_Screen->render;
     if(Surface == NULL)
         return;
-    
+
     // Did the line miss the screen completely?
     if((x1 < 0 && x2 < 0) || (y1 < 0 && y2 < 0))
         return;
     if((x1 >= Surface->w && x2 >= Surface->w) || (y1 >= Surface->h && y2 >= Surface->h))
         return;
-    
+
     Uint32 Color = get_Uint32_color(color);
     Sint16 dx, dy, sdx, sdy, x, y, px, py;
 
@@ -770,7 +773,7 @@ void video::putdata_alpha(Sint32 startx, Sint32 starty, Sint32 xsize, Sint32 ysi
 			curcolor = sourcedata[num++];
 			if (!curcolor)
 				continue;
-            
+
 			pointb(curx,cury,curcolor, alpha);
 		}
 }
@@ -785,7 +788,7 @@ void video::putdatatext(Sint32 startx, Sint32 starty, Sint32 xsize, Sint32 ysize
 	SDL_Rect rect;
 
 	for(cury = starty;cury < starty +ysize;cury++)
- 	{	
+ 	{
 		for (curx = startx; curx < startx +xsize; curx++)
 	        {
 			curcolor = sourcedata[num++];
@@ -852,7 +855,7 @@ void video::putdatatext(Sint32 startx, Sint32 starty, Sint32 xsize, Sint32 ysize
 
             rect.x = curx;
             rect.y = cury;
-			rect.w = 1;	
+			rect.w = 1;
 			rect.h = 1;
 			SDL_FillRect(E_Screen->render,&rect,scolor);
 		}
@@ -1165,32 +1168,32 @@ void video::walkputbuffer_flash(Sint32 walkerstartx, Sint32 walkerstarty,
 				buffoff++;
 				continue;
 			}
-			
+
 			if (curcolor > (unsigned char) 247)
 				curcolor = (unsigned char) (teamcolor+(255-curcolor));
-			
+
 			int r,g,b;
             query_palette_reg(curcolor,&r,&g,&b);
             r *= 4;
             g *= 4;
             b *= 4;
-            
+
             if(r > 155)
                 r = 255;
             else
                 r += 100;
-            
+
             if(g > 155)
                 g = 255;
             else
                 g += 100;
-            
+
             if(b > 155)
                 b = 255;
             else
                 b += 100;
-            
-            
+
+
 			//buffers: PORT: videobuffer[buffoff++] = curcolor;
 			pointb(walkerstartx+curx,walkerstarty+cury,r, g, b);
 		}
@@ -1331,7 +1334,7 @@ void video::walkputbuffertext_alpha(Sint32 walkerstartx, Sint32 walkerstarty,
                         }
                         if (curcolor > (unsigned char) 247)
                                 curcolor = (unsigned char) (teamcolor+(255-curcolor));
-                        
+
                         pointb(curx + walkerstartx, cury + walkerstarty, teamcolor, alpha);
                 }
                 walkoff += walkshift;
@@ -1583,13 +1586,13 @@ void video::walkputbuffer(Sint32 walkerstartx, Sint32 walkerstarty,
 					{
 						//pointb(buffoff++,get_pixel(buffoff+random(2)));
 						tempbuf = buffoff+random(2);
-						ty = tempbuf/320;
-						tx = tempbuf-ty*320;
+						ty = tempbuf/SCREEN_W; // <---KAT IS THIS WRONG? BOTH ARE 8?! SHouldn't ty be HEIGHT?
+						tx = tempbuf-ty*SCREEN_W;
 						get_pixel(tx,ty,&r,&g,&b);
 
-						ty = buffoff/320;
-						tx = buffoff-ty*320;
-						;
+						ty = buffoff/SCREEN_W;
+						tx = buffoff-ty*SCREEN_W;
+
 						pointb(tx,ty,(int)r,(int)g,(int)b);
 						buffoff++;
 					}
@@ -1618,7 +1621,7 @@ void video::walkputbuffer(Sint32 walkerstartx, Sint32 walkerstarty,
 					else if (shifttype == SHIFT_BLOCKY)
 					{
 						if (cury%2) //buffers:videobuffer[buffoff++] = videobuffer[buffoff-VIDEO_BUFFER_WIDTH];
-							pointb(buffoff,get_pixel(buffoff-320));
+							pointb(buffoff,get_pixel(buffoff-(SCREEN_W)));
 						else if (curx%2) //videobuffer[buffoff++] = videobuffer[buffoff-1];
 							pointb(buffoff,get_pixel(buffoff-2));
                         buffoff++;
@@ -1683,7 +1686,7 @@ void video::buffer_to_screen(Sint32 viewstartx,Sint32 viewstarty,
 //buffers: like buffer_to_screen but automaticaly swaps the entire screen
 void video::swap(void)
 {
-	buffer_to_screen(0,0,320,200);
+	buffer_to_screen(0,0,SCREEN_W,SCREEN_H);
 }
 
 //buffers: get pixel's RGB values if you have XY
@@ -1735,8 +1738,8 @@ int video::get_pixel(int offset)
 {
 	int x,y,t;
 
-	y = offset/320;
-	x = offset-y*320;
+	y = offset/SCREEN_W; //KAT shouldnt this be 200 or SCREEN_H???
+	x = offset-y*SCREEN_H;
 
 	return get_pixel(x,y,&t);
 }
@@ -1748,7 +1751,7 @@ int video::get_pixel(int offset)
 bool video::save_screenshot()
 {
     SDL_Surface* surf;
-    
+
 	switch(E_Screen->Engine)
 	{
 		case SAI:
@@ -1759,7 +1762,7 @@ bool video::save_screenshot()
             surf = E_Screen->render;
             break;
 	}
-	
+
 	static int i = 1;
 	char buf[200];
     #ifndef USE_BMP_SCREENSHOT
@@ -1768,28 +1771,28 @@ bool video::save_screenshot()
 	snprintf(buf, 200, "screenshot%d.bmp", i);
 	#endif
 	i++;
-	
+
 	SDL_RWops* rwops = open_write_file(buf);
 	if(rwops == NULL)
     {
         Log("Failed to open file for screenshot.\n");
         return false;
     }
-    
+
     Log("Saving screenshot: %s\n", buf);
-    
+
     #ifndef USE_BMP_SCREENSHOT
     // Make it safe to save (convert alpha channel)
     surf = SDL_PNGFormatAlpha(surf);
-    
+
     // Save it
     bool result = (SDL_SavePNG_RW(surf, rwops, 1) >= 0);
     SDL_FreeSurface(surf);
     #else
     bool result = (SDL_SaveBMP_RW(surf, rwops, 1) >= 0);
-    
+
     #endif
-    
+
     return result;
 }
 
@@ -1817,7 +1820,7 @@ void video::FadeBetween24(
 
 	const Uint8 *pFrom = fadeFromRGB;
 	const Uint8 *pTo = fadeToRGB;
-	
+
 	//Mix pixels in "from" and "to" images by 'amount'
 	Uint8 *pStop = pw + size;
 	while (pw != pStop)
@@ -1827,7 +1830,7 @@ void video::FadeBetween24(
 		*(pw++) = (nOldAmt * *(pFrom++) + amount * *(pTo++)) / fadeDuration;
 		pw++; pFrom++; pTo++;
 	}
-    
+
 	// FIXME!  Need to pass in the Screen structure.
 	//SDL_UpdateRect (pSurface, 0, 0, 0, 0);
 }
@@ -1867,9 +1870,9 @@ int video::FadeBetween(
 			return 0;
 		}
 	}
-	
+
 	//The new surface shouldn't need a lock unless it is somehow a screen surface.
-	ASSERT(!SDL_MUSTLOCK(pNewSurface)); 
+	ASSERT(!SDL_MUSTLOCK(pNewSurface));
 
 	//The dimensions and format of the old and new surface must match exactly.
 	ASSERT(pOldSurface->pitch == pNewSurface->pitch);
@@ -1907,7 +1910,7 @@ int video::FadeBetween(
 	do {
 		FadeBetween24(DestSurface,colorsf,colorst,
 				dwNow - dwFirstPaint + 50);	//allow first frame to show some change
-		E_Screen->swap(0,0,320,200);
+		E_Screen->swap(0,0,SCREEN_W, SCREEN_H);
 		dwNow = SDL_GetTicks();
 
 		get_input_events(POLL);
@@ -1925,8 +1928,8 @@ int video::FadeBetween(
 	//Show new screen entirely.
 	SDL_BlitSurface(pNewSurface, NULL, pOldSurface, NULL);
 	// Screen::Swap() does the work
-	E_Screen->swap(0,0,320,200);
-	
+	E_Screen->swap(0,0,SCREEN_W, SCREEN_H);
+
 	//Clean up.
 	delete [] colorsf;
 	delete [] colorst;
@@ -1941,7 +1944,7 @@ int video::FadeBetween(
 
 int video::fadeblack(bool fade_in)
 {
-	SDL_Surface* black = SDL_CreateRGBSurface(SDL_SWSURFACE, 320, 200, 32, 0, 0, 0, 0);
+	SDL_Surface* black = SDL_CreateRGBSurface(SDL_SWSURFACE, SCREEN_W, SCREEN_H, 32, 0, 0, 0, 0);
 	int i;
 
 	if(fade_in)

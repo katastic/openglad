@@ -94,6 +94,7 @@
 		<Unit filename="src/campaign_picker.cpp" />
 		<Unit filename="src/campaign_picker.h" />
 		<Unit filename="src/colors.h" />
+		<Unit filename="src/common.h" />
 		<Unit filename="src/effect.cpp" />
 		<Unit filename="src/effect.h" />
 		<Unit filename="src/external/libyaml/include/yaml.h" />

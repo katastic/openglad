@@ -20,6 +20,8 @@
 	buffers: 7/31/02: *include cleanup
 */
 #include "graph.h"
+#include "common.h"
+
 
 // ************************************************************
 //  PixieN -- N-Frame pixie

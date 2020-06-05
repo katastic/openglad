@@ -17,6 +17,8 @@
 #ifndef __VIEW_H
 #define __VIEW_H
 
+#include "common.h"
+
 // Definition of VIEWSCREEN class
 
 #include "base.h"
@@ -108,7 +110,7 @@ class viewscreen
 
 		char textlist[MAX_MESSAGES][80]; // max of 80-wide
 		short textcycles[MAX_MESSAGES];  // cycles to display screen-text
-		
+
 		char infotext[80]; // text to display
 		short mynum;     // # to id the viewscreen, 0, 1, 2 ...
 		short my_team;         // used for Player-v-Player mode
@@ -124,7 +126,7 @@ class viewscreen
 
 	protected:
 		options *prefsob;
-		
+
 		short size;
 		short xview;
 		short yview;

@@ -17,6 +17,8 @@
 
 #include "pixie_data.h"
 #include <cstdlib>
+#include "common.h"
+
 
 
 PixieData::PixieData()

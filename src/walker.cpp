@@ -1406,7 +1406,7 @@ float Map::LeastCostEstimate( void* stateStart, void* stateEnd )
 
 // CPPCHECK: Never used
 //HOWEVER, deleting or commenting it breaks the file. what....
-/*void Map::AdjacentCost( void* state, std::vector< StateCost > *adjacent )
+void Map::AdjacentCost( void* state, std::vector< StateCost > *adjacent )
 {
     int x1 = GET_STATE_X(state);
     int y1 = GET_STATE_Y(state);
@@ -1450,7 +1450,7 @@ float Map::LeastCostEstimate( void* stateStart, void* stateEnd )
         }
     }
 }
-*/
+
 void Map::PrintStateInfo( void* state )
 {
     int x1 = GET_STATE_X(state);

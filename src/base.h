@@ -32,7 +32,7 @@
 #include <math.h>
 #include <ctype.h>
 #include "sounds.h"
-#include "SDL.h"
+#include <SDL2/SDL.h>
 #include "input.h"
 #include "util.h"
 #include "gparser.h"

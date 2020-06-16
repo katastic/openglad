@@ -66,7 +66,7 @@ void radar::start(LevelData* data)
 		xview = sizex;
 	if (yview > sizey)
 		yview = sizey;
-    
+
     if(viewscreenp)
     {
         #ifdef USE_TOUCH_INPUT
@@ -165,10 +165,10 @@ short radar::draw(LevelData* data)
 		radarx = 0;
 	if (radary < 0)
 		radary = 0;
-    
+
     unsigned char alpha = 255;
     if(myscreen->numviews > 2 && !(myscreen->numviews == 3 && mynum == 0))
-        alpha = 127;
+        {alpha = 127;}
 	myscreen->putbuffer_alpha(xloc, yloc,
 	                   sizex,sizey,
 	                   xloc,yloc,xloc + xview,yloc + yview,
@@ -194,7 +194,7 @@ short radar::draw(LevelData* data)
         for(auto e = ls->begin(); e != ls->end(); e++)
 		{
 		    walker* ob = *e;
-		    
+
             oborder = ob->query_order();
 			do_show = 0; // don't show, by default
 			if ((oborder == ORDER_LIVING || oborder == ORDER_WEAPON
@@ -216,10 +216,10 @@ short radar::draw(LevelData* data)
 				{} //also do nothing
 				else
 				{
-					tempz = (tempx+(tempy*320)); //this may need fixing
+					tempz = (tempx+(tempy*SCREEN_W)); //this may need fixing
 					if (tempz > 64000 || tempz < 0)
 					{
-						Log("bad radar, bad\n");
+						Log("bad radar, bad\n");//KAT i think this means the radar is reading passed the end of the map data
 						return 1;
 					}
 					tempcolor = (ob->query_team_color());
@@ -322,10 +322,10 @@ short radar::draw(LevelData* data)
 				{} //also do nothing
 				else
 				{
-					tempz = (tempx+(tempy*320)); //this may need fixing
+					tempz = (tempx+(tempy*SCREEN_W)); //this may need fixing
 					if (tempz > 64000 || tempz < 0)
 					{
-						Log("bad radar, bad\n");
+						Log("bad radar, bad\n"); //KAT i think this means the radar is reading passed the end of the map data
 						return 1;
 					}
 					myscreen->pointb(tempx,tempy,(char)do_show, alpha);

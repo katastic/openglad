@@ -1910,9 +1910,9 @@ short options::load(viewscreen *viewp)
 	short prefnum = viewp->mynum;
 	// Yes, we are ACTUALLY COPYING the data
 	if(viewp->prefs != prefs[prefnum])
-        memcpy(viewp->prefs, prefs[prefnum], 10);
+        {memcpy(viewp->prefs, prefs[prefnum], 10);}
     if(viewp->mykeys != allkeys[prefnum])
-        memcpy(viewp->mykeys, allkeys[prefnum], 16 * sizeof(int));
+        {memcpy(viewp->mykeys, allkeys[prefnum], 16 * sizeof(int));}
 	return 1;
 }
 

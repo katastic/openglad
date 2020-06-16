@@ -24,7 +24,7 @@
 
 #define VIDEO_BUFFER_WIDTH SCREEN_W
 #define VIDEO_WIDTH SCREEN_W
-#define VIDEO_SIZE 64000
+#define VIDEO_SIZE (SCREEN_W*SCREEN_H)
 #define CX_SCREEN SCREEN_W
 #define CY_SCREEN SCREEN_H
 #define ASSERT(x) if (!(x)) return 0;
@@ -355,7 +355,7 @@ void video::fastbox(Sint32 startx, Sint32 starty, Sint32 xsize, Sint32 ysize, un
 
 	// Zardus: FIX: small check to make sure we're not trying to put in antimatter or something
 	if (xsize < 0 || ysize < 0 || startx < 0 || starty < 0)
-		return;
+        return;
 
 	if (!flag) // then write to screen directly
 	{
@@ -1756,7 +1756,7 @@ bool video::save_screenshot()
 	{
 		case SAI:
 		case EAGLE:
-            surf = E_Screen->render2;
+            surf = E_Screen->render2x;
 		    break;
         default:
             surf = E_Screen->render;

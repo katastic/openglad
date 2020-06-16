@@ -1680,9 +1680,9 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
 
 	const char* blood_string;
 	if(cfg.is_on("effects", "gore"))
-        blood_string = "BLOOD";
+        {blood_string = "BLOOD";}
     else
-        blood_string = "REMAINS";
+        {blood_string = "REMAINS";}
 
 	const char* treasures[NUM_FAMILIES] =
 	    { blood_string, "DRUMSTICK", "GOLD", "SILVER",
@@ -3410,8 +3410,8 @@ Sint32 level_editor()
         else
             Log("Failed to load level data.\n");
     }
-    else
-        Log("Campaign has no valid levels!\n");
+    else{
+        Log("Campaign has no valid levels!\n");}
 
 	redraw = 1;  // Redraw right away
 

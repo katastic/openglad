@@ -709,10 +709,17 @@ Screen::Screen( RenderEngine engine, int width, int height, int fullscreen)
     window_flags |= SDL_WINDOW_BORDERLESS;
     #endif
 
+#ifdef KAT_2X
+    window = SDL_CreateWindow("Gladiator",
+                        SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                        w*2, h*2,
+                        window_flags);
+#else
     window = SDL_CreateWindow("Gladiator",
                         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                         w, h,
                         window_flags);
+#endif
     if(window == NULL)
         exit(1);
 
@@ -724,18 +731,22 @@ Screen::Screen( RenderEngine engine, int width, int height, int fullscreen)
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
 
-    render = SDL_CreateRGBSurface(SDL_SWSURFACE, SCREEN_W, SCREEN_H, 32, 0, 0, 0, 0);
-	render_tex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_W, SCREEN_H);
-    render2 = NULL;  // To be initialized when we actually need it
-    render2_tex = NULL;
+#ifdef KAT_2X
+    render = SDL_CreateRGBSurface(SDL_SWSURFACE, SCREEN_W*2, SCREEN_H*2, 32, 0, 0, 0, 0);
+	render_tex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_W*2, SCREEN_H*2);
+#endif
+    render       = SDL_CreateRGBSurface(SDL_SWSURFACE, SCREEN_W, SCREEN_H, 32, 0, 0, 0, 0);
+	render_tex   = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_W, SCREEN_H);
+    render2x     = NULL;  // To be initialized when we actually need it
+    render2x_tex = NULL;
 }
 
 Screen::~Screen()
 {
 	SDL_DestroyTexture(render_tex);
-	SDL_DestroyTexture(render2_tex);
+	SDL_DestroyTexture(render2x_tex);
 	SDL_FreeSurface(render);
-	SDL_FreeSurface(render2);
+	SDL_FreeSurface(render2x);
 
 	SDL_DestroyRenderer(renderer);
 	//SDL_DestroyWindow(window);
@@ -765,33 +776,33 @@ void Screen::swap(int x, int y, int w, int h)
 
 	switch(Engine) {
 		case SAI:
-                if(render2 == NULL)
+                if(render2x == NULL)
                 {
-                    render2 = SDL_CreateRGBSurface(SDL_SWSURFACE, SCREEN_W, SCREEN_H, 32, 0, 0, 0, 0);
-                    render2_tex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_W, SCREEN_H);
+                    render2x = SDL_CreateRGBSurface(SDL_SWSURFACE, SCREEN_W*2, SCREEN_H*2, 32, 0, 0, 0, 0);
+                    render2x_tex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_W*2, SCREEN_H*2);
                 }
-                SDL_LockSurface( render2 );
+                SDL_LockSurface( render2x );
                 Super2xSaI_ex2(
                         (unsigned char*) render->pixels, x, y, w, h, render->pitch, render->h,
-                        (unsigned char*) render2->pixels, 2*x, 2*y, render2->pitch);
-                SDL_UnlockSurface( render2 );
+                        (unsigned char*) render2x->pixels, 2*x, 2*y, render2x->pitch);
+                SDL_UnlockSurface( render2x );
 
-                source_surface = render2;
-                dest_texture = render2_tex;
+                source_surface = render2x; //here's where we flip what we draw to the screen.
+                dest_texture = render2x_tex; //but we also flip the destination buffer?
             break;
 		case EAGLE:
-                if(render2 == NULL)
+                if(render2x == NULL)
                 {
-                    render2 = SDL_CreateRGBSurface(SDL_SWSURFACE, SCREEN_W, SCREEN_H, 32, 0, 0, 0, 0);
-                    render2_tex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_W, SCREEN_H);
+                    render2x = SDL_CreateRGBSurface(SDL_SWSURFACE, SCREEN_W*2, SCREEN_H*2, 32, 0, 0, 0, 0);
+                    render2x_tex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_W*2, SCREEN_H*2);
                 }
-                SDL_LockSurface( render2 );
+                SDL_LockSurface( render2x );
                 Scale_SuperEagle((unsigned char*) render->pixels, x, y, w, h, render->pitch, render->h,
-                                 (unsigned char*) render2->pixels, 2*x, 2*y, render2->pitch);
-                SDL_UnlockSurface( render2 );
+                                 (unsigned char*) render2x->pixels, 2*x, 2*y, render2x->pitch);
+                SDL_UnlockSurface( render2x );
 
-                source_surface = render2;
-                dest_texture = render2_tex;
+                source_surface = render2x; //here's where we flip what we draw to the screen.
+                dest_texture = render2x_tex; //but we also flip the destination buffer?
 			break;
         default:
             break;
@@ -799,9 +810,14 @@ void Screen::swap(int x, int y, int w, int h)
 
     SDL_UpdateTexture(dest_texture, NULL, source_surface->pixels, source_surface->pitch);
 
+#ifdef KAT_2X
+    SDL_Rect dest = {int(viewport_offset_x), int(viewport_offset_y), int(viewport_w)*2, int(viewport_h)*2}; // DID THIS DO IT?  this is just the draw struct
+    //this simply made it 2X bigger. Which works for 2X Mode. It doesn't help 2xSAI/Eagle. (Do we "need" those?)
+#else
     SDL_Rect dest = {int(viewport_offset_x), int(viewport_offset_y), int(viewport_w), int(viewport_h)};
+#endif
 
-    SDL_RenderCopy(renderer, dest_texture, NULL, &dest);
+    SDL_RenderCopy(renderer, dest_texture, NULL, &dest); //so does this scale it up IF it's smaller, and if not, it still draws it same size?
     SDL_RenderPresent(renderer);
 }
 

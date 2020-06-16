@@ -936,7 +936,7 @@ void draw_smallHealthBar(walker* w, viewscreen* view_buf)
         return;
 
     if(w->query_order() != ORDER_LIVING && w->query_order() != ORDER_GENERATOR)
-        return;
+        {return;}
 
 	Sint32 xscreen = (Sint32) (w->xpos - view_buf->topx + view_buf->xloc);
 	Sint32 yscreen = (Sint32) (w->ypos - view_buf->topy + view_buf->yloc);
@@ -1302,7 +1302,9 @@ short walker::draw_tile(viewscreen  *view_buf)
 	}
 
     if(outline == 0 && user != -1 && this != view_buf->control && this->team_num == view_buf->control->team_num)
+        {
         outline = OUTLINE_INVISIBLE;
+        }
 
 	if (stats->query_bit_flags(BIT_PHANTOM)) //WE ARE A PHANTOM
 		myscreen->walkputbuffer( xscreen, yscreen, sizex, sizey,
@@ -1776,7 +1778,9 @@ void walker::do_heal_effects(walker* healer, walker* target, short amount)
         return;
 
     if(healer)
+        {
         healer->damage_numbers.push_back(DamageNumber(target->xpos + target->sizex/2, target->ypos, amount, 56));
+        }
 	target->damage_numbers.push_back(DamageNumber(target->xpos + target->sizex/2, target->ypos, amount, 56));
 }
 
@@ -3415,7 +3419,7 @@ short walker::special()
 						strcpy(message, myguy->name);
 					else
 						strcpy(message, "ArchMage");
-					sprintf(tempstr, "%s has controlled %d men", message, didheal);
+					snprintf(tempstr, sizeof(tempstr), "%s has controlled %d men", message, didheal);
 					myscreen->do_notify(tempstr, this);
 
 					generic2 = stats->magicpoints - stats->special_cost[(int)current_special];
@@ -3613,9 +3617,9 @@ short walker::special()
 						else
 							strcpy(message, "Thief");
 						if (generic2) // then we actually failed to charm
-							sprintf(tempstr, "%s failed to charm!", message);
+							snprintf(tempstr, sizeof(tempstr), "%s failed to charm!", message);
 						else
-							sprintf(tempstr, "%s charmed an opponent!", message);
+							snprintf(tempstr, sizeof(tempstr), "%s charmed an opponent!", message);
 						myscreen->do_notify(tempstr, this);
 						busy += 10; // takes a while
 						break; // end of Charm Opponent

@@ -699,7 +699,7 @@ void redraw_mainmenu()
         allbuttons[5]->vdisplay();
     }
 
-    sprintf(message, "Difficulty: %s", difficulty_names[current_difficulty]);
+    snprintf(message, sizeof(message), "Difficulty: %s", difficulty_names[current_difficulty]);
     allbuttons[6]->label = message;
 
     // Show the allied mode
@@ -2229,15 +2229,15 @@ Sint32 increase_stat(Sint32 whatstat, Sint32 howmuch)
 {
     bool level_increased = (old_guy->get_level() < current_guy->get_level());
     bool stat_increased;
-    if(level_increased)
-        stat_increased = false;
-    else
+    if(level_increased){
+        stat_increased = false;}
+    else{
         stat_increased = (old_guy->strength < current_guy->strength
                || old_guy->dexterity < current_guy->dexterity
                || old_guy->constitution < current_guy->constitution
                || old_guy->intelligence < current_guy->intelligence
                || old_guy->armor < current_guy->armor);
-
+}
 	switch(whatstat)
 	{
 		case BUT_STR:
@@ -2279,13 +2279,13 @@ Sint32 decrease_stat(Sint32 whatstat, Sint32 howmuch)
     bool level_increased = (old_guy->get_level() < current_guy->get_level());
     bool stat_increased;
     if(level_increased)
-        stat_increased = false;
-    else
+        {stat_increased = false;}
+    else{
         stat_increased = (old_guy->strength < current_guy->strength
                || old_guy->dexterity < current_guy->dexterity
                || old_guy->constitution < current_guy->constitution
                || old_guy->intelligence < current_guy->intelligence
-               || old_guy->armor < current_guy->armor);
+               || old_guy->armor < current_guy->armor);}
 
 	switch(whatstat)
 	{
@@ -2891,8 +2891,8 @@ Sint32 edit_guy(Sint32 arg1)
 
 	myscreen->save_data.m_totalcash[current_guy->teamnum] -= cost;  // cost of new - old (current_guy - here)
 
-    if (here->get_level() != current_guy->get_level())
-        current_guy->upgrade_to_level(current_guy->get_level());
+    if (here->get_level() != current_guy->get_level()){
+        current_guy->upgrade_to_level(current_guy->get_level());}
 	statscopy(here, current_guy);
 
 	// Color our team button normally
@@ -2932,8 +2932,8 @@ Sint32 do_save(Sint32 arg1)
         else
             timed_dialog("SAVE FAILED");
     }
-    else
-        timed_dialog("SAVE CANCELED");
+    else{
+        timed_dialog("SAVE CANCELED");}
 
 	grab_mouse();
 
@@ -2946,10 +2946,10 @@ Sint32 do_load(Sint32 arg1)
 
 	snprintf(newname, 8, "save%d", arg1);
 
-	if(myscreen->save_data.load(newname))
+	if(myscreen->save_data.load(newname)){
         timed_dialog("GAME LOADED");
-    else
-        timed_dialog("LOAD FAILED");
+    }else{
+        timed_dialog("LOAD FAILED");}
 
 	return REDRAW;
 }
@@ -3825,7 +3825,7 @@ Sint32 set_difficulty()
    char message[80];
 
    current_difficulty = (current_difficulty + 1) % DIFFICULTY_SETTINGS;
-   sprintf(message, "Difficulty: %s", difficulty_names[current_difficulty]);
+   snprintf(message, sizeof(message), "Difficulty: %s", difficulty_names[current_difficulty]);
    #ifndef DISABLE_MULTIPLAYER
    allbuttons[6]->label = message;
    #else

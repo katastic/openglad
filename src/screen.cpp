@@ -754,7 +754,7 @@ short screen::act()
 		return endgame(0, level_data.id + 1);  // No exits and no enemies: Go to next sequential level.
 
     if(end)
-        return 1;
+        {return 1;}
 
 	// Make sure we're all pointing to legal targets
 	for(auto e = level_data.oblist.begin(); e != level_data.oblist.end(); e++)
@@ -857,7 +857,7 @@ short screen::endgame(short ending)
 short screen::endgame(short ending, short nextlevel)
 {
     if(end)
-        return 1;
+        {return 1;}
 
 
 	std::map<int, guy*> before;

@@ -3,7 +3,7 @@
 
 #include "SDL.h"
 
-typedef enum 
+typedef enum
 {
 	NoZoom = 0x01,
 	SAI = 0x02,
@@ -15,21 +15,21 @@ class Screen
 {
 	public:
 		RenderEngine Engine;  // how to render the physical screen
-		
+
 		SDL_Window* window;
 		SDL_Renderer* renderer;
-		
+
 		// The target for all rendering
 		SDL_Surface* render;
-		
+
 		// A texture updated by 'render' for normal rendering
 		SDL_Texture* render_tex;
-		
+
 		// A buffer for doubling filters (i.e. Sai or Eagle)
-        SDL_Surface* render2;
+        SDL_Surface* render2x;
         // A larger texture for the doubled result
-        SDL_Texture* render2_tex;
-        
+        SDL_Texture* render2x_tex;
+
 		Screen(RenderEngine engine, int width, int height, int fullscreen);
 		~Screen();
 
@@ -38,7 +38,7 @@ class Screen
         void clear();
         void clear(int x, int y, int w, int h);
 		void swap(int x, int y, int w, int h);
-		
+
 		void clear_window();
 
 };

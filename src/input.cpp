@@ -20,7 +20,7 @@
 // input code
 //
 
-#include "common.h"
+
 
 #include "input.h"
 #include "screen.h"
@@ -32,6 +32,8 @@
 #ifdef OUYA
 #include "OuyaController.h"
 #endif
+
+#include "common.h"
 
 void quit(Sint32 arg1);
 
@@ -79,11 +81,13 @@ void update_overscan_setting()
         overscan_percentage = 0.0f;
     else if(overscan_percentage > 0.25f)
         overscan_percentage = 0.25f;
-
+/*
+    KAT. wtf do we care about overscan anymore
     viewport_offset_x = window_w * overscan_percentage/2;
     viewport_offset_y = window_h * overscan_percentage/2;
     viewport_w = window_w * (1.0f - overscan_percentage);
     viewport_h = window_h * (1.0f - overscan_percentage);
+    */
 }
 
 JoyData player_joy[4];
@@ -392,6 +396,8 @@ void handle_text_event(const SDL_Event& event)
 
 void handle_mouse_event(const SDL_Event& event)
 {
+
+
     switch(event.type)
     {
     case SDL_MOUSEWHEEL:
@@ -402,8 +408,12 @@ void handle_mouse_event(const SDL_Event& event)
 #ifndef USE_TOUCH_INPUT
         // Mouse event
     case SDL_MOUSEMOTION:
-        mouse_state.x = (event.motion.x - viewport_offset_x) * (SCREEN_W / viewport_w);
-        mouse_state.y = (event.motion.y - viewport_offset_y) * (SCREEN_H / viewport_h);
+
+printf("W %d %d\n", SCREEN_W, WINDOWS_W );
+printf("H %d %d\n", SCREEN_H, WINDOWS_H );
+
+        mouse_state.x = event.button.x/(float)((float)WINDOWS_W/(float)SCREEN_W);
+        mouse_state.y = event.button.y/(float)((float)WINDOWS_H/(float)SCREEN_H);
         break;
     case SDL_MOUSEBUTTONUP:
         if (event.button.button == SDL_BUTTON_LEFT)
@@ -411,17 +421,21 @@ void handle_mouse_event(const SDL_Event& event)
         if (event.button.button == SDL_BUTTON_RIGHT)
             mouse_state.right = 0;
 
-        mouse_state.x = (event.button.x - viewport_offset_x) * (SCREEN_W / viewport_w);
-        mouse_state.y = (event.button.y - viewport_offset_y) * (SCREEN_H / viewport_h);
+        mouse_state.x = event.button.x/(float)((float)WINDOWS_W/(float)SCREEN_W);
+        mouse_state.y = event.button.y/(float)((float)WINDOWS_H/(float)SCREEN_H);
         break;
     case SDL_MOUSEBUTTONDOWN:
         if (event.button.button == SDL_BUTTON_LEFT)
             mouse_state.left = 1;
         else if (event.button.button == SDL_BUTTON_RIGHT)
             mouse_state.right = 1;
+        mouse_state.x = event.button.x/(float)((float)WINDOWS_W/(float)SCREEN_W);
+        mouse_state.y = event.button.y/(float)((float)WINDOWS_H/(float)SCREEN_H);
 
-        mouse_state.x = (event.button.x - viewport_offset_x) * (SCREEN_W / viewport_w);
-        mouse_state.y = (event.button.y - viewport_offset_y) * (SCREEN_H / viewport_h);
+        //mouse_state.x = event.button.x*((float)SCREEN_W/((float)WINDOWS_W));
+        //mouse_state.y = event.button.y*((float)SCREEN_H/((float)WINDOWS_H));
+        //mouse_state.x = (event.button.x - viewport_offset_x) * (WINDOWS_W / viewport_w);
+        //mouse_state.y = (event.button.y - viewport_offset_y) * (WINDOWS_H / viewport_h);
         break;
 #else
 #ifdef FAKE_TOUCH_EVENTS

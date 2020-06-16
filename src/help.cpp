@@ -190,7 +190,7 @@ short read_campaign_intro(screen * myscreen)
 {
     CampaignData data(myscreen->save_data.current_campaign);
     if(!data.load())
-        return 1;
+        {return 1;}
 
 	Sint32 screenlines;
 	Sint32  numlines, j;

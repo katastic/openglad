@@ -618,8 +618,6 @@ short new_score_panel(screen *myscreen, short do_it)
     [P=3] [301 401] [599 799] [w398 h298]
 
     width/heights all work out (within a pixel or two)!
-
-
 */
 //printf("[P=%d] [%d %d] [%d %d] [w%d h%d]\n", player, lm, tm, rm, bm, rm-lm, bm-tm);
 		if (control && !control->dead && control->user == player)

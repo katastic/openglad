@@ -311,7 +311,7 @@ button viewteam_buttons[] =
 button details_buttons[] =
     {
         button("BACK", KEYSTATE_ESCAPE, 10, 170, 40, 20, RETURN_MENU , EXIT, MenuNav::UpRight(1, 1)),
-        button(160, 4, 315 - 160, 66 - 4, 0 , -1, MenuNav::DownLeft(0, 0), false, true) // PROMOTE
+        button(160, 4, SCREEN_W-5 - 160, 66 - 4, 0 , -1, MenuNav::DownLeft(0, 0), false, true) // PROMOTE
     };
 
 button trainmenu_buttons[] =
@@ -3309,7 +3309,7 @@ Sint32 create_detail_menu(guy *arg1)
        }
 
        bool do_promote = !buttons[1].hidden && ((do_click && detailmouse.x >= 160 &&
-                   detailmouse.x <= 315 &&
+                   detailmouse.x <= SCREEN_W-5 &&
                    detailmouse.y >= 4   &&
                    detailmouse.y <= 66) || (pressed && highlighted_button == 1));
        if(do_promote)
@@ -3351,7 +3351,7 @@ Sint32 create_detail_menu(guy *arg1)
        text& mytext = myscreen->text_normal;
        mytext.write_xy(80 - mytext.query_width(current_guy->name)/2, 14,
                         current_guy->name,(unsigned char) DARK_BLUE, 1);
-       myscreen->draw_dialog(5, 68, 315, 167, "Character Special Abilities");
+       myscreen->draw_dialog(5, 68, SCREEN_W-5, 167, "Character Special Abilities");
        myscreen->draw_text_bar(160, 90, 162, 160);
 
        // Text stuff, determined by character class & level
@@ -3502,7 +3502,7 @@ Sint32 create_detail_menu(guy *arg1)
                {
                    sprintf(message,"Level %d Archmage. This",
                            (thisguy->get_level()-6)/2+1);
-                   myscreen->draw_dialog(158, 4, 315, 66, "Become ArchMage");
+                   myscreen->draw_dialog(158, 4, SCREEN_W-5, 66, "Become ArchMage");
                    WR(-10,"Your Mage is now of high");
                    WR( -9,"enough level to become a");
                    //WR( -8,"Level 1 Archmage. This  ");
@@ -3706,7 +3706,7 @@ Sint32 create_detail_menu(guy *arg1)
                // Can we change to orc captain?
                if (thisguy->get_level() >= 6)
                {
-                   myscreen->draw_dialog(158, 4, 315, 66, "Become Orc Captain");
+                   myscreen->draw_dialog(158, 4, SCREEN_W-5, 66, "Become Orc Captain");
                    WR(-10,"Your Orc is now of high ");
                    WR( -9,"enough level to become a");
                    WR( -8,"Level 1 Orc Captain. You");

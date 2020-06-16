@@ -574,13 +574,13 @@ short new_score_panel(screen *myscreen, short do_it)
 	    };
 
 	Uint32 myscore;
-	static Uint32 scorecountup[4] = {
-	                                           myscreen->save_data.m_score[0],
-	                                           myscreen->save_data.m_score[1],
-	                                           myscreen->save_data.m_score[2],
-	                                           myscreen->save_data.m_score[3],
-	                                       }
-	                                       ;
+	static Uint32 scorecountup[4] =
+        {
+	    myscreen->save_data.m_score[0],
+	    myscreen->save_data.m_score[1],
+	    myscreen->save_data.m_score[2],
+	    myscreen->save_data.m_score[3],
+	    };
 
 	for (short player = 0; player < myscreen->numviews; player++)
 	{
@@ -589,6 +589,15 @@ short new_score_panel(screen *myscreen, short do_it)
 		tm = myscreen->viewob[player]->yloc + OVERSCAN_PADDING; //top
 		rm = myscreen->viewob[player]->endx - OVERSCAN_PADDING; //right
 		bm = myscreen->viewob[player]->endy - OVERSCAN_PADDING; //bottom
+
+		//if(player == 3)
+          //  {
+            // [P=3] [401 301] [799 599] [w398 h298]
+         //   printf("[P=%d] [%d %d] [%d %d] [w%d h%d]\n", player, lm, tm, rm, bm, rm-lm, bm-tm);
+        //    tm -= 300;
+          //  lm -= 300;
+
+            //}
 /*
 4-player
     [P=0] [0     0] [398 298] HERE WE GO? the Y isn't lined up...

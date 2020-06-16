@@ -363,7 +363,8 @@ short text::write_char_xy(short x, short y, char letter, unsigned char color,
 	if (!to_buffer)
 		return write_char_xy(x, y, letter, (unsigned char) color);
 
-	myscreen->walkputbuffertext(x, y, sizex, sizey, 0, 0, SCREEN_W-1,SCREEN_H-1, &letters.data[letter * sizex * sizey], (unsigned char) color);
+	myscreen->walkputbuffertext(x, y, sizex, sizey, 0, 0, SCREEN_W-1,SCREEN_H-1,
+	 &letters.data[letter * sizex * sizey], (unsigned char) color);
 	//myscreen->buffer_to_screen(x, y, sizex + 4 - (sizex%4), sizey + 4 - (sizey%4) );
 	return 1;
 }
@@ -373,7 +374,8 @@ short text::write_char_xy(short x, short y, char letter, short to_buffer)
 	if (!to_buffer)
 		return write_char_xy(x, y, letter, (unsigned char) DEFAULT_TEXT_COLOR);
 
-	myscreen->walkputbuffertext(x, y, sizex, sizey, 0, 0, SCREEN_W-1,SCREEN_H-1, &letters.data[letter * sizex * sizey], (unsigned char) DEFAULT_TEXT_COLOR);
+	myscreen->walkputbuffertext(x, y, sizex, sizey, 0, 0, SCREEN_W-1,SCREEN_H-1,
+        &letters.data[letter * sizex * sizey], (unsigned char) DEFAULT_TEXT_COLOR);
 	//myscreen->buffer_to_screen(x, y, sizex + 4 - (sizex%4), sizey + 4 - (sizey%4) );
 	return 1;
 }
@@ -386,7 +388,8 @@ short text::write_char_xy(short x, short y, char letter, unsigned char color)
 
 short text::write_char_xy_alpha(short x, short y, char letter, unsigned char color, Uint8 alpha)
 {
-	myscreen->walkputbuffertext_alpha(x, y, sizex, sizey, 0, 0, SCREEN_W-1,SCREEN_H-1, &letters.data[letter * sizex * sizey], (unsigned char) color, alpha);
+	myscreen->walkputbuffertext_alpha(x, y, sizex, sizey, 0, 0, SCREEN_W-1,SCREEN_H-1,
+        &letters.data[letter * sizex * sizey], (unsigned char) color, alpha);
 	return 1;
 }
 
@@ -402,9 +405,17 @@ short text::write_char_xy(short x, short y, char letter, unsigned char color,
 	if (!whereto)
 		myscreen->putdatatext(x, y, sizex, sizey, &letters.data[letter *sizex*sizey], (unsigned char) color);
 	else
-		myscreen->walkputbuffertext(x+whereto->xloc, y+whereto->yloc, sizex, sizey,
-		                       whereto->xloc,whereto->yloc,whereto->endx, whereto->endy,
-		                       &letters.data[letter *sizex*sizey], (unsigned char) color);
+		myscreen->walkputbuffertext(
+            x+whereto->xloc,
+            y+whereto->yloc,
+            sizex,
+            sizey,
+
+		    whereto->xloc,
+		    whereto->yloc,
+		    whereto->endx,
+		    whereto->endy,
+		    &letters.data[letter *sizex*sizey], (unsigned char) color);
 	//         myscreen->buffer_to_screen(x+whereto->xloc, y+whereto->yloc,
 	//           (sizex + 4 - (sizex%4)), (sizey + 4 - (sizey%4)) );
 	return 1;
@@ -415,9 +426,19 @@ short text::write_char_xy(short x, short y, char letter, viewscreen *whereto)
 	if (!whereto)
 		myscreen->putdatatext(x, y, sizex, sizey, &letters.data[letter *sizex*sizey]);
 	else
-		myscreen->walkputbuffertext(x+whereto->xloc, y+whereto->yloc, sizex, sizey,
-		                       whereto->xloc,whereto->yloc,whereto->endx, whereto->endy,
-		                       &letters.data[letter *sizex*sizey], (unsigned char) DEFAULT_TEXT_COLOR);
+		myscreen->walkputbuffertext(
+                x+whereto->xloc,
+                y+whereto->yloc,
+                sizex,
+                sizey,
+
+                whereto->xloc,
+                whereto->yloc,
+                whereto->endx,
+                whereto->endy,
+
+		        &letters.data[letter *sizex*sizey],
+		        (unsigned char) DEFAULT_TEXT_COLOR);
 	//         myscreen->buffer_to_screen(x+whereto->xloc, y+whereto->yloc,
 	//           (sizex + 4 - (sizex%4)), (sizey + 4 - (sizey%4)) );
 	return 1;

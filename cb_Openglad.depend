@@ -2666,7 +2666,7 @@
 	<stdio.h>
 	"SDL_types.h"
 
-1592276538 source:/home/novous/Desktop/git/openglad/src/picker.cpp
+1592277998 source:/home/novous/Desktop/git/openglad/src/picker.cpp
 	"common.h"
 	"version.h"
 	"graph.h"
@@ -2751,7 +2751,7 @@
 	"stats.h"
 	<math.h>
 
-1592277042 source:/home/novous/Desktop/git/openglad/src/text.cpp
+1592278971 source:/home/novous/Desktop/git/openglad/src/text.cpp
 	"graph.h"
 	<cstring>
 	"common.h"
@@ -2792,7 +2792,7 @@
 1474064848 /home/novous/Desktop/git/openglad/util/savepng.h
 	"SDL_video.h"
 
-1592273200 source:/home/novous/Desktop/git/openglad/src/view.cpp
+1592278212 source:/home/novous/Desktop/git/openglad/src/view.cpp
 	"input.h"
 	"graph.h"
 	"colors.h"

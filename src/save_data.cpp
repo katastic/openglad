@@ -33,14 +33,14 @@ SaveData::SaveData()
 {
     completed_levels.insert(std::make_pair("org.openglad.gladiator", std::set<int>()));
     current_levels.insert(std::make_pair("org.openglad.gladiator", 1));
-    
+
 	for(int i = 0; i < 4; i++)
 	{
 		m_score[i] = 0;
 		m_totalcash[i] = 5000;
 		m_totalscore[i] = 0;
 	}
-	
+
 	team_size = 0;
 	for(int i = 0; i < MAX_TEAM_SIZE; i++)
     {
@@ -63,7 +63,7 @@ void SaveData::reset()
     current_levels.clear();
     completed_levels.insert(std::make_pair("org.openglad.gladiator", std::set<int>()));
     current_levels.insert(std::make_pair("org.openglad.gladiator", 1));
-	
+
 
 	score = totalcash = totalscore = 0;
 	for (int i = 0; i < 4; i++)
@@ -72,14 +72,14 @@ void SaveData::reset()
 		m_totalcash[i] = 5000;
 		m_totalscore[i] = 0;
 	}
-	
+
 	for(int i = 0; i < team_size; i++)
     {
         delete team_list[i];
         team_list[i] = NULL;
     }
 	team_size = 0;
-	
+
 	scen_num = 1;
 	my_team = 0;
     //numplayers = 1;
@@ -163,7 +163,7 @@ bool SaveData::load(const std::string& filename)
 	//   2-bytes Number of level indices in list
 	//   List of n level indices
 	//     2-bytes Level index
-    
+
     Log("Loading save: %s\n", filename.c_str());
 	strcpy(temp_filename, filename.c_str());
 	strcat(temp_filename, ".gtl"); // gladiator team list
@@ -173,10 +173,10 @@ bool SaveData::load(const std::string& filename)
 		Log("Failed to open save file: %s\n", filename.c_str());
 		return 0;
 	}
-    
+
     completed_levels.clear();
     current_levels.clear();
-    
+
 	for(int i = 0; i < team_size; i++)
     {
         delete team_list[i];
@@ -226,7 +226,7 @@ bool SaveData::load(const std::string& filename)
         else
             current_campaign = "org.openglad.gladiator";
 	}
-	
+
 	// Read scenario number
 	short temp_scenario;
 	SDL_RWread(infile, &temp_scenario, 2, 1);
@@ -277,7 +277,7 @@ bool SaveData::load(const std::string& filename)
         guy* temp_guy = new guy;
         team_list[i] = temp_guy;
         team_size++;
-        
+
 		// Get temp values to be read
 		temp_order = ORDER_LIVING; // may be changed later
 		// Read name of current guy...
@@ -349,7 +349,7 @@ bool SaveData::load(const std::string& filename)
 			temp_guy->teamnum = 0;
 		}
 	}
-	
+
     // Make sure the default campaign is included
 	completed_levels.insert(std::make_pair("org.openglad.gladiator", std::set<int>()));
 	current_levels.insert(std::make_pair("org.openglad.gladiator", 1));
@@ -358,12 +358,12 @@ bool SaveData::load(const std::string& filename)
     {
         char levelstatus[MAX_LEVELS];
         memset(levelstatus, 0, 500);
-        
+
         if (temp_version >= 5)
             SDL_RWread(infile, levelstatus, 500, 1);
         else
             SDL_RWread(infile, levelstatus, 200, 1);
-        
+
         // Guaranteed to be the default campaign if version < 8
         for(int i = 0; i < 500; i++)
         {
@@ -383,25 +383,25 @@ bool SaveData::load(const std::string& filename)
             // Get the campaign ID (40 chars)
             SDL_RWread(infile, campaign, 1, 40);
             campaign[40] = '\0';
-            
+
             short index = 1;
             // Get the current level for this campaign
             SDL_RWread(infile, &index, 2, 1);
             current_levels[campaign] = index;
-            
+
             // Get the number of cleared levels
             SDL_RWread(infile, &num_levels, 2, 1);
             for(int j = 0; j < num_levels; j++)
             {
                 // Get the level index
                 SDL_RWread(infile, &index, 2, 1);
-                
+
                 // Add it to our list
                 add_level_completed(campaign, index);
             }
         }
     }
-    
+
 	Log("Loading campaign: %s\n", current_campaign.c_str());
     int current_level = load_campaign(current_campaign, current_levels);
     if(current_level >= 0)
@@ -427,8 +427,8 @@ void SaveData::update_guys(std::list<walker*>& oblist)
         team_list[i] = NULL;
     }
     team_size = 0;
-    
-    
+
+
     // Remove new (or existing) "guys" from the list and store them in this SaveData to be saved and trained.
     for(auto e = oblist.begin(); e != oblist.end(); e++)
 	{
@@ -459,7 +459,7 @@ bool SaveData::save(const std::string& filename)
 
 	char temptext[10] = "GTL";
 	char temp_version = 9;
-	
+
 	Uint32 newcash = totalcash;
 	Uint32 newscore = totalscore;
 	//  short numguys;
@@ -530,7 +530,7 @@ bool SaveData::save(const std::string& filename)
 	Log("Saving save: %s\n", filename.c_str());
 	strcpy(temp_filename, filename.c_str());
 	strcat(temp_filename, ".gtl"); // gladiator team list
-	
+
 	if ( (outfile = open_write_file("save/", temp_filename)) == NULL ) // open for write
 	{
 		//gotoxy(1, 22);
@@ -551,7 +551,7 @@ bool SaveData::save(const std::string& filename)
 	// Write the name
 	strncpy(savedgame, save_name.c_str(), 40);
 	SDL_RWwrite(outfile, savedgame, 40, 1);
-	
+
 	// Write current campaign
 	Log("Saving campaign status: %s\n", current_campaign.c_str());
 	strncpy(temp_campaign, current_campaign.c_str(), 40);
@@ -595,7 +595,7 @@ bool SaveData::save(const std::string& filename)
 	for(int i = 0; i < team_size; i++)
 	{
 	    guy* temp_guy = team_list[i];
-	    
+
         // Get temp values to be saved
         temp_order = ORDER_LIVING;
         temp_family= temp_guy->family;
@@ -644,16 +644,16 @@ bool SaveData::save(const std::string& filename)
 	}
 
 	// Write the completed levels
-	
+
 	// Make sure our current level is saved
 	std::map<std::string, int>::iterator cur = current_levels.find(current_campaign);
 	if(cur != current_levels.end())
     {
         cur->second = scen_num;
     }
-    else
-        current_levels.insert(std::make_pair(current_campaign, scen_num));
-    
+    else{
+        current_levels.insert(std::make_pair(current_campaign, scen_num));}
+
 	// Number of campaigns
 	short num_campaigns = completed_levels.size();
     SDL_RWwrite(outfile, &num_campaigns, 2, 1);
@@ -664,13 +664,13 @@ bool SaveData::save(const std::string& filename)
         memset(campaign, 0, 41);
         strcpy(campaign, e->first.c_str());
         SDL_RWwrite(outfile, campaign, 1, 40);
-        
+
         short index = 1;
         std::map<std::string, int>::const_iterator g = current_levels.find(e->first);
         if(g != current_levels.end())
             index = g->second;
         SDL_RWwrite(outfile, &index, 2, 1);
-        
+
         // Number of levels
         short num_levels = e->second.size();
         SDL_RWwrite(outfile, &num_levels, 2, 1);
@@ -683,7 +683,7 @@ bool SaveData::save(const std::string& filename)
     }
 
     SDL_RWclose(outfile);
-    
+
 	return 1;
 }
 
@@ -695,7 +695,7 @@ bool SaveData::is_level_completed(int level_index) const
     // Campaign not found?  Then this level is not done.
     if(e == completed_levels.end())
         return false;
-    
+
     // If the level is listed, then it is completed.
     std::set<int>::const_iterator f = e->second.find(level_index);
     return (f != e->second.end());
@@ -707,18 +707,18 @@ int SaveData::get_num_levels_completed(const std::string& campaign) const
     // Campaign not found?
     if(e == completed_levels.end())
         return 0;
-    
+
     return e->second.size();
 }
 
 void SaveData::add_level_completed(const std::string& campaign, int level_index)
 {
     std::map<std::string, std::set<int> >::iterator e = completed_levels.find(campaign);
-    
+
     // Campaign not found?  Add it in.
     if(e == completed_levels.end())
         e = completed_levels.insert(std::make_pair(campaign, std::set<int>())).first;
-    
+
     // Add the completed level
     e->second.insert(level_index);
 }
@@ -726,7 +726,7 @@ void SaveData::add_level_completed(const std::string& campaign, int level_index)
 void SaveData::reset_campaign(const std::string& campaign)
 {
     std::map<std::string, std::set<int> >::iterator e = completed_levels.find(campaign);
-    
+
     if(e != completed_levels.end())
         e->second.clear();
 }

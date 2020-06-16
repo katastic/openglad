@@ -58,7 +58,7 @@ void draw_percentage_bar(short left, short top, unsigned char somecolor,
                          short somelength, screen * myscreen);
 void init_input();
 
-void draw_radar_gems(screen  *myscreen);
+//void draw_radar_gems(screen  *myscreen);
 void draw_gem(short x, short y, short color, screen * myscreen);
 
 unsigned char *radarpic;
@@ -300,6 +300,7 @@ short score_panel(screen *myscreen, short do_it)
 	return new_score_panel(myscreen, 1);
 }
 
+/* dead code / isn't used should be commented out and possibly removed to another file for reference purposes.
 void draw_radar_gems(screen  *myscreen)
 {
 	short upper_left_x = 246;
@@ -324,7 +325,7 @@ void draw_radar_gems(screen  *myscreen)
 	draw_gem(upper_right_x, upper_right_y, team_light,myscreen);
 	draw_gem(lower_left_x, lower_left_y, team_light,myscreen);
 	draw_gem(lower_right_x, lower_right_y, team_light,myscreen);
-}
+}*/
 
 void draw_gem(short x, short y, short color, screen * myscreen)
 {

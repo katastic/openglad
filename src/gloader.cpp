@@ -317,18 +317,18 @@ signed char  *anifood[] = { food1, food1, food1, food1,
 PixieData data_copy(const PixieData& d)
 {
     PixieData result;
-    
+
     if(!d.valid())
         return result;
-    
+
     result.frames = d.frames;
     result.w = d.w;
     result.h = d.h;
-    
+
     Sint32 len = d.w * d.h * d.frames;
     result.data = new unsigned char[len];
     memcpy(result.data, d.data, len);
-    
+
     return result;
 }
 
@@ -337,9 +337,9 @@ loader::loader()
     : graphics(NULL), animations(NULL), stepsizes(NULL), lineofsight(NULL), act_types(NULL), damage(NULL), fire_frequency(NULL)
 {
 	memset(hitpoints, 0, 200*sizeof(float));
-    
+
 	graphics = new PixieData[SIZE_ORDERS*SIZE_FAMILIES];
-        
+
 	//  hitpoints = new char[SIZE_ORDERS*SIZE_FAMILIES];
 	act_types = new char[SIZE_ORDERS*SIZE_FAMILIES];
 	memset(act_types, ACT_RANDOM, SIZE_ORDERS*SIZE_FAMILIES);
@@ -459,7 +459,7 @@ loader::loader()
 	graphics[PIX(ORDER_WEAPON, FAMILY_TREE)] = read_pixie_file("tree.pix");
 	graphics[PIX(ORDER_WEAPON, FAMILY_METEOR)] = read_pixie_file("meteor.pix");
 	graphics[PIX(ORDER_WEAPON, FAMILY_SPRINKLE)] = read_pixie_file("sparkle.pix");
-	
+
 	if(cfg.is_on("effects", "gore"))
     {
         graphics[PIX(ORDER_WEAPON, FAMILY_BLOOD)] = read_pixie_file("blood.pix");
@@ -470,7 +470,7 @@ loader::loader()
         graphics[PIX(ORDER_WEAPON, FAMILY_BLOOD)] = read_pixie_file("blood_friendly.pix");
         graphics[PIX(ORDER_TREASURE,FAMILY_STAIN)] = read_pixie_file("stain_friendly.pix");
     }
-        
+
 	graphics[PIX(ORDER_WEAPON, FAMILY_BONE)] = read_pixie_file("bone1.pix");
 	graphics[PIX(ORDER_WEAPON, FAMILY_BLOB)] = read_pixie_file("sl_ball.pix");
 	graphics[PIX(ORDER_WEAPON, FAMILY_LIGHTNING)] = read_pixie_file("lightnin.pix");
@@ -480,7 +480,7 @@ loader::loader()
 	graphics[PIX(ORDER_WEAPON, FAMILY_WAVE3)] = read_pixie_file("wave3.pix");
 	graphics[PIX(ORDER_WEAPON, FAMILY_CIRCLE_PROTECTION)] = read_pixie_file("wave2.pix");
 	graphics[PIX(ORDER_WEAPON, FAMILY_HAMMER)] = read_pixie_file("hammer.pix");
-	
+
 	graphics[PIX(ORDER_WEAPON, FAMILY_DOOR)] = read_pixie_file("door.pix");
 	graphics[PIX(ORDER_WEAPON, FAMILY_BOULDER)] = read_pixie_file("boulder1.pix");
 
@@ -774,7 +774,7 @@ loader::~loader(void)
 	for(i=0;i<(SIZE_ORDERS*SIZE_FAMILIES);i++) {
 	    graphics[i].free();
 	}
-	
+
 	delete[] graphics;
 
 	delete[] animations;
@@ -800,8 +800,8 @@ walker  *loader::create_walker(char order,
 {
 	walker  *ob;
 
-    if(order == ORDER_LIVING && family >= NUM_FAMILIES)
-        family = FAMILY_SOLDIER;
+    if(order == ORDER_LIVING && family >= NUM_FAMILIES){
+        family = FAMILY_SOLDIER;}
 
 	if (!graphics[PIX(order, family)].valid())
 	{
@@ -830,7 +830,7 @@ walker  *loader::create_walker(char order,
 	ob->stats->weapon_cost = 1; // default value
 
 	set_walker(ob, order, family);
-	
+
 	if(order == ORDER_LIVING)
         ob->set_frame(ob->ani[ob->curdir][0]);
 	return ob;
@@ -845,7 +845,7 @@ walker  *loader::set_walker(walker *ob,
 	ob->set_order_family(order,family);
 	ob->set_act_type(act_types[PIX(order, family)]);
 	ob->ani = animations[PIX(order, family)];
-	
+
 	set_derived_stats(ob, order, family);
 
 	for (i=0; i < NUM_SPECIALS; i++)

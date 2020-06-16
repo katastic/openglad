@@ -1747,7 +1747,7 @@
 	"base.h"
 	<list>
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/effect.cpp
+1592324407 source:/home/novous/Desktop/git/openglad/src/effect.cpp
 	"effect.h"
 
 1474064848 /home/novous/Desktop/git/openglad/src/effect.h
@@ -2486,7 +2486,7 @@
 	"base.h"
 	"level_data.h"
 
-1592319389 source:/home/novous/Desktop/git/openglad/src/glad.cpp
+1592326065 source:/home/novous/Desktop/git/openglad/src/glad.cpp
 	"version.h"
 	"graph.h"
 	"colors.h"

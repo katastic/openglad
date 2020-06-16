@@ -72,7 +72,7 @@ short effect::act()
 				death();
 				break;
 			}
-			switch (drawcycle % 16)
+			switch (drawcycle % 16) //this is a hardcoded sin function. that's kinda silly
 			{
 				case 0:
 					xd = 0;

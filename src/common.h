@@ -15,4 +15,12 @@ const int WINDOWS_H = (SCREEN_H*2);
 const int WINDOWS_W = SCREEN_W;
 const int WINDOWS_H = SCREEN_H;
 #endif
+
+
+
+const int DEFAULT_TIMER_SPEED = 4; // 6 is original. Lower is faster. 2 values is "1" value change in the options menu. 4 is "9" speed which I much prefer as default.
+
+
+
+
 #endif

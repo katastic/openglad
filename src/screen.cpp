@@ -116,7 +116,7 @@ screen::screen(short howmany)
 	palmode = 0;
 
 	end = 0;
-	timer_wait = 6;       // 'moderate' speed setting
+	timer_wait = DEFAULT_TIMER_SPEED;       // 'moderate' speed setting
 
 	redrawme = 1;
 	cyclemode = 1; //color cycling on by default

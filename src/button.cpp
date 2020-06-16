@@ -15,7 +15,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 #include "button.h"
-
+#include "common.h"
 extern short scen_level;
 extern pixieN *backdrops[5];
 
@@ -245,7 +245,7 @@ void vbutton::vdisplay()
         vdisplay(2);
         return;
     }
-    
+
     text& mytext = myscreen->text_normal;
     if (mypixie) // then use the graphic
     {
@@ -276,7 +276,7 @@ void vbutton::vdisplay(Sint32 status)
         vdisplay();
         return;
     }
-    
+
     text& mytext = myscreen->text_normal;
     if (mypixie) // then use the graphic
     {
@@ -312,9 +312,6 @@ void vbutton::vdisplay(Sint32 status)
         }
     }
     release_mouse();
-    //buffers: myscreen->buffer_to_screen(0, 0, 320, 200);
-    // Zardus: following isn't really needed and it messes up the fading
-    //myscreen->buffer_to_screen(xloc,yloc,xend-xloc,yend-yloc);
     grab_mouse();
 }
 
@@ -445,8 +442,8 @@ Sint32 vbutton::mouse_on()
                 myscreen->draw_box(xloc-1, yloc-1, xend, yend, 27, 0, 1);
             else
                 myscreen->draw_box(xloc-1, yloc-1, xend, yend, 27, 0, 1);
-            myscreen->buffer_to_screen(0, 0, 320, 200);
-            
+            myscreen->buffer_to_screen(0, 0, SCREEN_W, SCREEN_H);
+
             had_focus = 1;
         }
         return 1;
@@ -460,7 +457,7 @@ Sint32 vbutton::mouse_on()
                 myscreen->draw_box(xloc-1, yloc-1, xend, yend, 0, 0, 1);
             else
                 myscreen->draw_box(xloc-1, yloc-1, xend, yend, 0, 0, 1);
-            myscreen->buffer_to_screen(0, 0, 320, 200);
+            myscreen->buffer_to_screen(0, 0, SCREEN_W, SCREEN_H);
             had_focus = 0;
         }
         return 0;
@@ -477,7 +474,7 @@ vbutton * init_buttons(button * buttons, Sint32 numbuttons)
             delete allbuttons[i];
         allbuttons[i] = NULL;
     }
-    
+
     for (i=0; i < numbuttons; i++)
     {
         allbuttons[i] = new vbutton(buttons[i].x,buttons[i].y,
@@ -506,7 +503,7 @@ void draw_buttons(button * buttons, Sint32 numbuttons)
     {
         if(buttons[i].hidden || buttons[i].no_draw)
             continue;
-        
+
         allbuttons[i]->vdisplay();
         myscreen->draw_box(allbuttons[i]->xloc-1,
                            allbuttons[i]->yloc-1,
@@ -537,7 +534,7 @@ void toggle_rendering_engine()
         engine = "normal";
     else
         engine = "sai";
-    
+
     cfg.apply_setting("graphics", "render", engine);
 }
 

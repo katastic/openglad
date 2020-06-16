@@ -17,6 +17,8 @@
 #include "graph.h"
 #include <cstring>
 
+#include "common.h"
+
 void get_input_events(bool);
 
 static PixieData letters1;
@@ -30,11 +32,11 @@ text::text(const char * filename)
         letters1 = read_pixie_file(TEXT_1);
     if(!letters_big.valid())
         letters_big = read_pixie_file(TEXT_BIG);
-    
+
     const char* temp_filename = filename;
 	if (!temp_filename || strlen(temp_filename) < 2)
 		temp_filename = "text.pix";
-		
+
     if(strcmp(temp_filename, TEXT_BIG) == 0)
         letters = letters_big;
     else
@@ -85,12 +87,12 @@ short text::write_xy(short x, short y, unsigned char color, const char* formatte
 {
     if(formatted_string == NULL)
         return 0;
-    
+
     va_list lst;
     va_start(lst, formatted_string);
     vsnprintf(text_buffer, 255, formatted_string, lst);
     va_end(lst);
-    
+
 	unsigned short i = 0;
 	while(text_buffer[i])
 	{
@@ -104,12 +106,12 @@ short text::write_xy_shadow(short x, short y, unsigned char color, const char* f
 {
     if(formatted_string == NULL)
         return 0;
-    
+
     va_list lst;
     va_start(lst, formatted_string);
     vsnprintf(text_buffer, 255, formatted_string, lst);
     va_end(lst);
-    
+
 	unsigned short i = 0;
 	while(text_buffer[i])
 	{
@@ -125,12 +127,12 @@ short text::write_xy_center(short x, short y, unsigned char color, const char* f
 {
     if(formatted_string == NULL)
         return 0;
-    
+
     va_list lst;
     va_start(lst, formatted_string);
     vsnprintf(text_buffer, 255, formatted_string, lst);
     va_end(lst);
-    
+
 	unsigned short i = 0;
 	size_t len = strlen(text_buffer);
 	while(text_buffer[i])
@@ -145,12 +147,12 @@ short text::write_xy_center_alpha(short x, short y, unsigned char color, Uint8 a
 {
     if(formatted_string == NULL)
         return 0;
-    
+
     va_list lst;
     va_start(lst, formatted_string);
     vsnprintf(text_buffer, 255, formatted_string, lst);
     va_end(lst);
-    
+
 	unsigned short i = 0;
 	size_t len = strlen(text_buffer);
 	while(text_buffer[i])
@@ -165,12 +167,12 @@ short text::write_xy_center_shadow(short x, short y, unsigned char color, const 
 {
     if(formatted_string == NULL)
         return 0;
-    
+
     va_list lst;
     va_start(lst, formatted_string);
     vsnprintf(text_buffer, 255, formatted_string, lst);
     va_end(lst);
-    
+
 	unsigned short i = 0;
 	size_t len = strlen(text_buffer);
 	while(text_buffer[i])
@@ -290,7 +292,7 @@ short text::write_y(short y, const char *string, unsigned char color)
 	unsigned short len = 0;
 	unsigned short xstart;
 	len = (unsigned short) strlen(string);
-	xstart = (unsigned short) ((320 - len * (sizex+1))/2);
+	xstart = (unsigned short) ((SCREEN_W - len * (sizex+1))/2);
 	return write_xy(xstart, y, string, (unsigned char) color);
 }
 
@@ -299,7 +301,7 @@ short text::write_y(short y, const char *string)
 	unsigned short len = 0;
 	unsigned short xstart;
 	len = (unsigned short) strlen(string);
-	xstart = (unsigned short) ((320 - len * (sizex+1))/2);
+	xstart = (unsigned short) ((SCREEN_W - len * (sizex+1))/2);
 	return write_xy(xstart, y, string, (unsigned char) DEFAULT_TEXT_COLOR);
 }
 
@@ -309,7 +311,7 @@ short text::write_y(short y, const char *string, unsigned char color,
 	unsigned short len = 0;
 	unsigned short xstart;
 	len = (unsigned short) strlen(string);
-	xstart = (unsigned short) ((320 - len * (sizex+1))/2);
+	xstart = (unsigned short) ((SCREEN_W - len * (sizex+1))/2);
 	if (!to_buffer)
 		return write_xy(xstart, y, string, (unsigned char) color);
 	else
@@ -321,7 +323,7 @@ short text::write_y(short y, const char *string, short to_buffer)
 	unsigned short len = 0;
 	unsigned short xstart;
 	len = (unsigned short) strlen(string);
-	xstart = (unsigned short) ((320 - len * (sizex+1))/2);
+	xstart = (unsigned short) ((SCREEN_W - len * (sizex+1))/2);
 	if (!to_buffer)
 		return write_xy(xstart, y, string, (unsigned char) DEFAULT_TEXT_COLOR);
 	else
@@ -334,7 +336,7 @@ short text::write_y(short y, const char *string, unsigned char color,
 	unsigned short len = 0;
 	unsigned short xstart;
 	len = (unsigned short) strlen(string);
-	xstart = (unsigned short) ((320 - len * (sizex+1))/2);
+	xstart = (unsigned short) ((SCREEN_W - len * (sizex+1))/2);
 	if (!whereto)
 		return write_xy(xstart, y, string, (unsigned char) color);
 	else
@@ -346,7 +348,7 @@ short text::write_y(short y, const char *string, viewscreen *whereto)
 	unsigned short len = 0;
 	unsigned short xstart;
 	len = (unsigned short) strlen(string);
-	xstart = (unsigned short) ((320 - len * (sizex+1))/2);
+	xstart = (unsigned short) ((SCREEN_W - len * (sizex+1))/2);
 	if (!whereto)
 		return write_xy(xstart, y, string, (unsigned char) DEFAULT_TEXT_COLOR);
 	else
@@ -361,7 +363,7 @@ short text::write_char_xy(short x, short y, char letter, unsigned char color,
 	if (!to_buffer)
 		return write_char_xy(x, y, letter, (unsigned char) color);
 
-	myscreen->walkputbuffertext(x, y, sizex, sizey, 0, 0, 319,199, &letters.data[letter * sizex * sizey], (unsigned char) color);
+	myscreen->walkputbuffertext(x, y, sizex, sizey, 0, 0, SCREEN_W-1,SCREEN_H-1, &letters.data[letter * sizex * sizey], (unsigned char) color);
 	//myscreen->buffer_to_screen(x, y, sizex + 4 - (sizex%4), sizey + 4 - (sizey%4) );
 	return 1;
 }
@@ -371,7 +373,7 @@ short text::write_char_xy(short x, short y, char letter, short to_buffer)
 	if (!to_buffer)
 		return write_char_xy(x, y, letter, (unsigned char) DEFAULT_TEXT_COLOR);
 
-	myscreen->walkputbuffertext(x, y, sizex, sizey, 0, 0, 319,199, &letters.data[letter * sizex * sizey], (unsigned char) DEFAULT_TEXT_COLOR);
+	myscreen->walkputbuffertext(x, y, sizex, sizey, 0, 0, SCREEN_W-1,SCREEN_H-1, &letters.data[letter * sizex * sizey], (unsigned char) DEFAULT_TEXT_COLOR);
 	//myscreen->buffer_to_screen(x, y, sizex + 4 - (sizex%4), sizey + 4 - (sizey%4) );
 	return 1;
 }
@@ -384,7 +386,7 @@ short text::write_char_xy(short x, short y, char letter, unsigned char color)
 
 short text::write_char_xy_alpha(short x, short y, char letter, unsigned char color, Uint8 alpha)
 {
-	myscreen->walkputbuffertext_alpha(x, y, sizex, sizey, 0, 0, 319,199, &letters.data[letter * sizex * sizey], (unsigned char) color, alpha);
+	myscreen->walkputbuffertext_alpha(x, y, sizex, sizey, 0, 0, SCREEN_W-1,SCREEN_H-1, &letters.data[letter * sizex * sizey], (unsigned char) color, alpha);
 	return 1;
 }
 
@@ -438,7 +440,7 @@ char * text::input_string(short x, short y, short maxlength, const char *begin,
 	short current_length, i;
 	short string_done = 0;
 	static char editstring[100], firststring[100];
-	
+
 	int tempchar;
 	char* temptext;
 	short has_typed = 0; // hasn't typed yet
@@ -457,30 +459,30 @@ char * text::input_string(short x, short y, short maxlength, const char *begin,
 	if (strlen(begin))
 		myscreen->draw_box(x, y, x+query_width(begin), y+sizey-2, forecolor, 1, 1);
 	write_xy(x, y, editstring, WHITE, 1);
-	myscreen->buffer_to_screen(0, 0, 320, 200);
+	myscreen->buffer_to_screen(0, 0, SCREEN_W, SCREEN_H);
 
 	clear_keyboard();
 	clear_key_press_event();
 	clear_text_input_event();
-	
+
     SDL_StartTextInput();
-    
+
 	while ( !string_done )
 	{
-	
+
         tempchar = 0;
         temptext = NULL;
-        
+
 		// Wait for a key to be pressed ..
 		while (!query_key_press_event() && !query_text_input_event())
 			//dumbcount++;
 			get_input_events(WAIT);
-        
+
         if(query_key_press_event())
         {
             tempchar = query_key();
             clear_key_press_event();
-            
+
             if (tempchar == SDLK_RETURN)
                 string_done = 1;
             else if (tempchar == SDLK_ESCAPE)
@@ -501,7 +503,7 @@ char * text::input_string(short x, short y, short maxlength, const char *begin,
                 }
                 else
                     editstring[current_length-1] = 0;
-                
+
                 has_typed = 1;
             }
             // Other keys which will deselect the whole line
@@ -509,14 +511,14 @@ char * text::input_string(short x, short y, short maxlength, const char *begin,
             {
                 has_typed = 1;
             }
-            
+
             current_length = (short) strlen(editstring);
         }
-        
+
         if(query_text_input_event())
         {
             temptext = query_text_input();
-            
+
             if (!has_typed) // first char, so replace text
             {
                 current_length = 0;
@@ -525,11 +527,11 @@ char * text::input_string(short x, short y, short maxlength, const char *begin,
                 myscreen->draw_button(x, y, x+maxlength*(sizex+1),
                                   y+sizey+1, 1);
             }
-            
+
             if ( temptext != NULL &&
                       (current_length + short(strlen(temptext)) < maxlength) )
             {
-                
+
                 int len = strlen(temptext);
                 int i;
                 for(i = 0; i < len; i++)
@@ -544,7 +546,7 @@ char * text::input_string(short x, short y, short maxlength, const char *begin,
                 }
             }
             clear_text_input_event();
-            
+
             has_typed = 1;
             current_length = (short) strlen(editstring);
         }
@@ -557,11 +559,11 @@ char * text::input_string(short x, short y, short maxlength, const char *begin,
         }
 		else
             write_xy(x, y, editstring, forecolor, 1);
-		myscreen->buffer_to_screen(0, 0, 320, 200);
+		myscreen->buffer_to_screen(0, 0, SCREEN_W, SCREEN_H);
 	}
 
     SDL_StopTextInput();
-    
+
 	clear_keyboard();
 	if(return_null)
         return NULL;
@@ -582,7 +584,7 @@ char * text::input_string_ex(short x, short y, short maxlength, const char* mess
 	short current_length, i;
 	short string_done = 0;
 	static char editstring[100], firststring[100];
-	
+
 	int tempchar;
 	char* temptext;
 	short has_typed = 0; // hasn't typed yet
@@ -602,30 +604,30 @@ char * text::input_string_ex(short x, short y, short maxlength, const char* mess
 		myscreen->draw_box(x, y, x+query_width(begin), y+sizey-2, forecolor, 1, 1);
 	write_xy(x, y - 10, message, DARK_GREEN, 1);
 	write_xy(x, y, editstring, WHITE, 1);
-	myscreen->buffer_to_screen(0, 0, 320, 200);
+	myscreen->buffer_to_screen(0, 0, SCREEN_W, SCREEN_H);
 
 	clear_keyboard();
 	clear_key_press_event();
 	clear_text_input_event();
-	
+
     SDL_StartTextInput();
-    
+
 	while ( !string_done )
 	{
-	
+
         tempchar = 0;
         temptext = NULL;
-        
+
 		// Wait for a key to be pressed ..
 		while (!query_key_press_event() && !query_text_input_event())
 			//dumbcount++;
 			get_input_events(WAIT);
-        
+
         if(query_key_press_event())
         {
             tempchar = query_key();
             clear_key_press_event();
-            
+
             if (tempchar == SDLK_RETURN)
                 string_done = 1;
             else if (tempchar == SDLK_ESCAPE)
@@ -646,7 +648,7 @@ char * text::input_string_ex(short x, short y, short maxlength, const char* mess
                 }
                 else
                     editstring[current_length-1] = 0;
-                
+
                 has_typed = 1;
             }
             // Other keys which will deselect the whole line
@@ -654,14 +656,14 @@ char * text::input_string_ex(short x, short y, short maxlength, const char* mess
             {
                 has_typed = 1;
             }
-            
+
             current_length = (short) strlen(editstring);
         }
-        
+
         if(query_text_input_event())
         {
             temptext = query_text_input();
-            
+
             if (!has_typed) // first char, so replace text
             {
                 current_length = 0;
@@ -670,11 +672,11 @@ char * text::input_string_ex(short x, short y, short maxlength, const char* mess
                 myscreen->draw_button(x, y, x+maxlength*(sizex+1),
                                   y+sizey+1, 1);
             }
-            
+
             if ( temptext != NULL &&
                       (current_length + short(strlen(temptext)) < maxlength) )
             {
-                
+
                 int len = strlen(temptext);
                 int i;
                 for(i = 0; i < len; i++)
@@ -689,11 +691,11 @@ char * text::input_string_ex(short x, short y, short maxlength, const char* mess
                 }
             }
             clear_text_input_event();
-            
+
             has_typed = 1;
             current_length = (short) strlen(editstring);
         }
-		
+
 		myscreen->draw_button(x, y, x+maxlength*(sizex+1), y+sizey+1, 1);
         write_xy(x, y - 10, message, DARK_GREEN, 1);
         if(!has_typed && strlen(editstring) > 0)
@@ -703,11 +705,11 @@ char * text::input_string_ex(short x, short y, short maxlength, const char* mess
         }
 		else
             write_xy(x, y, editstring, forecolor, 1);
-		myscreen->buffer_to_screen(0, 0, 320, 200);
+		myscreen->buffer_to_screen(0, 0, SCREEN_W, SCREEN_H);
 	}
 
     SDL_StopTextInput();
-    
+
 	clear_keyboard();
 	if(return_null)
         return NULL;

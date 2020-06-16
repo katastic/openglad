@@ -74,7 +74,7 @@ extern options *theprefs;
 int main(int argc, char *argv[])
 {
 	io_init(argc, argv);
-	
+
 	cfg.load_settings();
 	cfg.save_settings();
 	cfg.commandline(argc, argv);
@@ -85,14 +85,14 @@ int main(int argc, char *argv[])
     #ifdef OUYA
     OuyaControllerManager::init();
     #endif
-    
+
 	//buffers: setting the seed
 	srand(time(NULL));
 
 	init_input();
 	intro_main(argc, argv);
 	picker_main(argc, argv);
-	
+
 	io_exit();
 	return 0;
 }
@@ -130,7 +130,7 @@ void glad_main(Sint32 playermode)
 
     // This will update the 'control' so the screen centers on our guy
     myscreen->continuous_input();
-    
+
 	//*******************************
 	// Fade in
 	//*******************************
@@ -176,16 +176,16 @@ void glad_main(Sint32 playermode)
 		if (myscreen->end)
 			break;
 		myscreen->redraw();
-		
+
 		if(debug_draw_obmap)
             myscreen->level_data.myobmap->draw();  // debug drawing for object collision map
-        
+
         #ifdef USE_TOUCH_INPUT
         draw_touch_controls(myscreen);
         #endif
 		score_panel(myscreen);
 		myscreen->refresh();
-        
+
         SDL_Event event;
         while(SDL_PollEvent(&event))
         {
@@ -213,21 +213,21 @@ void glad_main(Sint32 playermode)
                     break;
                 }
             }
-            
+
             myscreen->input(event);
         }
 		if (myscreen->end || done)
 			break;
-        
+
         myscreen->continuous_input();
-        
+
 		if (myscreen->end)
 			break;
 
 		//score_panel(myscreen);
 
 		//if (input == SDLK_ESCAPE) break;
-		
+
 
 		// Now cycle palette ..
 		if (myscreen->cyclemode)
@@ -249,7 +249,7 @@ void glad_main(Sint32 playermode)
 	clear_keyboard();
 
     myscreen->level_data.delete_objects();
-    
+
 	return; // return to picker
 	//  return 1;
 }
@@ -370,7 +370,7 @@ void draw_value_bar(short left, short top,
 			whatcolor = MID_HP_COLOR;
 		else if (points < control->stats->max_hitpoints)
 			whatcolor = HIGH_HP_COLOR;
-		else 
+		else
 			whatcolor = ORANGE_START;
 
 		if (points > control->stats->max_hitpoints)
@@ -428,7 +428,7 @@ void draw_value_bar(short left, short top,
 			whatcolor = MID_MP_COLOR;
 		else if (points < control->stats->max_magicpoints)
 			whatcolor = HIGH_MP_COLOR;
-		else 
+		else
 			whatcolor = WATER_START;
 
 		if (points > control->stats->max_magicpoints)
@@ -496,7 +496,7 @@ void new_draw_value_bar(short left, short top,
 			whatcolor = MID_HP_COLOR;
 		else if (points < control->stats->max_hitpoints)
 			whatcolor = HIGH_HP_COLOR;
-		else 
+		else
 			whatcolor = ORANGE_START;
 
 		if (points > control->stats->max_hitpoints)
@@ -521,7 +521,7 @@ void new_draw_value_bar(short left, short top,
 			whatcolor = MID_MP_COLOR;
 		else if (points < control->stats->max_magicpoints)
 			whatcolor = HIGH_MP_COLOR;
-		else 
+		else
 			whatcolor = WATER_START;
 
 		if (points > control->stats->max_magicpoints)
@@ -550,7 +550,7 @@ short new_score_panel(screen *myscreen, short do_it)
 	//static
 	char tempname[20];
 	short tempfoes = 0;
-	short players;
+	//short player;
 	short tempallies = 0;
 	text& mytext = myscreen->text_normal;
 #if 0
@@ -582,17 +582,41 @@ short new_score_panel(screen *myscreen, short do_it)
 	                                       }
 	                                       ;
 
-	for (players = 0; players < myscreen->numviews; players++)
+	for (short player = 0; player < myscreen->numviews; player++)
 	{
-		control = myscreen->viewob[players]->control;
-		lm = myscreen->viewob[players]->xloc + OVERSCAN_PADDING;
-		tm = myscreen->viewob[players]->yloc + OVERSCAN_PADDING;
-		rm = myscreen->viewob[players]->endx - OVERSCAN_PADDING;
-		bm = myscreen->viewob[players]->endy - OVERSCAN_PADDING;
-		if (control && !control->dead && control->user == players)
+		control = myscreen->viewob[player]->control;
+		lm = myscreen->viewob[player]->xloc + OVERSCAN_PADDING; //left
+		tm = myscreen->viewob[player]->yloc + OVERSCAN_PADDING; //top
+		rm = myscreen->viewob[player]->endx - OVERSCAN_PADDING; //right
+		bm = myscreen->viewob[player]->endy - OVERSCAN_PADDING; //bottom
+/*
+4-player
+    [P=0] [0     0] [398 298] HERE WE GO? the Y isn't lined up...
+    [P=1] [0   400] [798 298]
+    [P=2] [301   0] [398 599]
+    [P=3] [301 401] [799 599]
+
+    [manually rounded for easier]
+    [P=0] [0     0] [400 300]   --p0 is top left
+    [P=1] [0   400] [800 300]   --p1 is lower left
+    [P=2] [300   0] [400 600]   --p3 is top-right
+    [P=3] [300 400] [800 600]   --p4 is lower-right +
+
+
+    [P=0] [0 0]     [298 398] [w398 h298]
+    [P=1] [0 400]   [298 798] [w398 h298]
+    [P=2] [301 0]   [599 398] [w398 h298]
+    [P=3] [301 401] [599 799] [w398 h298]
+
+    width/heights all work out (within a pixel or two)!
+
+
+*/
+//printf("[P=%d] [%d %d] [%d %d] [w%d h%d]\n", player, lm, tm, rm, bm, rm-lm, bm-tm);
+		if (control && !control->dead && control->user == player)
 		{
 			// Get the button-drawing info ..
-			draw_button = myscreen->viewob[players]->prefs[PREF_OVERLAY];
+			draw_button = myscreen->viewob[player]->prefs[PREF_OVERLAY];
 			if (draw_button)
 				text_color = DARK_BLUE;
 			else
@@ -616,7 +640,7 @@ short new_score_panel(screen *myscreen, short do_it)
 
 			//buffers: the name[] var doesn't seem to be used other then
 			//buffers: here so i just commented it.
-			//strcpy(name[players], tempname);
+			//strcpy(name[player], tempname);
 			//buffers: this strcpy actually copies the name to be displayed
 			strcpy(message, tempname);
 
@@ -626,7 +650,7 @@ short new_score_panel(screen *myscreen, short do_it)
 			mytext.write_xy(lm+3, tm+4, message, text_color, 1);
 
 			// HP/MP bars; dependent on user settings
-			switch (myscreen->viewob[players]->prefs[PREF_LIFE])
+			switch (myscreen->viewob[player]->prefs[PREF_LIFE])
 			{
 				case PREF_LIFE_TEXT: // display numeric values only
 					if (draw_button)
@@ -662,7 +686,7 @@ short new_score_panel(screen *myscreen, short do_it)
 					break; // end of 'both' case
 			} // end of HP/MP display case
 
-			if (myscreen->viewob[players]->prefs[PREF_SCORE] == PREF_SCORE_ON)
+			if (myscreen->viewob[player]->prefs[PREF_SCORE] == PREF_SCORE_ON)
 			{
 				// Score, bottom left corner
 				int special_offset = -24;
@@ -692,10 +716,10 @@ short new_score_panel(screen *myscreen, short do_it)
 					scorecountup[control->team_num] = myscore;
 				myscreen->save_data.m_score[control->team_num] = myscore;
 				//above should count up the score towards the current amount
-				
+
 				int special_y = bm + special_offset;
 				// Don't show score and XP (clutter) when in a small viewport
-				if(myscreen->numviews > 2 && !(myscreen->numviews == 3 && players == 0))
+				if(myscreen->numviews > 2 && !(myscreen->numviews == 3 && player == 0))
                 {
                     special_y = bm - 8;
                 }
@@ -711,20 +735,20 @@ short new_score_panel(screen *myscreen, short do_it)
                         sprintf(message, "LEVEL: %i", control->stats->level);
                     mytext.write_xy(lm+2, bm-16, message, text_color, (short) 1);
                 }
-                
+
 				// Currently-select special
 				if (control->shifter_down &&
 				        strcmp(myscreen->alternate_name[(int)control->query_family()][(int)control->current_special], "NONE") )
 					sprintf(message, "SPC: %s", myscreen->alternate_name[(int)control->query_family()][(int)control->current_special]);
 				else
 					sprintf(message, "SPC: %s", myscreen->special_name[(int)control->query_family()][(int)control->current_special]);
-					
-                
+
+
 				if (control->stats->magicpoints >= control->stats->special_cost[(int)control->current_special])
 					mytext.write_xy(lm+2, special_y, message, text_color, (short) 1);
 				else
 					mytext.write_xy(lm+2, special_y, message, (unsigned char) RED, (short) 1);
-                
+
                 #ifdef USE_TOUCH_INPUT
                 // Alternate special name (if not "NONE")
 				if (strcmp(myscreen->alternate_name[(int)control->query_family()][(int)control->current_special], "NONE") )
@@ -756,7 +780,7 @@ short new_score_panel(screen *myscreen, short do_it)
 			*/
 
 			// Number of allies, upper right
-			if (myscreen->viewob[players]->prefs[PREF_FOES] == PREF_FOES_ON)
+			if (myscreen->viewob[player]->prefs[PREF_FOES] == PREF_FOES_ON)
 			{
 				if (draw_button)
 					myscreen->draw_button(rm-57, tm+1, rm-2, tm+16, 1, 1);
@@ -781,7 +805,7 @@ short new_score_panel(screen *myscreen, short do_it)
 			//    myscreen->putdata(244, 140, radarpic[1], radarpic[2], &(radarpic[3]) );
 		}
 	} // end of one-player mode
-	
+
 	return 1;
 
 }

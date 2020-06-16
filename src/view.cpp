@@ -219,20 +219,16 @@ short viewscreen::redraw()
 		topy = myscreen->level_data.topy;
 	}
 
-
 	if (topx < 0)
 		xneg = 1;
 	if (topy < 0)
 		yneg = 1;
 
-	//note  >> 4 is equivalent to /16 but faster, since it doesn't divide
-	//likewise <<4 is equivalent to *16, but faster
-
-	for (j=(topy/GRID_SIZE)-yneg;j < ((topy+(yview))/GRID_SIZE) +1; j++)
-		for (i=(topx/GRID_SIZE)-xneg;i < ((topx+(xview))/GRID_SIZE) +1; i++)
+	for (j=(topy/GRID_SIZE)-yneg;j < ((topy+(yview))/GRID_SIZE)+1; j++)
+		for (i=(topx/GRID_SIZE)-xneg;i < ((topx+(xview))/GRID_SIZE)+1; i++)
 		{
             // KAT <----------------
-			// NOTE: back is a PIXIEN.
+			// NOTE: back is a PIXIE.
 			// background graphic [grid(x,y)] -> put in buffer
 			if (i<0 || j<0 || i>=maxx || j>=maxy)
 			{
@@ -280,19 +276,15 @@ short viewscreen::redraw(LevelData* data, bool draw_radar)
 		topy = data->topy;
 	}
 
-
 	if (topx < 0)
 		xneg = 1;
 	if (topy < 0)
 		yneg = 1;
 
-	//note  >> 4 is equivalent to /16 but faster, since it doesn't divide
-	//likewise <<4 is equivalent to *16, but faster
-
-	for (j=(topy/GRID_SIZE)-yneg;j < ((topy+(yview))/GRID_SIZE) +1; j++)
-		for (i=(topx/GRID_SIZE)-xneg;i < ((topx+(xview))/GRID_SIZE) +1; i++)
+	for (j=(topy/GRID_SIZE)-yneg;j < ((topy+(yview))/GRID_SIZE)+1; j++)
+		for (i=(topx/GRID_SIZE)-xneg;i < ((topx+(xview))/GRID_SIZE)+1; i++)
 		{
-			// NOTE: back is a PIXIEN.
+			// NOTE: back is a PIXIE.
 			// background graphic [grid(x,y)] -> put in buffer
 			if (i<0 || j<0 || i>=maxx || j>=maxy)
 			{
@@ -1155,17 +1147,24 @@ void viewscreen::resize(char whatmode)
 		case 1: //  one-player mode
 			switch (whatmode)
 			{
+                //KAT FIX THESE. I added the variables but i'm not sure the effect atm
 				case PREF_VIEW_PANELS:
-					resize(44, 12, 232, 176); // room for score panel ..
+					resize(44,
+                           12,
+                           SCREEN_W - 232,
+                           SCREEN_H - 176); // room for score panel ..
 					break;
 				case PREF_VIEW_1:
-					resize(64, 28, 192, 144);
+					resize(64,
+                           28,
+                           SCREEN_W - 192,
+                           SCREEN_H - 144);
 					break;
 				case PREF_VIEW_2:
-					resize(86, 44, 148, 112);
+					resize(86, 44, SCREEN_W - 148, SCREEN_H - 112);
 					break;
 				case PREF_VIEW_3:
-					resize(106, 60, 108, 80);
+					resize(106, 60, SCREEN_W - 108, SCREEN_H - 80);
 					break;
 				case PREF_VIEW_FULL:
 				default:

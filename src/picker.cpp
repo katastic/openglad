@@ -386,13 +386,13 @@ button loadteam_buttons[] =
 button yes_or_no_buttons[] =
     {
         button("YES", KEYSTATE_UNKNOWN,  70, 130, 50, 20, YES_OR_NO, YES, MenuNav::Right(1)),
-        button("NO", KEYSTATE_UNKNOWN,  320-50-70, 130, 50, 20, YES_OR_NO, NO, MenuNav::Left(0))
+        button("NO", KEYSTATE_UNKNOWN,  SCREEN_W-50-70, SCREEN_H/2+130, 50, 20, YES_OR_NO, NO, MenuNav::Left(0))
     };
 
 button no_or_yes_buttons[] =
     {
         button("NO", KEYSTATE_UNKNOWN,  70, 130, 50, 20, YES_OR_NO, NO, MenuNav::Right(1)),
-        button("YES", KEYSTATE_UNKNOWN,  320-50-70, 130, 50, 20, YES_OR_NO, YES, MenuNav::Left(0))
+        button("YES", KEYSTATE_UNKNOWN,  SCREEN_W-50-70, SCREEN_H/2+130, 50, 20, YES_OR_NO, YES, MenuNav::Left(0))
     };
 
 button popup_dialog_buttons[] =
@@ -506,8 +506,8 @@ void draw_version_number()
 	myscreen->redrawme = 1;
 	int w = strlen(OPENGLAD_VERSION_STRING)*6;
 	int h = 8;
-	int x = 320 - w - 80;
-	int y = 200 - 12;
+	int x = SCREEN_W - w - 80;
+	int y = SCREEN_H - 12;
 	myscreen->fastbox(x, y, w, h, PURE_BLACK);
 	mytext.write_xy(x, y, OPENGLAD_VERSION_STRING, (unsigned char) DARK_BLUE, 1);
 }
@@ -777,7 +777,7 @@ Sint32 mainmenu(Sint32 arg1)
         draw_buttons(buttons, num_buttons);
         redraw_mainmenu();
         draw_highlight(buttons[highlighted_button]);
-        myscreen->buffer_to_screen(0,0,320,200);
+        myscreen->buffer_to_screen(0,0,SCREEN_W,SCREEN_H);
         SDL_Delay(10);
 	}
 
@@ -966,7 +966,7 @@ Sint32 create_team_menu(Sint32 arg1)
         mytext.write_xy(buttons[8].x + buttons[8].sizex - 6*strlen(myscreen->save_data.current_campaign.c_str()), buttons[8].y - 8, WHITE, "%s", myscreen->save_data.current_campaign.c_str());
 
         draw_highlight(buttons[highlighted_button]);
-        myscreen->buffer_to_screen(0,0,320,200);
+        myscreen->buffer_to_screen(0,0,SCREEN_W,SCREEN_H);
         SDL_Delay(10);
 	}
 
@@ -1005,9 +1005,9 @@ Sint32 create_view_menu(Sint32 arg1)
 		myscreen->clearbuffer();
         draw_backdrop();
         draw_buttons(buttons, num_buttons);
-        view_team(5,5,314, 160);
+        view_team(5,5,SCREEN_W-6, SCREEN_H-40);//314, 160);
         draw_highlight(buttons[highlighted_button]);
-        myscreen->buffer_to_screen(0,0,320,200);
+        myscreen->buffer_to_screen(0,0,SCREEN_W,SCREEN_H);
         SDL_Delay(10);
 	}
 	myscreen->clearbuffer();
@@ -1439,7 +1439,7 @@ Sint32 create_hire_menu(Sint32 arg1)
 
 
         draw_highlight(buttons[highlighted_button]);
-        myscreen->buffer_to_screen(0,0,320,200);
+        myscreen->buffer_to_screen(0,0,SCREEN_W,SCREEN_H);
         SDL_Delay(10);
 
         if(arg1 == 1)
@@ -1753,7 +1753,7 @@ Sint32 create_train_menu(Sint32 arg1)
         allbuttons[18]->vdisplay();
 
         draw_highlight(buttons[highlighted_button]);
-        myscreen->buffer_to_screen(0,0,320,200);
+        myscreen->buffer_to_screen(0,0,SCREEN_W,SCREEN_H);
         SDL_Delay(10);
 	}
 	myscreen->clearbuffer();
@@ -1829,7 +1829,7 @@ Sint32 create_load_menu(Sint32 arg1)
                            allbuttons[10]->yend, 0, 0, 1);
 
         draw_highlight(buttons[highlighted_button]);
-        myscreen->buffer_to_screen(0,0,320,200);
+        myscreen->buffer_to_screen(0,0,SCREEN_W,SCREEN_H);
         SDL_Delay(10);
 	}
 
@@ -1854,7 +1854,7 @@ void timed_dialog(const char* message, float delay_seconds)
     myscreen->draw_button(leftside, 80, rightside, 110, 1);
     gladtext.write_xy(160 - width/2, 94, message, (unsigned char) DARK_BLUE, 1);
 
-    myscreen->buffer_to_screen(0, 0, 320, 200); // refresh screen
+    myscreen->buffer_to_screen(0, 0, SCREEN_W, SCREEN_H); // refresh screen
 
 	grab_mouse();
     clear_keyboard();
@@ -1953,7 +1953,7 @@ bool yes_or_no_prompt(const char* title, const char* message, bool default_value
         draw_buttons(buttons, num_buttons);
 
         draw_highlight_interior(buttons[highlighted_button]);
-        myscreen->buffer_to_screen(0,0,320,200);
+        myscreen->buffer_to_screen(0,0,SCREEN_W,SCREEN_H);
         SDL_Delay(10);
 	}
 
@@ -2050,7 +2050,7 @@ bool no_or_yes_prompt(const char* title, const char* message, bool default_value
         draw_buttons(buttons, num_buttons);
 
         draw_highlight_interior(buttons[highlighted_button]);
-        myscreen->buffer_to_screen(0,0,320,200);
+        myscreen->buffer_to_screen(0,0,SCREEN_H, SCREEN_H);
         SDL_Delay(10);
 	}
 
@@ -2144,7 +2144,7 @@ void popup_dialog(const char* title, const char* message)
         draw_buttons(buttons, num_buttons);
 
         draw_highlight_interior(buttons[highlighted_button]);
-        myscreen->buffer_to_screen(0,0,320,200);
+        myscreen->buffer_to_screen(0,0,SCREEN_H, SCREEN_H);
         SDL_Delay(10);
 	}
 }
@@ -2218,7 +2218,7 @@ Sint32 create_save_menu(Sint32 arg1)
                            allbuttons[10]->yend, 0, 0, 1);
 
         draw_highlight(buttons[highlighted_button]);
-        myscreen->buffer_to_screen(0,0,320,200);
+        myscreen->buffer_to_screen(0,0,SCREEN_H, SCREEN_H);
         SDL_Delay(10);
 	}
 	return REDRAW;
@@ -2664,9 +2664,6 @@ Sint32 cycle_guy(Sint32 whichway)
 	current_guy->name[11] = '\0';
 
 	show_guy(0, 0);
-
-	//myscreen->buffer_to_screen(52, 24, 108, 64);
-
 	grab_mouse();
 
 	return OK;
@@ -2788,7 +2785,7 @@ Sint32 name_guy(Sint32 arg)  // 0 == current_guy, 1 == ourteam[editguy]
 
 	myscreen->draw_button(174,  8, 306, 30, 1, 1); // text box
 	nametext.write_xy(176, 12, "NAME THIS CHARACTER:", DARK_BLUE, 1);
-	myscreen->buffer_to_screen(0, 0, 320, 200);
+	myscreen->buffer_to_screen(0, 0, SCREEN_H, SCREEN_H);
 
 	clear_keyboard();
 	char* new_text = nametext.input_string(176, 20, 11, someguy->name);
@@ -2797,7 +2794,7 @@ Sint32 name_guy(Sint32 arg)  // 0 == current_guy, 1 == ourteam[editguy]
 	memmove(someguy->name, new_text, strlen(new_text)+1);  // Could be overlapping strings
 	myscreen->draw_button(174,  8, 306, 30, 1, 1); // text box
 
-	myscreen->buffer_to_screen(0, 0, 320, 200);
+	myscreen->buffer_to_screen(0, 0, SCREEN_W,SCREEN_H);
 	grab_mouse();
 
 	return REDRAW;
@@ -3200,20 +3197,20 @@ Sint32 main_options()
 		// Draw
 		myscreen->clear_window();  // Clearing entire window because the overscan may have been adjusted.
 
-		myscreen->draw_button(0, 0, 320, 200, 0);
-		myscreen->draw_button_inverted(4, 4, 312, 192);
+		myscreen->draw_button(0, 0, SCREEN_W, SCREEN_H, 0);
+		myscreen->draw_button_inverted(4, 4, SCREEN_W - 8, SCREEN_H - 8);
 
 
         draw_buttons(buttons, num_buttons);
 
 		draw_toggle_effect_button(buttons[1], "sound", "sound");
-		myscreen->hor_line(60, buttons[2].y - BUTTON_PADDING/2, 200, PURE_WHITE);
+		myscreen->hor_line(60, buttons[2].y - BUTTON_PADDING/2, SCREEN_W, PURE_WHITE);
 
 		mytext.write_xy(20, buttons[2].y + 3, DARK_BLUE, "Rendering engine:");
 		mytext.write_xy(20, buttons[2].y + 3 + 10, DARK_BLUE, " (needs restart)");
 		draw_toggle_effect_button(buttons[3], "graphics", "fullscreen");
 		mytext.write_xy(20, buttons[4].y + 3, DARK_BLUE, "Overscan adjust:");
-		myscreen->hor_line(60, buttons[6].y - BUTTON_PADDING/2, 200, PURE_WHITE);
+		myscreen->hor_line(60, buttons[6].y - BUTTON_PADDING/2, SCREEN_W, PURE_WHITE);
 
 		mytext.write_xy(20, buttons[6].y + 3, DARK_BLUE, "Effects:");
 		draw_toggle_effect_button(buttons[6], "effects", "mini_hp_bar");
@@ -3226,7 +3223,7 @@ Sint32 main_options()
 		draw_toggle_effect_button(buttons[13], "effects", "gore");
 
         draw_highlight(buttons[highlighted_button]);
-        myscreen->buffer_to_screen(0,0,320,200);
+        myscreen->buffer_to_screen(0,0,SCREEN_W,SCREEN_H);
         SDL_Delay(10);
 	}
 
@@ -3254,7 +3251,7 @@ Sint32 set_player_mode(Sint32 howmany)
 		allbuttons[count]->vdisplay();
 		count++;
 	}
-	//buffers: myscreen->buffer_to_screen(0, 0, 320, 200);
+	//buffers: myscreen->buffer_to_screen(0, 0, SCREEN_W,SCREEN_H);
 
 	return OK;
 }
@@ -3744,7 +3741,7 @@ Sint32 create_detail_menu(guy *arg1)
 
        draw_buttons(buttons, num_buttons);
        draw_highlight_interior(buttons[highlighted_button]);
-       myscreen->buffer_to_screen(0, 0, 320, 200);
+       myscreen->buffer_to_screen(0, 0, SCREEN_W,SCREEN_H);
    }
    return REDRAW;  // back to edit menu
 }
@@ -3836,7 +3833,7 @@ Sint32 set_difficulty()
    #endif
 
    //allbuttons[6]->vdisplay();
-   //myscreen->buffer_to_screen(0, 0, 320, 200);
+   //myscreen->buffer_to_screen(0, 0, SCREEN_W,SCREEN_H);
 
    return OK;
 }
@@ -3866,7 +3863,7 @@ Sint32 change_teamnum(Sint32 arg)
    allbuttons[18]->label = message;
    //allbuttons[18]->do_outline = 1;
    //allbuttons[18]->vdisplay();
-   //myscreen->buffer_to_screen(0, 0, 320, 200);
+   //myscreen->buffer_to_screen(0, 0, SCREEN_W,SCREEN_H);
 
    return OK;
 }
@@ -3910,7 +3907,7 @@ Sint32 change_allied()
    allbuttons[7]->label = message;
 
    //buffers: allbuttons[7]->vdisplay();
-   //buffers: myscreen->buffer_to_screen(0, 0, 320, 200);
+   //buffers: myscreen->buffer_to_screen(0, 0, SCREEN_W,SCREEN_H);
 
    return OK;
 }

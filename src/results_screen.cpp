@@ -417,8 +417,8 @@ bool results_screen(int ending, int nextlevel, std::map<int, guy*>& before, std:
     float scroll = 0.0f;
     int frame = 0;
 
-    Sint16 screenW = 320*2;
-    Sint16 screenH = 200*2;
+    Sint16 screenW = SCREEN_W;
+    Sint16 screenH = SCREEN_H;
 
     SDL_Rect area;
     area.x = 50;
@@ -758,7 +758,7 @@ bool results_screen(int ending, int nextlevel, std::map<int, guy*>& before, std:
         }
 
         draw_highlight(buttons[highlighted_button]);
-        myscreen->buffer_to_screen(0, 0, 320*2, 200*2);
+        myscreen->buffer_to_screen(0, 0, SCREEN_W, SCREEN_H);
         SDL_Delay(10);
 
         frame++;

@@ -25,6 +25,7 @@
 #include "button.h"
 #include <vector>
 #include <string>
+#include "common.h"
 
 
 bool yes_or_no_prompt(const char* title, const char* message, bool default_value);
@@ -53,11 +54,11 @@ int load_campaign(const std::string& campaign, std::map<std::string, int>& curre
             Log("Failed to unmount campaign %s, which caused loading %s to fail.\n", old_campaign.c_str(), campaign.c_str());
             return -3;
         }
-        
+
         if(!mount_campaign_package(campaign))
             return -2;
     }
-    
+
     std::map<std::string, int>::const_iterator g = current_levels.find(campaign);
     if(g != current_levels.end())
         return g->second;
@@ -68,7 +69,7 @@ int load_campaign(const std::string& campaign, std::map<std::string, int>& curre
 class CampaignEntry
 {
 public:
-    
+
     std::string id;
     std::string title;
     float rating;
@@ -78,18 +79,18 @@ public:
     std::string description;
     int suggested_power;
     int first_level;
-    
+
     int num_levels;
-    
+
     PixieData icondata;
     pixie* icon;
-    
+
     // Player-specific
     int num_levels_completed;
 
     CampaignEntry(const std::string& id, int num_levels_completed);
     ~CampaignEntry();
-    
+
     void draw(const SDL_Rect& area, int team_power);
 };
 
@@ -100,10 +101,10 @@ CampaignEntry::CampaignEntry(const std::string& id, int num_levels_completed)
     if(mount_campaign_package(id))
     {
         SDL_RWops* rwops = open_read_file("campaign.yaml");
-        
+
         Yam yam;
         yam.set_input(rwops_read_handler, rwops);
-        
+
         while(yam.parse_next() == Yam::OK)
         {
             switch(yam.event.type)
@@ -128,22 +129,22 @@ CampaignEntry::CampaignEntry(const std::string& id, int num_levels_completed)
                     break;
             }
         }
-        
+
         yam.close_input();
         SDL_RWclose(rwops);
-        
+
         // TODO: Get rating from website
         rating = 0.0f;
-        
+
         std::string icon_file = "icon.pix";
         icondata = read_pixie_file(icon_file.c_str());
         if(icondata.valid())
             icon = new pixie(icondata);
-        
+
         // Count the number of levels
         std::list<int> levels = list_levels();
         num_levels = levels.size();
-        
+
         unmount_campaign_package(id);
     }
 }
@@ -160,14 +161,14 @@ void CampaignEntry::draw(const SDL_Rect& area, int team_power)
     int y = area.y;
     int w = area.w;
     int h = area.h;
-    
+
     text& loadtext = myscreen->text_normal;
 
     // Print title
     char buf[60];
     snprintf(buf, 30, "%s", title.c_str());
     loadtext.write_xy(x + w/2 - title.size()*3, y - 22, buf, WHITE, 1);
-    
+
     // Rating stars
     std::string rating_text = "";
     for(int i = 0; i < int(rating); i++)
@@ -176,20 +177,20 @@ void CampaignEntry::draw(const SDL_Rect& area, int team_power)
     }
     snprintf(buf, 30, "%s", rating_text.c_str());
     loadtext.write_xy(x + w/2 - rating_text.size()*3, y - 14, buf, WHITE, 1);
-    
+
     // Print version
     snprintf(buf, 30, "v%s", version.c_str());
     if(rating_text.size() > 0)
         loadtext.write_xy(x + w/2 + rating_text.size()*3 + 6, y - 14, buf, WHITE, 1);
     else
         loadtext.write_xy(x + w/2 - strlen(buf)*3, y - 14, buf, WHITE, 1);
-    
+
     // Draw icon button
     myscreen->draw_button(x - 2, y - 2, x + w + 2, y + h + 2, 1, 1);
     // Draw icon
 	icon->drawMix(x, y, myscreen->viewob[0]);
 	y += h + 4;
-	
+
 	// Print suggested power
 	if(team_power >= 0)
     {
@@ -199,7 +200,7 @@ void CampaignEntry::draw(const SDL_Rect& area, int team_power)
             snprintf(buf2, 30, ", Suggested Power: %d", suggested_power);
         else
             buf2[0] = '\0';
-        
+
         int len = strlen(buf);
         int len2 = strlen(buf2);
         loadtext.write_xy(x + w/2 - (len + len2)*3, y, buf, LIGHT_GREEN, 1);
@@ -211,12 +212,12 @@ void CampaignEntry::draw(const SDL_Rect& area, int team_power)
             snprintf(buf, 30, "Suggested Power: %d", suggested_power);
         else
             buf[0] = '\0';
-        
+
         int len = strlen(buf);
         loadtext.write_xy(x + w/2 - (len)*3, y, buf, LIGHT_GREEN, 1);
     }
     y += 8;
-    
+
     // Print completion progress
     if(num_levels_completed < 0)
         snprintf(buf, 30, "%d level%s", num_levels, (num_levels == 1? "" : "s"));
@@ -224,18 +225,18 @@ void CampaignEntry::draw(const SDL_Rect& area, int team_power)
         snprintf(buf, 30, "%d out of %d completed", num_levels_completed, num_levels);
     loadtext.write_xy(x + w/2 - strlen(buf)*3, y, buf, WHITE, 1);
     y += 8;
-    
+
     // Print authors
     if(authors.size() > 0)
     {
         snprintf(buf, 30, "By %s", authors.c_str());
         loadtext.write_xy(x + w/2 - strlen(buf)*3, y, buf, WHITE, 1);
     }
-    
+
     // Draw description box
     SDL_Rect descbox = {160 - 225/2, Sint16(area.y + area.h + 35), 225, 60};
     myscreen->draw_box(descbox.x, descbox.y, descbox.x + descbox.w, descbox.y + descbox.h, GREY, 1, 1);
-    
+
     // Print description
     std::string desc = description;
     int j = 10;
@@ -252,7 +253,7 @@ void CampaignEntry::draw(const SDL_Rect& area, int team_power)
         j += 10;
     }
     y = descbox.y + descbox.h + 2;
-    
+
     // Print contributors
     if(contributors.size() > 0)
     {
@@ -260,10 +261,10 @@ void CampaignEntry::draw(const SDL_Rect& area, int team_power)
         loadtext.write_xy(x + w/2 - strlen(buf)*3, y, buf, WHITE, 1);
         y += 10;
     }
-    
+
     snprintf(buf, 60, "%s", id.c_str());
     loadtext.write_xy(x + w/2 - strlen(buf)*3, y, buf, WHITE, 1);
-    
+
 }
 
 
@@ -274,16 +275,16 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
     std::string old_campaign_id = get_mounted_campaign();
     CampaignEntry* result = NULL;
     CampaignResult ret_value;
-    
+
     text& loadtext = myscreen->text_normal;
-    
+
     unmount_campaign_package(old_campaign_id);
 
     // Here are the browser variables
     std::vector<CampaignEntry*> entries;
-    
+
     unsigned int current_campaign_index = 0;
-    
+
     // Load campaigns
     std::list<std::string> campaign_ids = list_campaigns();
     int i = 0;
@@ -293,10 +294,10 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
         if(save_data != NULL)
             num_completed = save_data->get_num_levels_completed(*e);
         entries.push_back(new CampaignEntry(*e, num_completed));
-        
+
         if(*e == old_campaign_id)
             current_campaign_index = i;
-        
+
         i++;
     }
 
@@ -313,7 +314,7 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
             }
         }
     }
-    
+
     // Campaign icon positioning
     SDL_Rect area;
     area.x = 160 - 16;
@@ -322,8 +323,8 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
     area.h = 32;
 
     // Buttons
-    Sint16 screenW = 320;
-    Sint16 screenH = 200;
+    Sint16 screenW = SCREEN_W;
+    Sint16 screenH = SCREEN_H;
     SDL_Rect prev = {Sint16(area.x - 30 - 20), Sint16(area.y), 30, 10};
     SDL_Rect next = {Sint16(area.x + area.w + 20), Sint16(area.y), 30, 10};
 
@@ -332,12 +333,12 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
     SDL_Rect delete_button = {Sint16(screenW - 50), 10, 38, 10};
     SDL_Rect id_button = {Sint16(delete_button.x - 52 - 10), 10, 52, 10};
     SDL_Rect reset_button = delete_button;
-    
-    
+
+
     // Controller input
     int retvalue = 0;
 	int highlighted_button = 3;
-	
+
 	int prev_index = 0;
 	int next_index = 1;
 	int choose_index = 2;
@@ -345,7 +346,7 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
 	int delete_index = 4;
 	int id_index = 5;
 	int reset_index = 6;
-	
+
 	button buttons[] = {
         button("PREV", KEYSTATE_UNKNOWN, prev.x, prev.y, prev.w, prev.h, 0, -1 , MenuNav::UpDownRight(id_index, cancel_index, next_index)),
         button("NEXT", KEYSTATE_UNKNOWN, next.x, next.y, next.w, next.h, 0, -1 , MenuNav::UpDownLeft(id_index, choose_index, prev_index)),
@@ -355,13 +356,13 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
         button("ENTER ID", KEYSTATE_UNKNOWN, id_button.x, id_button.y, id_button.w, id_button.h, 0, -1 , MenuNav::DownRight(next_index, delete_index)),
         button("RESET", KEYSTATE_UNKNOWN, delete_button.x, delete_button.y, delete_button.w, delete_button.h, 0, -1 , MenuNav::DownLeft(choose_index, id_index)),
 	};
-	
+
 	buttons[prev_index].hidden = (current_campaign_index == 0);
 	buttons[next_index].hidden = (current_campaign_index + 1 >= entries.size());
 	buttons[choose_index].hidden = !(current_campaign_index < entries.size() && entries[current_campaign_index] != NULL);
 	buttons[delete_index].hidden = !enable_delete;
 	buttons[reset_index].hidden = enable_delete;
-	
+
 	buttons[next_index].nav.down = (buttons[choose_index].hidden? cancel_index : choose_index);
 	buttons[cancel_index].nav.up = (buttons[prev_index].hidden? (buttons[next_index].hidden? id_index : next_index) : prev_index);
 	buttons[id_index].nav.down = (buttons[next_index].hidden? (buttons[prev_index].hidden? cancel_index : prev_index) : next_index);
@@ -378,7 +379,7 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
 
         // Get keys and stuff
         get_input_events(POLL);
-		
+
         handle_menu_nav(buttons, highlighted_button, retvalue, false);
 
         // Quit if 'q' is pressed
@@ -389,7 +390,7 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
 		MouseState& mymouse = query_mouse();
         int mx = mymouse.x;
         int my = mymouse.y;
-        
+
         bool do_click = mymouse.left;
 		bool do_prev = !buttons[prev_index].hidden && ((do_click && prev.x <= mx && mx <= prev.x + prev.w
                && prev.y <= my && my <= prev.y + prev.h) || (retvalue == OG_OK && highlighted_button == prev_index));
@@ -405,7 +406,7 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
                && reset_button.y <= my && my <= reset_button.y + reset_button.h) || (retvalue == OG_OK && highlighted_button == reset_index));
         bool do_id = (do_click && id_button.x <= mx && mx <= id_button.x + id_button.w
                && id_button.y <= my && my <= id_button.y + id_button.h) || (retvalue == OG_OK && highlighted_button == id_index);
-        
+
 		if (mymouse.left)
 		{
 		    while(mymouse.left)
@@ -453,19 +454,19 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
               && no_or_yes_prompt("Delete campaign", "Are you really sure?", false))
            {
                delete_campaign(entries[current_campaign_index]->id);
-               
+
                restore_default_campaigns();
                remount_campaign_package();  // Just in case we deleted the current campaign
-               
+
                // Reload the picker
                for(std::vector<CampaignEntry*>::iterator e = entries.begin(); e != entries.end(); e++)
                {
                    delete *e;
                }
                entries.clear();
-               
+
                campaign_ids = list_campaigns();
-               
+
                 for(std::list<std::string>::iterator e = campaign_ids.begin(); e != campaign_ids.end(); e++)
                 {
                     int num_completed = -1;
@@ -473,7 +474,7 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
                         num_completed = save_data->get_num_levels_completed(*e);
                     entries.push_back(new CampaignEntry(*e, num_completed));
                 }
-                
+
                 current_campaign_index = 0;
            }
        }
@@ -498,7 +499,7 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
                myscreen->save_data.reset_campaign(entries[current_campaign_index]->id);
            }
        }
-       
+
         retvalue = 0;
 
         // Update hidden buttons
@@ -514,7 +515,7 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
             buttons[cancel_index].nav.up = (buttons[prev_index].hidden? (buttons[next_index].hidden? id_index : next_index) : prev_index);
             buttons[id_index].nav.down = (buttons[next_index].hidden? (buttons[prev_index].hidden? cancel_index : prev_index) : next_index);
             buttons[id_index].nav.right = (buttons[delete_index].hidden? reset_index : delete_index);
-            
+
             if(buttons[highlighted_button].hidden)
             {
                 if(highlighted_button == prev_index && !buttons[next_index].hidden)
@@ -534,13 +535,13 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
             myscreen->draw_button(prev.x, prev.y, prev.x + prev.w, prev.y + prev.h, 1, 1);
             loadtext.write_xy(prev.x + 2, prev.y + 2, "Prev", DARK_BLUE, 1);
         }
-        
+
         if(current_campaign_index + 1 < entries.size())
         {
             myscreen->draw_button(next.x, next.y, next.x + next.w, next.y + next.h, 1, 1);
             loadtext.write_xy(next.x + 2, next.y + 2, "Next", DARK_BLUE, 1);
         }
-        
+
         if(current_campaign_index < entries.size() && entries[current_campaign_index] != NULL)
         {
             myscreen->draw_button(choose.x, choose.y, choose.x + choose.w, choose.y + choose.h, 1, 1);
@@ -558,36 +559,36 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
             myscreen->draw_button(reset_button.x, reset_button.y, reset_button.x + reset_button.w, reset_button.y + reset_button.h, 1, 1);
             loadtext.write_xy(reset_button.x + 2, reset_button.y + 2, "Reset", RED, 1);
         }
-        
+
         myscreen->draw_button(id_button.x, id_button.y, id_button.x + id_button.w, id_button.y + id_button.h, 1, 1);
         loadtext.write_xy(id_button.x + 2, id_button.y + 2, "Enter ID", DARK_BLUE, 1);
-        
+
         // Draw entry
         if(current_campaign_index < entries.size() && entries[current_campaign_index] != NULL)
             entries[current_campaign_index]->draw(area, army_power);
 
         draw_highlight(buttons[highlighted_button]);
-        myscreen->buffer_to_screen(0, 0, 320, 200);
+        myscreen->buffer_to_screen(0, 0, SCREEN_W,SCREEN_H);
         SDL_Delay(10);
     }
 
     while (keystates[KEYSTATE_q])
         get_input_events(WAIT);
-    
+
     // Restore old campaign
     mount_campaign_package(old_campaign_id);
-    
+
     if(result != NULL)
     {
         ret_value.id = result->id;
         ret_value.first_level = result->first_level;
     }
-    
+
     for(std::vector<CampaignEntry*>::iterator e = entries.begin(); e != entries.end(); e++)
     {
         delete *e;
     }
     entries.clear();
-    
+
     return ret_value;
 }

@@ -217,9 +217,9 @@ short radar::draw(LevelData* data)
 				else
 				{
 					tempz = (tempx+(tempy*SCREEN_W)); //this may need fixing
-					if (tempz > 64000 || tempz < 0)
+					if (tempz > SCREEN_W*SCREEN_H || tempz < 0)
 					{
-						Log("bad radar, bad\n");//KAT i think this means the radar is reading passed the end of the map data
+						Log("bad radar, bad\n");
 						return 1;
 					}
 					tempcolor = (ob->query_team_color());
@@ -323,9 +323,9 @@ short radar::draw(LevelData* data)
 				else
 				{
 					tempz = (tempx+(tempy*SCREEN_W)); //this may need fixing
-					if (tempz > 64000 || tempz < 0)
+					if (tempz > SCREEN_W*SCREEN_H || tempz < 0)
 					{
-						Log("bad radar, bad\n"); //KAT i think this means the radar is reading passed the end of the map data
+						Log("bad radar, bad\n");
 						return 1;
 					}
 					myscreen->pointb(tempx,tempy,(char)do_show, alpha);

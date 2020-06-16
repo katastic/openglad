@@ -1571,8 +1571,9 @@
 
 1538914477 /home/novous/Desktop/openglad-master/src/common.h
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/button.cpp
+1592274330 source:/home/novous/Desktop/git/openglad/src/button.cpp
 	"button.h"
+	"common.h"
 
 1474064848 /home/novous/Desktop/git/openglad/src/button.h
 	"base.h"
@@ -1711,7 +1712,7 @@
 	"pixien.h"
 	"obmap.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/campaign_picker.cpp
+1592276493 source:/home/novous/Desktop/git/openglad/src/campaign_picker.cpp
 	"campaign_picker.h"
 	"io.h"
 	"yam.h"
@@ -1722,6 +1723,7 @@
 	"button.h"
 	<vector>
 	<string>
+	"common.h"
 
 1474064848 /home/novous/Desktop/git/openglad/src/campaign_picker.h
 	"screen.h"
@@ -2466,7 +2468,7 @@
 	"base.h"
 	"level_data.h"
 
-1538932476 /home/novous/Desktop/git/openglad/src/common.h
+1592267534 /home/novous/Desktop/git/openglad/src/common.h
 
 1474064848 /home/novous/Desktop/git/openglad/src/living.h
 	"base.h"
@@ -2484,7 +2486,7 @@
 	"base.h"
 	"level_data.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/glad.cpp
+1592277096 source:/home/novous/Desktop/git/openglad/src/glad.cpp
 	"version.h"
 	"graph.h"
 	"colors.h"
@@ -2539,11 +2541,12 @@
 	<math.h>
 	<cstring>
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/help.cpp
+1592276736 source:/home/novous/Desktop/git/openglad/src/help.cpp
 	<string.h>
 	<stdio.h>
 	"graph.h"
 	"util.h"
+	"common.h"
 
 1538819220 source:/home/novous/Desktop/git/openglad/src/input.cpp
 	"common.h"
@@ -2603,7 +2606,7 @@
 	"view.h"
 	<algorithm>
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/level_editor.cpp
+1592276700 source:/home/novous/Desktop/git/openglad/src/level_editor.cpp
 	"screen.h"
 	"view.h"
 	"radar.h"
@@ -2618,6 +2621,7 @@
 	"campaign_picker.h"
 	"sai2x.h"
 	<cstring>
+	"common.h"
 	"OuyaController.h"
 	<string>
 	<vector>
@@ -2629,7 +2633,7 @@
 1474064848 /home/novous/Desktop/git/openglad/src/sai2x.h
 	"SDL.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/level_picker.cpp
+1592276451 source:/home/novous/Desktop/git/openglad/src/level_picker.cpp
 	"level_picker.h"
 	"level_data.h"
 	"radar.h"
@@ -2638,6 +2642,7 @@
 	"text.h"
 	"guy.h"
 	"button.h"
+	"common.h"
 	<list>
 	<string>
 	<cstdio>
@@ -2661,7 +2666,7 @@
 	<stdio.h>
 	"SDL_types.h"
 
-1538817892 source:/home/novous/Desktop/git/openglad/src/picker.cpp
+1592276538 source:/home/novous/Desktop/git/openglad/src/picker.cpp
 	"common.h"
 	"version.h"
 	"graph.h"
@@ -2687,7 +2692,7 @@
 	"graph.h"
 	"common.h"
 
-1538661498 source:/home/novous/Desktop/git/openglad/src/results_screen.cpp
+1592276586 source:/home/novous/Desktop/git/openglad/src/results_screen.cpp
 	"results_screen.h"
 	"base.h"
 	"button.h"
@@ -2713,7 +2718,7 @@
 	"campaign_picker.h"
 	<cstring>
 
-1538819120 source:/home/novous/Desktop/git/openglad/src/screen.cpp
+1592273114 source:/home/novous/Desktop/git/openglad/src/screen.cpp
 	"graph.h"
 	"smooth.h"
 	"util.h"
@@ -2724,7 +2729,7 @@
 	<cstring>
 	"common.h"
 
-1538818242 /home/novous/Desktop/git/openglad/src/view_sizes.h
+1592272749 /home/novous/Desktop/git/openglad/src/view_sizes.h
 	"common.h"
 
 1474064848 source:/home/novous/Desktop/git/openglad/src/smooth.cpp
@@ -2746,9 +2751,10 @@
 	"stats.h"
 	<math.h>
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/text.cpp
+1592277042 source:/home/novous/Desktop/git/openglad/src/text.cpp
 	"graph.h"
 	<cstring>
+	"common.h"
 
 1474064848 source:/home/novous/Desktop/git/openglad/src/treasure.cpp
 	<math.h>
@@ -2786,7 +2792,7 @@
 1474064848 /home/novous/Desktop/git/openglad/util/savepng.h
 	"SDL_video.h"
 
-1538818024 source:/home/novous/Desktop/git/openglad/src/view.cpp
+1592273200 source:/home/novous/Desktop/git/openglad/src/view.cpp
 	"input.h"
 	"graph.h"
 	"colors.h"
@@ -2796,7 +2802,7 @@
 	<algorithm>
 	<cstring>
 
-1592265006 source:/home/novous/Desktop/git/openglad/src/walker.cpp
+1592276643 source:/home/novous/Desktop/git/openglad/src/walker.cpp
 	"graph.h"
 	"smooth.h"
 	"micropather.h"
@@ -2809,4 +2815,8 @@
 	"SDL.h"
 	"png.h"
 	<stdlib.h>
+
+1592267371 source:/home/novous/Desktop/git/openglad/src/radar.cpp
+	"graph.h"
+	"colors.h"
 

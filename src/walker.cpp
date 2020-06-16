@@ -2941,7 +2941,7 @@ short walker::special()
 						myscreen->viewob[0]->set_display_text(message, 2);
 						myscreen->viewob[0]->redraw();
 						myscreen->viewob[0]->refresh();
-						//myscreen->buffer_to_screen(0, 0, 320, 200);
+
 						std::list<walker*> newlist = myscreen->find_friends_in_range(
 						              myscreen->level_data.oblist, 30000, &howmany, this);
 

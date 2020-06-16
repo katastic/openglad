@@ -19,6 +19,8 @@
 #include "graph.h"
 #include "util.h"
 
+#include "common.h"
+
 #define HELPTEXT_LEFT 40
 #define HELPTEXT_TOP  40
 #define DISPLAY_LINES 15
@@ -71,7 +73,7 @@ short read_scenario(screen *myscreen)
 	Sint32 templines;
 	Sint32 text_delay = 1; // bigger = slower
 	Sint32 key_presses = 0;
-	
+
 	text& mytext = myscreen->text_normal;
 	Sint32 start_time, now_time;
 	Sint32 bottomrow = (screenlines - ((DISPLAY_LINES-1)*8) );
@@ -86,7 +88,7 @@ short read_scenario(screen *myscreen)
 	while (!query_input_continue())
 	{
 		get_input_events(POLL);
-		
+
 		short scroll_amount = get_and_reset_scroll_amount();
 		if (scroll_amount < 0)    // scrolling down
 		{
@@ -172,7 +174,7 @@ short read_scenario(screen *myscreen)
 			                 HELPTEXT_TOP-7, "SCENARIO INFORMATION", (unsigned char) RED, 1);
 			mytext.write_xy(HELPTEXT_LEFT+30,
 			                 HELPTEXT_TOP+98, CONTINUE_ACTION_STRING " TO CONTINUE", (unsigned char) RED, 1);
-			myscreen->buffer_to_screen(0, 0, 320, 200);
+			myscreen->buffer_to_screen(0, 0, SCREEN_W, SCREEN_H);
 			changed = 0;
 		} // end of changed drawing loop
 
@@ -180,7 +182,7 @@ short read_scenario(screen *myscreen)
 
 	while (keystates[KEYSTATE_ESCAPE])  // wait for key release
 		get_input_events(WAIT);
-    
+
 	return (short) numlines;
 }
 
@@ -189,7 +191,7 @@ short read_campaign_intro(screen * myscreen)
     CampaignData data(myscreen->save_data.current_campaign);
     if(!data.load())
         return 1;
-    
+
 	Sint32 screenlines;
 	Sint32  numlines, j;
 	Sint32 linesdown;
@@ -197,7 +199,7 @@ short read_campaign_intro(screen * myscreen)
 	Sint32 templines;
 	Sint32 text_delay = 1; // bigger = slower
 	Sint32 key_presses = 0;
-	
+
 	text& mytext = myscreen->text_normal;
 	Sint32 start_time, now_time;
 	Sint32 bottomrow;
@@ -218,7 +220,7 @@ short read_campaign_intro(screen * myscreen)
 	while (!query_input_continue())
 	{
 		get_input_events(POLL);
-		
+
 		short scroll_amount = get_and_reset_scroll_amount();
 		if (scroll_amount < 0)    // scrolling down
 		{
@@ -290,11 +292,11 @@ short read_campaign_intro(screen * myscreen)
             {
 				if(data.getDescriptionLine(j+templines).size() == 0)
                     continue;
-                
+
                 mytext.write_xy(HELPTEXT_LEFT+2, (short) (TEXT_DOWN(j)-linesdown%8), data.getDescriptionLine(j+templines).c_str(), (unsigned char) DARK_BLUE, 1 ); // to buffer!
             }
 
-			
+
 			// Draw a bounding box (top and bottom edges) ..
 			myscreen->draw_text_bar(HELPTEXT_LEFT, HELPTEXT_TOP-8,
 			                        HELPTEXT_LEFT+240-4, HELPTEXT_TOP-2);
@@ -307,7 +309,7 @@ short read_campaign_intro(screen * myscreen)
 			//myscreen->buffer_to_screen(0, 0, 320, 200);
 			myscreen->buffer_to_screen(HELPTEXT_LEFT-4, HELPTEXT_TOP-4-8,244,119);
 
-			
+
 			changed = 0;
 		} // end of changed drawing loop
 

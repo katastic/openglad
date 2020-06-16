@@ -30,6 +30,8 @@
 #include "sai2x.h"
 #include <cstring>
 
+#include "common.h"
+
 #ifdef OUYA
 #include "OuyaController.h"
 #endif
@@ -108,13 +110,13 @@ Sint32 start_time_s; // for timer ops
 class Rect
 {
 public:
-    
+
     int x, y;
     unsigned int w, h;
-    
+
     Rect();
     Rect(int x, int y, unsigned int w, unsigned int h);
-    
+
     bool contains(int x, int y) const;
 };
 
@@ -134,13 +136,13 @@ bool Rect::contains(int x, int y) const
 class Rectf
 {
 public:
-    
+
     float x, y;
     float w, h;
-    
+
     Rectf();
     Rectf(float x, float y, float w, float h);
-    
+
     bool contains(float X, float Y) const;
 };
 
@@ -230,7 +232,7 @@ class ObjectType
 public:
     unsigned char order;
     unsigned char family;
-    
+
     ObjectType()
         : order(0), family(0)
     {}
@@ -254,7 +256,7 @@ bool does_campaign_exist(const std::string& campaign_id)
         if(campaign_id == *e)
             return true;
     }
-    
+
     return false;
 }
 
@@ -262,7 +264,7 @@ bool create_new_campaign(const std::string& campaign_id)
 {
     // Delete the temp directory
     cleanup_unpacked_campaign();
-    
+
     // Create the necessities in the temp directory
     create_dir(get_user_path() + "temp/");
     create_dir(get_user_path() + "temp/pix");
@@ -273,11 +275,11 @@ bool create_new_campaign(const std::string& campaign_id)
     create_new_scen_file(get_user_path() + "temp/scen/scen1.fss", "scen0001");
     // Create the map file (grid)
     create_new_map_pix(get_user_path() + "temp/pix/scen0001.pix", 40, 60);
-    
+
     bool result = repack_campaign(campaign_id);
     if(!result)
         return result;
-    
+
     cleanup_unpacked_campaign();
     return true;
 }
@@ -305,12 +307,12 @@ public:
     int shadow_color;
     int text_color;
     bool centered;
-    
+
     SimpleButton(const std::string& label, int x, int y, unsigned int w, unsigned int h, bool remove_border = false, bool draw_top_separator = false);
-    
+
     void draw(screen* myscreen);
     bool contains(int x, int y) const;
-    
+
     void set_colors_normal();
     void set_colors_enabled();
     void set_colors_disabled();
@@ -322,7 +324,7 @@ SimpleButton::SimpleButton(const std::string& label, int x, int y, unsigned int 
     : label(label), remove_border(remove_border), draw_top_separator(draw_top_separator), centered(false)
 {
     set_colors_normal();
-    
+
     area.x = x;
     area.y = y;
     area.w = w;
@@ -334,9 +336,9 @@ void SimpleButton::draw(screen* myscreen)
     myscreen->draw_button_colored(area.x, area.y, area.x + area.w - 1, area.y + area.h - 1, !remove_border, base_color, high_color, shadow_color);
     if(remove_border && draw_top_separator)
         myscreen->hor_line(area.x, area.y, area.w, shadow_color);
-    
+
     text& mytext = myscreen->text_normal;
-    
+
     if(centered)
         mytext.write_xy(area.x + area.w/2 - 3*label.size(), area.y + area.h/2 - 2, label.c_str(), text_color, 1);
     else
@@ -386,25 +388,25 @@ void SimpleButton::set_colors_active()
 bool prompt_for_string_block(const std::string& message, std::list<std::string>& result)
 {
     myscreen->darken_screen();
-    
+
     int max_chars = 40;
     int max_lines = 8;
-    
+
     int w = max_chars*6;
     int h = max_lines*10;
     int x = 160 - w/2;
     int y = 100 - h/2;
-    
+
     text& mytext = myscreen->text_normal;
-    
+
     // Background
     myscreen->draw_button(x - 5, y - 20, x + w + 10, y + h + 10, 1);
-    
+
     unsigned char forecolor = DARK_BLUE;
-    
+
     SDL_Rect done_button = {320 - 52, 0, 50, 14};
     SDL_Rect cancel_button = {320 - 104, 0, 50, 14};
-    
+
     #if defined(USE_TOUCH_INPUT) || defined(USE_CONTROLLER_INPUT)
     SDL_Rect newline_button = {320 - 75, 16, 50, 14};
     SDL_Rect up_button = {14, 0, 14, 14};
@@ -412,34 +414,34 @@ bool prompt_for_string_block(const std::string& message, std::list<std::string>&
     SDL_Rect left_button = {0, 14, 14, 14};
     SDL_Rect right_button = {28, 14, 14, 14};
     #endif
-    
+
     std::list<std::string> original_text = result;
 
 	clear_keyboard();
 	clear_key_press_event();
 	clear_text_input_event();
 	MouseState& mymouse = query_mouse_no_poll();
-	
+
     SDL_StartTextInput();
-    
+
     if(result.size() == 0)
         result.push_back("");
-    
+
     std::list<std::string>::iterator s = result.begin();
     size_t cursor_pos = 0;
     size_t current_line = 0;
-    
+
     bool cancel = false;
     bool done = false;
 	while (!done)
 	{
         get_input_events(POLL);
-        
+
         if(query_key_press_event())
         {
             char c = query_key();
             clear_key_press_event();
-            
+
             if (c == SDLK_RETURN)
             {
                 #if defined(USE_TOUCH_INPUT) || defined(USE_CONTROLLER_INPUT)
@@ -484,7 +486,7 @@ bool prompt_for_string_block(const std::string& message, std::list<std::string>&
         else if(mymouse.left)
         {
             mymouse.left = false;
-            
+
             if(mymouse.in(done_button))
             {
                 done = true;
@@ -523,7 +525,7 @@ bool prompt_for_string_block(const std::string& message, std::list<std::string>&
                 }
                 else  // At the bottom already
                     cursor_pos = s->size();
-                
+
                 if(s->size() < cursor_pos)
                     cursor_pos = s->size();
             }
@@ -556,12 +558,12 @@ bool prompt_for_string_block(const std::string& message, std::list<std::string>&
             }
             #endif
         }
-        
+
         if(keystates[KEYSTATE_ESCAPE])
         {
             while(keystates[KEYSTATE_ESCAPE])
                 get_input_events(WAIT);
-            
+
             done = true;
             break;
         }
@@ -569,7 +571,7 @@ bool prompt_for_string_block(const std::string& message, std::list<std::string>&
         {
             if(cursor_pos < s->size())
                 s->erase(cursor_pos, 1);
-            
+
             while(keystates[KEYSTATE_DELETE])
                 get_input_events(WAIT);
         }
@@ -582,7 +584,7 @@ bool prompt_for_string_block(const std::string& message, std::list<std::string>&
                 if(s->size() < cursor_pos)
                     cursor_pos = s->size();
             }
-            
+
             while(keystates[KEYSTATE_UP])
                 get_input_events(WAIT);
         }
@@ -595,10 +597,10 @@ bool prompt_for_string_block(const std::string& message, std::list<std::string>&
             }
             else  // At the bottom already
                 cursor_pos = s->size();
-            
+
             if(s->size() < cursor_pos)
                 cursor_pos = s->size();
-            
+
             while(keystates[KEYSTATE_DOWN])
                 get_input_events(WAIT);
         }
@@ -612,7 +614,7 @@ bool prompt_for_string_block(const std::string& message, std::list<std::string>&
                 s--;
                 cursor_pos = s->size();
             }
-            
+
             while(keystates[KEYSTATE_LEFT])
                 get_input_events(WAIT);
         }
@@ -631,32 +633,32 @@ bool prompt_for_string_block(const std::string& message, std::list<std::string>&
                 else  // No next line
                     cursor_pos = s->size();
             }
-            
+
             while(keystates[KEYSTATE_RIGHT])
                 get_input_events(WAIT);
         }
-        
+
         if(query_text_input_event())
         {
             char* temptext = query_text_input();
-            
+
             if(temptext != NULL)
             {
                 s->insert(cursor_pos, temptext);
                 cursor_pos += strlen(temptext);
             }
         }
-		
+
         clear_text_input_event();
         myscreen->draw_button(x - 5, y - 20, x + w + 10, y + h + 10, 1);
         mytext.write_xy(x, y - 13, message.c_str(), BLACK, 1);
         myscreen->hor_line(x, y - 5, w, BLACK);
-        
+
         myscreen->draw_button(done_button.x, done_button.y, done_button.x + done_button.w, done_button.y + done_button.h, 1);
         mytext.write_xy(done_button.x + done_button.w/2 - 12, done_button.y + done_button.h/2 - 3, "DONE", DARK_BLUE, 1);
         myscreen->draw_button(cancel_button.x, cancel_button.y, cancel_button.x + cancel_button.w, cancel_button.y + cancel_button.h, 1);
         mytext.write_xy(cancel_button.x + cancel_button.w/2 - 18, cancel_button.y + cancel_button.h/2 - 3, "CANCEL", DARK_BLUE, 1);
-        
+
         #if defined(USE_TOUCH_INPUT) || defined(USE_CONTROLLER_INPUT)
         myscreen->draw_button(newline_button.x, newline_button.y, newline_button.x + newline_button.w, newline_button.y + newline_button.h, 1);
         mytext.write_xy(newline_button.x + newline_button.w/2 - 18, newline_button.y + newline_button.h/2 - 3, "NEWLINE", DARK_BLUE, 1);
@@ -669,7 +671,7 @@ bool prompt_for_string_block(const std::string& message, std::list<std::string>&
         myscreen->draw_button(right_button.x, right_button.y, right_button.x + right_button.w, right_button.y + right_button.h, 1);
         mytext.write_xy(right_button.x + right_button.w/2 - 6, right_button.y + right_button.h/2 - 3, "RT", DARK_BLUE, 1);
         #endif
-        
+
         int offset = 0;
         if(current_line > 3)
             offset = (current_line - 3)*10;
@@ -682,36 +684,36 @@ bool prompt_for_string_block(const std::string& message, std::list<std::string>&
             j++;
         }
         myscreen->ver_line(x + cursor_pos*6, y + current_line*10 - 2 - offset, 10, RED);
-		myscreen->buffer_to_screen(0, 0, 320, 200);
-        
+		myscreen->buffer_to_screen(0, 0, SCREEN_W, SCREEN_H);
+
         SDL_Delay(10);
 	}
 
     SDL_StopTextInput();
-    
+
 	clear_keyboard();
-    
+
     return !cancel;
 }
 
 bool prompt_for_string(const std::string& message, std::string& result)
 {
     myscreen->darken_screen();
-    
+
     int max_chars = 29;
-    
+
     int x = 58;
     int y = 60;
     int w = max_chars*6;
     int h = 10;
-    
+
     myscreen->draw_button(x - 5, y - 20, x + w + 10, y + h + 10, 1);
-    
+
     char* str = myscreen->text_normal.input_string_ex(x, y, max_chars, message.c_str(), result.c_str());
-    
+
     if(str == NULL)
         return false;
-    
+
     result = str;
     return true;
 }
@@ -723,11 +725,11 @@ bool prompt_for_string(const std::string& message, std::string& result)
 class EditorTerrainBrush
 {
 public:
-    
+
     Sint32 terrain;
     bool use_smoothing;
     bool picking;
-    
+
     EditorTerrainBrush()
         : terrain(PIX_GRASS1), use_smoothing(true), picking(false)
     {}
@@ -736,18 +738,18 @@ public:
 class EditorObjectBrush
 {
 public:
-    
+
     bool snap_to_grid;
     Sint32 order;
     Sint32 family;
     char team;
     unsigned short level;
     bool picking;
-    
+
     EditorObjectBrush()
         : snap_to_grid(true), order(ORDER_LIVING), family(0), team(1), level(1), picking(false)
     {}
-    
+
     void set(walker* target)
     {
         if(target == NULL)
@@ -778,8 +780,8 @@ public:
     unsigned char family;
     unsigned short level;
     walker* target;
-    
-    
+
+
     SelectionInfo()
         : valid(false), x(0), y(0), w(GRID_SIZE), h(GRID_SIZE), order(ORDER_LIVING), family(FAMILY_SOLDIER), level(1), target(NULL)
     {}
@@ -788,7 +790,7 @@ public:
     {
         set(target);
     }
-    
+
     void clear()
     {
         valid = false;
@@ -819,12 +821,12 @@ public:
             this->target = target;
         }
     }
-    
+
     walker* get_object(LevelData* level)
     {
         if(!valid)
             return NULL;
-        
+
         return target;
     }
 };
@@ -835,7 +837,7 @@ class LevelEditorData
 public:
     CampaignData* campaign;
     LevelData* level;
-    
+
 	ModeEnum mode;
     EditorTerrainBrush terrain_brush;
     EditorObjectBrush object_brush;
@@ -843,100 +845,100 @@ public:
     bool rect_selecting;
     Rectf selection_rect;
     bool dragging;
-    
+
 	radar myradar;
-	
+
 	Uint16 menu_button_height;
-	
+
 	set<SimpleButton*> menu_buttons;
 	// The active menu buttons
 	list<pair<SimpleButton*, set<SimpleButton*> > > current_menu;
 	// The mode-specific buttons
 	set<SimpleButton*> mode_buttons;
 	set<SimpleButton*> pan_buttons;
-	
+
 	// Menu buttons
-	
+
 	// File menu
 	SimpleButton fileButton, fileCampaignButton, fileLevelButton, fileQuitButton;
-	
+
 	// File > Campaign submenu
 	SimpleButton fileCampaignImportButton, fileCampaignShareButton, fileCampaignNewButton, fileCampaignLoadButton, fileCampaignSaveButton, fileCampaignSaveAsButton;
-	
+
 	// File > Level submenu
 	SimpleButton fileLevelNewButton, fileLevelLoadButton, fileLevelSaveButton, fileLevelSaveAsButton;
-	
+
 	// Campaign menu
 	SimpleButton campaignButton, campaignInfoButton, campaignProfileButton, campaignDetailsButton, campaignValidateButton;
-	
+
 	// Campaign > Profile submenu
 	SimpleButton campaignProfileTitleButton, campaignProfileDescriptionButton, campaignProfileIconButton, campaignProfileAuthorsButton, campaignProfileContributorsButton;
-	
+
 	// Campaign > Details submenu
 	SimpleButton campaignDetailsVersionButton, campaignDetailsSuggestedPowerButton, campaignDetailsFirstLevelButton;
-	
+
 	// Level menu
 	SimpleButton levelButton, levelInfoButton, levelProfileButton, levelDetailsButton, levelGoalsButton, levelResmoothButton, levelDeleteTerrainButton, levelDeleteObjectsButton;
-	
+
 	// Level > Profile submenu
 	SimpleButton levelProfileTitleButton, levelProfileDescriptionButton;
-	
+
 	// Level > Details submenu
 	SimpleButton levelDetailsMapSizeButton, levelDetailsParValueButton, levelDetailsTimeLimitButton;
-	
+
 	// Level > Goals submenu
 	SimpleButton levelGoalsEnemiesButton, levelGoalsGeneratorsButton, levelGoalsNPCsButton;
-	
+
 	// Edit menu
 	SimpleButton modeButton, modeTerrainButton, modeObjectButton, modeSelectButton;
-	
+
 	// On-screen buttons
 	SimpleButton pickerButton;
 	SimpleButton gridSnapButton;
 	SimpleButton terrainSmoothButton;
-	
+
 	SimpleButton setNameButton;
 	SimpleButton prevTeamButton, nextTeamButton;
 	SimpleButton prevLevelButton, nextLevelButton;
 	SimpleButton prevClassButton, nextClassButton;
 	SimpleButton facingButton;
-	
+
 	SimpleButton deleteButton;
-	
+
 	SimpleButton panUpButton, panDownButton, panLeftButton, panRightButton;
 	SimpleButton panUpRightButton, panUpLeftButton, panDownRightButton, panDownLeftButton;
-    
-    
+
+
     LevelEditorData();
     ~LevelEditorData();
-    
+
     bool loadCampaign(const std::string& id);
     bool reloadCampaign();
-    
+
     bool loadLevel(int id);
     bool reloadLevel();
-    
+
     bool saveCampaignAs(const std::string& id);
     bool saveCampaign();
-    
+
     bool saveLevelAs(int id);
     bool saveLevel();
-    
+
     void draw(screen* myscreen);
     Sint32 display_panel(screen* myscreen);
-    
+
     bool mouse_on_menus(int mx, int my);
     void update_menu_buttons();
     void reset_mode_buttons();
     void activate_mode_button(SimpleButton* button);
-    
+
     void clear_terrain();
     void resmooth_terrain();
     void mouse_down(int mx, int my);
     void mouse_motion(int mx, int my, int dx, int dy);
     void mouse_up(int mx, int my, int old_mx, int old_my, bool& done);
     void pick_by_mouse(int mx, int my);
-    
+
     bool is_in_grid(int x, int y);
     unsigned char get_terrain(int x, int y);
     void set_terrain(int x, int y, unsigned char terrain);
@@ -956,12 +958,12 @@ bool are_objects_outside_area(LevelData* level, int x, int y, int w, int h);
 LevelEditorData::LevelEditorData()
     : campaign(new CampaignData("org.openglad.gladiator")), level(new LevelData(1)), mode(TERRAIN), rect_selecting(false), dragging(false), myradar(myscreen->viewob[0], myscreen, 0)
     , menu_button_height(DEFAULT_EDITOR_MENU_BUTTON_HEIGHT)
-    
+
 	, fileButton("File", OVERSCAN_PADDING, 0, 30, menu_button_height)
 	, fileCampaignButton("Campaign >", OVERSCAN_PADDING, fileButton.area.y + fileButton.area.h, 65, menu_button_height, true)
 	, fileLevelButton("Level >", OVERSCAN_PADDING, fileCampaignButton.area.y + fileCampaignButton.area.h, 65, menu_button_height, true, true)
 	, fileQuitButton("Exit", OVERSCAN_PADDING, fileLevelButton.area.y + fileLevelButton.area.h, 65, menu_button_height, true, true)
-	
+
 	, fileCampaignImportButton("Import...", fileCampaignButton.area.x + fileCampaignButton.area.w, fileCampaignButton.area.y, 65, menu_button_height, true)
 	, fileCampaignShareButton("Share...", fileCampaignImportButton.area.x, fileCampaignImportButton.area.y + fileCampaignImportButton.area.h, 65, menu_button_height, true, true)
 	//, fileCampaignNewButton("New", fileCampaignImportButton.area.x, fileCampaignShareButton.area.y + fileCampaignShareButton.area.h, 65, menu_button_height, true, true)
@@ -969,29 +971,29 @@ LevelEditorData::LevelEditorData()
 	, fileCampaignLoadButton("Load...", fileCampaignImportButton.area.x, fileCampaignNewButton.area.y + fileCampaignNewButton.area.h, 65, menu_button_height, true, true)
 	, fileCampaignSaveButton("Save", fileCampaignImportButton.area.x, fileCampaignLoadButton.area.y + fileCampaignLoadButton.area.h, 65, menu_button_height, true, true)
 	, fileCampaignSaveAsButton("Save As...", fileCampaignImportButton.area.x, fileCampaignSaveButton.area.y + fileCampaignSaveButton.area.h, 65, menu_button_height, true, true)
-	
+
 	, fileLevelNewButton("New", fileLevelButton.area.x + fileLevelButton.area.w, fileLevelButton.area.y, 65, menu_button_height, true)
 	, fileLevelLoadButton("Load...", fileLevelNewButton.area.x, fileLevelNewButton.area.y + fileLevelNewButton.area.h, 65, menu_button_height, true, true)
 	, fileLevelSaveButton("Save", fileLevelNewButton.area.x, fileLevelLoadButton.area.y + fileLevelLoadButton.area.h, 65, menu_button_height, true, true)
 	, fileLevelSaveAsButton("Save As...", fileLevelNewButton.area.x, fileLevelSaveButton.area.y + fileLevelSaveButton.area.h, 65, menu_button_height, true, true)
-	
+
 	, campaignButton("Campaign", fileButton.area.x + fileButton.area.w, 0, 55, menu_button_height)
 	, campaignInfoButton("Info...", campaignButton.area.x, campaignButton.area.y + campaignButton.area.h, 59, menu_button_height, true)
 	, campaignProfileButton("Profile >", campaignButton.area.x, campaignInfoButton.area.y + campaignInfoButton.area.h, 59, menu_button_height, true, true)
 	, campaignDetailsButton("Details >", campaignButton.area.x, campaignProfileButton.area.y + campaignProfileButton.area.h, 59, menu_button_height, true, true)
 	, campaignValidateButton("Validate", campaignButton.area.x, campaignDetailsButton.area.y + campaignDetailsButton.area.h, 59, menu_button_height, true, true)
-	
+
 	, campaignProfileTitleButton("Title...", campaignProfileButton.area.x + campaignProfileButton.area.w, campaignProfileButton.area.y, 95, menu_button_height, true)
 	, campaignProfileDescriptionButton("Description...", campaignProfileTitleButton.area.x, campaignProfileTitleButton.area.y + campaignProfileTitleButton.area.h, 95, menu_button_height, true, true)
 	, campaignProfileIconButton("Icon...", campaignProfileTitleButton.area.x, campaignProfileDescriptionButton.area.y + campaignProfileDescriptionButton.area.h, 95, menu_button_height, true, true)
 	//, campaignProfileAuthorsButton("Authors...", campaignProfileTitleButton.area.x, campaignProfileIconButton.area.y + campaignProfileIconButton.area.h, 95, menu_button_height, true, true)
 	, campaignProfileAuthorsButton("Authors...", campaignProfileTitleButton.area.x, campaignProfileDescriptionButton.area.y + campaignProfileDescriptionButton.area.h, 95, menu_button_height, true, true)
 	, campaignProfileContributorsButton("Contributors...", campaignProfileTitleButton.area.x, campaignProfileAuthorsButton.area.y + campaignProfileAuthorsButton.area.h, 95, menu_button_height, true, true)
-	
+
 	, campaignDetailsVersionButton("Version...", campaignDetailsButton.area.x + campaignDetailsButton.area.w, campaignDetailsButton.area.y, 113, menu_button_height, true)
 	, campaignDetailsSuggestedPowerButton("Suggested power...", campaignDetailsVersionButton.area.x, campaignDetailsVersionButton.area.y + campaignDetailsVersionButton.area.h, 113, menu_button_height, true, true)
 	, campaignDetailsFirstLevelButton("First level...", campaignDetailsVersionButton.area.x, campaignDetailsSuggestedPowerButton.area.y + campaignDetailsSuggestedPowerButton.area.h, 113, menu_button_height, true, true)
-	
+
 	, levelButton("Level", campaignButton.area.x + campaignButton.area.w, 0, 40, menu_button_height)
 	, levelInfoButton("Info...", levelButton.area.x, levelButton.area.y + levelButton.area.h, 110, menu_button_height, true)
 	, levelProfileButton("Profile >", levelButton.area.x, levelInfoButton.area.y + levelInfoButton.area.h, 110, menu_button_height, true, true)
@@ -1000,23 +1002,23 @@ LevelEditorData::LevelEditorData()
 	, levelResmoothButton("Resmooth terrain", levelButton.area.x, levelGoalsButton.area.y + levelGoalsButton.area.h, 110, menu_button_height, true, true)
 	, levelDeleteTerrainButton("Clear all terrain", levelButton.area.x, levelResmoothButton.area.y + levelResmoothButton.area.h, 110, menu_button_height, true, true)
 	, levelDeleteObjectsButton("Clear all objects", levelButton.area.x, levelDeleteTerrainButton.area.y + levelDeleteTerrainButton.area.h, 110, menu_button_height, true, true)
-	
+
 	, levelProfileTitleButton("Title...", levelProfileButton.area.x + levelProfileButton.area.w, levelProfileButton.area.y, 95, menu_button_height, true)
 	, levelProfileDescriptionButton("Description...", levelProfileTitleButton.area.x, levelProfileTitleButton.area.y + levelProfileTitleButton.area.h, 95, menu_button_height, true, true)
-	
+
 	, levelDetailsMapSizeButton("Map size...", levelDetailsButton.area.x + levelDetailsButton.area.w, levelDetailsButton.area.y, 95, menu_button_height, true)
 	, levelDetailsParValueButton("Par value...", levelDetailsMapSizeButton.area.x, levelDetailsMapSizeButton.area.y + levelDetailsMapSizeButton.area.h, 95, menu_button_height, true, true)
 	, levelDetailsTimeLimitButton("Time limit...", levelDetailsParValueButton.area.x, levelDetailsParValueButton.area.y + levelDetailsParValueButton.area.h, 95, menu_button_height, true, true)
-	
+
 	, levelGoalsEnemiesButton("Defeat enemies: On", levelGoalsButton.area.x + levelGoalsButton.area.w - 2*OVERSCAN_PADDING, levelGoalsButton.area.y, 125, menu_button_height, true)
 	, levelGoalsGeneratorsButton("Beat generators: Off", levelGoalsEnemiesButton.area.x, levelGoalsEnemiesButton.area.y + levelGoalsEnemiesButton.area.h, 125, menu_button_height, true, true)
 	, levelGoalsNPCsButton("Protect NPCs: Off", levelGoalsEnemiesButton.area.x, levelGoalsGeneratorsButton.area.y + levelGoalsGeneratorsButton.area.h, 125, menu_button_height, true, true)
-	
+
 	, modeButton("Edit (Terrain)", levelButton.area.x + levelButton.area.w, 0, 90, menu_button_height)
 	, modeTerrainButton("Terrain Mode", modeButton.area.x, modeButton.area.y + modeButton.area.h, 75, menu_button_height, true)
 	, modeObjectButton("Object Mode", modeButton.area.x, modeTerrainButton.area.y + modeTerrainButton.area.h, 75, menu_button_height, true, true)
 	, modeSelectButton("Select Mode", modeButton.area.x, modeObjectButton.area.y + modeObjectButton.area.h, 75, menu_button_height, true, true)
-    
+
     , pickerButton("Pick", OVERSCAN_PADDING, 20, 27, 15)
     , gridSnapButton("Snap", pickerButton.area.x+pickerButton.area.w+2, 20, 27, 15)
     , terrainSmoothButton("Smooth", pickerButton.area.x+pickerButton.area.w+2, 20, 39, 15)  // Same place as gridSnapButton
@@ -1043,10 +1045,10 @@ LevelEditorData::LevelEditorData()
 	menu_buttons.insert(&campaignButton);
 	menu_buttons.insert(&levelButton);
 	menu_buttons.insert(&modeButton);
-	
+
     gridSnapButton.set_colors_enabled();
     terrainSmoothButton.set_colors_enabled();
-    
+
     #if defined(USE_TOUCH_INPUT) || defined(USE_CONTROLLER_INPUT)
     pan_buttons.insert(&panUpButton);
     pan_buttons.insert(&panDownButton);
@@ -1057,7 +1059,7 @@ LevelEditorData::LevelEditorData()
     pan_buttons.insert(&panDownRightButton);
     pan_buttons.insert(&panDownLeftButton);
     #endif
-    
+
     myradar.force_lower_position = true;
 }
 
@@ -1098,28 +1100,28 @@ bool LevelEditorData::reloadLevel()
 bool LevelEditorData::saveCampaignAs(const std::string& id)
 {
     bool result = campaign->save_as(id);
-    
+
     // Remount for consistency in PhysFS
     if(!remount_campaign_package())
     {
         Log("Failed to remount campaign after saving it.\n");
         return false;
     }
-    
+
     return result;
 }
 
 bool LevelEditorData::saveCampaign()
 {
     bool result = campaign->save();
-    
+
     // Remount for consistency in PhysFS
     if(!remount_campaign_package())
     {
         Log("Failed to remount campaign after saving it.\n");
         return false;
     }
-    
+
     return result;
 }
 
@@ -1130,17 +1132,17 @@ bool LevelEditorData::saveLevelAs(int id)
     char buf[20];
     snprintf(buf, 20, "scen%d", id);
     level->grid_file = buf;
-    
+
     std::string old_campaign = get_mounted_campaign();
     unpack_campaign(old_campaign);
     bool result = level->save();
     if(result)
         result = repack_campaign(old_campaign);
     cleanup_unpacked_campaign();
-    
+
     // Remount for consistency in PhysFS
     remount_campaign_package();
-    
+
     return result;
 }
 
@@ -1165,17 +1167,17 @@ bool LevelEditorData::mouse_on_menus(int mx, int my)
         if((*e)->contains(mx, my))
             return true;
     }
-    
+
     for(set<SimpleButton*>::const_iterator e = mode_buttons.begin(); e != mode_buttons.end(); e++)
     {
         if((*e)->contains(mx, my))
             return true;
     }
-    
+
     // Count anything in the area of the pan buttons
     if(pan_buttons.size() > 0 && Rect(panLeftButton.area.x, panUpButton.area.y, panRightButton.area.x + panRightButton.area.w - panLeftButton.area.x, panDownButton.area.y + panDownButton.area.h - panUpButton.area.y).contains(mx, my))
         return true;
-    
+
     for(std::list<std::pair<SimpleButton*, std::set<SimpleButton*> > >::const_iterator e = current_menu.begin(); e != current_menu.end(); e++)
     {
         const set<SimpleButton*>& s = e->second;
@@ -1185,7 +1187,7 @@ bool LevelEditorData::mouse_on_menus(int mx, int my)
                 return true;
         }
     }
-    
+
     return false;
 }
 
@@ -1193,10 +1195,10 @@ void LevelEditorData::update_menu_buttons()
 {
     levelGoalsEnemiesButton.label = "Defeat enemies: ";
     levelGoalsEnemiesButton.label += (level->type & LevelData::TYPE_CAN_EXIT_WHENEVER? "Off" : "On");
-    
+
     levelGoalsGeneratorsButton.label = "Beat generators: ";
     levelGoalsGeneratorsButton.label += (level->type & LevelData::TYPE_MUST_DESTROY_GENERATORS? "On" : "Off");
-    
+
     levelGoalsNPCsButton.label = "Protect NPCs: ";
     levelGoalsNPCsButton.label += (level->type & LevelData::TYPE_MUST_PROTECT_NAMED_NPCS? "On" : "Off");
 }
@@ -1396,7 +1398,7 @@ void LevelEditorData::activate_mode_button(SimpleButton* button)
                 obj->set_frame(obj->ani[obj->curdir][0]);
                 obj->setxy(e->x, e->y);
                 e->set(obj);
-                
+
                 levelchanged = 1;
             }
         }
@@ -1418,7 +1420,7 @@ void LevelEditorData::activate_mode_button(SimpleButton* button)
                 obj->set_frame(obj->ani[obj->curdir][0]);
                 obj->setxy(e->x, e->y);
                 e->set(obj);
-                
+
                 levelchanged = 1;
             }
         }
@@ -1460,11 +1462,11 @@ bool activate_sub_menu_button(int mx, int my, std::list<std::pair<SimpleButton*,
     // Make sure it is showing
     if(!button.contains(mx, my) || (!is_in_top_menu && !button_showing(current_menu, &button)))
         return false;
-    
+
     MouseState& mymouse = query_mouse_no_poll();
     while (mymouse.left)
         get_input_events(WAIT);
-    
+
     if(current_menu.size() > 0)
     {
         // Close menu if already open
@@ -1473,7 +1475,7 @@ bool activate_sub_menu_button(int mx, int my, std::list<std::pair<SimpleButton*,
             current_menu.pop_back();
             return false;
         }
-        
+
         // Remove all menus up to the parent
         while(current_menu.size() > 0)
         {
@@ -1484,7 +1486,7 @@ bool activate_sub_menu_button(int mx, int my, std::list<std::pair<SimpleButton*,
                 return true; // Open this menu
         }
     }
-    
+
     // No parent!
     return is_in_top_menu;
 }
@@ -1494,11 +1496,11 @@ bool activate_menu_choice(int mx, int my, LevelEditorData& data, SimpleButton& b
     // Make sure it is showing
     if(!button.contains(mx, my) || (!is_in_top_menu && !button_showing(data.current_menu, &button)))
         return false;
-    
+
     MouseState& mymouse = query_mouse_no_poll();
     while (mymouse.left)
         get_input_events(WAIT);
-    
+
     // Close menu
     data.current_menu.clear();
     data.draw(myscreen);
@@ -1511,11 +1513,11 @@ bool activate_menu_toggle_choice(int mx, int my, LevelEditorData& data, SimpleBu
     // Make sure it is showing
     if(!button.contains(mx, my) || (!is_in_top_menu && !button_showing(data.current_menu, &button)))
         return false;
-    
+
     MouseState& mymouse = query_mouse_no_poll();
     while (mymouse.left)
         get_input_events(WAIT);
-    
+
     // Close menu
     data.draw(myscreen);
     myscreen->refresh();
@@ -1528,9 +1530,9 @@ void get_connected_level_exits(int current_level, const std::list<int>& levels, 
     // Stopping condition
     if(connected.find(current_level) != connected.end())
         return;
-    
+
     connected.insert(current_level);
-    
+
     // Load level
     LevelData d(current_level);
     if(!d.load())
@@ -1540,7 +1542,7 @@ void get_connected_level_exits(int current_level, const std::list<int>& levels, 
         problems.push_back(buf);
         return;
     }
-    
+
     // Get the exits
     std::set<int> exits;
     for(auto e = d.fxlist.begin(); e != d.fxlist.end(); e++)
@@ -1549,7 +1551,7 @@ void get_connected_level_exits(int current_level, const std::list<int>& levels, 
         if(w->query_order() == ORDER_TREASURE && w->query_family() == FAMILY_EXIT && w->stats != NULL)
             exits.insert(w->stats->level);
     }
-    
+
     // With no exits, we'll progress directly to the next sequential level
     if(exits.size() == 0)
     {
@@ -1563,7 +1565,7 @@ void get_connected_level_exits(int current_level, const std::list<int>& levels, 
                 break;
             }
         }
-        
+
         if(has_next)
         {
             exits.insert(current_level+1);
@@ -1576,7 +1578,7 @@ void get_connected_level_exits(int current_level, const std::list<int>& levels, 
             return;
         }
     }
-    
+
     // Recursively call on exits
     for(std::set<int>::iterator e = exits.begin(); e != exits.end(); e++)
     {
@@ -1589,17 +1591,17 @@ bool LevelEditorData::saveLevel()
     char buf[20];
     snprintf(buf, 20, "scen%d", level->id);
     level->grid_file = buf;
-    
+
     std::string old_campaign = get_mounted_campaign();
     unpack_campaign(old_campaign);
     bool result = level->save();
     if(result)
         result = repack_campaign(get_mounted_campaign());
     cleanup_unpacked_campaign();
-    
+
     // Remount for consistency in PhysFS
     remount_campaign_package();
-    
+
     return result;
 }
 
@@ -1607,7 +1609,7 @@ void LevelEditorData::draw(screen* myscreen)
 {
     myscreen->clearbuffer();
     level->draw(myscreen);
-    
+
     if(rect_selecting)
     {
         Rectf r(selection_rect.x - level->topx + myscreen->viewob[0]->xloc, selection_rect.y - level->topy + myscreen->viewob[0]->yloc, selection_rect.w, selection_rect.h);
@@ -1624,9 +1626,9 @@ void LevelEditorData::draw(screen* myscreen)
         myscreen->draw_box(r.x, r.y, r.x + r.w, r.y + r.h, ORANGE_START, 0, 1);
         redraw = 1;
     }
-    
+
     display_panel(myscreen);
-    
+
 }
 
 Sint32 LevelEditorData::display_panel(screen* myscreen)
@@ -1641,7 +1643,7 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
             int mx, my;
             mx = e->x - level->topx;
             my = e->y - level->topy;
-            
+
             {
                 // Draw target tile
                 int worldx = mx + level->topx;
@@ -1652,14 +1654,14 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
             }
         }
     }
-    
+
     // Draw minimap
     myradar.draw(level);
-    
+
     // Draw mode-specific buttons
     for(set<SimpleButton*>::iterator e = mode_buttons.begin(); e != mode_buttons.end(); e++)
         (*e)->draw(myscreen);
-        
+
     if(pan_buttons.size() > 0)
     {
         Rect r(panLeftButton.area.x, panUpButton.area.y, panRightButton.area.x + panRightButton.area.w - panLeftButton.area.x, panDownButton.area.y + panDownButton.area.h - panUpButton.area.y);
@@ -1667,7 +1669,7 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
         for(set<SimpleButton*>::iterator e = pan_buttons.begin(); e != pan_buttons.end(); e++)
             (*e)->draw(myscreen);
     }
-    
+
 	char message[50];
 	Sint32 i, j; // for loops
 	//   static Sint32 family=-1, hitpoints=-1, score=-1, act=-1;
@@ -1675,13 +1677,13 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
 	Sint32 lm = 245;
 	Sint32 curline = 0;
 	Sint32 whichback;
-	
+
 	const char* blood_string;
 	if(cfg.is_on("effects", "gore"))
         blood_string = "BLOOD";
     else
         blood_string = "REMAINS";
-    
+
 	const char* treasures[NUM_FAMILIES] =
 	    { blood_string, "DRUMSTICK", "GOLD", "SILVER",
 	      "MAGIC", "INVIS", "INVULN", "FLIGHT",
@@ -1709,14 +1711,14 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
     {
         // Draw the info box background
         myscreen->draw_button(lm-4, L_D(-1)+4, 315, L_D(7)-2, 1, 1);
-        
+
         if(selection.size() > 1)
             scentext.write_xy(lm, L_D(curline++), "Selected:", RED, 1);
         int i = 0;
         for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
         {
             bool showing_name = false;
-            
+
             // Too many names to show?
             if(i+1 == 6 && selection.size() > 6)
             {
@@ -1733,7 +1735,7 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
             }
             else if(selection.size() == 0)
                 curline++;  // Skip name line for guy with no name
-            
+
             if(selection.size() == 1 || !showing_name)
             {
                 // Show family name
@@ -1769,13 +1771,13 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
                     strcat(message, "UNKNOWN");
                 scentext.write_xy(lm, L_D(curline++), message, DARK_BLUE, 1);
             }
-            
+
             i++;
-            
+
             // Only show extended info for a single selection
             if(selection.size() > 1)
                 continue;
-            
+
             // More info for a single selection
             // Level display
             message[0] = '\0';
@@ -1806,18 +1808,18 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
                 default:
                     break;
             }
-            
+
             if(strlen(message) > 0)
                 scentext.write_xy(lm, L_D(curline++), message, DARK_BLUE, 1);
         }
-        
+
     }
-    
+
     if(mode == OBJECT)
     {
         // Draw the bounding box
         myscreen->draw_button(lm-4, L_D(-1)+4, 315, L_D(7)-2, 1, 1);
-        
+
         // Get team number ..
         message[0] = '\0';
         if (object_brush.order == ORDER_LIVING)
@@ -1880,24 +1882,24 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
             default:
                 break;
         }
-        
+
         if(strlen(message) > 0)
             scentext.write_xy(lm, L_D(curline++), message, DARK_BLUE, 1);
-        
+
         numobs = myscreen->level_data.numobs;
         //myscreen->fastbox(lm,L_D(curline),55,7,27, 1);
         sprintf(message, "OB: %d", numobs);
         scentext.write_xy(lm,L_D(curline++),message, DARK_BLUE, 1);
     }
-    
+
     if(mode == TERRAIN)
     {
         // Show the current brush
         myscreen->putbuffer(lm+25, PIX_TOP-16-1, GRID_SIZE, GRID_SIZE,
-                            0, 0, 320, 200, myscreen->level_data.pixdata[terrain_brush.terrain].data);
+                            0, 0, SCREEN_W, SCREEN_H, myscreen->level_data.pixdata[terrain_brush.terrain].data);
         // Border
         myscreen->draw_box(lm+25, PIX_TOP-16-1, lm+25+GRID_SIZE, PIX_TOP-16-1+GRID_SIZE, RED, 0, 1);
-        
+
         // Show the background grid
         for (i=0; i < PIX_OVER; i++)
         {
@@ -1906,15 +1908,15 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
                 whichback = (i+(j+rowsdown)*4) % (sizeof(backgrounds)/4);
                 myscreen->putbuffer(S_RIGHT+i*GRID_SIZE, PIX_TOP+j*GRID_SIZE,
                                     GRID_SIZE, GRID_SIZE,
-                                    0, 0, 320, 200,
+                                    0, 0, SCREEN_W, SCREEN_H,
                                     myscreen->level_data.pixdata[ backgrounds[whichback] ].data);
             }
         }
         myscreen->draw_box(S_RIGHT, PIX_TOP,
                            S_RIGHT+4*GRID_SIZE, PIX_TOP+4*GRID_SIZE, 0, 0, 1);
-        
+
         #ifndef USE_TOUCH_INPUT
-        
+
         // Draw cursor
         int mx, my;
         MouseState& mymouse = query_mouse_no_poll();
@@ -1950,12 +1952,12 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
         newob->draw_tile(myscreen->viewob[0]);
         // Border
         myscreen->draw_box(lm+25, PIX_TOP-16-1, lm+25+GRID_SIZE, PIX_TOP-16-1+GRID_SIZE, RED, 0, 1);
-        
+
         myscreen->draw_box(S_RIGHT, PIX_TOP,
                            S_RIGHT+4*GRID_SIZE, PIX_TOP+4*GRID_SIZE, PURE_BLACK, 1, 1);
         myscreen->draw_box(S_RIGHT, PIX_TOP,
                            S_RIGHT+4*GRID_SIZE, PIX_TOP+4*GRID_SIZE, WHITE, 0, 1);
-        
+
         for (i=0; i < PIX_OVER; i++)
         {
             for (j=0; j < 4; j++)
@@ -1971,9 +1973,9 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
                 }
             }
         }
-        
+
         #ifndef USE_TOUCH_INPUT
-        
+
         // Draw cursor
         int mx, my;
         MouseState& mymouse = query_mouse_no_poll();
@@ -1990,13 +1992,13 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
             newob->set_data(level->myloader->graphics[PIX(object_brush.order, object_brush.family)]);
             level->myloader->set_walker(newob, object_brush.order, object_brush.family);
             newob->team_num = object_brush.team;
-            
+
             // Get size rounded up to nearest GRID_SIZE
             int w = newob->sizex;
             int h = newob->sizey;
             w += GRID_SIZE - (w%GRID_SIZE == 0? GRID_SIZE : w%GRID_SIZE);
             h += GRID_SIZE - (h%GRID_SIZE == 0? GRID_SIZE : h%GRID_SIZE);
-            
+
             // Draw target tile
             if(object_brush.snap_to_grid)
             {
@@ -2008,22 +2010,22 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
                 int screeny = gridy - level->topy;
                 myscreen->draw_box(screenx, screeny, screenx + w, screeny + h, YELLOW, 0, 1);
             }
-            
+
             // Draw current brush near cursor
             newob->draw(myscreen->viewob[0]);
         }
         #endif
-        
+
         level->remove_ob(newob);
         delete newob;
     }
-    
-    
-    
+
+
+
     // Draw top menu
     for(set<SimpleButton*>::iterator e = menu_buttons.begin(); e != menu_buttons.end(); e++)
         (*e)->draw(myscreen);
-    
+
     // Draw submenus
     for(list<pair<SimpleButton*, set<SimpleButton*> > >::iterator e = current_menu.begin(); e != current_menu.end(); e++)
     {
@@ -2031,9 +2033,9 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
         for(set<SimpleButton*>::iterator f = s.begin(); f != s.end(); f++)
             (*f)->draw(myscreen);
     }
-    
-    
-	myscreen->buffer_to_screen(0, 0, 320, 200);
+
+
+	myscreen->buffer_to_screen(0, 0, SCREEN_W, SCREEN_H);
 
 	return 1;
 }
@@ -2043,7 +2045,7 @@ void LevelEditorData::clear_terrain()
 {
     int w = level->grid.w;
     int h = level->grid.h;
-    
+
     memset(level->grid.data, 1, w*h);
     resmooth_terrain();
 }
@@ -2077,13 +2079,13 @@ void LevelEditorData::mouse_motion(int mx, int my, int dx, int dy)
         {
             Sint32 worldx = mx + level->topx - myscreen->viewob[0]->xloc; // - S_LEFT
             Sint32 worldy = my + level->topy - myscreen->viewob[0]->yloc; // - S_UP
-            
+
             walker* under_cursor = NULL;
             if(!dragging && !rect_selecting)
             {
                 // Did we start dragging a selected object?
                 under_cursor = get_object(worldx, worldy);
-                
+
                 walker* got_one = NULL;
                 for(vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
                 {
@@ -2095,7 +2097,7 @@ void LevelEditorData::mouse_motion(int mx, int my, int dx, int dy)
                 }
                 under_cursor = got_one;
             }
-            
+
             if((dragging || under_cursor != NULL) && selection.size() > 0)
             {
                 // Drag the selected objects
@@ -2106,14 +2108,14 @@ void LevelEditorData::mouse_motion(int mx, int my, int dx, int dy)
                     if(w != NULL)
                     {
                         w->setxy(w->xpos + dx, w->ypos + dy);
-                        
+
                         // Update selection position
                         e->x = w->xpos;
                         e->y = w->ypos;
                     }
                 }
             }
-            
+
             if(!dragging)
             {
                 // Select with a rectangle
@@ -2127,10 +2129,10 @@ void LevelEditorData::mouse_motion(int mx, int my, int dx, int dy)
                     selection_rect.h = 1;
                     rect_selecting = true;
                 }
-                
+
                 selection_rect.w = worldx - selection_rect.x;
                 selection_rect.h = worldy - selection_rect.y;
-                
+
             }
         }
     }
@@ -2188,12 +2190,12 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
         dragging = false;
         return;
     }
-    
+
     bool mouse_on_menu = mouse_on_menus(mx, my);
     bool old_mouse_on_menu = mouse_on_menus(old_mx, old_my);
     bool on_menu = mouse_on_menu && old_mouse_on_menu;
     bool off_menu = !mouse_on_menu && !old_mouse_on_menu;
-    
+
     // Clicking on menu items
     if(on_menu)
     {
@@ -2225,12 +2227,12 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
             {
                 cancel = !yes_or_no_prompt("Import", "Discard unsaved level changes?", false);
             }
-            
+
             if(campaignchanged)
             {
                 cancel = !yes_or_no_prompt("Import", "Discard unsaved campaign changes?", false);
             }
-            
+
             if(!cancel)
             {
                 popup_dialog("Import Campaign", "Not yet implemented.");
@@ -2254,12 +2256,12 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
                     {
                         timed_dialog("Save failed.");
                         redraw = 1;
-                        
+
                         cancel = true;
                     }
                 }
             }
-            
+
             if(campaignchanged)
             {
                 if(yes_or_no_prompt("Share", "Save campaign first?", false))
@@ -2274,12 +2276,12 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
                     {
                         timed_dialog("Save failed.");
                         redraw = 1;
-                        
+
                         cancel = true;
                     }
                 }
             }
-            
+
             if(!cancel)
             {
                 popup_dialog("Share Campaign", "Not yet implemented.");
@@ -2294,8 +2296,8 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
             {
                 cancel = !yes_or_no_prompt("New Campaign", "Discard unsaved changes?", false);
             }
-            
-            
+
+
             if(!cancel)
             {
                 // Ask for campaign ID
@@ -2307,22 +2309,22 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
                     {
                         cancel = true;
                     }
-                    
+
                     if(!cancel)
                     {
                         if(create_new_campaign(campaign))
                         {
-                            
+
                             // Load campaign data for the editor
                             if(loadCampaign(campaign))
                             {
                                 // Mount new campaign
                                 unmount_campaign_package(get_mounted_campaign());
                                 mount_campaign_package(campaign);
-                                
+
                                 // Load first scenario
                                 std::list<int> levels = list_levels();
-                                
+
                                 if(levels.size() > 0)
                                 {
                                     loadLevel(levels.front());
@@ -2351,7 +2353,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
                         }
                     }
                 }
-                
+
             }
         }
         else if(activate_menu_choice(mx, my, *this, fileCampaignLoadButton))
@@ -2363,7 +2365,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
             {
                 cancel = !yes_or_no_prompt("Load Campaign", "Discard unsaved changes?", false);
             }
-            
+
             if(!cancel)
             {
                 CampaignResult result = pick_campaign(NULL, true);
@@ -2380,7 +2382,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
                         timed_dialog("Failed to load campaign.");
                         cancel = true;
                     }
-                    
+
                     if(!cancel)
                     {
                         myscreen->clearbuffer();
@@ -2390,7 +2392,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
                         {
                             load_first_level = yes_or_no_prompt("Load Level", "Discard unsaved changes?", false);
                         }
-                        
+
                         if(load_first_level)
                         {
                             // Load first scenario
@@ -2467,7 +2469,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
             {
                 cancel = !yes_or_no_prompt("Load Level", "Discard unsaved changes?", false);
             }
-            
+
             if(!cancel)
             {
                 // New level
@@ -2486,7 +2488,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
             {
                 cancel = !yes_or_no_prompt("Load Level", "Discard unsaved changes?", false);
             }
-            
+
             if(!cancel)
             {
                 // Browse for the level to load
@@ -2505,7 +2507,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
                         timed_dialog("Failed to load level.");
                         redraw = 1;
                     }
-                    
+
                     myradar.start(level);
                     redraw = 1;
                 }
@@ -2528,7 +2530,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
         else if(activate_menu_choice(mx, my, *this, fileLevelSaveAsButton))
         {
             int id = pick_level(myscreen, level->id, true);
-            
+
             if(id >= 0 && id != level->id)
             {
                 std::list<int> levels = list_levels();
@@ -2570,7 +2572,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
         else if(activate_menu_choice(mx, my, *this, campaignInfoButton))
         {
             char buf[512];
-            snprintf(buf, 512, "%s\nID: %s\nTitle: %s\nVersion: %s\nAuthors: %s\nContributors: %s\nSugg. Power: %d\nFirst level: %d", 
+            snprintf(buf, 512, "%s\nID: %s\nTitle: %s\nVersion: %s\nAuthors: %s\nContributors: %s\nSugg. Power: %d\nFirst level: %d",
                         (campaignchanged? "(unsaved)" : ""), campaign->id.c_str(), campaign->title.c_str(), campaign->version.c_str(), campaign->authors.c_str(), campaign->contributors.c_str(), campaign->suggested_power, campaign->first_level);
             popup_dialog("Campaign Info", buf);
         }
@@ -2671,11 +2673,11 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
             std::list<int> levels = list_levels();
             std::set<int> connected;
             std::list<std::string> problems;
-            
+
             // Are the levels all connected to the first level?
             int current_level = campaign->first_level;
             get_connected_level_exits(current_level, levels, connected, problems);
-            
+
             for(std::list<int>::iterator e = levels.begin(); e != levels.end(); e++)
             {
                 if(connected.find(*e) == connected.end())
@@ -2685,7 +2687,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
                     problems.push_back(buf);
                 }
             }
-            
+
             // Get ready to show the user the problems
             char buf[512];
             if(problems.size() == 0)
@@ -2704,7 +2706,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
                     snprintf(buf, 40, "%d more problems...", num_over);
                     problems.push_back(buf);
                 }
-                
+
                 // Put all the problems together for the printer
                 buf[0] = '\0';
                 for(std::list<std::string>::iterator e = problems.begin(); e != problems.end(); e++)
@@ -2715,7 +2717,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
                     strcat(buf, "\n");
                 }
             }
-            
+
             // Show user the problems
             popup_dialog("Validate Campaign", buf);
         }
@@ -2778,18 +2780,18 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
         else if(activate_menu_choice(mx, my, *this, levelDetailsMapSizeButton))
         {
             // Using two prompts sequentially
-            
+
             char buf[20];
             snprintf(buf, 20, "%u", level->grid.w);
             std::string width = buf;
             snprintf(buf, 20, "%u", level->grid.h);
             std::string height = buf;
-            
+
             if(prompt_for_string("Map Width", width))
             {
                 int w = toInt(width);
                 int h;
-                
+
                 #ifdef ANDROID
                 // The soft keyboard on Android might take a little while to be ready again, so opening it right away doesn't always work.
                 SDL_Delay(1000);
@@ -2797,7 +2799,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
                 if(prompt_for_string( "Map Height", height))
                 {
                     h = toInt(height);
-                    
+
                     // Validate here so we can tell the user
                     // Size is limited to one byte in the file format
                     if(w < 3 || h < 3 || w > 255 || h > 255)
@@ -2812,7 +2814,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
                             strcat(buf, "Width is too big (max 255).\n");
                         if(h > 255)
                             strcat(buf, "Height is too big (max 255).\n");
-                        
+
                         popup_dialog("Resize Map", buf);
                     }
                     else
@@ -2823,13 +2825,13 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
                         {
                             // Now change it
                             level->resize_grid(w, h);
-                            
+
                             // Reset the minimap
                             myradar.start(level);
-                            
+
                             draw(myscreen);
                             myscreen->refresh();
-                            
+
                             char buf[30];
                             snprintf(buf, 30, "Resized map to %ux%u", level->grid.w, level->grid.h);
                             timed_dialog(buf);
@@ -2974,7 +2976,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
                     break;
                 }
             }
-            
+
         }
     }
     else
@@ -2986,11 +2988,11 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
             current_menu.clear();
         }
     }
-    
+
     if(off_menu)
     {
         // Clicked and released off the menu
-        
+
         // Zardus: ADD: can move map by clicking on minimap
         if ((mode != SELECT || (!rect_selecting && !dragging)) && mx > myscreen->viewob[0]->endx - myradar.xview - 4
                 && my > myscreen->viewob[0]->endy - myradar.yview - 4
@@ -3011,11 +3013,11 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
             if (mode == SELECT)
             {
                 walker* newob = NULL;
-                
+
                 if(rect_selecting && (fabs(selection_rect.w) > 15 || fabs(selection_rect.h > 15)))
                 {
                     rect_selecting = false;
-                    
+
                     // Select guys in the rectangle
                     if(!keystates[KEYSTATE_LCTRL] && !keystates[KEYSTATE_RCTRL])
                         selection.clear();
@@ -3076,10 +3078,10 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
                         }
                         else if(!(keystates[KEYSTATE_LCTRL] || keystates[KEYSTATE_RCTRL]))
                             selection.clear();  // Deselect if not trying to grab more
-                        
+
                         level->remove_ob(newob);
                         delete newob;
-                        
+
                         reset_mode_buttons();
                     }
                 }  // end of info mode
@@ -3157,9 +3159,9 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
                 {
                     windowx /= GRID_SIZE;  // get the map position ..
                     windowy /= GRID_SIZE;
-                    
+
                     // Terrain painting is done by holding in level_editor()
-                    
+
                     if(terrain_brush.picking)
                     {
                         // Set brush to the grid tile
@@ -3177,18 +3179,18 @@ void LevelEditorData::pick_by_mouse(int mx, int my)
 {
     Sint32 windowx = mx + level->topx - myscreen->viewob[0]->xloc; // - S_LEFT
     Sint32 windowy = my + level->topy - myscreen->viewob[0]->yloc; // - S_UP
-    
+
     // Set brush to the grid tile
     if(mode == TERRAIN)
     {
         // Snap to grid
         windowx -= (windowx%GRID_SIZE);
         windowy -= (windowy%GRID_SIZE);
-        
+
         // Reduce to array dims
         windowx /= GRID_SIZE;
         windowy /= GRID_SIZE;
-        
+
         // Get tile from grid array
         if(is_in_grid(windowx, windowy))
             terrain_brush.terrain = get_terrain(windowx, windowy);
@@ -3201,7 +3203,7 @@ void LevelEditorData::pick_by_mouse(int mx, int my)
             windowx -= (windowx%GRID_SIZE);
             windowy -= (windowy%GRID_SIZE);
         }
-        
+
         // Get object from level
         walker* w = get_object(windowx, windowy);
         if(w != NULL)
@@ -3221,7 +3223,7 @@ unsigned char LevelEditorData::get_terrain(int x, int y)
 {
     if(!is_in_grid(x, y))
         return 0;
-    
+
     return level->grid.data[y*level->grid.w + x];
 }
 
@@ -3229,7 +3231,7 @@ void LevelEditorData::set_terrain(int x, int y, unsigned char terrain)
 {
     if(!is_in_grid(x, y))
         return;
-    
+
     level->grid.data[y*level->grid.w + x] = terrain;
 }
 
@@ -3275,7 +3277,7 @@ bool are_objects_outside_area(LevelData* level, int x, int y, int w, int h)
 		if(ob && (x > ob->xpos || ob->xpos >= x + w || y > ob->ypos || ob->ypos >= y + h))
 		    return true;
 	}
-	
+
 	return false;
 }
 
@@ -3285,7 +3287,7 @@ EventTypeEnum handle_basic_editor_event(const SDL_Event& event)
 {
     switch (event.type)
     {
-    case SDL_WINDOWEVENT:   
+    case SDL_WINDOWEVENT:
         handle_window_event(event);
         return HANDLED_EVENT;
     case SDL_TEXTINPUT:
@@ -3376,27 +3378,27 @@ Sint32 level_editor()
     static LevelEditorData data;
     EditorTerrainBrush& terrain_brush = data.terrain_brush;
     EditorObjectBrush& object_brush = data.object_brush;
-    
+
     ModeEnum& mode = data.mode;
     radar& myradar = data.myradar;
-    
+
 	Sint32 i,j;
 	Sint32 windowx, windowy;
 	Sint32 mx, my;
-    
+
     // Initialize palette for cycling
     load_and_set_palette("our.pal", scenpalette);
-    
+
     if(data.reloadCampaign())
         Log("Loaded campaign data successfully.\n");
     else
         Log("Failed to load campaign data.\n");
-    
+
     std::string old_campaign = get_mounted_campaign();
     if(old_campaign.size() > 0)
         unmount_campaign_package(old_campaign);
     mount_campaign_package(data.campaign->id);
-    
+
 
     std::list<int> levels = list_levels();
     if(levels.size() > 0)
@@ -3412,7 +3414,7 @@ Sint32 level_editor()
         Log("Campaign has no valid levels!\n");
 
 	redraw = 1;  // Redraw right away
-	
+
 	object_pane.clear();
 	for(int i = 0; i < NUM_FAMILIES; i++)
     {
@@ -3426,30 +3428,30 @@ Sint32 level_editor()
     {
         object_pane.push_back(ObjectType(ORDER_GENERATOR, i));
     }
-    
+
     object_pane.push_back(ObjectType(ORDER_WEAPON, FAMILY_DOOR));
     object_pane.push_back(ObjectType(ORDER_SPECIAL, FAMILY_RESERVED_TEAM));
-	
+
 	// Minimap
 	myradar.start(data.level);
-	
+
 	// GUI
 	using std::set;
 	using std::pair;
 	using std::list;
-	
+
 	data.reset_mode_buttons();
-	
+
     MouseState& mymouse = query_mouse_no_poll();
-    
+
     #ifdef USE_CONTROLLER_INPUT
     mymouse.x = 160;
     mymouse.y = 100;
     #endif
-    
+
     mouse_last_x = mymouse.x;
     mouse_last_y = mymouse.y;
-    
+
     float cycletimer = 0.0f;
 	grab_mouse();
 	Uint32 last_ticks = SDL_GetTicks();
@@ -3470,7 +3472,7 @@ Sint32 level_editor()
 		    done = true;
 			break;
 		}
-		
+
         while(SDL_PollEvent(&event))
         {
             #ifdef USE_CONTROLLER_INPUT
@@ -3478,7 +3480,7 @@ Sint32 level_editor()
             {
                 // Send fake mouse down event
                 SDL_Event event;
-                
+
                 event.type = SDL_MOUSEBUTTONDOWN;
                 event.button.button = SDL_BUTTON_LEFT;
                 event.button.x = mymouse.x * (viewport_w / 320) + viewport_offset_x;
@@ -3490,7 +3492,7 @@ Sint32 level_editor()
             {
                 // Send fake mouse up event
                 SDL_Event event;
-                
+
                 event.type = SDL_MOUSEBUTTONUP;
                 event.button.button = SDL_BUTTON_LEFT;
                 event.button.x = mymouse.x * (viewport_w / 320) + viewport_offset_x;
@@ -3509,12 +3511,12 @@ Sint32 level_editor()
                 {
                     mouse_last_x = mymouse.x;
                     mouse_last_y = mymouse.y;
-                    
+
                     data.mouse_down(mymouse.x, mymouse.y);
                 }
                 break;
             case MOUSE_UP_EVENT:
-                
+
                 if(mouse_up_button == MOUSE_LEFT)
                 {
                     data.mouse_up(mymouse.x, mymouse.y, mouse_last_x, mouse_last_y, done);
@@ -3538,7 +3540,7 @@ Sint32 level_editor()
                         break;
                     }
                 }
-                
+
                 // Change teams ..
                 else if(event.key.keysym.sym == SDLK_0)
                     object_brush.team = 0;
@@ -3586,7 +3588,7 @@ Sint32 level_editor()
                         else
                             timed_dialog("Failed to save campaign.");
                     }
-                    
+
                     if(saved)
                         timed_dialog("Saved.");
                     else if(!levelchanged && !campaignchanged)
@@ -3683,7 +3685,7 @@ Sint32 level_editor()
                 dx = 5*c.getAxisValue(OuyaController::AXIS_LS_X);
                 dy = 5*c.getAxisValue(OuyaController::AXIS_LS_Y);
             }
-            
+
             if(mymouse.x + dx < 0)
                 mymouse.x = 0;
             if(mymouse.x + dx > 320)
@@ -3692,12 +3694,12 @@ Sint32 level_editor()
                 mymouse.y = 0;
             if(mymouse.y + dy > 200)
                 mymouse.y = 200;
-            
+
             if(dx != 0 || dy != 0)
             {
                 int x, y;
                 SDL_Event event;
-                
+
                 event.type = SDL_MOUSEMOTION;
                 event.motion.type = SDL_MOUSEMOTION;
                 event.motion.windowID = 0;
@@ -3710,14 +3712,14 @@ Sint32 level_editor()
                 SDL_PushEvent(&event);
             }
         }
-        
+
         #ifdef OUYA
-            
+
             const OuyaController& c = OuyaControllerManager::getController(0);
-            
+
             float vx = c.getAxisValue(OuyaController::AXIS_RS_X);
             float vy = c.getAxisValue(OuyaController::AXIS_RS_Y);
-            
+
             // Scroll the tile selector when over it
             if(Rect(S_RIGHT, PIX_TOP, 4*GRID_SIZE, 4*GRID_SIZE).contains(mymouse.x, mymouse.y))
             {
@@ -3729,7 +3731,7 @@ Sint32 level_editor()
             else
             {
                 scroll_amount = 0;
-                
+
                 // Panning
                 pan_left = (vx < -OuyaController::DEADZONE);
                 pan_right = (vx > OuyaController::DEADZONE);
@@ -3737,7 +3739,7 @@ Sint32 level_editor()
                 pan_down = (vy > OuyaController::DEADZONE);
             }
         #endif
-        
+
         #endif
 
 		short scroll_amount = get_and_reset_scroll_amount();
@@ -3752,9 +3754,9 @@ Sint32 level_editor()
 			rowsdown++;
 			if (rowsdown >= maxrows)
 				rowsdown -= maxrows;
-            
+
             redraw = 1;
-            
+
 			while (keystates[KEYSTATE_DOWN])
 				get_input_events(WAIT);
 		}
@@ -3767,9 +3769,9 @@ Sint32 level_editor()
 				rowsdown += maxrows;
 			if (rowsdown <0 || rowsdown >= maxrows) // bad case
 				rowsdown = 0;
-            
+
             redraw = 1;
-            
+
 			while (keystates[KEYSTATE_UP])
 				get_input_events(WAIT);
 		}
@@ -3809,19 +3811,19 @@ Sint32 level_editor()
 
 		// Mouse stuff ..
 		mymouse = query_mouse_no_poll();
-		
+
 		if (mymouse.left)       // put or remove the current guy
 		{
 			redraw = 1;
 			mx = mymouse.x;
 			my = mymouse.y;
-            
+
             // Holding on menu items
             bool mouse_on_menu = data.mouse_on_menus(mx, my);
             bool old_mouse_on_menu = data.mouse_on_menus(mouse_last_x, mouse_last_y);
             bool on_menu = mouse_on_menu && old_mouse_on_menu;
             bool off_menu = !mouse_on_menu && !old_mouse_on_menu;
-            
+
             if(on_menu)
             {
                 // Panning with mouse (touch)
@@ -3877,7 +3879,7 @@ Sint32 level_editor()
                     redraw = 1;
                     data.level->add_draw_pos(SCROLLSIZE, 0);
                 }
-                    
+
             }
             else if(off_menu)
             {
@@ -3910,7 +3912,7 @@ Sint32 level_editor()
                         {
                             windowx /= GRID_SIZE;  // get the map position ..
                             windowy /= GRID_SIZE;
-                            
+
                             if(!terrain_brush.picking)
                             {
                                 // Set to our current selection (apply brush)
@@ -3924,7 +3926,7 @@ Sint32 level_editor()
                                                     j >= 0 && j < data.level->grid.h)
                                                 data.level->mysmoother.smooth(i, j);
                                 }
-                                
+
                                 myradar.update(data.level);
                             }
                         }
@@ -3946,37 +3948,37 @@ Sint32 level_editor()
             }
 			redraw = 1;
 		}
-		
+
 		// Redraw screen
 		if (redraw)
 		{
             redraw = 0;
 			data.draw(myscreen);
-			
+
             #ifdef USE_CONTROLLER_INPUT
             myscreen->fastbox(mymouse.x-1, mymouse.y-1, 4, 4, PURE_WHITE);
             myscreen->fastbox(mymouse.x, mymouse.y, 2, 2, PURE_BLACK);
             #endif
             myscreen->refresh();
 		}
-        
+
         SDL_Delay(10);
-        
+
 	    last_ticks = start_ticks;
 	    start_ticks = SDL_GetTicks();
 
 	}
-	
+
 	// Reset the screen position so it doesn't ruin the main menu
     data.level->set_draw_pos(0, 0);
     // Update the screen's position
     data.level->draw(myscreen);
     // Clear the background
     myscreen->clearbuffer();
-    
+
     unmount_campaign_package(data.campaign->id);
     mount_campaign_package(old_campaign);
-    
+
 	return OK;
 }
 
@@ -4179,7 +4181,7 @@ walker * some_hit(Sint32 x, Sint32 y, walker  *ob, LevelData* data)
             return w;
         }
 	}
-	
+
     for(auto e = data->fxlist.begin(); e != data->fxlist.end(); e++)
 	{
 	    walker* w = *e;
@@ -4192,7 +4194,7 @@ walker * some_hit(Sint32 x, Sint32 y, walker  *ob, LevelData* data)
             return w;
         }
 	}
-	
+
     for(auto e = data->weaplist.begin(); e != data->weaplist.end(); e++)
 	{
 	    walker* w = *e;

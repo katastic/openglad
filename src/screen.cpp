@@ -1,5 +1,4 @@
-/* Copyright (C) 1995-2002  FSGames. Ported by Sean Ford and Yan Shosh
- *
+/*
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -297,19 +296,13 @@ void screen::ready_for_battle(short howmany)
     initialize_views();
 
 	end = 0;
-
 	retry = false;
-
 	redrawme = 1;
-
 	timerstart = query_timer_control();
 	framecount = 0;
 	enemy_freeze = 0;
-
 	control_hp = 0;
-
 	palmode = 0;
-
 	redrawme = 1;
 
 }
@@ -328,8 +321,11 @@ void screen::reset(short howmany)
 	}
 	else if (numviews == 2)
 	{
+//		viewob[1] = new viewscreen( 0, 0, 400-1, 800, 1);
+//		viewob[0] = new viewscreen( 400-1, 0, 400-1, 800, 0);
 		viewob[1] = new viewscreen( T_LEFT_ONE, T_UP_ONE, T_WIDTH, T_HEIGHT, 1);
 		viewob[0] = new viewscreen( T_LEFT_TWO, T_UP_TWO, T_WIDTH, T_HEIGHT, 0);
+		//this doesn't APPEAR to be the problem (though 3 player and 4 player look wrong)
 	}
 	else if (numviews == 3)
 	{
@@ -344,6 +340,8 @@ void screen::reset(short howmany)
 		viewob[2] = new viewscreen( 112, 16, 100, 168, 2);
 		viewob[3] = new viewscreen( 112, 16, 100, 168, 3);
 	}
+
+
 
 	end = 0;
 
@@ -1156,10 +1154,10 @@ void screen::draw_panels(short howmany)
 }
 
 // This can be slow, so don't call it much
-walker  * screen::find_nearest_blood(walker  *who)
+walker *screen::find_nearest_blood(walker  *who)
 {
 	Sint32 distance, newdistance;
-	walker  *returnob = NULL;
+	walker *returnob = NULL;
 
 	if (!who)
 		return NULL;
@@ -1168,7 +1166,7 @@ walker  * screen::find_nearest_blood(walker  *who)
 
 	for(auto e = level_data.fxlist.begin(); e != level_data.fxlist.end(); e++)
 	{
-	    walker* w = *e;
+	    walker *w = *e;
 		if (w && w->query_order() == ORDER_TREASURE &&
 		        w->query_family() == FAMILY_STAIN && !w->dead)
 		{

@@ -126,7 +126,7 @@ std::string get_asset_path()
 SDL_RWops* open_read_file(const char* file)
 {
     SDL_RWops* rwops = NULL;
-    
+
     //Log((std::string("Trying via PHYSFS: ") + file).c_str());
     rwops = PHYSFSRWOPS_openRead(file);
     if(rwops != NULL) return rwops;
@@ -182,9 +182,9 @@ std::list<std::string> list_files(const std::string& dirname)
         p++;
     }
     PHYSFS_freeList(files);
-    
+
     fileList.sort();
-    
+
     return fileList;
 }
 
@@ -201,7 +201,7 @@ bool mount_campaign_package(const std::string& id)
         return false;
 
     Log(std::string("Mounting campaign package: " + id).c_str());
-    
+
     std::string filename = get_user_path() + "campaigns/" + id + ".glad";
     if(!PHYSFS_mount(filename.c_str(), NULL, 0))
     {
@@ -217,7 +217,7 @@ bool unmount_campaign_package(const std::string& id)
 {
     if(id.size() == 0)
         return true;
-    
+
     std::string filename = get_user_path() + "campaigns/" + id + ".glad";
     if(!PHYSFS_removeFromSearchPath(filename.c_str()))
     {
@@ -275,7 +275,7 @@ std::list<int> list_levels()
         }
         e++;
     }
-    
+
     result.sort();
     return result;
 }
@@ -305,7 +305,7 @@ std::vector<int> list_levels_v()
         }
         e++;
     }
-    
+
     std::sort(result.begin(), result.end());
     return result;
 }
@@ -316,7 +316,7 @@ void delete_level(int id)
     std::string campaign = get_mounted_campaign();
     if(campaign.size() == 0)
         return;
-    
+
     cleanup_unpacked_campaign();
     unpack_campaign(campaign);
     char path[256];
@@ -327,7 +327,7 @@ void delete_level(int id)
     snprintf(path, 256, "%stemp/pix/scen%04d.pix", get_user_path().c_str(), id);
     remove(path);
     repack_campaign(campaign);
-    
+
     // Remount for consistency in PhysFS
     remount_campaign_package();
 }
@@ -367,11 +367,11 @@ void copy_file(const std::string& filename, const std::string& dest_filename)
         Log("Could not open file to copy.\n");
         return;
     }
-    
+
     long size = 100;
     // Grab the data
     unsigned char* data = (unsigned char*)malloc(size);
-    
+
     // Save it to another file
     Log("Copying to: %s\n", dest_filename.c_str());
     SDL_RWops* out = SDL_RWFromFile(dest_filename.c_str(), "wb");
@@ -379,9 +379,10 @@ void copy_file(const std::string& filename, const std::string& dest_filename)
     {
         Log("Could not open destination file.\n");
         SDL_RWclose(in);
+        free(data);  //CPPCHECK: fix for Memory leak for [data]
         return;
     }
-    
+
     long total = 0;
     long len = 0;
     while((len = SDL_RWread(in, data, 1, size)) > 0)
@@ -389,11 +390,11 @@ void copy_file(const std::string& filename, const std::string& dest_filename)
         SDL_RWwrite(out, data, 1, len);
         total += len;
     }
-    
+
     SDL_RWclose(in);
     SDL_RWclose(out);
     free(data);
-    
+
     Log("Copied %d bytes.\n", total);
 }
 
@@ -423,18 +424,18 @@ void io_init(int argc, char* argv[])
 {
     // Make sure our directory tree exists and is set up
     create_dataopenglad();
-    
+
     PHYSFS_init(argv[0]);
     PHYSFS_setWriteDir(get_user_path().c_str());
-    
+
     if(!PHYSFS_mount(get_user_path().c_str(), NULL, 1))
     {
         Log("Failed to mount user data path.\n");
         exit(1);
     }
-    
+
     restore_default_campaigns();
-    
+
     // NOTES!
     // PhysFS cannot grab files from the assets folder because they're actually inside the apk.
     // SDL_RWops does some magic to figure out a file descriptor from JNI.
@@ -442,7 +443,7 @@ void io_init(int argc, char* argv[])
     // So for simple assets, I need to check PhysFS first, then fall back to SDL_RWops from the assets folder.
     // For campaign packages, I can copy them to the internal storage and they'll live happily there, accessed by PhysFS.
     // SDL_RWops size checking on Android doesn't seem to work!
-    
+
     // Open up the default campaign
     Log("Mounting default campaign...");
     if (!mount_campaign_package("org.openglad.gladiator"))
@@ -451,7 +452,7 @@ void io_init(int argc, char* argv[])
         exit(1);
     }
     Log("Mounted default campaign...");
-    
+
     // Set up paths for default assets
     if(!PHYSFS_mount((get_asset_path() + "pix/").c_str(), "pix/", 1))
     {
@@ -491,21 +492,21 @@ std::list<std::string> list_paths_recursively(const std::string& dirname)
     std::string _dirname = dirname;
     if(_dirname.size() > 0 && _dirname[_dirname.size()-1] != '/')
         _dirname += '/';
-    
+
     std::list<std::string> ls;
 
     DIR* dir = opendir(_dirname.c_str());
     dirent* entry;
-    
+
     if(dir == NULL)
         return ls;
-    
+
     while ((entry = readdir(dir)) != NULL)
     {
         if(strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0)
             continue;
-        
-        
+
+
         #ifdef WIN32
         struct stat status;
         stat((_dirname + entry->d_name).c_str(), &status);
@@ -539,22 +540,22 @@ bool zip_contents(const std::string& indirectory, const std::string& outfile)
     if(indir.size() > 0 && indir[indir.size()-1] != '/')
         indir += '/';
     //Log("Zipping %s as %s\n", indir.c_str(), outfile.c_str());
-    
+
     int err = 0;
     zip* archive = zip_open(outfile.c_str(), ZIP_CREATE | ZIP_TRUNCATE, &err);
     if(archive == NULL)
         return false;
-    
+
     struct zip_source *s;
     char src_name[512];
     char dest_name[512];
-    
+
     std::list<std::string> files = list_paths_recursively(indir);
     for(std::list<std::string>::iterator e = files.begin(); e != files.end(); e++)
     {
         snprintf(src_name, 512, "%s%s", indir.c_str(), e->c_str());
         snprintf(dest_name, 512, "%s", e->c_str());
-        
+
         if(src_name[strlen(src_name)-1] == '/')
         {
             if(zip_dir_add(archive, dest_name, ZIP_FL_ENC_GUESS) < 0)
@@ -573,13 +574,13 @@ bool zip_contents(const std::string& indirectory, const std::string& outfile)
             }
         }
     }
-    
+
     if(zip_close(archive) < 0)
     {
         Log("Error flushing zip file output: %s\n", zip_strerror(archive));
         return false;
     }
-    
+
     return true;
 }
 
@@ -604,13 +605,13 @@ int mkpath(const char *s, mode_t mode)
 
     if ((path = strdup(s)) == NULL)
         exit(1);
- 
+
     if ((q = strdup(s)) == NULL)
         exit(1);
 
     if ((parent = dirname(q)) == NULL)
         goto out;
-    
+
     if ((up = strdup(parent)) == NULL)
         exit(1);
 
@@ -637,11 +638,11 @@ bool create_path_to_file(const char* filename)
         c = strrchr(filename, '\\');
     if(c == NULL)
         return true;
-    
+
     char buf[512];
     snprintf(buf, 512, "%s", filename);
     buf[c - filename] = '\0';
-    
+
     return (mkpath(buf, 0755) >= 0);
 }
 
@@ -655,19 +656,19 @@ bool unzip_into(const std::string& infile, const std::string& outdirectory)
     std::string outdir = outdirectory;
     if(outdir.size() > 0 && outdir[outdir.size()-1] != '/')
         outdir += '/';
-    
+
     //Log("Unzipping %s\n", infile.c_str());
-    
+
     int err = 0;
     zip* archive = zip_open(infile.c_str(), 0, &err);
     if(archive == NULL)
         return false;
-    
+
     struct zip_stat status;
     struct zip_file* file;
     int buf_size = 512;
     char buf[buf_size];
-    
+
     for(int i = 0; i < zip_get_num_entries(archive, 0); i++)
     {
         if(zip_stat_index(archive, i, 0, &status) == 0)
@@ -686,7 +687,7 @@ bool unzip_into(const std::string& infile, const std::string& outdirectory)
                     // Error
                     continue;
                 }
-                
+
                 snprintf(buf, buf_size, "%s%s", outdir.c_str(), status.name);
                 create_path_to_file(buf);
                 SDL_RWops* rwops = open_write_file(outdir.c_str(), status.name);
@@ -695,7 +696,7 @@ bool unzip_into(const std::string& infile, const std::string& outdirectory)
                     // Error
                     continue;
                 }
- 
+
                 size_t sum = 0;
                 while(sum < status.size)
                 {
@@ -703,7 +704,7 @@ bool unzip_into(const std::string& infile, const std::string& outdirectory)
                     if(len < 0)
                     {
                         // Error
-                        
+
                     }
                     SDL_RWwrite(rwops, buf, 1, len);
                     sum += len;
@@ -717,7 +718,7 @@ bool unzip_into(const std::string& infile, const std::string& outdirectory)
             // Error
         }
     }
-    
+
     return (zip_close(archive) >= 0);
 }
 
@@ -728,19 +729,19 @@ bool create_new_map_pix(const std::string& filename, int w, int h)
 	// <x size>                   1 byte
 	// <y size>                   1 byte
 	// <pixie data>               <x*y*frames> bytes
-	
+
 	unsigned char c;
 	SDL_RWops* outfile = open_write_file(filename.c_str());
 	if(outfile == NULL)
         return false;
-    
+
     c = 1;  // Frames
 	SDL_RWwrite(outfile, &c, 1, 1);
     c = w;  // x size
 	SDL_RWwrite(outfile, &c, 1, 1);
     c = h;  // y size
 	SDL_RWwrite(outfile, &c, 1, 1);
-	
+
 	int size = w*h;
 	for(int i = 0; i < size; i++)
     {
@@ -762,7 +763,7 @@ bool create_new_map_pix(const std::string& filename, int w, int h)
         }
         SDL_RWwrite(outfile, &c, 1, 1);
     }
-    
+
     SDL_RWclose(outfile);
     return true;
 }
@@ -774,26 +775,26 @@ bool create_new_pix(const std::string& filename, int w, int h, unsigned char fil
 	// <x size>                   1 byte
 	// <y size>                   1 byte
 	// <pixie data>               <x*y*frames> bytes
-	
+
 	unsigned char c;
 	SDL_RWops* outfile = open_write_file(filename.c_str());
 	if(outfile == NULL)
         return false;
-    
+
     c = 1;  // Frames
 	SDL_RWwrite(outfile, &c, 1, 1);
     c = w;  // x size
 	SDL_RWwrite(outfile, &c, 1, 1);
     c = h;  // y size
 	SDL_RWwrite(outfile, &c, 1, 1);
-	
+
 	c = fill_color;  // Color
 	int size = w*h;
 	for(int i = 0; i < size; i++)
     {
         SDL_RWwrite(outfile, &c, 1, 1);
     }
-    
+
     SDL_RWclose(outfile);
     return true;
 }
@@ -803,10 +804,10 @@ bool create_new_campaign_descriptor(const std::string& filename)
 	SDL_RWops* outfile = open_write_file(filename.c_str());
 	if(outfile == NULL)
         return false;
-    
+
     Yam yam;
     yam.set_output(rwops_write_handler, outfile);
-    
+
     yam.emit_pair("format_version", "1");
     yam.emit_pair("title", "New Campaign");
     yam.emit_pair("version", "1");
@@ -815,7 +816,7 @@ bool create_new_campaign_descriptor(const std::string& filename)
     yam.emit_pair("authors", "");
     yam.emit_pair("contributors", "");
     yam.emit_pair("description", "A new campaign.");
-    
+
     yam.close_output();
     SDL_RWclose(outfile);
     return true;
@@ -824,7 +825,7 @@ bool create_new_campaign_descriptor(const std::string& filename)
 bool create_new_scen_file(const std::string& scenfile, const std::string& gridname)
 {
     // TODO: It would be nice to store all the level data in a class, then have saving code all in one place.
-    
+
 	// Format of a scenario object list file is: (ver. 8)
 	// 3-byte header: 'FSS'
 	// 1-byte version number (from graph.h)
@@ -849,35 +850,35 @@ bool create_new_scen_file(const std::string& scenfile, const std::string& gridna
 	// List of n lines of text, each of form:
 	// 1-byte character width of line
 	// m bytes == characters on this line
-	
+
 	const char* header = "FSS";
 	unsigned char version = 8;
-	
+
 	char grid_file_name[8];
 	strncpy(grid_file_name, gridname.c_str(), 8);
-	
+
 	char scenario_title[30];
 	strncpy(scenario_title, "New Level", 30);
-	
+
 	unsigned char scenario_type = 1;//SCEN_TYPE_CAN_EXIT;
-	
+
 	short par_value = 1;
-	
+
 	short num_objects = 0;
-	
+
 	//char reserved[20] = "MSTRMSTRMSTRMSTR";
-	
+
 	unsigned char num_lines = 1;
 	char line_text[50] = "A new scenario.";
 	unsigned char line_length = strlen(line_text);
-	
+
 	SDL_RWops* outfile;
 	if((outfile = open_write_file(scenfile.c_str())) == NULL)
 	{
 		Log("Could not open file for writing: %s\n", scenfile.c_str());
 		return false;
 	}
-	
+
 	// Write it out
 	SDL_RWwrite(outfile, header, 1, 3);
 	SDL_RWwrite(outfile, &version, 1, 1);
@@ -888,13 +889,13 @@ bool create_new_scen_file(const std::string& scenfile, const std::string& gridna
 
 	SDL_RWwrite(outfile, &num_objects, 2, 1);
     // No objects to write
-    
+
 	SDL_RWwrite(outfile, &num_lines, 1, 1);
     SDL_RWwrite(outfile, &line_length, 1, 1);
     SDL_RWwrite(outfile, line_text, line_length, 1);
 
 	SDL_RWclose(outfile);
-	
+
     return true;
 }
 
@@ -920,6 +921,6 @@ void cleanup_unpacked_campaign()
         remove(path.c_str());
         rmdir(path.c_str());
     }
-    
+
     rmdir((get_user_path() + "temp").c_str());
 }

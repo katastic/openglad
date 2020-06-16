@@ -30,6 +30,7 @@ short end_of_file;                        // global flag ..
 char helptext[HELP_WIDTH][MAX_LINES];
 
 
+/*cppcheck
 // This function reads one text line from file infile,
 // stopping at length (length), or when encountering an
 // end-of-line character ..
@@ -60,7 +61,7 @@ char* read_one_line(SDL_RWops *infile, short length)
 	}
 
 	return newline;
-}
+}*/
 
 // Note: this code has been redone to work in 'scanlines,'
 //       so that the text scrolls by pixels rather than lines.
@@ -324,6 +325,7 @@ short read_campaign_intro(screen * myscreen)
 }
 
 
+/* cppchecker: never used
 // This function fills the array with the help file
 // text ..
 // It returns the # of lines successfully filled ..
@@ -348,6 +350,5 @@ short fill_help_array(char somearray[HELP_WIDTH][MAX_LINES], SDL_RWops *infile)
 
 	return MAX_LINES;
 }
-
-
+*/
 

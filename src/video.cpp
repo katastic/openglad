@@ -109,10 +109,11 @@ void video::set_fullscreen(bool fullscreen)
     update_overscan_setting();*/
 }
 
+/*cppcheck: never used
 unsigned char * video::getbuffer()
 {
 	return &videobuffer[0];
-}
+}*/
 
 void video::clearbuffer()
 {
@@ -313,6 +314,7 @@ void video::darken_screen()
 
 
 
+/*cppcheck: never used
 void video::putblack(Sint32 startx, Sint32 starty, Sint32 xsize, Sint32 ysize)
 {
 	Sint32 curx, cury;
@@ -327,7 +329,7 @@ void video::putblack(Sint32 startx, Sint32 starty, Sint32 xsize, Sint32 ysize)
 				videoptr[curpoint] = 0;
 		}
 	}
-}
+}*/
 
 // This version of fastbox writes directly to screen memory;
 // The following version, with an extra parameter, writes to
@@ -378,13 +380,14 @@ void video::fastbox_outline(Sint32 startx, Sint32 starty, Sint32 xsize, Sint32 y
     draw_box(startx, starty, startx + xsize, starty + ysize, color, 0);
 }
 
+/*cppcheck: never used
 // Place a point on the screen
 //buffers: PORT: this point func is equivalent to drawing directly to screen
 void video::point(Sint32 x, Sint32 y, unsigned char color)
 {
 	pointb(x,y,color);
 	//buffers: PORT: SDL_UpdateRect(screen,x,y,1,1);
-}
+}*/
 
 void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 {
@@ -738,6 +741,7 @@ void video::do_cycle(Sint32 curmode, Sint32 maxmode)
 	}
 }
 
+/* cppchecker: never used
 //video::putdata
 //draws objects to screen, respecting transparency
 //used by text
@@ -758,8 +762,9 @@ void video::putdata(Sint32 startx, Sint32 starty, Sint32 xsize, Sint32 ysize, un
 			//buffers: PORT: videoptr[targ] = curcolor;
 			point(curx,cury,curcolor);//buffers: PORT: draw the point
 		}
-}
+}*/
 
+/*cppcheck: never used
 // putdata with alpha blending
 void video::putdata_alpha(Sint32 startx, Sint32 starty, Sint32 xsize, Sint32 ysize, unsigned char  *sourcedata, unsigned char alpha)
 {
@@ -777,7 +782,7 @@ void video::putdata_alpha(Sint32 startx, Sint32 starty, Sint32 xsize, Sint32 ysi
 			pointb(curx,cury,curcolor, alpha);
 		}
 }
-
+*/
 
 void video::putdatatext(Sint32 startx, Sint32 starty, Sint32 xsize, Sint32 ysize, unsigned char  *sourcedata)
 {
@@ -808,6 +813,8 @@ void video::putdatatext(Sint32 startx, Sint32 starty, Sint32 xsize, Sint32 ysize
     	}
 }
 
+
+/*CPPCHECK: Never used
 //video::putdata
 //draws objects to screen, respecting transparency
 //used by text
@@ -832,7 +839,7 @@ void video::putdata(Sint32 startx, Sint32 starty, Sint32 xsize, Sint32 ysize, un
 			point(curx,cury,curcolor);
 		}
 }
-
+*/
 void video::putdatatext(Sint32 startx, Sint32 starty, Sint32 xsize, Sint32 ysize, unsigned char  *sourcedata, unsigned char color)
 {
         Sint32 curx, cury;

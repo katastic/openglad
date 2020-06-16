@@ -1082,13 +1082,14 @@ void viewscreen::set_display_text(const char *newtext, short numcycles)
 		textcycles[i] = 0;
 }
 
+/*CPPCHECK: Never used
 // Blanks the screen text
 void viewscreen::clear_text()
 {
 	Sint32 i;
 	for (i=0; i < MAX_MESSAGES; i++)
 		textlist[i][0] = 0;
-}
+}*/
 
 short viewscreen::draw_obs()
 {
@@ -2100,6 +2101,7 @@ Sint32 viewscreen::set_key_prefs()
 	return 1;
 }
 
+/* cppchecker: never used
 // Waits for a key to be pressed and then released ..
 // returns this key.
 int get_keypress()
@@ -2110,3 +2112,4 @@ int get_keypress()
 	return query_key();
 }
 
+*/

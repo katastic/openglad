@@ -17,7 +17,7 @@
 //pixie.cpp
 
 /* ChangeLog
-	buffers: 7/31/02: 
+	buffers: 7/31/02:
 		*include cleanup
 	buffers: 8/8/02:
 		*changed the SDL surfaces to 24bit
@@ -47,7 +47,7 @@
 pixie::pixie(const PixieData& data)
 {
 	set_data(data);
-	
+
 	accel = 0;
 }
 
@@ -55,9 +55,9 @@ pixie::pixie(const PixieData& data)
 pixie::pixie(const PixieData& data, int doaccel)
 {
 	set_data(data);
-	
+
 	accel = 0;
-	
+
 	if(doaccel)
 		init_sdl_surface();
 }
@@ -156,12 +156,12 @@ short pixie::drawMix(viewscreen * view_buf)
 	return 1;
 }
 
-
+/*cppcheck: never used
 short pixie::put_screen(short x, short y)
 {
 	myscreen->putdata(x, y, sizex, sizey, bmp);
 	return 1;
-}
+}*/
 
 short pixie::on_screen()
 {

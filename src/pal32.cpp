@@ -52,13 +52,13 @@ short load_and_set_palette(const char *filename, unsigned char *newpalette)
 			Log("Error in reading palette file %s\n", filename);
 			return 0;
 		}
-	 
+
 		if (fread(temppal, 1, 768, infile) != 768 || ferror(infile))
 		{
 			Log("Error: Corrupt palette file %s!\n", filename);
 			return 0;
 		}
-	 
+
 		fclose(infile);
 	*/
 	// Copy back the palette info ..
@@ -76,12 +76,13 @@ short load_and_set_palette(const char *filename, unsigned char *newpalette)
 // save_palette
 // save the dos palette so we can restore it when done
 //
+/*cppcheck: never used
 short save_palette(unsigned char * whatpalette)
 {
 	//buffers: PORT: we don't have a palette to save :P
 	return 0;
 }
-
+*/
 
 //
 // load_palette
@@ -97,13 +98,13 @@ short load_palette(const char *filename, unsigned char *newpalette)
 			Log("Error in reading palette file %s\n", filename);
 			return 0;
 		}
-	 
+
 		if (fread(temppal, 1, 768, infile) != 768 || ferror(infile))
 		{
 			Log("Error: Corrupt palette file %s!\n", filename);
 			return 0;
 		}
-	 
+
 		fclose(infile);
 	*/
 	// Copy back the palette info ..

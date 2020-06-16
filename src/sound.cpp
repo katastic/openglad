@@ -75,12 +75,12 @@ int soundob::init()
 	// Do we have sounds on?
 	if (silence)
 		return 0;
-    
+
     int sample_rate = 22050;
     int sample_format = AUDIO_S16;
     int sample_buffer_size = 1024;
     bool stereo = true;
-    
+
 	if(Mix_OpenAudio(sample_rate, sample_format, stereo? 2 : 1 , sample_buffer_size) == -1)
 	{
 		Log("ERROR: Mix_OpenAudio: %s\n",Mix_GetError());
@@ -130,7 +130,7 @@ int soundob::init()
 void soundob::load_sound(Mix_Chunk **audio, char * file)
 {
     SDL_RWops* rw = open_read_file("sound/", file);
-	
+
 	*audio = Mix_LoadWAV_RW(rw, 0);
 	if(!*audio)
 	{
@@ -170,16 +170,18 @@ void soundob::play_sound(short whichnum)
 	Mix_PlayChannel(-1,sound[whichnum],0);
 }
 
+/*cppcheck: never used
 unsigned char soundob::query_volume()
 {
 	return volume;
-}
+}*/
 
+/*cppcheck: never used
 unsigned char soundob::set_volume(unsigned char volumelevel)
 {
 	volume = volumelevel;
 	return volume;
-}
+}*/
 
 // Used to turn sound on or off
 unsigned char soundob::set_sound(bool silent)

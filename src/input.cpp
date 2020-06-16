@@ -409,8 +409,9 @@ void handle_mouse_event(const SDL_Event& event)
         // Mouse event
     case SDL_MOUSEMOTION:
 
-printf("W %d %d\n", SCREEN_W, WINDOWS_W );
-printf("H %d %d\n", SCREEN_H, WINDOWS_H );
+//KATDEBUG
+//printf("W %d %d\n", SCREEN_W, WINDOWS_W );
+//printf("H %d %d\n", SCREEN_H, WINDOWS_H );
 
         mouse_state.x = event.button.x/(float)((float)WINDOWS_W/(float)SCREEN_W);
         mouse_state.y = event.button.y/(float)((float)WINDOWS_H/(float)SCREEN_H);
@@ -787,6 +788,7 @@ bool isAnyPlayerKey(SDLKey key)
     return false;
 }
 
+/*cppcheck: never used
 bool isPlayerKey(int player_num, SDLKey key)
 {
     for(int i = 0; i < NUM_KEYS; i++)
@@ -795,7 +797,7 @@ bool isPlayerKey(int player_num, SDLKey key)
             return true;
     }
     return false;
-}
+}*/
 
 SDL_Event wait_for_key_event()
 {
@@ -1487,6 +1489,7 @@ MouseState& query_mouse_no_poll()
 }
 
 
+/*CPPCHECK: Never used
 // Convert from scancode to ascii, ie, SDLK_a to 'A'
 unsigned char convert_to_ascii(int scancode)
 {
@@ -1586,3 +1589,4 @@ unsigned char convert_to_ascii(int scancode)
         return 255;
     }
 }
+*/

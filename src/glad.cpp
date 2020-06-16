@@ -326,7 +326,7 @@ void draw_radar_gems(screen  *myscreen)
 	draw_gem(lower_left_x, lower_left_y, team_light,myscreen);
 	draw_gem(lower_right_x, lower_right_y, team_light,myscreen);
 }*/
-
+/* cppchecker: never used
 void draw_gem(short x, short y, short color, screen * myscreen)
 {
 	short light = color;
@@ -346,9 +346,10 @@ void draw_gem(short x, short y, short color, screen * myscreen)
 	myscreen->point(x+1, y+3, darkest);
 	myscreen->point(x, y+4, darkest);
 }
-
+*/
 bool float_eq(float a, float b);
 
+/* cppchecker: never used
 void draw_value_bar(short left, short top,
                     walker  * control, short mode, screen * myscreen)
 {
@@ -475,7 +476,7 @@ void draw_value_bar(short left, short top,
 		}
 	} // end of sp stuff
 } // end of drawing routine ..
-
+*/
 void new_draw_value_bar(short left, short top,
                         walker  * control, short mode, screen * myscreen)
 {

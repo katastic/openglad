@@ -367,13 +367,14 @@ void SimpleButton::set_colors_enabled()
     shadow_color = 74;
 }
 
+/* cppcheck: never used
 void SimpleButton::set_colors_disabled()
 {
     text_color = 3;
     base_color = 10;
     high_color = 12;
     shadow_color = 14;
-}
+}*/
 
 void SimpleButton::set_colors_active()
 {
@@ -1089,12 +1090,13 @@ bool LevelEditorData::loadLevel(int id)
     return result;
 }
 
+/* cppcheck: Never used
 bool LevelEditorData::reloadLevel()
 {
     bool result = level->load();
     update_menu_buttons();
     return result;
-}
+}*/
 
 
 bool LevelEditorData::saveCampaignAs(const std::string& id)
@@ -3983,12 +3985,13 @@ Sint32 level_editor()
 }
 
 
+/* cppcheck: never used
 void set_screen_pos(screen *myscreen, Sint32 x, Sint32 y)
 {
 	myscreen->level_data.topx = x;
 	myscreen->level_data.topy = y;
 	redraw = 1;
-}
+}*/
 
 char get_random_matching_tile(Sint32 whatback)
 {

@@ -113,16 +113,16 @@ void getLevelStats(LevelData& level_data, int* max_enemy_level, float* average_e
     exits.unique();
 }
 
-
+/* cppchecker: never used
 bool isDir(const string& filename)
 {
     struct stat status;
     stat(filename.c_str(), &status);
 
     return (status.st_mode & S_IFDIR);
-}
+}*/
 
-
+/* cppchecker: never used
 bool sort_scen(const string& first, const string& second)
 {
     string s1;
@@ -145,14 +145,13 @@ bool sort_scen(const string& first, const string& second)
         if(!gotNum && isalpha(*e))
             s2 += *e;
         else
-            s2num += *e;
     }
 
     if(s1 == s2)
         return (atoi(s1num.c_str()) < atoi(s2num.c_str()));
     return (first < second);
 }
-
+*/
 
 class BrowserEntry
 {

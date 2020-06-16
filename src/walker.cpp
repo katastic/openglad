@@ -20,6 +20,8 @@
 	buffers: 7/31/02: *deleted some redundant headers
 */
 
+#include<assert.h>
+
 #include "graph.h"
 #include "smooth.h"
 
@@ -1390,6 +1392,8 @@ public:
     virtual void  PrintStateInfo( void* state );
 };
 
+//CPPCHECK: Never used
+//HOWEVER, deleting or commenting it breaks the file. what....
 float Map::LeastCostEstimate( void* stateStart, void* stateEnd )
 {
     int x1 = GET_STATE_X(stateStart);
@@ -1400,7 +1404,9 @@ float Map::LeastCostEstimate( void* stateStart, void* stateEnd )
     return sqrtf((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
 }
 
-void Map::AdjacentCost( void* state, std::vector< StateCost > *adjacent )
+// CPPCHECK: Never used
+//HOWEVER, deleting or commenting it breaks the file. what....
+/*void Map::AdjacentCost( void* state, std::vector< StateCost > *adjacent )
 {
     int x1 = GET_STATE_X(state);
     int y1 = GET_STATE_Y(state);
@@ -1444,7 +1450,7 @@ void Map::AdjacentCost( void* state, std::vector< StateCost > *adjacent )
         }
     }
 }
-
+*/
 void Map::PrintStateInfo( void* state )
 {
     int x1 = GET_STATE_X(state);
@@ -1452,8 +1458,6 @@ void Map::PrintStateInfo( void* state )
 
     Log("(%d,%d)", x1, y1);
 }
-
-
 
 Map path_map;
 MicroPather pather(&path_map);
@@ -1671,16 +1675,18 @@ short walker::query_act_type()
 	return act_type;
 }
 
+/*cppcheck: never used
 short walker::set_old_act_type(short num)
 {
 	old_act_type = (char) num;
 	return num;
-}
+}*/
 
+/*cppcheck: never used
 short walker::query_old_act_type()
 {
 	return old_act_type;
-}
+}*/
 
 short walker::collide(walker  *ob)
 {
@@ -1688,9 +1694,9 @@ short walker::collide(walker  *ob)
 	return 1;
 }
 
-
 short get_xp_from_attack(walker* w, walker* target, float damage)
 {
+    if(target == NULL)return 0; //to fix cppcheck for next line
     float x = (w->stats->level - target->stats->level);
     // Whooo-ee!  An interpolated (quintic) polynomial to fit {{0,30},{1,25},{2,15},{3,10},{4,5},{5,2.5},{6,1.25},{7,0.5},{8,0.25},{9,-10}} for 20 damage done.
     // Being an odd order polynomial is important so it can rise to infinity leftward and fall to neg infinity rightward.
@@ -2322,6 +2328,7 @@ walker  *walker::create_weapon()
 	return weapon;
 }
 
+/*cppcheck: never used
 short walker::query_next_to()
 {
 	short newx, newy;
@@ -2346,7 +2353,7 @@ short walker::query_next_to()
 	{
 		return 0;
 	}
-}
+}*/
 
 short walker::special()
 {

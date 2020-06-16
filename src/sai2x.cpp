@@ -486,7 +486,7 @@ void Scale_SuperEagle(
 }
 
 
-
+/* cppcheck: never used
 void Super2xSaI_ex(unsigned char *src, Uint32 src_pitch, unsigned char *unused, unsigned char *dest, Uint32 dest_pitch, Uint32 width, Uint32 height)
 {
 
@@ -496,7 +496,7 @@ void Super2xSaI_ex(unsigned char *src, Uint32 src_pitch, unsigned char *unused, 
 	unsigned int x, y;
 	Uint32 color[16];
 
-	/* Point to the first 3 lines. */
+	// Point to the first 3 lines.
 	src_line[0] = src;
 	src_line[1] = src;
 	src_line[2] = src + src_pitch;
@@ -517,7 +517,7 @@ void Super2xSaI_ex(unsigned char *src, Uint32 src_pitch, unsigned char *unused, 
 
 	for (y = 0; y < height; y++) {
 
-		/* Todo: x = width - 2, x = width - 1 */
+		// Todo: x = width - 2, x = width - 1
 
 		for (x = 0; x < width; x++) {
 			Uint32 product1a, product1b, product2a, product2b;
@@ -589,7 +589,7 @@ void Super2xSaI_ex(unsigned char *src, Uint32 src_pitch, unsigned char *unused, 
 			*((Uint32 *) (&dst_line[1][x * 8])) = product2a;
 			*((Uint32 *) (&dst_line[1][x * 8 + 4])) = product2b;
 
-			/* Move color matrix forward */
+			// Move color matrix forward
 			color[0] = color[1]; color[4] = color[5]; color[8] = color[9];   color[12] = color[13];
 			color[1] = color[2]; color[5] = color[6]; color[9] = color[10];  color[13] = color[14];
 			color[2] = color[3]; color[6] = color[7]; color[10] = color[11]; color[14] = color[15];
@@ -604,18 +604,18 @@ void Super2xSaI_ex(unsigned char *src, Uint32 src_pitch, unsigned char *unused, 
 			}
 		}
 
-		/* We're done with one line, so we shift the source lines up */
+		// We're done with one line, so we shift the source lines up
 		src_line[0] = src_line[1];
 		src_line[1] = src_line[2];
 		src_line[2] = src_line[3];
 
-		/* Read next line */
+		// Read next line
 		if (y + 3 >= height)
 			src_line[3] = src_line[2];
 		else
 			src_line[3] = src_line[2] + src_pitch;
 
-		/* Then shift the color matrix up */
+		// Then shift the color matrix up
 		Uint32 *lbp;
 		lbp = (Uint32*)src_line[0];
 		color[0] = *lbp; color[1] = color[0]; color[2] = *(lbp + 1); color[3] = *(lbp + 2);
@@ -632,7 +632,8 @@ void Super2xSaI_ex(unsigned char *src, Uint32 src_pitch, unsigned char *unused, 
 		}
 	}
 }
-
+*/
+/* cppcheck: never used
 void Super2xSaI(SDL_Surface *src, SDL_Surface *dest, int s_x, int s_y, int d_x, int d_y, int w, int h)
 {
 	int sbpp, dbpp;
@@ -646,7 +647,7 @@ void Super2xSaI(SDL_Surface *src, SDL_Surface *dest, int s_x, int s_y, int d_x, 
 	sbpp = src->format->BitsPerPixel;
 	dbpp = dest->format->BitsPerPixel;
 
-	if ((sbpp != xsai_depth) || (sbpp != dbpp))	/* Must be same color depth */
+	if ((sbpp != xsai_depth) || (sbpp != dbpp))	// Must be same color depth
 	{
 		Log("Error: In Super2xSaI, sbpp or dbpp are not equal to xsai_depth\n");
 		return;
@@ -657,7 +658,7 @@ void Super2xSaI(SDL_Surface *src, SDL_Surface *dest, int s_x, int s_y, int d_x, 
 
 	if (w < 4 || h < 4)
 	{
-		/* Image is too small to be 2xSaI'ed. */
+		// Image is too small to be 2xSaI'ed.
 		Log("Error: surface to copy is to small, TODO here\n");
 		return;
 	}
@@ -671,7 +672,7 @@ void Super2xSaI(SDL_Surface *src, SDL_Surface *dest, int s_x, int s_y, int d_x, 
 			w, h);
 	return;
 }
-
+*/
 
 
 /////////////////////////////////
@@ -752,11 +753,11 @@ Screen::~Screen()
 	//SDL_DestroyWindow(window);
 }
 
-
+/* cppcheck: never used
 void Screen::SaveBMP(SDL_Surface* screen, char* filename)
 {
 	SDL_SaveBMP(screen, filename);
-}
+}*/
 
 void Screen::clear()
 {

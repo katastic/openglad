@@ -2901,6 +2901,7 @@ Sint32 edit_guy(Sint32 arg1)
 	return OK;
 }
 
+/* cppchecker: never used
 Sint32 how_many(Sint32 whatfamily)    // how many guys of family X on the team?
 {
 	Sint32 counter = 0;
@@ -2913,7 +2914,7 @@ Sint32 how_many(Sint32 whatfamily)    // how many guys of family X on the team?
     }
 
 	return counter;
-}
+}*/
 
 Sint32 do_save(Sint32 arg1)
 {
@@ -3017,6 +3018,7 @@ const char* get_saved_name(const char * filename)
 	return (savedgame);
 }
 
+/*CPPCHECK: Never used
 Sint32 delete_all()
 {
 	Sint32 counter = myscreen->save_data.team_size;
@@ -3030,7 +3032,7 @@ Sint32 delete_all()
     myscreen->save_data.team_size = 0;
 
 	return counter;
-}
+}*/
 
 Sint32 go_menu(Sint32 arg1)
 {
@@ -3258,10 +3260,11 @@ Sint32 set_player_mode(Sint32 howmany)
 
 
 //new functions
+/*cppcheck: never used
 Sint32 return_menu(Sint32 arg)
 {
    return arg;
-}
+}*/
 
 Sint32 create_detail_menu(guy *arg1)
 {
@@ -3749,7 +3752,7 @@ Sint32 create_detail_menu(guy *arg1)
 
 
 
-
+/* cppchecker: never used
 int get_scen_num_from_filename(const char* name)
 {
    if(!name)
@@ -3764,7 +3767,7 @@ int get_scen_num_from_filename(const char* name)
     return -1;
    else
     return atoi(n);
-}
+}*/
 
 
 Sint32 do_pick_campaign(Sint32 arg1)

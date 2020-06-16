@@ -102,6 +102,7 @@ short text::write_xy(short x, short y, unsigned char color, const char* formatte
 	return i*(sizex+1);
 }
 
+/* CPPCHECK: Never used. However maybe a useful tool function to keep. Commenting unused code.
 short text::write_xy_shadow(short x, short y, unsigned char color, const char* formatted_string, ...)
 {
     if(formatted_string == NULL)
@@ -122,6 +123,7 @@ short text::write_xy_shadow(short x, short y, unsigned char color, const char* f
 	}
 	return i*(sizex+1);
 }
+*/
 
 short text::write_xy_center(short x, short y, unsigned char color, const char* formatted_string, ...)
 {

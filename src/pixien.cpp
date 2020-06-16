@@ -69,12 +69,14 @@ short pixieN::set_frame(short framenum)
 	return 1;
 }
 
+/*cppcheck: never used
 short pixieN::next_frame()
 {
 	return set_frame(frame++ % frames);
-}
+}*/
 
+/*cppcheck: never used
 short pixieN::query_frame()
 {
 	return frame;
-}
+}*/

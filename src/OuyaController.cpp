@@ -15,15 +15,16 @@ OuyaController::OuyaController()
 {
     for(int i = 0; i < NUM_BUTTONS; i++)
         button_state[i] = false;
-    
+
     for(int i = 0; i < NUM_AXES; i++)
         axis_state[i] = 0.0f;
 }
 
+/* cppcheck: never used
 int OuyaController::getPlayerNum() const
 {
     return player;
-}
+}*/
 
 bool& OuyaController::getButtonValue(ButtonEnum button)
 {
@@ -135,11 +136,12 @@ float OuyaController::getAxisValue(AxisEnum axis) const
     return 0.0f;
 }
 
+/* cppcheck: never used
 float OuyaController::getNormalizedAxisValue(AxisEnum axis) const
 {
     if(!isStickBeyondDeadzone(axis))
         return 0.0f;
-    
+
     float value = 0.0f;
     float dir = 0.0f;
     // A joystick deadzone is angled in the direction of the stick, so we need to calculate the amount of deadzone in that direction
@@ -175,12 +177,12 @@ float OuyaController::getNormalizedAxisValue(AxisEnum axis) const
     default:
         return 0.0f;
     }
-    
+
     SDL_Log("value: %.2f, dzone: %.2f, result: %.2f\n", value, dzone, (value - dzone)/(1.0f - dzone));
     if(value > 0.0f)
         return (value - dzone)/(1.0f - dzone);
     return (value + dzone)/(1.0f - dzone);
-}
+}*/
 
 inline float dist(float x, float y)
 {
@@ -215,7 +217,7 @@ bool OuyaController::isStickInNegativeCone(AxisEnum axis) const
 {
     if(!isStickBeyondDeadzone(axis))
         return false;
-    
+
     switch(axis)
     {
     case AXIS_LS_X:
@@ -249,7 +251,7 @@ bool OuyaController::isStickInPositiveCone(AxisEnum axis) const
 {
     if(!isStickBeyondDeadzone(axis))
         return false;
-    
+
     switch(axis)
     {
     case AXIS_LS_X:
@@ -295,22 +297,22 @@ void OuyaControllerManager::init()
 {
     if(inited)
         return;
-    
+
     send_user_events = true;
-    
+
     BUTTON_DOWN_EVENT = SDL_RegisterEvents(1);
     BUTTON_UP_EVENT = SDL_RegisterEvents(1);
     AXIS_EVENT = SDL_RegisterEvents(1);
-    
+
     SDL_assert(BUTTON_DOWN_EVENT != Uint32(-1));
     SDL_assert(BUTTON_UP_EVENT != Uint32(-1));
     SDL_assert(AXIS_EVENT != Uint32(-1));
-    
+
     for(int i = 0; i < MAX_PLAYERS; i++)
     {
         controller[i].player = i;
     }
-    
+
     inited = true;
 }
 
@@ -323,9 +325,9 @@ OuyaController& OuyaControllerManager::getController(int player)
 void OuyaControllerManager::key_down(int player, int button)
 {
     SDL_assert(player >= 0 && player < MAX_PLAYERS);
-    
+
     controller[player].getButtonValue(OuyaController::ButtonEnum(button)) = true;
-    
+
     if(send_user_events)
     {
         SDL_Event event;
@@ -341,9 +343,9 @@ void OuyaControllerManager::key_down(int player, int button)
 void OuyaControllerManager::key_up(int player, int button)
 {
     SDL_assert(player >= 0 && player < MAX_PLAYERS);
-    
+
     controller[player].getButtonValue(OuyaController::ButtonEnum(button)) = false;
-    
+
     if(send_user_events)
     {
         SDL_Event event;
@@ -359,7 +361,7 @@ void OuyaControllerManager::key_up(int player, int button)
 void OuyaControllerManager::axis_motion(int player, float LS_X, float LS_Y, float RS_X, float RS_Y, float L2, float R2)
 {
     SDL_assert(player >= 0 && player < MAX_PLAYERS);
-    
+
     OuyaController& c = controller[player];
     c.getAxisValue(OuyaController::AXIS_LS_X) = LS_X;
     c.getAxisValue(OuyaController::AXIS_LS_Y) = LS_Y;
@@ -367,7 +369,7 @@ void OuyaControllerManager::axis_motion(int player, float LS_X, float LS_Y, floa
     c.getAxisValue(OuyaController::AXIS_RS_Y) = RS_Y;
     c.getAxisValue(OuyaController::AXIS_L2) = L2;
     c.getAxisValue(OuyaController::AXIS_R2) = R2;
-    
+
     if(send_user_events)
     {
         SDL_Event event;

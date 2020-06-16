@@ -56,8 +56,9 @@ void Log(const char* format, ...)
     va_end(args);
 }
 
+/*
 void change_time(Uint32 new_count)
-{}
+{}*/
 
 void grab_timer()
 {}
@@ -97,12 +98,13 @@ void lowercase(char * str)
 }
 
 //buffers: add: another extra routine.
+/* CPPCHECK: Never used
 void uppercase(char *str)
 {
     unsigned int i;
     for(i=0; i<strlen(str); i++)
         str[i] = toupper(str[i]);
-}
+}*/
 
 // kari: yet two extra
 void lowercase(std::string &str)
@@ -111,8 +113,8 @@ void lowercase(std::string &str)
         *iter = tolower(*iter);
 }
 
-void uppercase(std::string &str)
+/*cppcheck: never used
 {
     for(std::string::iterator iter = str.begin(); iter!=str.end(); ++iter)
         *iter = toupper(*iter);
-}
+}*/

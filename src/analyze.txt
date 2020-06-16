@@ -1,0 +1,2226 @@
+Checking OuyaController.cpp ...
+Checking OuyaController.cpp: __ANDROID__...
+1/39 files checked 0% done
+Checking button.cpp ...
+button.cpp:201:10: warning: Member variable 'vbutton::fun' is not initialized in the constructor. [uninitMemberVar]
+vbutton::vbutton() //for pointers
+         ^
+button.cpp:201:10: warning: Member variable 'vbutton::prev' is not initialized in the constructor. [uninitMemberVar]
+vbutton::vbutton() //for pointers
+         ^
+button.cpp:201:10: warning: Member variable 'vbutton::hotkey' is not initialized in the constructor. [uninitMemberVar]
+vbutton::vbutton() //for pointers
+         ^
+button.cpp:201:10: warning: Member variable 'vbutton::color' is not initialized in the constructor. [uninitMemberVar]
+vbutton::vbutton() //for pointers
+         ^
+button.cpp:201:10: warning: Member variable 'vbutton::hidden' is not initialized in the constructor. [uninitMemberVar]
+vbutton::vbutton() //for pointers
+         ^
+button.cpp:201:10: warning: Member variable 'vbutton::no_draw' is not initialized in the constructor. [uninitMemberVar]
+vbutton::vbutton() //for pointers
+         ^
+button.cpp:109:10: warning: Member variable 'vbutton::prev' is not initialized in the constructor. [uninitMemberVar]
+vbutton::vbutton(Sint32 xpos, Sint32 ypos, Sint32 wide, Sint32 high,
+         ^
+button.cpp:138:10: warning: Member variable 'vbutton::prev' is not initialized in the constructor. [uninitMemberVar]
+vbutton::vbutton(Sint32 xpos, Sint32 ypos, Sint32 wide, Sint32 high,
+         ^
+button.cpp:167:10: warning: Member variable 'vbutton::prev' is not initialized in the constructor. [uninitMemberVar]
+vbutton::vbutton(Sint32 xpos, Sint32 ypos, Sint32 wide, Sint32 high,
+         ^
+button.cpp:112:5: performance: Variable 'arg' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    arg = pass;
+    ^
+button.cpp:114:5: performance: Variable 'myfunc' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    myfunc = 0;
+    ^
+button.cpp:115:5: performance: Variable 'xloc' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    xloc = xpos;
+    ^
+button.cpp:116:5: performance: Variable 'yloc' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    yloc = ypos;
+    ^
+button.cpp:117:5: performance: Variable 'width' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    width = wide;
+    ^
+button.cpp:118:5: performance: Variable 'height' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    height = high;
+    ^
+button.cpp:121:5: performance: Variable 'label' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    label = msg;
+    ^
+button.cpp:141:5: performance: Variable 'arg' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    arg = pass;
+    ^
+button.cpp:143:5: performance: Variable 'myfunc' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    myfunc = func_code;
+    ^
+button.cpp:144:5: performance: Variable 'xloc' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    xloc = xpos;
+    ^
+button.cpp:145:5: performance: Variable 'yloc' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    yloc = ypos;
+    ^
+button.cpp:146:5: performance: Variable 'width' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    width = wide;
+    ^
+button.cpp:147:5: performance: Variable 'height' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    height = high;
+    ^
+button.cpp:150:5: performance: Variable 'label' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    label = msg;
+    ^
+button.cpp:171:5: performance: Variable 'arg' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    arg = pass;
+    ^
+button.cpp:173:5: performance: Variable 'myfunc' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    myfunc = func_code;
+    ^
+button.cpp:174:5: performance: Variable 'xloc' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    xloc = xpos;
+    ^
+button.cpp:175:5: performance: Variable 'yloc' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    yloc = ypos;
+    ^
+button.cpp:176:5: performance: Variable 'width' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    width = wide;
+    ^
+button.cpp:177:5: performance: Variable 'height' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    height = high;
+    ^
+button.cpp:180:5: performance: Variable 'label' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    label = msg;
+    ^
+text.h:32:3: style: Class 'text' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  text(const char * filename);
+  ^
+input.h:169:5: style: Class 'JoyData' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+    JoyData(int index);
+    ^
+soundob.h:49:3: style: Class 'soundob' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  soundob(bool silent);
+  ^
+pixie.h:27:3: style: Class 'pixie' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  pixie(const PixieData& data);
+  ^
+pixien.h:28:3: style: Class 'pixieN' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  pixieN(const PixieData& data);
+  ^
+level_data.h:56:5: style: Class 'CampaignData' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+    CampaignData(const std::string& id);
+    ^
+level_data.h:102:5: style: Class 'LevelData' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+    LevelData(int id);
+    ^
+walker.h:31:3: style: Class 'walker' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  walker(const PixieData& data);
+  ^
+screen.h:39:3: style: Class 'screen' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  screen(short howmany);
+  ^
+walker.h:34:9: style: The function 'move' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  short move(short x, short y);
+        ^
+pixie.h:31:17: note: Virtual function in base class
+  virtual short move (short x, short y);
+                ^
+walker.h:34:9: note: Function in derived class
+  short move(short x, short y);
+        ^
+button.cpp:432:17: style: Variable 'mymouse' can be declared with const [constVariable]
+    MouseState& mymouse = query_mouse();
+                ^
+button.cpp:321:20: style: Variable 'retvalue' is assigned a value that is never used. [unreadVariable]
+    Sint32 retvalue=0;
+                   ^
+button.cpp:351:20: style: Variable 'retvalue' is assigned a value that is never used. [unreadVariable]
+    Sint32 retvalue=0;
+                   ^
+button.cpp:411:21: style: Variable 'whichbutton' is assigned a value that is never used. [unreadVariable]
+        whichbutton = 1;
+                    ^
+Checking button.cpp: OUYA...
+Checking button.cpp: USE_TOUCH_INPUT...
+2/39 files checked 2% done
+Checking campaign_picker.cpp ...
+campaign_picker.cpp:142:13: warning: Class 'CampaignEntry' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s). [noCopyConstructor]
+            icon = new pixie(icondata);
+            ^
+campaign_picker.cpp:142:13: warning: Class 'CampaignEntry' does not have a operator= which is recommended since it has dynamic memory/resource allocation(s). [noOperatorEq]
+            icon = new pixie(icondata);
+            ^
+stats.h:56:3: style: Class 'statistics' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  statistics(walker  *);
+  ^
+guy.h:30:3: style: Class 'guy' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  guy (int whatfamily);
+  ^
+campaign_picker.cpp:309:17: style: Local variable 'i' shadows outer variable [shadowVariable]
+        for(int i=0; i<MAX_TEAM_SIZE; i++)
+                ^
+campaign_picker.cpp:290:9: note: Shadowed declaration
+    int i = 0;
+        ^
+campaign_picker.cpp:309:17: note: Shadow variable
+        for(int i=0; i<MAX_TEAM_SIZE; i++)
+                ^
+campaign_picker.cpp:328:41: style: Argument 'area.x-30-20' to function Sint16 is always 94 [constArgument]
+    SDL_Rect prev = {Sint16(area.x - 30 - 20), Sint16(area.y), 30, 10};
+                                        ^
+campaign_picker.cpp:320:12: note: area.x is assigned value 144
+    area.x = 160 - 16;
+           ^
+campaign_picker.cpp:328:41: note: Argument 'area.x-30-20' to function Sint16 is always 94
+    SDL_Rect prev = {Sint16(area.x - 30 - 20), Sint16(area.y), 30, 10};
+                                        ^
+campaign_picker.cpp:331:41: style: Argument 'screenW/2+20' to function Sint16 is always 220 [constArgument]
+    SDL_Rect choose = {Sint16(screenW/2 + 20), Sint16(screenH - 15), 30, 10};
+                                        ^
+campaign_picker.cpp:326:22: note: Assignment 'screenW=SCREEN_W', assigned value is 400
+    Sint16 screenW = SCREEN_W;
+                     ^
+campaign_picker.cpp:331:41: note: Argument 'screenW/2+20' to function Sint16 is always 220
+    SDL_Rect choose = {Sint16(screenW/2 + 20), Sint16(screenH - 15), 30, 10};
+                                        ^
+campaign_picker.cpp:331:63: style: Argument 'screenH-15' to function Sint16 is always 285 [constArgument]
+    SDL_Rect choose = {Sint16(screenW/2 + 20), Sint16(screenH - 15), 30, 10};
+                                                              ^
+campaign_picker.cpp:327:22: note: Assignment 'screenH=SCREEN_H', assigned value is 300
+    Sint16 screenH = SCREEN_H;
+                     ^
+campaign_picker.cpp:331:63: note: Argument 'screenH-15' to function Sint16 is always 285
+    SDL_Rect choose = {Sint16(screenW/2 + 20), Sint16(screenH - 15), 30, 10};
+                                                              ^
+campaign_picker.cpp:332:46: style: Argument 'screenW/2-38-20' to function Sint16 is always 142 [constArgument]
+    SDL_Rect cancel = {Sint16(screenW/2 - 38 - 20), Sint16(screenH - 15), 38, 10};
+                                             ^
+campaign_picker.cpp:326:22: note: Assignment 'screenW=SCREEN_W', assigned value is 400
+    Sint16 screenW = SCREEN_W;
+                     ^
+campaign_picker.cpp:332:46: note: Argument 'screenW/2-38-20' to function Sint16 is always 142
+    SDL_Rect cancel = {Sint16(screenW/2 - 38 - 20), Sint16(screenH - 15), 38, 10};
+                                             ^
+campaign_picker.cpp:332:68: style: Argument 'screenH-15' to function Sint16 is always 285 [constArgument]
+    SDL_Rect cancel = {Sint16(screenW/2 - 38 - 20), Sint16(screenH - 15), 38, 10};
+                                                                   ^
+campaign_picker.cpp:327:22: note: Assignment 'screenH=SCREEN_H', assigned value is 300
+    Sint16 screenH = SCREEN_H;
+                     ^
+campaign_picker.cpp:332:68: note: Argument 'screenH-15' to function Sint16 is always 285
+    SDL_Rect cancel = {Sint16(screenW/2 - 38 - 20), Sint16(screenH - 15), 38, 10};
+                                                                   ^
+campaign_picker.cpp:333:46: style: Argument 'screenW-50' to function Sint16 is always 350 [constArgument]
+    SDL_Rect delete_button = {Sint16(screenW - 50), 10, 38, 10};
+                                             ^
+campaign_picker.cpp:326:22: note: Assignment 'screenW=SCREEN_W', assigned value is 400
+    Sint16 screenW = SCREEN_W;
+                     ^
+campaign_picker.cpp:333:46: note: Argument 'screenW-50' to function Sint16 is always 350
+    SDL_Rect delete_button = {Sint16(screenW - 50), 10, 38, 10};
+                                             ^
+campaign_picker.cpp:291:93: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(std::list<std::string>::iterator e = campaign_ids.begin(); e != campaign_ids.end(); e++)
+                                                                                            ^
+campaign_picker.cpp:462:99: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+               for(std::vector<CampaignEntry*>::iterator e = entries.begin(); e != entries.end(); e++)
+                                                                                                  ^
+campaign_picker.cpp:470:105: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                for(std::list<std::string>::iterator e = campaign_ids.begin(); e != campaign_ids.end(); e++)
+                                                                                                        ^
+campaign_picker.cpp:587:88: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(std::vector<CampaignEntry*>::iterator e = entries.begin(); e != entries.end(); e++)
+                                                                                       ^
+Checking campaign_picker.cpp: OUYA...
+Checking campaign_picker.cpp: USE_TOUCH_INPUT...
+3/39 files checked 4% done
+Checking effect.cpp ...
+effect.h:32:3: style: Class 'effect' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  effect(const PixieData& data);
+  ^
+effect.h:34:9: style: The function 'act' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  short act();
+        ^
+walker.h:50:17: note: Virtual function in base class
+  virtual short act();
+                ^
+effect.h:34:9: note: Function in derived class
+  short act();
+        ^
+effect.h:35:9: style: The function 'animate' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  short animate();
+        ^
+walker.h:58:17: note: Virtual function in base class
+  virtual short animate();
+                ^
+effect.h:35:9: note: Function in derived class
+  short animate();
+        ^
+effect.h:36:9: style: The function 'death' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  short death(); // called on destruction
+        ^
+walker.h:82:17: note: Virtual function in base class
+  virtual short death(); // called when death/destruction occurs ..
+                ^
+effect.h:36:9: note: Function in derived class
+  short death(); // called on destruction
+        ^
+effect.h:37:8: style: The function 'query_order' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  char query_order()
+       ^
+walker.h:60:16: note: Virtual function in base class
+  virtual char query_order()
+               ^
+effect.h:37:8: note: Function in derived class
+  char query_order()
+       ^
+effect.cpp:48:8: style: The scope of the variable 'numfoes' can be reduced. [variableScope]
+ short numfoes;
+       ^
+Checking effect.cpp: OUYA...
+Checking effect.cpp: USE_TOUCH_INPUT...
+4/39 files checked 5% done
+Checking game.cpp ...
+living.h:28:3: style: Class 'living' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  living(const PixieData& data);
+  ^
+weap.h:28:3: style: Class 'weap' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  weap(const PixieData& data);
+  ^
+treasure.h:28:3: style: Class 'treasure' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  treasure(const PixieData& data);
+  ^
+living.h:30:18: style: The function 'act' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  short          act();
+                 ^
+walker.h:50:17: note: Virtual function in base class
+  virtual short act();
+                ^
+living.h:30:18: note: Function in derived class
+  short          act();
+                 ^
+living.h:31:18: style: The function 'check_special' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  short          check_special(); // determine if we should do special ..
+                 ^
+walker.h:85:17: note: Virtual function in base class
+  virtual short check_special();
+                ^
+living.h:31:18: note: Function in derived class
+  short          check_special(); // determine if we should do special ..
+                 ^
+living.h:32:18: style: The function 'collide' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  short          collide(walker  *ob);
+                 ^
+walker.h:56:17: note: Virtual function in base class
+  virtual short collide(walker  *ob);
+                ^
+living.h:32:18: note: Function in derived class
+  short          collide(walker  *ob);
+                 ^
+living.h:34:18: style: The function 'do_summon' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  walker*        do_summon(char whatfamily, unsigned short lifetime);
+                 ^
+walker.h:84:20: note: Virtual function in base class
+  virtual walker  *do_summon(char whatfamily, unsigned short lifetime);
+                   ^
+living.h:34:18: note: Function in derived class
+  walker*        do_summon(char whatfamily, unsigned short lifetime);
+                 ^
+living.h:35:18: style: The function 'facing' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  short          facing(short x, short y);
+                 ^
+walker.h:90:17: note: Virtual function in base class
+  virtual short facing(short x, short y);
+                ^
+living.h:35:18: note: Function in derived class
+  short          facing(short x, short y);
+                 ^
+living.h:36:18: style: The function 'set_difficulty' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  void           set_difficulty(Uint32 whatlevel);
+                 ^
+walker.h:87:16: note: Virtual function in base class
+  virtual void set_difficulty(Uint32 whatlevel);
+               ^
+living.h:36:18: note: Function in derived class
+  void           set_difficulty(Uint32 whatlevel);
+                 ^
+living.h:37:18: style: The function 'shove' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  short          shove(walker  *target, short x, short y);
+                 ^
+walker.h:75:17: note: Virtual function in base class
+  virtual short shove(walker  *target, short x, short y);
+                ^
+living.h:37:18: note: Function in derived class
+  short          shove(walker  *target, short x, short y);
+                 ^
+living.h:38:18: style: The function 'query_order' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  char           query_order()
+                 ^
+walker.h:60:16: note: Virtual function in base class
+  virtual char query_order()
+               ^
+living.h:38:18: note: Function in derived class
+  char           query_order()
+                 ^
+living.h:42:16: style: The function 'walk' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual bool walk(float x, float y);
+               ^
+walker.h:40:16: note: Virtual function in base class
+  virtual bool walk(float x, float y);
+               ^
+living.h:42:16: note: Function in derived class
+  virtual bool walk(float x, float y);
+               ^
+living.h:44:9: style: The function 'act_random' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  short act_random();
+        ^
+walker.h:188:17: note: Virtual function in base class
+  virtual short act_random();
+                ^
+living.h:44:9: note: Function in derived class
+  short act_random();
+        ^
+weap.h:31:9: style: The function 'act' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  short act();
+        ^
+walker.h:50:17: note: Virtual function in base class
+  virtual short act();
+                ^
+weap.h:31:9: note: Function in derived class
+  short act();
+        ^
+weap.h:32:9: style: The function 'animate' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  short animate();
+        ^
+walker.h:58:17: note: Virtual function in base class
+  virtual short animate();
+                ^
+weap.h:32:9: note: Function in derived class
+  short animate();
+        ^
+weap.h:33:9: style: The function 'death' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  short death(); // called on destruction
+        ^
+walker.h:82:17: note: Virtual function in base class
+  virtual short death(); // called when death/destruction occurs ..
+                ^
+weap.h:33:9: note: Function in derived class
+  short death(); // called on destruction
+        ^
+weap.h:34:9: style: The function 'setxy' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  short setxy(short x, short y);
+        ^
+walker.h:36:17: note: Virtual function in base class
+  virtual short setxy(short x, short y);
+                ^
+weap.h:34:9: note: Function in derived class
+  short setxy(short x, short y);
+        ^
+weap.h:35:9: style: The function 'query_order' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  char  query_order()
+        ^
+walker.h:60:16: note: Virtual function in base class
+  virtual char query_order()
+               ^
+weap.h:35:9: note: Function in derived class
+  char  query_order()
+        ^
+treasure.h:30:18: style: The function 'act' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  short          act();
+                 ^
+walker.h:50:17: note: Virtual function in base class
+  virtual short act();
+                ^
+treasure.h:30:18: note: Function in derived class
+  short          act();
+                 ^
+treasure.h:32:18: style: The function 'eat_me' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  short          eat_me(walker  * eater);
+                 ^
+walker.h:76:17: note: Virtual function in base class
+  virtual short eat_me(walker  *eater);
+                ^
+treasure.h:32:18: note: Function in derived class
+  short          eat_me(walker  * eater);
+                 ^
+treasure.h:34:16: style: The function 'set_direct_frame' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  void         set_direct_frame(short whatframe);
+               ^
+walker.h:77:16: note: Virtual function in base class
+  virtual void set_direct_frame(short whichframe);
+               ^
+treasure.h:34:16: note: Function in derived class
+  void         set_direct_frame(short whatframe);
+               ^
+treasure.h:35:16: style: The function 'query_order' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  char         query_order()
+               ^
+walker.h:60:16: note: Virtual function in base class
+  virtual char query_order()
+               ^
+treasure.h:35:16: note: Function in derived class
+  char         query_order()
+               ^
+game.cpp:28:17: style: The scope of the variable 'temp_walker' can be reduced. [variableScope]
+ walker        *temp_walker,  *replace_walker;
+                ^
+game.cpp:29:16: style: The scope of the variable 'myord' can be reduced. [variableScope]
+ short         myord, myfam;
+               ^
+game.cpp:29:23: style: The scope of the variable 'myfam' can be reduced. [variableScope]
+ short         myord, myfam;
+                      ^
+game.cpp:68:10: style: Local variable 'i' shadows outer variable [shadowVariable]
+ for(int i = 0; i < myscreen->save_data.team_size; i++)
+         ^
+game.cpp:31:16: note: Shadowed declaration
+ int           i;
+               ^
+game.cpp:68:10: note: Shadow variable
+ for(int i = 0; i < myscreen->save_data.team_size; i++)
+         ^
+Checking game.cpp: OUYA...
+Checking game.cpp: USE_TOUCH_INPUT...
+5/39 files checked 6% done
+Checking glad.cpp ...
+glad.cpp:716:22: warning: Either the condition 'control' is redundant or there is possible null pointer dereference: control. [nullPointerRedundantCheck]
+    if (scorecountup[control->team_num] > myscore)
+                     ^
+glad.cpp:712:9: note: Assuming that condition 'control' is not redundant
+    if (control)
+        ^
+glad.cpp:716:22: note: Null pointer dereference
+    if (scorecountup[control->team_num] > myscore)
+                     ^
+glad.cpp:562:11: style: The scope of the variable 'control' can be reduced. [variableScope]
+ walker  *control;
+          ^
+glad.cpp:563:8: style: The scope of the variable 'lm' can be reduced. [variableScope]
+ short lm, tm; // left and top margins
+       ^
+glad.cpp:563:12: style: The scope of the variable 'tm' can be reduced. [variableScope]
+ short lm, tm; // left and top margins
+           ^
+glad.cpp:564:8: style: The scope of the variable 'rm' can be reduced. [variableScope]
+ short rm, bm; // right and bottom margins
+       ^
+glad.cpp:824:8: style: The scope of the variable 'i' can be reduced. [variableScope]
+ short i, j;
+       ^
+glad.cpp:824:11: style: The scope of the variable 'j' can be reduced. [variableScope]
+ short i, j;
+          ^
+glad.cpp:358:22: style: Variable 'bar_remainder' is assigned a value that is never used. [unreadVariable]
+ short bar_remainder = totallength - bar_length;
+                     ^
+glad.cpp:484:18: style: Variable 'bar_length' is assigned a value that is never used. [unreadVariable]
+ short bar_length=0;
+                 ^
+glad.cpp:553:17: style: Variable 'tempfoes' is assigned a value that is never used. [unreadVariable]
+ short tempfoes = 0;
+                ^
+glad.cpp:555:19: style: Variable 'tempallies' is assigned a value that is never used. [unreadVariable]
+ short tempallies = 0;
+                  ^
+Checking glad.cpp: OUYA...
+Checking glad.cpp: REDUCE_OVERSCAN...
+Checking glad.cpp: USE_TOUCH_INPUT...
+glad.cpp:703:9: style: Local variable 'bm' shadows outer variable [shadowVariable]
+    int bm = tm + 54;
+        ^
+glad.cpp:564:12: note: Shadowed declaration
+ short rm, bm; // right and bottom margins
+           ^
+glad.cpp:703:9: note: Shadow variable
+    int bm = tm + 54;
+        ^
+6/39 files checked 8% done
+Checking gloader.cpp ...
+gloader.cpp:341:2: warning: Class 'loader' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s). [noCopyConstructor]
+ graphics = new PixieData[SIZE_ORDERS*SIZE_FAMILIES];
+ ^
+gloader.cpp:341:2: warning: Class 'loader' does not have a operator= which is recommended since it has dynamic memory/resource allocation(s). [noOperatorEq]
+ graphics = new PixieData[SIZE_ORDERS*SIZE_FAMILIES];
+ ^
+gloader.cpp:523:45: style: Variable 'act_types[21*1+15]' is reassigned a value before the old one has been used. [redundantAssignment]
+ act_types[PIX(ORDER_WEAPON, FAMILY_WAVE3)] = ACT_FIRE;
+                                            ^
+gloader.cpp:522:45: note: act_types[21*1+15] is assigned
+ act_types[PIX(ORDER_WEAPON, FAMILY_WAVE3)] = ACT_FIRE;
+                                            ^
+gloader.cpp:523:45: note: act_types[21*1+15] is overwritten
+ act_types[PIX(ORDER_WEAPON, FAMILY_WAVE3)] = ACT_FIRE;
+                                            ^
+Checking gloader.cpp: OUYA...
+Checking gloader.cpp: USE_TOUCH_INPUT...
+7/39 files checked 13% done
+Checking gparser.cpp ...
+gparser.cpp:179:34: style: Parameter 'argc' can be declared with const [constParameter]
+void cfg_store::commandline(int &argc, char **&argv)
+                                 ^
+gparser.cpp:179:48: style: Parameter 'argv' can be declared with const [constParameter]
+void cfg_store::commandline(int &argc, char **&argv)
+                                               ^
+Checking gparser.cpp: OUYA...
+Checking gparser.cpp: USE_TOUCH_INPUT...
+Checking gparser.cpp: _MSC_VER...
+8/39 files checked 13% done
+Checking graphlib.cpp ...
+Checking graphlib.cpp: OUYA...
+Checking graphlib.cpp: USE_TOUCH_INPUT...
+9/39 files checked 14% done
+Checking guy.cpp ...
+guy.cpp:71:2: performance: Variable 'level_kills' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+ level_kills = 0;
+ ^
+guy.cpp:72:2: performance: Variable 'total_damage' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+ total_damage = total_hits = total_shots = 0;
+ ^
+guy.cpp:72:17: performance: Variable 'total_hits' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+ total_damage = total_hits = total_shots = 0;
+                ^
+guy.cpp:72:30: performance: Variable 'total_shots' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+ total_damage = total_hits = total_shots = 0;
+                             ^
+guy.cpp:73:2: performance: Variable 'exp' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+ exp = 0;
+ ^
+guy.cpp:338:47: style: Same expression used in consecutive assignments of 'c' and 'i'. [duplicateAssignExpression]
+    short s = 8*level_diff, d = 6*level_diff, c = 8*level_diff, i = 8*level_diff, a = 1*level_diff;
+                                              ^
+guy.cpp:338:65: note: Same expression used in consecutive assignments of 'c' and 'i'.
+    short s = 8*level_diff, d = 6*level_diff, c = 8*level_diff, i = 8*level_diff, a = 1*level_diff;
+                                                                ^
+guy.cpp:338:47: note: Same expression used in consecutive assignments of 'c' and 'i'.
+    short s = 8*level_diff, d = 6*level_diff, c = 8*level_diff, i = 8*level_diff, a = 1*level_diff;
+                                              ^
+Checking guy.cpp: OUYA...
+Checking guy.cpp: USE_TOUCH_INPUT...
+10/39 files checked 16% done
+Checking help.cpp ...
+help.cpp:40:8: style: The scope of the variable 'readvalue' can be reduced. [variableScope]
+ short readvalue;
+       ^
+help.cpp:334:8: style: The scope of the variable 'someline' can be reduced. [variableScope]
+ char *someline;
+       ^
+help.cpp:75:21: style: Variable 'key_presses' is assigned a value that is never used. [unreadVariable]
+ Sint32 key_presses = 0;
+                    ^
+Checking help.cpp: OUYA...
+Checking help.cpp: USE_TOUCH_INPUT...
+11/39 files checked 17% done
+Checking input.cpp ...
+input.cpp:906:10: warning: Member variable 'JoyData::key_type' is not initialized in the constructor. [uninitMemberVar]
+JoyData::JoyData()
+         ^
+input.cpp:906:10: warning: Member variable 'JoyData::key_index' is not initialized in the constructor. [uninitMemberVar]
+JoyData::JoyData()
+         ^
+input.cpp:347:9: style: Consecutive return, break, continue, goto or throw statements are unnecessary. [duplicateBreak]
+        break;
+        ^
+Checking input.cpp: FAKE_TOUCH_EVENTS;USE_TOUCH_INPUT...
+Checking input.cpp: OUYA...
+Checking input.cpp: USE_TOUCH_INPUT...
+12/39 files checked 21% done
+Checking intro.cpp ...
+Checking intro.cpp: OUYA...
+Checking intro.cpp: USE_TOUCH_INPUT...
+13/39 files checked 22% done
+Checking io.cpp ...
+io.cpp:242:73: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); e++)
+                                                                        ^
+io.cpp:276:9: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        e++;
+        ^
+io.cpp:306:9: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        e++;
+        ^
+io.cpp:523:91: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+            for(std::list<std::string>::iterator e = sublist.begin(); e != sublist.end(); e++)
+                                                                                          ^
+io.cpp:554:79: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(std::list<std::string>::iterator e = files.begin(); e != files.end(); e++)
+                                                                              ^
+io.cpp:918:83: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(std::list<std::string>::reverse_iterator e = ls.rbegin(); e != ls.rend(); e++)
+                                                                                  ^
+Checking io.cpp: ANDROID...
+Checking io.cpp: OUYA...
+Checking io.cpp: USE_TOUCH_INPUT...
+Checking io.cpp: WIN32...
+Checking io.cpp: __IPHONEOS__...
+14/39 files checked 24% done
+Checking level_data.cpp ...
+level_data.cpp:302:5: warning: Class 'LevelData' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s). [noCopyConstructor]
+    myloader = new loader;
+    ^
+level_data.cpp:302:5: warning: Class 'LevelData' does not have a operator= which is recommended since it has dynamic memory/resource allocation(s). [noOperatorEq]
+    myloader = new loader;
+    ^
+level_data.cpp:151:17: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                e++;
+                ^
+level_data.cpp:229:17: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                e++;
+                ^
+level_data.cpp:280:9: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        e++;
+        ^
+level_data.cpp:592:83: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(std::list<walker*>::iterator e = dead_list.begin(); e != dead_list.end(); e++)
+                                                                                  ^
+level_data.cpp:1588:3: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+  e++;
+  ^
+level_data.cpp:1632:9: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        e++;
+        ^
+Checking level_data.cpp: OUYA...
+Checking level_data.cpp: USE_TOUCH_INPUT...
+15/39 files checked 28% done
+Checking level_editor.cpp ...
+level_editor.cpp:3310:27: warning: Comparison of a boolean expression with an integer. [compareBoolExpressionWithInt]
+            if(left_state != mymouse.left)
+                          ^
+level_editor.cpp:3312:33: warning: Comparison of a boolean expression with an integer. [compareBoolExpressionWithInt]
+            else if(right_state != mymouse.right)
+                                ^
+level_editor.cpp:3338:27: warning: Comparison of a boolean expression with an integer. [compareBoolExpressionWithInt]
+            if(left_state != mymouse.left)
+                          ^
+level_editor.cpp:3340:33: warning: Comparison of a boolean expression with an integer. [compareBoolExpressionWithInt]
+            else if(right_state != mymouse.right)
+                                ^
+level_editor.cpp:959:7: warning: Class 'LevelEditorData' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s). [noCopyConstructor]
+    : campaign(new CampaignData("org.openglad.gladiator")), level(new LevelData(1)), mode(TERRAIN), rect_selecting(false), dragging(false), myradar(myscreen->viewob[0], myscreen, 0)
+      ^
+level_editor.cpp:959:7: warning: Class 'LevelEditorData' does not have a operator= which is recommended since it has dynamic memory/resource allocation(s). [noOperatorEq]
+    : campaign(new CampaignData("org.openglad.gladiator")), level(new LevelData(1)), mode(TERRAIN), rect_selecting(false), dragging(false), myradar(myscreen->viewob[0], myscreen, 0)
+      ^
+level_editor.cpp:788:5: style: Class 'SelectionInfo' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+    SelectionInfo(walker* target)
+    ^
+level_editor.cpp:3112:25: warning: Either the condition 'if(newob)' is redundant or there is possible null pointer dereference: newob. [nullPointerRedundantCheck]
+                        newob->team_num = object_brush.team;
+                        ^
+level_editor.cpp:3119:32: note: Assuming that condition 'if(newob)' is not redundant
+                            if (newob)
+                               ^
+level_editor.cpp:3112:25: note: Null pointer dereference
+                        newob->team_num = object_brush.team;
+                        ^
+level_editor.cpp:3113:25: warning: Either the condition 'if(newob)' is redundant or there is possible null pointer dereference: newob. [nullPointerRedundantCheck]
+                        newob->stats->level = object_brush.level;
+                        ^
+level_editor.cpp:3119:32: note: Assuming that condition 'if(newob)' is not redundant
+                            if (newob)
+                               ^
+level_editor.cpp:3113:25: note: Null pointer dereference
+                        newob->stats->level = object_brush.level;
+                        ^
+level_editor.cpp:3114:25: warning: Either the condition 'if(newob)' is redundant or there is possible null pointer dereference: newob. [nullPointerRedundantCheck]
+                        newob->dead = 0; // just in case
+                        ^
+level_editor.cpp:3119:32: note: Assuming that condition 'if(newob)' is not redundant
+                            if (newob)
+                               ^
+level_editor.cpp:3114:25: note: Null pointer dereference
+                        newob->dead = 0; // just in case
+                        ^
+level_editor.cpp:3115:25: warning: Either the condition 'if(newob)' is redundant or there is possible null pointer dereference: newob. [nullPointerRedundantCheck]
+                        newob->collide_ob = 0;
+                        ^
+level_editor.cpp:3119:32: note: Assuming that condition 'if(newob)' is not redundant
+                            if (newob)
+                               ^
+level_editor.cpp:3115:25: note: Null pointer dereference
+                        newob->collide_ob = 0;
+                        ^
+level_editor.cpp:2133:34: style: Variable 'selection_rect.w' is reassigned a value before the old one has been used. [redundantAssignment]
+                selection_rect.w = worldx - selection_rect.x;
+                                 ^
+level_editor.cpp:2128:38: note: selection_rect.w is assigned
+                    selection_rect.w = 1;
+                                     ^
+level_editor.cpp:2133:34: note: selection_rect.w is overwritten
+                selection_rect.w = worldx - selection_rect.x;
+                                 ^
+level_editor.cpp:2134:34: style: Variable 'selection_rect.h' is reassigned a value before the old one has been used. [redundantAssignment]
+                selection_rect.h = worldy - selection_rect.y;
+                                 ^
+level_editor.cpp:2129:38: note: selection_rect.h is assigned
+                    selection_rect.h = 1;
+                                     ^
+level_editor.cpp:2134:34: note: selection_rect.h is overwritten
+                selection_rect.h = worldy - selection_rect.y;
+                                 ^
+level_editor.cpp:2793:21: style: The scope of the variable 'h' can be reduced. [variableScope]
+                int h;
+                    ^
+level_editor.cpp:1717:13: style: Local variable 'i' shadows outer variable [shadowVariable]
+        int i = 0;
+            ^
+level_editor.cpp:1674:9: note: Shadowed declaration
+ Sint32 i, j; // for loops
+        ^
+level_editor.cpp:1717:13: note: Shadow variable
+        int i = 0;
+            ^
+level_editor.cpp:2122:23: style: Local variable 'worldx' shadows outer variable [shadowVariable]
+                float worldx = mx + level->topx - myscreen->viewob[0]->xloc;
+                      ^
+level_editor.cpp:2080:20: note: Shadowed declaration
+            Sint32 worldx = mx + level->topx - myscreen->viewob[0]->xloc; // - S_LEFT
+                   ^
+level_editor.cpp:2122:23: note: Shadow variable
+                float worldx = mx + level->topx - myscreen->viewob[0]->xloc;
+                      ^
+level_editor.cpp:2123:23: style: Local variable 'worldy' shadows outer variable [shadowVariable]
+                float worldy = my + level->topy - myscreen->viewob[0]->yloc;
+                      ^
+level_editor.cpp:2081:20: note: Shadowed declaration
+            Sint32 worldy = my + level->topy - myscreen->viewob[0]->yloc; // - S_UP
+                   ^
+level_editor.cpp:2123:23: note: Shadow variable
+                float worldy = my + level->topy - myscreen->viewob[0]->yloc;
+                      ^
+level_editor.cpp:2705:26: style: Local variable 'buf' shadows outer variable [shadowVariable]
+                    char buf[40];
+                         ^
+level_editor.cpp:2692:18: note: Shadowed declaration
+            char buf[512];
+                 ^
+level_editor.cpp:2705:26: note: Shadow variable
+                    char buf[40];
+                         ^
+level_editor.cpp:2807:30: style: Local variable 'buf' shadows outer variable [shadowVariable]
+                        char buf[200];
+                             ^
+level_editor.cpp:2784:18: note: Shadowed declaration
+            char buf[20];
+                 ^
+level_editor.cpp:2807:30: note: Shadow variable
+                        char buf[200];
+                             ^
+level_editor.cpp:2835:34: style: Local variable 'buf' shadows outer variable [shadowVariable]
+                            char buf[30];
+                                 ^
+level_editor.cpp:2784:18: note: Shadowed declaration
+            char buf[20];
+                 ^
+level_editor.cpp:2835:34: note: Shadow variable
+                            char buf[30];
+                                 ^
+level_editor.cpp:3419:10: style: Local variable 'i' shadows outer variable [shadowVariable]
+ for(int i = 0; i < NUM_FAMILIES; i++)
+         ^
+level_editor.cpp:3385:9: note: Shadowed declaration
+ Sint32 i,j;
+        ^
+level_editor.cpp:3419:10: note: Shadow variable
+ for(int i = 0; i < NUM_FAMILIES; i++)
+         ^
+level_editor.cpp:3423:10: style: Local variable 'i' shadows outer variable [shadowVariable]
+ for(int i = 0; i < MAX_TREASURE+1; i++)
+         ^
+level_editor.cpp:3385:9: note: Shadowed declaration
+ Sint32 i,j;
+        ^
+level_editor.cpp:3423:10: note: Shadow variable
+ for(int i = 0; i < MAX_TREASURE+1; i++)
+         ^
+level_editor.cpp:3427:10: style: Local variable 'i' shadows outer variable [shadowVariable]
+ for(int i = 0; i < 4; i++)
+         ^
+level_editor.cpp:3385:9: note: Shadowed declaration
+ Sint32 i,j;
+        ^
+level_editor.cpp:3427:10: note: Shadow variable
+ for(int i = 0; i < 4; i++)
+         ^
+level_editor.cpp:3745:9: style: Local variable 'scroll_amount' shadows outer variable [shadowVariable]
+  short scroll_amount = get_and_reset_scroll_amount();
+        ^
+level_editor.cpp:38:14: note: Shadowed declaration
+extern short scroll_amount;  // for scrolling up and down text popups
+             ^
+level_editor.cpp:3745:9: note: Shadow variable
+  short scroll_amount = get_and_reset_scroll_amount();
+        ^
+level_editor.cpp:1197:86: style: Clarify calculation precedence for '&' and '?'. [clarifyCalculation]
+    levelGoalsEnemiesButton.label += (level->type & LevelData::TYPE_CAN_EXIT_WHENEVER? "Off" : "On");
+                                                                                     ^
+level_editor.cpp:1200:95: style: Clarify calculation precedence for '&' and '?'. [clarifyCalculation]
+    levelGoalsGeneratorsButton.label += (level->type & LevelData::TYPE_MUST_DESTROY_GENERATORS? "On" : "Off");
+                                                                                              ^
+level_editor.cpp:1203:89: style: Clarify calculation precedence for '&' and '?'. [clarifyCalculation]
+    levelGoalsNPCsButton.label += (level->type & LevelData::TYPE_MUST_PROTECT_NAMED_NPCS? "On" : "Off");
+                                                                                        ^
+level_editor.cpp:1466:17: style: Variable 'mymouse' can be declared with const [constVariable]
+    MouseState& mymouse = query_mouse_no_poll();
+                ^
+level_editor.cpp:1500:17: style: Variable 'mymouse' can be declared with const [constVariable]
+    MouseState& mymouse = query_mouse_no_poll();
+                ^
+level_editor.cpp:1517:17: style: Variable 'mymouse' can be declared with const [constVariable]
+    MouseState& mymouse = query_mouse_no_poll();
+                ^
+level_editor.cpp:2075:17: style: Variable 'mymouse' can be declared with const [constVariable]
+    MouseState& mymouse = query_mouse_no_poll();
+                ^
+level_editor.cpp:3379:25: style: Variable 'terrain_brush' can be declared with const [constVariable]
+    EditorTerrainBrush& terrain_brush = data.terrain_brush;
+                        ^
+level_editor.cpp:567:18: style: Variable 'done' is assigned a value that is never used. [unreadVariable]
+            done = true;
+                 ^
+level_editor.cpp:1615:16: style: Variable 'r' is assigned a value that is never used. [unreadVariable]
+        Rectf r(selection_rect.x - level->topx + myscreen->viewob[0]->xloc, selection_rect.y - level->topy + myscreen->viewob[0]->yloc, selection_rect.w, selection_rect.h);
+               ^
+level_editor.cpp:3472:12: style: Variable 'done' is assigned a value that is never used. [unreadVariable]
+      done = true;
+           ^
+level_editor.cpp:254:73: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); e++)
+                                                                        ^
+level_editor.cpp:453:17: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                s++;
+                ^
+level_editor.cpp:472:25: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                        s--;
+                        ^
+level_editor.cpp:583:17: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                s--;
+                ^
+level_editor.cpp:596:17: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                s++;
+                ^
+level_editor.cpp:614:17: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                s--;
+                ^
+level_editor.cpp:630:21: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                    s++;
+                    ^
+level_editor.cpp:679:85: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        for(std::list<std::string>::iterator e = result.begin(); e != result.end(); e++)
+                                                                                    ^
+level_editor.cpp:1153:119: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(std::list<std::pair<SimpleButton*, std::set<SimpleButton*> > >::const_iterator e = ls.begin(); e != ls.end(); e++)
+                                                                                                                      ^
+level_editor.cpp:1165:95: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(set<SimpleButton*>::const_iterator e = menu_buttons.begin(); e != menu_buttons.end(); e++)
+                                                                                              ^
+level_editor.cpp:1171:95: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(set<SimpleButton*>::const_iterator e = mode_buttons.begin(); e != mode_buttons.end(); e++)
+                                                                                              ^
+level_editor.cpp:1181:139: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(std::list<std::pair<SimpleButton*, std::set<SimpleButton*> > >::const_iterator e = current_menu.begin(); e != current_menu.end(); e++)
+                                                                                                                                          ^
+level_editor.cpp:1184:77: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        for(set<SimpleButton*>::const_iterator f = s.begin(); f != s.end(); f++)
+                                                                            ^
+level_editor.cpp:1309:99: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+            for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+                                                                                                  ^
+level_editor.cpp:1334:99: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+            for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+                                                                                                  ^
+level_editor.cpp:1357:95: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+                                                                                              ^
+level_editor.cpp:1373:95: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+                                                                                              ^
+level_editor.cpp:1386:95: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+                                                                                              ^
+level_editor.cpp:1408:95: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+                                                                                              ^
+level_editor.cpp:1430:95: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+                                                                                              ^
+level_editor.cpp:1446:95: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+                                                                                              ^
+level_editor.cpp:1560:83: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        for(std::list<int>::const_iterator e = levels.begin(); e != levels.end(); e++)
+                                                                                  ^
+level_editor.cpp:1583:70: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(std::set<int>::iterator e = exits.begin(); e != exits.end(); e++)
+                                                                     ^
+level_editor.cpp:1640:95: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+                                                                                              ^
+level_editor.cpp:1662:89: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(set<SimpleButton*>::iterator e = mode_buttons.begin(); e != mode_buttons.end(); e++)
+                                                                                        ^
+level_editor.cpp:1669:91: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        for(set<SimpleButton*>::iterator e = pan_buttons.begin(); e != pan_buttons.end(); e++)
+                                                                                          ^
+level_editor.cpp:1718:95: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+                                                                                              ^
+level_editor.cpp:2026:89: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(set<SimpleButton*>::iterator e = menu_buttons.begin(); e != menu_buttons.end(); e++)
+                                                                                        ^
+level_editor.cpp:2030:118: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(list<pair<SimpleButton*, set<SimpleButton*> > >::iterator e = current_menu.begin(); e != current_menu.end(); e++)
+                                                                                                                     ^
+level_editor.cpp:2033:71: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        for(set<SimpleButton*>::iterator f = s.begin(); f != s.end(); f++)
+                                                                      ^
+level_editor.cpp:2090:98: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                for(vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+                                                                                                 ^
+level_editor.cpp:2105:98: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                for(vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+                                                                                                 ^
+level_editor.cpp:2143:92: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(vector<SelectionInfo>::const_iterator e = selection.begin(); e != selection.end(); e++)
+                                                                                           ^
+level_editor.cpp:2681:81: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+            for(std::list<int>::iterator e = levels.begin(); e != levels.end(); e++)
+                                                                                ^
+level_editor.cpp:2712:97: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                for(std::list<std::string>::iterator e = problems.begin(); e != problems.end(); e++)
+                                                                                                ^
+level_editor.cpp:2970:102: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+            for(std::set<SimpleButton*>::iterator e = mode_buttons.begin(); e != mode_buttons.end(); e++)
+                                                                                                     ^
+level_editor.cpp:3059:119: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                                for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+                                                                                                                      ^
+Checking level_editor.cpp: ANDROID...
+Checking level_editor.cpp: OUYA...
+Checking level_editor.cpp: OUYA;USE_CONTROLLER_INPUT...
+level_editor.cpp:3482:27: style: Local variable 'event' shadows outer variable [shadowVariable]
+                SDL_Event event;
+                          ^
+level_editor.cpp:3464:12: note: Shadowed declaration
+ SDL_Event event;
+           ^
+level_editor.cpp:3482:27: note: Shadow variable
+                SDL_Event event;
+                          ^
+level_editor.cpp:3494:27: style: Local variable 'event' shadows outer variable [shadowVariable]
+                SDL_Event event;
+                          ^
+level_editor.cpp:3464:12: note: Shadowed declaration
+ SDL_Event event;
+           ^
+level_editor.cpp:3494:27: note: Shadow variable
+                SDL_Event event;
+                          ^
+level_editor.cpp:3701:27: style: Local variable 'event' shadows outer variable [shadowVariable]
+                SDL_Event event;
+                          ^
+level_editor.cpp:3464:12: note: Shadowed declaration
+ SDL_Event event;
+           ^
+level_editor.cpp:3701:27: note: Shadow variable
+                SDL_Event event;
+                          ^
+level_editor.cpp:448:22: style: Variable 'done' is assigned a value that is never used. [unreadVariable]
+                done = true;  // Some soft keyboards might disappear anyhow if you press return...
+                     ^
+level_editor.cpp:504:17: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                s++;
+                ^
+level_editor.cpp:514:21: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                    s--;
+                    ^
+level_editor.cpp:524:21: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                    s++;
+                    ^
+level_editor.cpp:539:21: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                    s--;
+                    ^
+level_editor.cpp:552:25: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                        s++;
+                        ^
+Checking level_editor.cpp: REDUCE_OVERSCAN...
+Checking level_editor.cpp: USE_CONTROLLER_INPUT...
+Checking level_editor.cpp: USE_CONTROLLER_INPUT;USE_TOUCH_INPUT...
+Checking level_editor.cpp: USE_TOUCH_INPUT...
+16/39 files checked 40% done
+Checking level_picker.cpp ...
+level_picker.cpp:136:12: style: Condition '!gotNum' is always true [knownConditionTrueFalse]
+        if(!gotNum && isalpha(*e))
+           ^
+level_picker.cpp:133:19: note: Assignment 'gotNum=false', assigned value is 0
+    bool gotNum = false;
+                  ^
+level_picker.cpp:136:12: note: Condition '!gotNum' is always true
+        if(!gotNum && isalpha(*e))
+           ^
+level_picker.cpp:145:12: style: Condition '!gotNum' is always true [knownConditionTrueFalse]
+        if(!gotNum && isalpha(*e))
+           ^
+level_picker.cpp:142:14: note: Assignment 'gotNum=false', assigned value is 0
+    gotNum = false;
+             ^
+level_picker.cpp:145:12: note: Condition '!gotNum' is always true
+        if(!gotNum && isalpha(*e))
+           ^
+level_picker.cpp:333:37: style: Argument 'screenW-150' to function Sint16 is always 250 [constArgument]
+    SDL_Rect prev = {Sint16(screenW - 150), 20, 30, 10};
+                                    ^
+level_picker.cpp:331:22: note: Assignment 'screenW=SCREEN_W', assigned value is 400
+    Sint16 screenW = SCREEN_W;
+                     ^
+level_picker.cpp:333:37: note: Argument 'screenW-150' to function Sint16 is always 250
+    SDL_Rect prev = {Sint16(screenW - 150), 20, 30, 10};
+                                    ^
+level_picker.cpp:334:37: style: Argument 'screenW-150' to function Sint16 is always 250 [constArgument]
+    SDL_Rect next = {Sint16(screenW - 150), Sint16(screenH - 50), 30, 10};
+                                    ^
+level_picker.cpp:331:22: note: Assignment 'screenW=SCREEN_W', assigned value is 400
+    Sint16 screenW = SCREEN_W;
+                     ^
+level_picker.cpp:334:37: note: Argument 'screenW-150' to function Sint16 is always 250
+    SDL_Rect next = {Sint16(screenW - 150), Sint16(screenH - 50), 30, 10};
+                                    ^
+level_picker.cpp:334:60: style: Argument 'screenH-50' to function Sint16 is always 250 [constArgument]
+    SDL_Rect next = {Sint16(screenW - 150), Sint16(screenH - 50), 30, 10};
+                                                           ^
+level_picker.cpp:332:22: note: Assignment 'screenH=SCREEN_H', assigned value is 300
+    Sint16 screenH = SCREEN_H;
+                     ^
+level_picker.cpp:334:60: note: Argument 'screenH-50' to function Sint16 is always 250
+    SDL_Rect next = {Sint16(screenW - 150), Sint16(screenH - 50), 30, 10};
+                                                           ^
+level_picker.cpp:337:39: style: Argument 'screenW-50' to function Sint16 is always 350 [constArgument]
+    SDL_Rect choose = {Sint16(screenW - 50), Sint16(screenH - 30), 30, 10};
+                                      ^
+level_picker.cpp:331:22: note: Assignment 'screenW=SCREEN_W', assigned value is 400
+    Sint16 screenW = SCREEN_W;
+                     ^
+level_picker.cpp:337:39: note: Argument 'screenW-50' to function Sint16 is always 350
+    SDL_Rect choose = {Sint16(screenW - 50), Sint16(screenH - 30), 30, 10};
+                                      ^
+level_picker.cpp:337:61: style: Argument 'screenH-30' to function Sint16 is always 270 [constArgument]
+    SDL_Rect choose = {Sint16(screenW - 50), Sint16(screenH - 30), 30, 10};
+                                                            ^
+level_picker.cpp:332:22: note: Assignment 'screenH=SCREEN_H', assigned value is 300
+    Sint16 screenH = SCREEN_H;
+                     ^
+level_picker.cpp:337:61: note: Argument 'screenH-30' to function Sint16 is always 270
+    SDL_Rect choose = {Sint16(screenW - 50), Sint16(screenH - 30), 30, 10};
+                                                            ^
+level_picker.cpp:338:39: style: Argument 'screenW-100' to function Sint16 is always 300 [constArgument]
+    SDL_Rect cancel = {Sint16(screenW - 100), Sint16(screenH - 30), 38, 10};
+                                      ^
+level_picker.cpp:331:22: note: Assignment 'screenW=SCREEN_W', assigned value is 400
+    Sint16 screenW = SCREEN_W;
+                     ^
+level_picker.cpp:338:39: note: Argument 'screenW-100' to function Sint16 is always 300
+    SDL_Rect cancel = {Sint16(screenW - 100), Sint16(screenH - 30), 38, 10};
+                                      ^
+level_picker.cpp:338:62: style: Argument 'screenH-30' to function Sint16 is always 270 [constArgument]
+    SDL_Rect cancel = {Sint16(screenW - 100), Sint16(screenH - 30), 38, 10};
+                                                             ^
+level_picker.cpp:332:22: note: Assignment 'screenH=SCREEN_H', assigned value is 300
+    Sint16 screenH = SCREEN_H;
+                     ^
+level_picker.cpp:338:62: note: Argument 'screenH-30' to function Sint16 is always 270
+    SDL_Rect cancel = {Sint16(screenW - 100), Sint16(screenH - 30), 38, 10};
+                                                             ^
+level_picker.cpp:339:46: style: Argument 'screenW-50' to function Sint16 is always 350 [constArgument]
+    SDL_Rect delete_button = {Sint16(screenW - 50), 10, 38, 10};
+                                             ^
+level_picker.cpp:331:22: note: Assignment 'screenW=SCREEN_W', assigned value is 400
+    Sint16 screenW = SCREEN_W;
+                     ^
+level_picker.cpp:339:46: note: Argument 'screenW-50' to function Sint16 is always 350
+    SDL_Rect delete_button = {Sint16(screenW - 50), 10, 38, 10};
+                                             ^
+level_picker.cpp:134:69: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(string::const_iterator e = first.begin(); e != first.end(); e++)
+                                                                    ^
+level_picker.cpp:143:71: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(string::const_iterator e = second.begin(); e != second.end(); e++)
+                                                                      ^
+level_picker.cpp:214:113: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(std::list<std::string>::iterator e = level_data.description.begin(); e != level_data.description.end(); e++)
+                                                                                                                ^
+level_picker.cpp:265:70: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        for(list<int>::iterator e = exits.begin(); e != exits.end(); e++)
+                                                                     ^
+Checking level_picker.cpp: OUYA...
+Checking level_picker.cpp: USE_TOUCH_INPUT...
+17/39 files checked 42% done
+Checking living.cpp ...
+Checking living.cpp: OUYA...
+Checking living.cpp: USE_TOUCH_INPUT...
+18/39 files checked 44% done
+Checking obmap.cpp ...
+obmap.cpp:250:11: warning: Either the condition '!ob' is redundant or there is possible null pointer dereference: ob. [nullPointerRedundantCheck]
+ oxsize = ob->sizex;
+          ^
+obmap.cpp:256:5: note: Assuming that condition '!ob' is not redundant
+ if(!ob)
+    ^
+obmap.cpp:250:11: note: Null pointer dereference
+ oxsize = ob->sizex;
+          ^
+obmap.cpp:251:11: warning: Either the condition '!ob' is redundant or there is possible null pointer dereference: ob. [nullPointerRedundantCheck]
+ oysize = ob->sizey;
+          ^
+obmap.cpp:256:5: note: Assuming that condition '!ob' is not redundant
+ if(!ob)
+    ^
+obmap.cpp:251:11: note: Null pointer dereference
+ oysize = ob->sizey;
+          ^
+Checking obmap.cpp: OUYA...
+Checking obmap.cpp: USE_TOUCH_INPUT...
+19/39 files checked 45% done
+Checking pal32.cpp ...
+pal32.cpp:142:8: style: The scope of the variable 'tempcol' can be reduced. [variableScope]
+ short tempcol;
+       ^
+pal32.cpp:172:8: style: The scope of the variable 'colorspot' can be reduced. [variableScope]
+ short colorspot;
+       ^
+20/39 files checked 46% done
+Checking picker.cpp ...
+picker.cpp:1556:22: style: The statement 'if (here!=ourteam[editguy]) here=ourteam[editguy]' is logically equivalent to 'here=ourteam[editguy]'. [duplicateConditionalAssign]
+            if (here != ourteam[editguy])
+                     ^
+picker.cpp:1557:22: note: Assignment 'here=ourteam[editguy]'
+                here = ourteam[editguy];
+                     ^
+picker.cpp:1556:22: note: Condition 'here!=ourteam[editguy]' is redundant
+            if (here != ourteam[editguy])
+                     ^
+picker.cpp:2805:21: warning: Either the condition '!current_guy' is redundant or there is possible null pointer dereference: current_guy. [nullPointerRedundantCheck]
+ Sint32 newfamily = current_guy->family;
+                    ^
+picker.cpp:2813:6: note: Assuming that condition '!current_guy' is not redundant
+ if (!current_guy) // we should be adding current_guy
+     ^
+picker.cpp:2805:21: note: Null pointer dereference
+ Sint32 newfamily = current_guy->family;
+                    ^
+picker.cpp:2687:12: style: Variable 'newfamily' is reassigned a value before the old one has been used. [redundantAssignment]
+ newfamily = current_guy->family;
+           ^
+picker.cpp:2684:13: note: newfamily is assigned
+  newfamily = allowable_guys[current_type];
+            ^
+picker.cpp:2687:12: note: newfamily is overwritten
+ newfamily = current_guy->family;
+           ^
+picker.cpp:2687:12: style: Variable 'newfamily' is reassigned a value before the old one has been used. [redundantAssignment]
+ newfamily = current_guy->family;
+           ^
+picker.cpp:2686:13: note: newfamily is assigned
+  newfamily = myscreen->save_data.team_list[editguy]->family;
+            ^
+picker.cpp:2687:12: note: newfamily is overwritten
+ newfamily = current_guy->family;
+           ^
+picker.cpp:3786:14: style: Redundant initialization for 'templevel'. The initialized value is overwritten before it is read. [redundantInitialization]
+   templevel = pick_level(myscreen, myscreen->level_data.id);
+             ^
+picker.cpp:3784:21: note: templevel is initialized
+   Sint32 templevel = myscreen->save_data.scen_num;
+                    ^
+picker.cpp:3786:14: note: templevel is overwritten
+   templevel = pick_level(myscreen, myscreen->level_data.id);
+             ^
+picker.cpp:1215:16: style: The scope of the variable 'showcolor' can be reduced. [variableScope]
+ unsigned char showcolor; // normally STAT_COLOR or STAT_CHANGED
+               ^
+picker.cpp:1464:8: style: The scope of the variable 'linesdown' can be reduced. [variableScope]
+ float linesdown = 0.0f;
+       ^
+picker.cpp:1902:9: style: The scope of the variable 'j' can be reduced. [variableScope]
+    int j = 0;
+        ^
+picker.cpp:1904:6: style: The scope of the variable 'dumbcount' can be reduced. [variableScope]
+ int dumbcount;
+     ^
+picker.cpp:1999:9: style: The scope of the variable 'j' can be reduced. [variableScope]
+    int j = 0;
+        ^
+picker.cpp:2001:6: style: The scope of the variable 'dumbcount' can be reduced. [variableScope]
+ int dumbcount;
+     ^
+picker.cpp:2097:9: style: The scope of the variable 'dumbcount' can be reduced. [variableScope]
+    int dumbcount;
+        ^
+picker.cpp:2100:9: style: The scope of the variable 'j' can be reduced. [variableScope]
+    int j = 0;
+        ^
+picker.cpp:447:7: style: Local variable 'message' shadows outer variable [shadowVariable]
+ char message[30], namecolor, numguys = 0;
+      ^
+picker.cpp:78:7: note: Shadowed declaration
+char  message[80];
+      ^
+picker.cpp:447:7: note: Shadow variable
+ char message[30], namecolor, numguys = 0;
+      ^
+picker.cpp:644:7: style: Local variable 'message' shadows outer variable [shadowVariable]
+ char message[80];
+      ^
+picker.cpp:78:7: note: Shadowed declaration
+char  message[80];
+      ^
+picker.cpp:644:7: note: Shadow variable
+ char message[80];
+      ^
+picker.cpp:1770:7: style: Local variable 'message' shadows outer variable [shadowVariable]
+ char message[80];
+      ^
+picker.cpp:78:7: note: Shadowed declaration
+char  message[80];
+      ^
+picker.cpp:1770:7: note: Shadow variable
+ char message[80];
+      ^
+picker.cpp:2158:7: style: Local variable 'message' shadows outer variable [shadowVariable]
+ char message[80];
+      ^
+picker.cpp:78:7: note: Shadowed declaration
+char  message[80];
+      ^
+picker.cpp:2158:7: note: Shadow variable
+ char message[80];
+      ^
+picker.cpp:3825:9: style: Local variable 'message' shadows outer variable [shadowVariable]
+   char message[80];
+        ^
+picker.cpp:78:7: note: Shadowed declaration
+char  message[80];
+      ^
+picker.cpp:3825:9: note: Shadow variable
+   char message[80];
+        ^
+picker.cpp:3845:10: style: Local variable 'message' shadows outer variable [shadowVariable]
+   char  message[80];
+         ^
+picker.cpp:78:7: note: Shadowed declaration
+char  message[80];
+      ^
+picker.cpp:3845:10: note: Shadow variable
+   char  message[80];
+         ^
+picker.cpp:3874:10: style: Local variable 'message' shadows outer variable [shadowVariable]
+   char  message[80];
+         ^
+picker.cpp:78:7: note: Shadowed declaration
+char  message[80];
+      ^
+picker.cpp:3874:10: note: Shadow variable
+   char  message[80];
+         ^
+picker.cpp:3896:9: style: Local variable 'message' shadows outer variable [shadowVariable]
+   char message[80];
+        ^
+picker.cpp:78:7: note: Shadowed declaration
+char  message[80];
+      ^
+picker.cpp:3896:9: note: Shadow variable
+   char message[80];
+        ^
+picker.cpp:1702:79: style: Argument 'linesdown*line_height' to function Sint32 is always 30 [constArgument]
+  SDL_Rect r = {info_box_content.x + 10, info_box_content.y + Sint32(linesdown*line_height) - 2, info_box_content.w - 20, 2};
+                                                                              ^
+picker.cpp:1674:21: note: Assignment 'linesdown=0', assigned value is 0
+        linesdown = 0;
+                    ^
+picker.cpp:1682:9: note: linesdown is incremented', new value is 1
+        linesdown++;
+        ^
+picker.cpp:1695:9: note: linesdown is incremented', new value is 2
+        linesdown++;
+        ^
+picker.cpp:1700:9: note: linesdown is incremented', new value is 3
+        linesdown++;
+        ^
+picker.cpp:1702:79: note: Argument 'linesdown*line_height' to function Sint32 is always 30
+  SDL_Rect r = {info_box_content.x + 10, info_box_content.y + Sint32(linesdown*line_height) - 2, info_box_content.w - 20, 2};
+                                                                              ^
+picker.cpp:2865:14: style: Variable 'cheatmouse' can be declared with const [constVariable]
+ MouseState& cheatmouse = query_mouse();
+             ^
+picker.cpp:737:8: style: Variable 'arg1' is assigned a value that is never used. [unreadVariable]
+  arg1 = 1;
+       ^
+picker.cpp:981:8: style: Variable 'arg1' is assigned a value that is never used. [unreadVariable]
+  arg1 = 1;
+       ^
+picker.cpp:1464:18: style: Variable 'linesdown' is assigned a value that is never used. [unreadVariable]
+ float linesdown = 0.0f;
+                 ^
+picker.cpp:1479:8: style: Variable 'arg1' is assigned a value that is never used. [unreadVariable]
+  arg1 = 1;
+       ^
+picker.cpp:1773:8: style: Variable 'arg1' is assigned a value that is never used. [unreadVariable]
+  arg1 = 1;
+       ^
+picker.cpp:1902:11: style: Variable 'j' is assigned a value that is never used. [unreadVariable]
+    int j = 0;
+          ^
+picker.cpp:1999:11: style: Variable 'j' is assigned a value that is never used. [unreadVariable]
+    int j = 0;
+          ^
+picker.cpp:2100:11: style: Variable 'j' is assigned a value that is never used. [unreadVariable]
+    int j = 0;
+          ^
+picker.cpp:2161:8: style: Variable 'arg1' is assigned a value that is never used. [unreadVariable]
+  arg1 = 1;
+       ^
+picker.cpp:2868:8: style: Variable 'arg1' is assigned a value that is never used. [unreadVariable]
+  arg1 = 1;
+       ^
+picker.cpp:3041:8: style: Variable 'arg1' is assigned a value that is never used. [unreadVariable]
+  arg1 = 1;
+       ^
+picker.cpp:1334:81: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        for(std::list<std::string>::iterator e = desc.begin(); e != desc.end(); e++)
+                                                                                ^
+picker.cpp:1893:73: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); e++)
+                                                                        ^
+picker.cpp:1947:77: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); e++)
+                                                                            ^
+picker.cpp:1990:73: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); e++)
+                                                                        ^
+picker.cpp:2044:77: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); e++)
+                                                                            ^
+picker.cpp:2086:73: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); e++)
+                                                                        ^
+picker.cpp:2138:77: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); e++)
+                                                                            ^
+Checking picker.cpp: ANDROID;OUYA...
+Checking picker.cpp: OUYA...
+Checking picker.cpp: USE_CONTROLLER_INPUT...
+Checking picker.cpp: USE_TOUCH_INPUT...
+21/39 files checked 57% done
+Checking pixie.cpp ...
+pixie.cpp:47:8: warning: Member variable 'pixie::xpos' is not initialized in the constructor. [uninitMemberVar]
+pixie::pixie(const PixieData& data)
+       ^
+pixie.cpp:47:8: warning: Member variable 'pixie::ypos' is not initialized in the constructor. [uninitMemberVar]
+pixie::pixie(const PixieData& data)
+       ^
+pixie.cpp:47:8: warning: Member variable 'pixie::oldbmp' is not initialized in the constructor. [uninitMemberVar]
+pixie::pixie(const PixieData& data)
+       ^
+pixie.cpp:47:8: warning: Member variable 'pixie::bmp_surface' is not initialized in the constructor. [uninitMemberVar]
+pixie::pixie(const PixieData& data)
+       ^
+pixie.cpp:55:8: warning: Member variable 'pixie::xpos' is not initialized in the constructor. [uninitMemberVar]
+pixie::pixie(const PixieData& data, int doaccel)
+       ^
+pixie.cpp:55:8: warning: Member variable 'pixie::ypos' is not initialized in the constructor. [uninitMemberVar]
+pixie::pixie(const PixieData& data, int doaccel)
+       ^
+pixie.cpp:55:8: warning: Member variable 'pixie::oldbmp' is not initialized in the constructor. [uninitMemberVar]
+pixie::pixie(const PixieData& data, int doaccel)
+       ^
+Checking pixie.cpp: OUYA...
+Checking pixie.cpp: USE_TOUCH_INPUT...
+22/39 files checked 57% done
+Checking pixie_data.cpp ...
+23/39 files checked 57% done
+Checking pixien.cpp ...
+Checking pixien.cpp: OUYA...
+Checking pixien.cpp: USE_TOUCH_INPUT...
+24/39 files checked 57% done
+Checking radar.cpp ...
+radar.cpp:41:8: warning: Member variable 'radar::sizex' is not initialized in the constructor. [uninitMemberVar]
+radar::radar(viewscreen * myview, screen * myscreen, short whatnum)
+       ^
+radar.cpp:41:8: warning: Member variable 'radar::sizey' is not initialized in the constructor. [uninitMemberVar]
+radar::radar(viewscreen * myview, screen * myscreen, short whatnum)
+       ^
+radar.cpp:41:8: warning: Member variable 'radar::xpos' is not initialized in the constructor. [uninitMemberVar]
+radar::radar(viewscreen * myview, screen * myscreen, short whatnum)
+       ^
+radar.cpp:41:8: warning: Member variable 'radar::ypos' is not initialized in the constructor. [uninitMemberVar]
+radar::radar(viewscreen * myview, screen * myscreen, short whatnum)
+       ^
+radar.cpp:41:8: warning: Member variable 'radar::xloc' is not initialized in the constructor. [uninitMemberVar]
+radar::radar(viewscreen * myview, screen * myscreen, short whatnum)
+       ^
+radar.cpp:41:8: warning: Member variable 'radar::yloc' is not initialized in the constructor. [uninitMemberVar]
+radar::radar(viewscreen * myview, screen * myscreen, short whatnum)
+       ^
+radar.cpp:41:8: warning: Member variable 'radar::radarx' is not initialized in the constructor. [uninitMemberVar]
+radar::radar(viewscreen * myview, screen * myscreen, short whatnum)
+       ^
+radar.cpp:41:8: warning: Member variable 'radar::radary' is not initialized in the constructor. [uninitMemberVar]
+radar::radar(viewscreen * myview, screen * myscreen, short whatnum)
+       ^
+radar.cpp:41:8: warning: Member variable 'radar::oldbmp' is not initialized in the constructor. [uninitMemberVar]
+radar::radar(viewscreen * myview, screen * myscreen, short whatnum)
+       ^
+radar.cpp:41:8: warning: Member variable 'radar::xview' is not initialized in the constructor. [uninitMemberVar]
+radar::radar(viewscreen * myview, screen * myscreen, short whatnum)
+       ^
+radar.cpp:41:8: warning: Member variable 'radar::yview' is not initialized in the constructor. [uninitMemberVar]
+radar::radar(viewscreen * myview, screen * myscreen, short whatnum)
+       ^
+radar.cpp:41:8: warning: Member variable 'radar::size' is not initialized in the constructor. [uninitMemberVar]
+radar::radar(viewscreen * myview, screen * myscreen, short whatnum)
+       ^
+Checking radar.cpp: OUYA...
+Checking radar.cpp: REDUCE_OVERSCAN...
+Checking radar.cpp: REDUCE_OVERSCAN;USE_TOUCH_INPUT...
+Checking radar.cpp: USE_TOUCH_INPUT...
+25/39 files checked 59% done
+Checking results_screen.cpp ...
+results_screen.cpp:103:9: warning: Assignment of function parameter has no effect outside the function. Did you forget dereferencing it? [uselessAssignmentPtrArg]
+        after = NULL;
+        ^
+results_screen.cpp:562:37: style: The if condition is the same as the previous if condition [duplicateCondition]
+                if(area_inner.y < y && y + 10 < area_inner.y + area_inner.h)
+                                    ^
+results_screen.cpp:554:37: note: First condition
+                if(area_inner.y < y && y + 10 < area_inner.y + area_inner.h)
+                                    ^
+results_screen.cpp:562:37: note: Second condition
+                if(area_inner.y < y && y + 10 < area_inner.y + area_inner.h)
+                                    ^
+results_screen.cpp:646:24: style: Local variable 'i' shadows outer variable [shadowVariable]
+            for(size_t i = 0; i < troops.size(); i++)
+                       ^
+results_screen.cpp:404:9: note: Shadowed declaration
+    int i = 0;
+        ^
+results_screen.cpp:646:24: note: Shadow variable
+            for(size_t i = 0; i < troops.size(); i++)
+                       ^
+results_screen.cpp:751:17: style: Local variable 'i' shadows outer variable [shadowVariable]
+        for(int i = 0; i < num_buttons; i++)
+                ^
+results_screen.cpp:404:9: note: Shadowed declaration
+    int i = 0;
+        ^
+results_screen.cpp:751:17: note: Shadow variable
+        for(int i = 0; i < num_buttons; i++)
+                ^
+results_screen.cpp:329:15: style: Variable 'save_data' can be declared with const [constVariable]
+    SaveData& save_data = myscreen->save_data;
+              ^
+results_screen.cpp:370:78: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(std::map<int, guy*>::iterator e = before.begin(); e != before.end(); e++)
+                                                                             ^
+results_screen.cpp:377:79: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(std::map<int, walker*>::iterator e = after.begin(); e != after.end(); e++)
+                                                                              ^
+results_screen.cpp:385:83: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(std::vector<TroopResult>::iterator e = troops.begin(); e != troops.end(); e++)
+                                                                                  ^
+results_screen.cpp:405:83: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(std::vector<TroopResult>::iterator e = troops.begin(); e != troops.end(); e++)
+                                                                                  ^
+results_screen.cpp:612:91: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                for(std::vector<int>::iterator e = recruits.begin(); e != recruits.end(); e++)
+                                                                                          ^
+results_screen.cpp:630:87: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                for(std::vector<int>::iterator e = losses.begin(); e != losses.end(); e++)
+                                                                                      ^
+results_screen.cpp:722:107: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                        for(std::vector<std::string>::iterator e = specials.begin(); e != specials.end(); e++)
+                                                                                                          ^
+Checking results_screen.cpp: OUYA...
+Checking results_screen.cpp: USE_CONTROLLER_INPUT...
+Checking results_screen.cpp: USE_TOUCH_INPUT...
+26/39 files checked 61% done
+Checking sai2x.cpp ...
+sai2x.cpp:625:29: warning: Redundant assignment of 'color[9]' to itself. [selfAssignment]
+  color[8] = *lbp; color[9] = color[9]; color[10] = *(lbp + 1); color[11] = *(lbp + 2);
+                            ^
+sai2x.cpp:619:11: style: Local variable 'lbp' shadows outer variable [shadowVariable]
+  Uint32 *lbp;
+          ^
+sai2x.cpp:509:10: note: Shadowed declaration
+ Uint32 *lbp;
+         ^
+sai2x.cpp:619:11: note: Shadow variable
+  Uint32 *lbp;
+          ^
+Checking sai2x.cpp: ANDROID...
+sai2x.cpp:705:8: style: Condition 'fullscreen' is always true [knownConditionTrueFalse]
+    if(fullscreen)
+       ^
+sai2x.cpp:698:18: note: Assignment 'fullscreen=true', assigned value is 1
+    fullscreen = true;
+                 ^
+sai2x.cpp:705:8: note: Condition 'fullscreen' is always true
+    if(fullscreen)
+       ^
+Checking sai2x.cpp: KAT_2X...
+Checking sai2x.cpp: OUYA...
+Checking sai2x.cpp: USE_TOUCH_INPUT...
+Checking sai2x.cpp: __IPHONEOS__...
+27/39 files checked 63% done
+Checking save_data.cpp ...
+save_data.cpp:105:8: style: The scope of the variable 'i' can be reduced. [variableScope]
+ short i;
+       ^
+save_data.cpp:180:10: style: Local variable 'i' shadows outer variable [shadowVariable]
+ for(int i = 0; i < team_size; i++)
+         ^
+save_data.cpp:105:8: note: Shadowed declaration
+ short i;
+       ^
+save_data.cpp:180:10: note: Shadow variable
+ for(int i = 0; i < team_size; i++)
+         ^
+save_data.cpp:275:13: style: Local variable 'i' shadows outer variable [shadowVariable]
+    for(int i = 0; i < listsize; i++)
+            ^
+save_data.cpp:105:8: note: Shadowed declaration
+ short i;
+       ^
+save_data.cpp:275:13: note: Shadow variable
+    for(int i = 0; i < listsize; i++)
+            ^
+save_data.cpp:368:17: style: Local variable 'i' shadows outer variable [shadowVariable]
+        for(int i = 0; i < 500; i++)
+                ^
+save_data.cpp:105:8: note: Shadowed declaration
+ short i;
+       ^
+save_data.cpp:368:17: note: Shadow variable
+        for(int i = 0; i < 500; i++)
+                ^
+save_data.cpp:381:17: style: Local variable 'i' shadows outer variable [shadowVariable]
+        for(int i = 0; i < num_campaigns; i++)
+                ^
+save_data.cpp:105:8: note: Shadowed declaration
+ short i;
+       ^
+save_data.cpp:381:17: note: Shadow variable
+        for(int i = 0; i < num_campaigns; i++)
+                ^
+save_data.cpp:595:10: style: Local variable 'i' shadows outer variable [shadowVariable]
+ for(int i = 0; i < team_size; i++)
+         ^
+save_data.cpp:467:8: note: Shadowed declaration
+ short i;
+       ^
+save_data.cpp:595:10: note: Shadow variable
+ for(int i = 0; i < team_size; i++)
+         ^
+save_data.cpp:660:119: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+ for(std::map<std::string, std::set<int> >::const_iterator e = completed_levels.begin(); e != completed_levels.end(); e++)
+                                                                                                                      ^
+save_data.cpp:677:88: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        for(std::set<int>::const_iterator f = e->second.begin(); f != e->second.end(); f++)
+                                                                                       ^
+Checking save_data.cpp: OUYA...
+Checking save_data.cpp: USE_TOUCH_INPUT...
+28/39 files checked 65% done
+Checking screen.cpp ...
+screen.cpp:151:5: warning: Class 'screen' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s). [noCopyConstructor]
+    soundp = new soundob();
+    ^
+screen.cpp:151:5: warning: Class 'screen' does not have a operator= which is recommended since it has dynamic memory/resource allocation(s). [noOperatorEq]
+    soundp = new soundob();
+    ^
+screen.cpp:685:9: style: Condition 'ob' is always true [knownConditionTrueFalse]
+    if (ob && !ob->dead)
+        ^
+screen.cpp:680:8: note: Assuming that condition 'ob' is not redundant
+   if (ob && !ob->dead)
+       ^
+screen.cpp:685:9: note: Condition 'ob' is always true
+    if (ob && !ob->dead)
+        ^
+screen.cpp:729:8: style: Condition 'ob' is always true [knownConditionTrueFalse]
+   if (ob && !ob->dead)
+       ^
+screen.cpp:726:7: note: Assuming that condition 'ob' is not redundant
+  if (ob && !ob->dead)
+      ^
+screen.cpp:729:8: note: Condition 'ob' is always true
+   if (ob && !ob->dead)
+       ^
+screen.cpp:1138:11: warning: Redundant assignment of 'howmany' to itself. [selfAssignment]
+  howmany = howmany;
+          ^
+screen.cpp:909:29: style: Variable 'allbonuscash' is assigned a value that is never used. [unreadVariable]
+        Uint32 allbonuscash = 0;
+                            ^
+screen.cpp:921:17: style: Variable 'allbonuscash' is assigned a value that is never used. [unreadVariable]
+   allbonuscash += bonuscash[i];
+                ^
+screen.cpp:927:17: style: Variable 'allbonuscash' is assigned a value that is never used. [unreadVariable]
+   allbonuscash = 0;
+                ^
+screen.cpp:952:12: style: Variable 'loop' is assigned a value that is never used. [unreadVariable]
+ short loop=0;
+           ^
+screen.cpp:1138:11: style: Variable 'howmany' is assigned a value that is never used. [unreadVariable]
+  howmany = howmany;
+          ^
+Checking screen.cpp: OUYA...
+Checking screen.cpp: USE_TOUCH_INPUT...
+29/39 files checked 68% done
+Checking smooth.cpp ...
+Checking smooth.cpp: OUYA...
+Checking smooth.cpp: USE_TOUCH_INPUT...
+30/39 files checked 70% done
+Checking sound.cpp ...
+sound.cpp:187:14: warning: Comparison of a boolean expression with an integer. [compareBoolExpressionWithInt]
+ if (silence == silent)      // Are we already set this way?
+             ^
+sound.cpp:39:10: warning: Member variable 'soundob::baseio' is not initialized in the constructor. [uninitMemberVar]
+soundob::soundob()
+         ^
+sound.cpp:39:10: warning: Member variable 'soundob::irq' is not initialized in the constructor. [uninitMemberVar]
+soundob::soundob()
+         ^
+sound.cpp:39:10: warning: Member variable 'soundob::dma' is not initialized in the constructor. [uninitMemberVar]
+soundob::soundob()
+         ^
+sound.cpp:39:10: warning: Member variable 'soundob::dma16' is not initialized in the constructor. [uninitMemberVar]
+soundob::soundob()
+         ^
+sound.cpp:51:10: warning: Member variable 'soundob::baseio' is not initialized in the constructor. [uninitMemberVar]
+soundob::soundob(bool silent)
+         ^
+sound.cpp:51:10: warning: Member variable 'soundob::irq' is not initialized in the constructor. [uninitMemberVar]
+soundob::soundob(bool silent)
+         ^
+sound.cpp:51:10: warning: Member variable 'soundob::dma' is not initialized in the constructor. [uninitMemberVar]
+soundob::soundob(bool silent)
+         ^
+sound.cpp:51:10: warning: Member variable 'soundob::dma16' is not initialized in the constructor. [uninitMemberVar]
+soundob::soundob(bool silent)
+         ^
+Checking sound.cpp: SOUND_DB...
+31/39 files checked 71% done
+Checking stats.cpp ...
+stats.cpp:674:9: style: Redundant initialization for 'mystep'. The initialized value is overwritten before it is read. [redundantInitialization]
+ mystep = CHECK_STEP_SIZE;
+        ^
+stats.cpp:672:15: note: mystep is initialized
+ float mystep = controller->stepsize;
+              ^
+stats.cpp:674:9: note: mystep is overwritten
+ mystep = CHECK_STEP_SIZE;
+        ^
+stats.cpp:724:9: style: Redundant initialization for 'mystep'. The initialized value is overwritten before it is read. [redundantInitialization]
+ mystep = CHECK_STEP_SIZE;
+        ^
+stats.cpp:722:15: note: mystep is initialized
+ float mystep = controller->stepsize;
+              ^
+stats.cpp:724:9: note: mystep is overwritten
+ mystep = CHECK_STEP_SIZE;
+        ^
+stats.cpp:757:9: style: Redundant initialization for 'mystep'. The initialized value is overwritten before it is read. [redundantInitialization]
+ mystep = CHECK_STEP_SIZE;
+        ^
+stats.cpp:755:15: note: mystep is initialized
+ float mystep = controller->stepsize;
+              ^
+stats.cpp:757:9: note: mystep is overwritten
+ mystep = CHECK_STEP_SIZE;
+        ^
+stats.cpp:204:11: style: The scope of the variable 'target' can be reduced. [variableScope]
+ walker * target;
+          ^
+stats.cpp:609:7: style: The scope of the variable 'message' can be reduced. [variableScope]
+ char message[80];
+      ^
+stats.cpp:1070:8: style: The scope of the variable 'xdest' can be reduced. [variableScope]
+ float xdest, ydest;
+       ^
+stats.cpp:1070:15: style: The scope of the variable 'ydest' can be reduced. [variableScope]
+ float xdest, ydest;
+              ^
+stats.cpp:1071:8: style: The scope of the variable 'xdelta' can be reduced. [variableScope]
+ float xdelta, ydelta;
+       ^
+stats.cpp:1071:16: style: The scope of the variable 'ydelta' can be reduced. [variableScope]
+ float xdelta, ydelta;
+               ^
+Checking stats.cpp: OUYA...
+Checking stats.cpp: PROFILING...
+Checking stats.cpp: USE_TOUCH_INPUT...
+32/39 files checked 73% done
+Checking text.cpp ...
+text.cpp:477:22: warning: Either the condition 'begin' is redundant or there is possible null pointer dereference: begin. [nullPointerRedundantCheck]
+ strcpy(firststring, begin); // default case
+                     ^
+text.cpp:473:6: note: Assuming that condition 'begin' is not redundant
+ if (begin)
+     ^
+text.cpp:477:22: note: Null pointer dereference
+ strcpy(firststring, begin); // default case
+                     ^
+text.cpp:480:13: warning: Either the condition 'begin' is redundant or there is possible null pointer dereference: begin. [nullPointerRedundantCheck]
+ if (strlen(begin))
+            ^
+text.cpp:473:6: note: Assuming that condition 'begin' is not redundant
+ if (begin)
+     ^
+text.cpp:480:13: note: Null pointer dereference
+ if (strlen(begin))
+            ^
+text.cpp:621:22: warning: Either the condition 'begin' is redundant or there is possible null pointer dereference: begin. [nullPointerRedundantCheck]
+ strcpy(firststring, begin); // default case
+                     ^
+text.cpp:617:6: note: Assuming that condition 'begin' is not redundant
+ if (begin)
+     ^
+text.cpp:621:22: note: Null pointer dereference
+ strcpy(firststring, begin); // default case
+                     ^
+text.cpp:624:13: warning: Either the condition 'begin' is redundant or there is possible null pointer dereference: begin. [nullPointerRedundantCheck]
+ if (strlen(begin))
+            ^
+text.cpp:617:6: note: Assuming that condition 'begin' is not redundant
+ if (begin)
+     ^
+text.cpp:624:13: note: Null pointer dereference
+ if (strlen(begin))
+            ^
+text.cpp:203:17: style: The scope of the variable 'width' can be reduced. [variableScope]
+ unsigned short width;
+                ^
+text.cpp:241:17: style: The scope of the variable 'width' can be reduced. [variableScope]
+ unsigned short width;
+                ^
+text.cpp:465:6: style: The scope of the variable 'tempchar' can be reduced. [variableScope]
+ int tempchar;
+     ^
+text.cpp:609:6: style: The scope of the variable 'tempchar' can be reduced. [variableScope]
+ int tempchar;
+     ^
+text.cpp:557:21: style: Local variable 'i' shadows outer variable [shadowVariable]
+                int i;
+                    ^
+text.cpp:461:24: note: Shadowed declaration
+ short current_length, i;
+                       ^
+text.cpp:557:21: note: Shadow variable
+                int i;
+                    ^
+text.cpp:702:21: style: Local variable 'i' shadows outer variable [shadowVariable]
+                int i;
+                    ^
+text.cpp:605:24: note: Shadowed declaration
+ short current_length, i;
+                       ^
+text.cpp:702:21: note: Shadow variable
+                int i;
+                    ^
+text.cpp:230:9: style: Variable 'width' is assigned a value that is never used. [unreadVariable]
+  width -= width%4;
+        ^
+text.cpp:231:9: style: Variable 'width' is assigned a value that is never used. [unreadVariable]
+  width +=4;
+        ^
+text.cpp:253:9: style: Variable 'width' is assigned a value that is never used. [unreadVariable]
+  width -= width%4;
+        ^
+text.cpp:254:9: style: Variable 'width' is assigned a value that is never used. [unreadVariable]
+  width +=4;
+        ^
+text.cpp:494:18: style: Variable 'tempchar' is assigned a value that is never used. [unreadVariable]
+        tempchar = 0;
+                 ^
+text.cpp:639:18: style: Variable 'tempchar' is assigned a value that is never used. [unreadVariable]
+        tempchar = 0;
+                 ^
+Checking text.cpp: OUYA...
+Checking text.cpp: USE_TOUCH_INPUT...
+33/39 files checked 75% done
+Checking treasure.cpp ...
+treasure.cpp:175:14: style: Variable 'leftside' is assigned a value that is never used. [unreadVariable]
+   leftside  = 160 - ( (strlen(exitname) + 18) * 3);
+             ^
+treasure.cpp:176:14: style: Variable 'rightside' is assigned a value that is never used. [unreadVariable]
+   rightside = 160 + ( (strlen(exitname) + 18) * 3);
+             ^
+treasure.cpp:186:14: style: Variable 'leftside' is assigned a value that is never used. [unreadVariable]
+    leftside -= 12;
+             ^
+treasure.cpp:187:15: style: Variable 'rightside' is assigned a value that is never used. [unreadVariable]
+    rightside += 12;
+              ^
+Checking treasure.cpp: OUYA...
+Checking treasure.cpp: USE_TOUCH_INPUT...
+34/39 files checked 76% done
+Checking util.cpp ...
+Checking util.cpp: OUYA...
+Checking util.cpp: USE_TOUCH_INPUT...
+Checking util.cpp: WINDOWS...
+35/39 files checked 76% done
+Checking video.cpp ...
+video.cpp:38:8: warning: Member variable 'video::dospalette' is not initialized in the constructor. [uninitMemberVar]
+video::video()
+       ^
+video.cpp:38:8: warning: Member variable 'video::videobuffer' is not initialized in the constructor. [uninitMemberVar]
+video::video()
+       ^
+video.cpp:38:8: warning: Member variable 'video::cyclemode' is not initialized in the constructor. [uninitMemberVar]
+video::video()
+       ^
+video.cpp:38:8: warning: Member variable 'video::window' is not initialized in the constructor. [uninitMemberVar]
+video::video()
+       ^
+video.cpp:38:8: warning: Member variable 'video::screen_width' is not initialized in the constructor. [uninitMemberVar]
+video::video()
+       ^
+video.cpp:38:8: warning: Member variable 'video::screen_height' is not initialized in the constructor. [uninitMemberVar]
+video::video()
+       ^
+video.cpp:38:8: warning: Member variable 'video::pdouble' is not initialized in the constructor. [uninitMemberVar]
+video::video()
+       ^
+video.cpp:498:21: style: Redundant initialization for 'pix'. The initialized value is overwritten before it is read. [redundantInitialization]
+                pix = (Uint8 *)surface->pixels + y * surface->pitch + x*3;
+                    ^
+video.cpp:487:24: note: pix is initialized
+            Uint8 *pix = (Uint8 *)surface->pixels + y * surface->pitch + x*3;
+                       ^
+video.cpp:498:21: note: pix is overwritten
+                pix = (Uint8 *)surface->pixels + y * surface->pitch + x*3;
+                    ^
+video.cpp:452:24: style: Local variable 'pixel' shadows outer variable [shadowVariable]
+                Uint8 *pixel = (Uint8 *)surface->pixels + y*surface->pitch + x;
+                       ^
+video.cpp:447:13: note: Shadowed declaration
+    Uint32* pixel;
+            ^
+video.cpp:452:24: note: Shadow variable
+                Uint8 *pixel = (Uint8 *)surface->pixels + y*surface->pitch + x;
+                       ^
+video.cpp:472:25: style: Local variable 'pixel' shadows outer variable [shadowVariable]
+                Uint16 *pixel = (Uint16 *)surface->pixels + y*surface->pitch/2 + x;
+                        ^
+video.cpp:447:13: note: Shadowed declaration
+    Uint32* pixel;
+            ^
+video.cpp:472:25: note: Shadow variable
+                Uint16 *pixel = (Uint16 *)surface->pixels + y*surface->pitch/2 + x;
+                        ^
+video.cpp:918:5: style: Variable 'num' is assigned a value that is never used. [unreadVariable]
+ num=0;
+    ^
+video.cpp:974:5: style: Variable 'num' is assigned a value that is never used. [unreadVariable]
+ num=0;
+    ^
+video.cpp:1336:42: style: Variable 'curcolor' is assigned a value that is never used. [unreadVariable]
+                                curcolor = (unsigned char) (teamcolor+(255-curcolor));
+                                         ^
+Checking video.cpp: OUYA...
+Checking video.cpp: USE_BMP_SCREENSHOT...
+Checking video.cpp: USE_TOUCH_INPUT...
+36/39 files checked 81% done
+Checking view.cpp ...
+view.cpp:1069:24: style: Array index 'i' is used before limits check. [arrayIndexThenCheck]
+ while (strlen(textlist[i]) && i < MAX_MESSAGES)
+                       ^
+view.cpp:1870:10: warning: Member variable 'options::keys' is not initialized in the constructor. [uninitMemberVar]
+options::options()
+         ^
+view.cpp:148:2: performance: Variable 'gamma' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+ gamma = 0;
+ ^
+view.cpp:168:2: warning: Class 'viewscreen' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s). [noCopyConstructor]
+ myradar = new radar(this, myscreen, mynum);
+ ^
+view.cpp:168:2: warning: Class 'viewscreen' does not have a operator= which is recommended since it has dynamic memory/resource allocation(s). [noOperatorEq]
+ myradar = new radar(this, myscreen, mynum);
+ ^
+view.cpp:352:14: style: The scope of the variable 'somemessage' can be reduced. [variableScope]
+ static char somemessage[80];
+             ^
+view.cpp:358:15: style: The scope of the variable 'changedteam' can be reduced. [variableScope]
+ static short changedteam[6] = {0, 0, 0, 0, 0, 0};  // for switching team
+              ^
+view.cpp:361:10: style: The scope of the variable 'newob' can be reduced. [variableScope]
+ walker *newob; // for general-purpose use
+         ^
+view.cpp:205:13: style: Variable 'gridp' can be declared with const [constVariable]
+ PixieData& gridp = myscreen->level_data.grid;
+            ^
+view.cpp:262:13: style: Variable 'gridp' can be declared with const [constVariable]
+ PixieData& gridp = data->grid;
+            ^
+Checking view.cpp: OUYA...
+Checking view.cpp: USE_TOUCH_INPUT...
+37/39 files checked 87% done
+Checking walker.cpp ...
+walker.cpp:51:2: warning: Class 'walker' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s). [noCopyConstructor]
+ stats = new statistics(this);
+ ^
+walker.cpp:51:2: warning: Class 'walker' does not have a operator= which is recommended since it has dynamic memory/resource allocation(s). [noOperatorEq]
+ stats = new statistics(this);
+ ^
+walker.cpp:4001:15: style: Suspicious condition (assignment + comparison); Clarify expression with parentheses. [clarifyCondition]
+           && (distance = distance_to_ob(ob) > 64) )
+              ^
+walker.cpp:2042:19: style: Condition 'playerteam>-1' is always true [knownConditionTrueFalse]
+   if (playerteam > -1)
+                  ^
+walker.cpp:2021:15: note: Assignment 'playerteam=0', assigned value is 0
+ playerteam = 0;
+              ^
+walker.cpp:2042:19: note: Condition 'playerteam>-1' is always true
+   if (playerteam > -1)
+                  ^
+walker.cpp:2864:11: style: Condition '!generic' is always true [knownConditionTrueFalse]
+      if (!generic) // didn't remove a marker, so place one
+          ^
+walker.cpp:2863:17: note: Assignment 'generic=0', assigned value is 0
+      generic = 0; // force new placement, for now
+                ^
+walker.cpp:2864:11: note: Condition '!generic' is always true
+      if (!generic) // didn't remove a marker, so place one
+          ^
+walker.cpp:3654:15: style: C-style pointer casting [cstyleCast]
+     fireob = (weap*) fire();
+              ^
+walker.cpp:3659:15: style: C-style pointer casting [cstyleCast]
+     fireob = (weap*) fire();
+              ^
+walker.cpp:3669:16: style: C-style pointer casting [cstyleCast]
+      fireob = (weap*) fire();
+               ^
+walker.cpp:3683:16: style: C-style pointer casting [cstyleCast]
+      fireob = (weap*) fire();
+               ^
+walker.cpp:3697:16: style: C-style pointer casting [cstyleCast]
+      fireob = (weap*) fire();
+               ^
+walker.cpp:3072:15: style: Variable 'generic' is reassigned a value before the old one has been used. [redundantAssignment]
+      generic = stats->magicpoints - stats->special_cost[(int)current_special];
+              ^
+walker.cpp:3049:17: note: generic is assigned
+        generic = 1;
+                ^
+walker.cpp:3072:15: note: generic is overwritten
+      generic = stats->magicpoints - stats->special_cost[(int)current_special];
+              ^
+walker.cpp:3917:6: style: Consecutive return, break, continue, goto or throw statements are unnecessary. [duplicateBreak]
+     break; // end of tunnel case
+     ^
+walker.cpp:313:8: style: The scope of the variable 'ret1' can be reduced. [variableScope]
+ short ret1 = 0, ret2 = 0;
+       ^
+walker.cpp:313:18: style: The scope of the variable 'ret2' can be reduced. [variableScope]
+ short ret1 = 0, ret2 = 0;
+                 ^
+walker.cpp:320:8: style: The scope of the variable 'mycycle' can be reduced. [variableScope]
+ short mycycle;
+       ^
+walker.cpp:400:22: style: The scope of the variable 'gotup' can be reduced. [variableScope]
+                bool gotup = false, gotover = false;
+                     ^
+walker.cpp:400:37: style: The scope of the variable 'gotover' can be reduced. [variableScope]
+                bool gotup = false, gotover = false;
+                                    ^
+walker.cpp:1531:8: style: The scope of the variable 'temp' can be reduced. [variableScope]
+ short temp;
+       ^
+walker.cpp:1878:11: style: The scope of the variable 'blood' can be reduced. [variableScope]
+ walker  *blood; // temporary stain
+          ^
+walker.cpp:1881:7: style: The scope of the variable 'message' can be reduced. [variableScope]
+ char message[80];
+      ^
+walker.cpp:1887:15: style: The scope of the variable 'tom' can be reduced. [variableScope]
+ static short tom = 0;
+              ^
+walker.cpp:2164:12: style: The scope of the variable 'newob' can be reduced. [variableScope]
+ walker  * newob;
+           ^
+walker.cpp:2357:20: style: The scope of the variable 'tempwalk' can be reduced. [variableScope]
+ walker  * alive, *tempwalk;
+                   ^
+walker.cpp:2396:12: style: Variable 'tempx' is assigned a value that is never used. [unreadVariable]
+     tempx = lastx;
+           ^
+walker.cpp:2397:12: style: Variable 'tempy' is assigned a value that is never used. [unreadVariable]
+     tempy = lasty;
+           ^
+walker.cpp:2468:12: style: Variable 'tempx' is assigned a value that is never used. [unreadVariable]
+     tempx = lastx;
+           ^
+walker.cpp:2469:12: style: Variable 'tempy' is assigned a value that is never used. [unreadVariable]
+     tempy = lasty;
+           ^
+walker.cpp:4104:13: style: Variable 'xdir' is assigned a value that is never used. [unreadVariable]
+ short xdir = 0;
+            ^
+walker.cpp:4105:13: style: Variable 'ydir' is assigned a value that is never used. [unreadVariable]
+ short ydir = 0;
+            ^
+walker.cpp:4157:8: style: Variable 'xdir' is assigned a value that is never used. [unreadVariable]
+  xdir = xdelta / abs(xdelta);
+       ^
+walker.cpp:4160:8: style: Variable 'ydir' is assigned a value that is never used. [unreadVariable]
+  ydir = ydelta / abs(ydelta);
+       ^
+walker.cpp:1523:9: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+        e++;
+        ^
+Checking walker.cpp: OUYA...
+Checking walker.cpp: USE_TOUCH_INPUT...
+38/39 files checked 99% done
+Checking weap.cpp ...
+weap.cpp:27:2: performance: Variable 'do_bounce' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+ do_bounce = 0; // don't normally bounce :)
+ ^
+weap.cpp:37:14: style: The scope of the variable 'message' can be reduced. [variableScope]
+ static char message[80];
+             ^
+Checking weap.cpp: OUYA...
+Checking weap.cpp: USE_TOUCH_INPUT...
+39/39 files checked 100% done
+walker.cpp:1405:0: style: The function 'AdjacentCost' is never used. [unusedFunction]
+
+^
+button.cpp:89:0: style: The function 'All' is never used. [unusedFunction]
+
+^
+OuyaController.cpp:408:0: style: The function 'Java_com_dinomage_openglad_Openglad_OuyaControllerGenericMotionEvent' is never used. [unusedFunction]
+
+^
+OuyaController.cpp:392:0: style: The function 'Java_com_dinomage_openglad_Openglad_OuyaControllerKeyDown' is never used. [unusedFunction]
+
+^
+OuyaController.cpp:400:0: style: The function 'Java_com_dinomage_openglad_Openglad_OuyaControllerKeyUp' is never used. [unusedFunction]
+
+^
+walker.cpp:1395:0: style: The function 'LeastCostEstimate' is never used. [unusedFunction]
+
+^
+button.cpp:81:0: style: The function 'LeftRight' is never used. [unusedFunction]
+
+^
+walker.cpp:1450:0: style: The function 'PrintStateInfo' is never used. [unusedFunction]
+
+^
+sai2x.cpp:756:0: style: The function 'SaveBMP' is never used. [unusedFunction]
+
+^
+sai2x.cpp:636:0: style: The function 'Super2xSaI' is never used. [unusedFunction]
+
+^
+button.cpp:29:0: style: The function 'Up' is never used. [unusedFunction]
+
+^
+util.cpp:59:0: style: The function 'change_time' is never used. [unusedFunction]
+
+^
+view.cpp:1086:0: style: The function 'clear_text' is never used. [unusedFunction]
+
+^
+input.cpp:1491:0: style: The function 'convert_to_ascii' is never used. [unusedFunction]
+
+^
+picker.cpp:3020:0: style: The function 'delete_all' is never used. [unusedFunction]
+
+^
+glad.cpp:330:0: style: The function 'draw_gem' is never used. [unusedFunction]
+
+^
+glad.cpp:352:0: style: The function 'draw_value_bar' is never used. [unusedFunction]
+
+^
+help.cpp:330:0: style: The function 'fill_help_array' is never used. [unusedFunction]
+
+^
+OuyaController.cpp:138:0: style: The function 'getNormalizedAxisValue' is never used. [unusedFunction]
+
+^
+OuyaController.cpp:23:0: style: The function 'getPlayerNum' is never used. [unusedFunction]
+
+^
+view.cpp:2105:0: style: The function 'get_keypress' is never used. [unusedFunction]
+
+^
+picker.cpp:3753:0: style: The function 'get_scen_num_from_filename' is never used. [unusedFunction]
+
+^
+video.cpp:112:0: style: The function 'getbuffer' is never used. [unusedFunction]
+
+^
+picker.cpp:2904:0: style: The function 'how_many' is never used. [unusedFunction]
+
+^
+level_picker.cpp:117:0: style: The function 'isDir' is never used. [unusedFunction]
+
+^
+input.cpp:790:0: style: The function 'isPlayerKey' is never used. [unusedFunction]
+
+^
+pixien.cpp:72:0: style: The function 'next_frame' is never used. [unusedFunction]
+
+^
+pixie.cpp:160:0: style: The function 'put_screen' is never used. [unusedFunction]
+
+^
+video.cpp:316:0: style: The function 'putblack' is never used. [unusedFunction]
+
+^
+video.cpp:764:0: style: The function 'putdata_alpha' is never used. [unusedFunction]
+
+^
+pixien.cpp:77:0: style: The function 'query_frame' is never used. [unusedFunction]
+
+^
+walker.cpp:2327:0: style: The function 'query_next_to' is never used. [unusedFunction]
+
+^
+walker.cpp:1682:0: style: The function 'query_old_act_type' is never used. [unusedFunction]
+
+^
+sound.cpp:173:0: style: The function 'query_volume' is never used. [unusedFunction]
+
+^
+level_editor.cpp:1092:0: style: The function 'reloadLevel' is never used. [unusedFunction]
+
+^
+picker.cpp:3261:0: style: The function 'return_menu' is never used. [unusedFunction]
+
+^
+pal32.cpp:79:0: style: The function 'save_palette' is never used. [unusedFunction]
+
+^
+level_editor.cpp:370:0: style: The function 'set_colors_disabled' is never used. [unusedFunction]
+
+^
+walker.cpp:1676:0: style: The function 'set_old_act_type' is never used. [unusedFunction]
+
+^
+level_editor.cpp:3986:0: style: The function 'set_screen_pos' is never used. [unusedFunction]
+
+^
+sound.cpp:178:0: style: The function 'set_volume' is never used. [unusedFunction]
+
+^
+level_picker.cpp:126:0: style: The function 'sort_scen' is never used. [unusedFunction]
+
+^
+util.cpp:100:0: style: The function 'uppercase' is never used. [unusedFunction]
+
+^
+text.cpp:105:0: style: The function 'write_xy_shadow' is never used. [unusedFunction]
+
+^
+nofile:0:0: information: Cppcheck cannot find all the include files (use --check-config for details) [missingInclude]
+

@@ -26,10 +26,11 @@ void get_input_events(bool);
 
 
 
+/*CPPCHECK: Never used
 MenuNav MenuNav::Up(int up)
 {
     return MenuNav(up, -1,-1,-1);
-}
+}*/
 MenuNav MenuNav::Down(int down)
 {
     return MenuNav(-1, down, -1, -1);
@@ -78,18 +79,21 @@ MenuNav MenuNav::DownLeftRight(int down, int left, int right)
 {
     return MenuNav(-1, down, left, right);
 }
+/*
+CPPCHECK: Never used
 MenuNav MenuNav::LeftRight(int left, int right)
 {
     return MenuNav(-1, -1, left, right);
-}
+}*/
 MenuNav MenuNav::UpDownLeftRight(int up, int down, int left, int right)
 {
     return MenuNav(up, down, left, right);
 }
+/*CPPCHECK: Never used
 MenuNav MenuNav::All(int up, int down, int left, int right)
 {
     return MenuNav(up, down, left, right);
-}
+}*/
 MenuNav MenuNav::None()
 {
     return MenuNav();

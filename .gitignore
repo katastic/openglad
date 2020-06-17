@@ -4,5 +4,6 @@
 obj
 /obj/**
 *.exe
+*.o
 stdout.txt
 stderr.txt

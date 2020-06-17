@@ -1,3 +1,0 @@
-g++ -g  -I/usr/include/SDL2    -I../src/externalyam/    -I../src/external/libzip/   -I../src/external/yam/include/           -I../src/external/libyaml/include/            -I../src/external/physfs/            -I../src/external/physfs/extras/            -I../src/external/physfs/extras/zlib123/            -I../src/external/micropather/     ../src/external/micropather/*.cpp    ../src/external/yam/*.cpp   -L../build_deps/  -lcdeps -shared -o ../build_deps/libcppdeps.so
-
-#NOTE, these have to be copied into the main folder for opengladvs to see the shared lib. or find a way to embed it anyway

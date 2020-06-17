@@ -1,0 +1,2 @@
+g++   -g    ../src/*.cpp    -I/usr/include/SDL2    -I../src/external/yam/    -I../src/external/libzip/    -I../src/external/libyaml/include/            -I../src/external/physfs/            -I../src/external/physfs/extras/            -I../src/external/physfs/extras/zlib123/            -I../src/external/micropather/            -L../build_deps/            -lcdeps    -lcppdeps    -lSDL2main    -lSDL2  -lSDL2_mixer -lpng16    -o    ../opengladvs
+#  -lopengl32 

@@ -16,8 +16,8 @@ static Uint32 greenMask = 0x7E0;
 static int PixelsPerMask = 2;
 static int xsai_depth = 0;
 
-static unsigned char *src_line[4];
-static unsigned char *dst_line[2];
+//static unsigned char *src_line[4]; not used
+//static unsigned char *dst_line[2]; not used
 
 #define GET_RESULT(A, B, C, D) ((A != C || A != D) - (B != C || B != D))
 

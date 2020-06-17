@@ -56,7 +56,7 @@ short treasure::act()
 short treasure::eat_me(walker  * eater)
 {
 	short guys_here;
-	
+
 	char message[80];
 	Sint32 distance;
 	walker  *target, *flash;
@@ -74,9 +74,9 @@ short treasure::eat_me(walker  * eater)
 				eater->stats->hitpoints += amount;
 				if (eater->stats->hitpoints > eater->stats->max_hitpoints)
 					eater->stats->hitpoints = eater->stats->max_hitpoints;
-                
+
                 do_heal_effects(NULL, eater, amount);
-                
+
 				dead = 1;
 				if (on_screen())
 					myscreen->soundp->play_sound(SOUND_EAT);
@@ -185,7 +185,7 @@ short treasure::eat_me(walker  * eater)
 			{
 				leftside -= 12;
 				rightside += 12;
-                
+
                 char buf[40];
                 snprintf(buf, 40, "Withdraw to %s?", exitname);
                 bool result = yes_or_no_prompt("Exit Field", buf, false);
@@ -205,14 +205,14 @@ short treasure::eat_me(walker  * eater)
 							myscreen->level_data.myobmap->remove(w);
 						}
 					}
-					
+
 					// Now reload the autosave to revert our changes during battle (don't use SaveData::update_guys())
                     myscreen->save_data.load("save0");
-                    
+
                     // Go to the exit's level
 					myscreen->save_data.scen_num = stats->level;
 					myscreen->end = 1;
-					
+
                     // Autosave because we escaped to a new level
 					// Save with the new current level
                     myscreen->save_data.save("save0");
@@ -323,8 +323,8 @@ walker  * treasure::find_teleport_target()
 	// First find where we are in the list ...
     auto mine = std::find(ls.begin(), ls.end(), this);
     if(mine == ls.end())
-        return NULL;
-    
+        {return NULL;}
+
 	// Now search the rest of the list ..
 	auto e = mine;
 	e++;

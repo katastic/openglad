@@ -1,0 +1,38 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+  {
+  "type": "shell",
+  "label": "GAME",
+  "command": "/usr/bin/g++",
+  "args": [
+    "-g",
+    "${workspaceFolder}/src/*.cpp",
+    "-I/usr/include/SDL2",
+    "-I${workspaceFolder}/src/external/yam/",
+    "-I${workspaceFolder}/src/external/libzip/",
+    "-I${workspaceFolder}/src/external/libyaml/include/",        
+    "-I${workspaceFolder}/src/external/physfs/",        
+    "-I${workspaceFolder}/src/external/physfs/extras/",        
+    "-I${workspaceFolder}/src/external/physfs/extras/zlib123/",        
+    "-I${workspaceFolder}/src/external/micropather/",        
+    "-L${workspaceFolder}/build_deps/",        
+    "-lcdeps",
+    "-lcppdeps",
+    "-lSDL2main",
+    "-lSDL2",
+    "-lopengl32",
+    "-o",
+    "opengladvs"
+  ],
+  "options": {
+    "cwd": "/usr/bin"
+  },
+  "problemMatcher": [
+    "$gcc"
+  ],
+  "group": "build"
+}
+
+  ]
+}

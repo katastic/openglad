@@ -1788,17 +1788,18 @@ bool video::save_screenshot()
 
     Log("Saving screenshot: %s\n", buf);
 
-    #ifndef USE_BMP_SCREENSHOT
+	
+//    #ifndef USE_BMP_SCREENSHOT
     // Make it safe to save (convert alpha channel)
-    surf = SDL_PNGFormatAlpha(surf);
+    //surf = SDL_PNGFormatAlpha(surf); // undefined reference to `SDL_PNGFormatAlpha'
 
     // Save it
-    bool result = (SDL_SavePNG_RW(surf, rwops, 1) >= 0);
-    SDL_FreeSurface(surf);
-    #else
+    //bool result = (SDL_SavePNG_RW(surf, rwops, 1) >= 0);// undefined reference to `SDL_SavePNG_RW'
+    //SDL_FreeSurface(surf);
+    //#else
     bool result = (SDL_SaveBMP_RW(surf, rwops, 1) >= 0);
 
-    #endif
+    //#endif
 
     return result;
 }

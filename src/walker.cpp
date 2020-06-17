@@ -2145,7 +2145,7 @@ short walker::attack(walker  *target)
 			blood->team_num = target->team_num;
 			blood->ani_type = ANI_GROW;
 			blood->ignore = 1; // so that we can be walked over .. ?
-			blood->setxy(target->xpos,target->ypos);
+			blood->setxy(target->xpos, target->ypos);
 		}
 		if (on_screen() && targetorder == ORDER_LIVING)
 		{

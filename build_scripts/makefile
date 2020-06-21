@@ -23,9 +23,9 @@ opengladvs: $(OBJ_FILES)
 	LD_RUN_PATH='./build_deps/' g++ -ggdb $(CXXFLAGS) $(OBJ_FILES) $(LDFLAGS) -o ../openglad
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	g++ $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
+	g++ -ggdb $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 	
 clean:	
 	rm -r ../obj/*
-	rm ../openglad_mk
+	rm ../openglad
 	echo "DELETING OBJ files"

@@ -15,16 +15,17 @@ CXXFLAGS := -I/usr/include/SDL2    -I../src/external/yam/    -I../src/external/l
 #LD_RUN_PATH='.' tells the linker that we'll have shared libraries located in our game run directory/build_deps, and to search there instead of forcing us to install our shared libs into system. Since they're not really shared libs.
 #https://aimlesslygoingforward.com/blog/2014/01/19/bundling-shared-libraries-on-linux/
 
-FILES := ../obj/button.o ../obj/glad.o ../obj/guy.o ../obj/io.o ../obj/living.o ../obj/picker.o ../obj/radar.o ../obj/screen.o ../obj/text.o ../obj/view.o ../obj/campaign_picker.o ../obj/gloader.o ../obj/help.o ../obj/level_data.o ../obj/obmap.o ../obj/pixie.o ../obj/results_screen.o ../obj/smooth.o ../obj/treasure.o ../obj/walker.o ../obj/effect.o ../obj/gparser.o ../obj/input.o ../obj/level_editor.o ../obj/OuyaController.o ../obj/pixie_data.o ../obj/sai2x.o ../obj/sound.o ../obj/util.o ../obj/weap.o ../obj/game.o ../obj/graphlib.o ../obj/intro.o ../obj/level_picker.o ../obj/pal32.o ../obj/pixien.o ../obj/save_data.o ../obj/stats.o ../obj/video.o  -o out1
+#FILES := ../obj/button.o ../obj/glad.o ../obj/guy.o ../obj/io.o ../obj/living.o ../obj/picker.o ../obj/radar.o ../obj/screen.o ../obj/text.o ../obj/view.o ../obj/campaign_picker.o ../obj/gloader.o ../obj/help.o ../obj/level_data.o ../obj/obmap.o ../obj/pixie.o ../obj/results_screen.o ../obj/smooth.o ../obj/treasure.o ../obj/walker.o ../obj/effect.o ../obj/gparser.o ../obj/input.o ../obj/level_editor.o ../obj/OuyaController.o ../obj/pixie_data.o ../obj/sai2x.o ../obj/sound.o ../obj/util.o ../obj/weap.o ../obj/game.o ../obj/graphlib.o ../obj/intro.o ../obj/level_picker.o ../obj/pal32.o ../obj/pixien.o ../obj/save_data.o ../obj/stats.o ../obj/video.o  -o out1
 
 
 opengladvs: $(OBJ_FILES)
 #	g++ $(LDFLAGS)  -o $@ $^
-	LD_RUN_PATH='./build_deps/' g++  $(CXXFLAGS) $(OBJ_FILES) $(LDFLAGS) -o ../openglad_mk
+	LD_RUN_PATH='./build_deps/' g++ -ggdb $(CXXFLAGS) $(OBJ_FILES) $(LDFLAGS) -o ../openglad
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	g++ $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 	
 clean:	
 	rm -r ../obj/*
+	rm ../openglad_mk
 	echo "DELETING OBJ files"

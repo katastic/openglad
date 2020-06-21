@@ -629,6 +629,19 @@ short living::check_special()
 			if (howmany > 3) // too many enemies!
 				return 1;
 			return 0;
+		case FAMILY_SUMMONER:  // TP if  away from guys ..
+			howmany = 0;
+			myscreen->find_foes_in_range(myscreen->level_data.oblist,
+			                                        110, &howmany, this);
+
+			if (howmany < 1) //  away from anybody ..
+				return 1;
+			if (howmany > 3) // too many enemies!
+				return 1;
+			return 0;
+
+
+
 			//break; // end of fighter case
 		case FAMILY_SLIME:
 			if (myscreen->level_data.numobs < MAXOBS)

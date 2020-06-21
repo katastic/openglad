@@ -3019,6 +3019,54 @@ short walker::special()
 				}
 			}
 			break; // end of mage
+
+		case FAMILY_SUMMONER:
+
+			{
+
+
+
+				// First make the guy we'd summon, at least physically
+						newob = myscreen->level_data.add_ob(ORDER_LIVING, FAMILY_ORC);
+						if (!newob)
+							return 0; // failsafe
+						// We need to check for a space around the archmage...
+						generic = 0; // this means we have or haven't found room
+						for (i=-1; i <= 1; i++)
+							for (j=-1; j <= 1; j++)
+							{
+								if ( (i==0 && j==0) || (generic) )
+									continue;
+								if (myscreen->query_passable(xpos+((newob->sizex+1)*i),
+								                            ypos+((newob->sizey+1)*j), newob))
+								{
+									// We've found a legal spot ..
+									generic = 1;
+									newob->setxy(xpos+((newob->sizex+1)*i),
+									             ypos+((newob->sizey+1)*j));
+									newob->stats->level = (stats->level+1)/2;
+									newob->set_difficulty(newob->stats->level);
+									newob->team_num = team_num; // set to our team
+									newob->owner = this; // we're owned!
+									newob->lifetime = 200 + 60*stats->level;
+								} // end of successfully put summoned creature
+							} // end of I and J loops
+						if (!generic) // we never found a legal spot
+						{
+							newob->dead = 1;
+							return 0;
+						}
+						busy += 15;
+
+
+
+
+			}
+
+
+
+			break; // end of summoner
+
 		case FAMILY_ARCHMAGE:
 			switch (current_special)
 			{

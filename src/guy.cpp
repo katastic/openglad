@@ -81,8 +81,8 @@ guy::guy(int whatfamily)
     scen_hits = 0;
 	
 	// Set stats
-	if(whatfamily <= FAMILY_ARCHMAGE)
-	{
+	if(whatfamily <= FAMILY_ARCHMAGE) // KAT BUG this will break if we don't put summoner BEFORE archmage
+	{ //can we change it to ==, or will that modify ones > ARCHMAGE like guard towers?
         strength = statlist[whatfamily][0];
         dexterity = statlist[whatfamily][1];
         constitution = statlist[whatfamily][2];
@@ -210,7 +210,8 @@ Sint32 costlist[NUM_FAMILIES] =
         300,  // orc
         1000, // 'big' orc
         350,  // barbarian
-        450,  // archmage, not used
+        250, // SUMMONER BEFORE archmage
+        450  // archmage, not used        
     };
 
 Sint32 statlist[NUM_FAMILIES][6] =
@@ -233,7 +234,8 @@ Sint32 statlist[NUM_FAMILIES][6] =
         {18,  8,   16,  5,   11,    1},  // orc
         {18,  8,   16,  5,   11,    1},  // 'big' orc
         {14,  5,   14,  8,   8,     1},  // barbarian
-        {4,   6,   4,   16,  5,     1},  // archmage
+        {1,   1,   10,   25,  1,     1},  // SUMMONER
+        {4,   6,   4,   16,  5,     1},  // archmage        
     };
 
 #define BASE_GUY_HP 30
@@ -257,7 +259,8 @@ float derived_bonuses[NUM_FAMILIES][8] =
         {BASE_GUY_HP+110, 0,   23,   0,          0,     0,   3,     7},  // orc
         {BASE_GUY_HP+150, 0,   28,   0,          0,     0,   3,     6},  // 'big' orc
         {BASE_GUY_HP+120, 0,   25,   0,          0,     0,   3,     5.5f},  // barbarian
-        {BASE_GUY_HP+120, 0,   8,    0,          0,     0,   3,     1},  // archmage
+        {BASE_GUY_HP+120, 0,   8,    0,          0,     0,   3,     1},  // SUMMONER
+        {BASE_GUY_HP+120, 0,   8,    0,          0,     0,   3,     1},  // archmage        
         {BASE_GUY_HP+270, 0,   60,   0,          0,     0,   8,     9},  // golem
         {BASE_GUY_HP+270, 0,   60,   0,          0,     0,   8,     7},  // giant skeleton
         {BASE_GUY_HP+100, 0,   0,    0,          0,     0,   0,     5},  // tower
@@ -284,7 +287,8 @@ Sint32 statcosts[NUM_FAMILIES][6] =
         { 6,15, 5,40,50, 200},  // 'big' orc
         { 5,35, 5,35,50, 200},  // barbarian
         //  {25,15,20, 5,50, 200},  // archmage
-        {30,20,25, 7,55, 200},  // archmage
+        {30,20,25, 7,55, 200},  // SUMMONER. BEFORE archmage
+        {30,20,25, 7,55, 200},  // archmage        
     };
 
 
@@ -367,6 +371,13 @@ void guy::upgrade_to_level(short level, bool set_xp)
 			a *= 1.0f;
 			break;
 		case FAMILY_ARCHMAGE:
+			s *= 0.5f;
+			d *= 1.0f;
+			c *= 0.5f;
+			i *= 2.0f;
+			a *= 1.0f;
+			break;
+		case FAMILY_SUMMONER:
 			s *= 0.5f;
 			d *= 1.0f;
 			c *= 0.5f;

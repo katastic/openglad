@@ -27,7 +27,7 @@
 void popup_dialog(const char* title, const char* message);
 
 #define SIZE_ORDERS 7 // see graph.h
-#define SIZE_FAMILIES 21  // see also NUM_FAMILIES in graph.h
+#define SIZE_FAMILIES 22  // see also NUM_FAMILIES in graph.h
 //#define PIX(a,b) (SIZE_FAMILIES*a+b)  //moved to graph.h
 
 extern float derived_bonuses[NUM_FAMILIES][8];
@@ -356,7 +356,7 @@ loader::loader()
 	graphics[PIX(ORDER_LIVING, FAMILY_ELF)] = read_pixie_file("elf.pix");
 	graphics[PIX(ORDER_LIVING, FAMILY_ARCHER)] = read_pixie_file("archer.pix");
 	graphics[PIX(ORDER_LIVING, FAMILY_THIEF)] = read_pixie_file("thief.pix");
-	graphics[PIX(ORDER_LIVING, FAMILY_MAGE)] = read_pixie_file("mage.pix");
+	graphics[PIX(ORDER_LIVING, FAMILY_MAGE)] = read_pixie_file("mage.pix");	
 	graphics[PIX(ORDER_LIVING, FAMILY_SKELETON)] = read_pixie_file("skeleton.pix");
 	graphics[PIX(ORDER_LIVING, FAMILY_CLERIC)] = read_pixie_file("cleric.pix");
 	graphics[PIX(ORDER_LIVING, FAMILY_FIREELEMENTAL)] = read_pixie_file("firelem.pix");
@@ -369,10 +369,14 @@ loader::loader()
 	graphics[PIX(ORDER_LIVING, FAMILY_ORC)] = read_pixie_file("orc.pix");
 	graphics[PIX(ORDER_LIVING, FAMILY_BIG_ORC)] = read_pixie_file("orc2.pix");
 	graphics[PIX(ORDER_LIVING, FAMILY_BARBARIAN)] = read_pixie_file("barby.pix");
+	graphics[PIX(ORDER_LIVING, FAMILY_SUMMONER)] = read_pixie_file("skeleton.pix");
 	graphics[PIX(ORDER_LIVING, FAMILY_ARCHMAGE)] = read_pixie_file("archmage.pix");
 	graphics[PIX(ORDER_LIVING, FAMILY_GOLEM)] = read_pixie_file("golem1.pix");
 	graphics[PIX(ORDER_LIVING, FAMILY_GIANT_SKELETON)] = read_pixie_file("gs1.pix");
 	graphics[PIX(ORDER_LIVING, FAMILY_TOWER1)] = read_pixie_file("towersm1.pix");
+	
+	
+
 
     for(int i = 0; i < NUM_FAMILIES; i++)
     {
@@ -400,6 +404,7 @@ loader::loader()
 	act_types[PIX(ORDER_LIVING, FAMILY_ORC)] = ACT_RANDOM;
 	act_types[PIX(ORDER_LIVING, FAMILY_BIG_ORC)] = ACT_RANDOM;
 	act_types[PIX(ORDER_LIVING, FAMILY_BARBARIAN)] = ACT_RANDOM;
+	act_types[PIX(ORDER_LIVING, FAMILY_SUMMONER)] = ACT_RANDOM;
 	act_types[PIX(ORDER_LIVING, FAMILY_ARCHMAGE)] = ACT_RANDOM;
 	act_types[PIX(ORDER_LIVING, FAMILY_GOLEM)] = ACT_RANDOM;
 	act_types[PIX(ORDER_LIVING, FAMILY_GIANT_SKELETON)] = ACT_RANDOM;
@@ -409,7 +414,7 @@ loader::loader()
 	animations[PIX(ORDER_LIVING, FAMILY_ELF)] = animan;
 	animations[PIX(ORDER_LIVING, FAMILY_ARCHER)] = animan;
 	animations[PIX(ORDER_LIVING, FAMILY_THIEF)] = animan;
-	animations[PIX(ORDER_LIVING, FAMILY_MAGE)] = animage;
+	animations[PIX(ORDER_LIVING, FAMILY_MAGE)] = animage;	
 	animations[PIX(ORDER_LIVING, FAMILY_SKELETON)] = aniskel;
 	animations[PIX(ORDER_LIVING, FAMILY_CLERIC)] = animan;
 	animations[PIX(ORDER_LIVING, FAMILY_FIREELEMENTAL)] = animan;
@@ -422,17 +427,20 @@ loader::loader()
 	animations[PIX(ORDER_LIVING, FAMILY_ORC)] = animan;
 	animations[PIX(ORDER_LIVING, FAMILY_BIG_ORC)] = animan;
 	animations[PIX(ORDER_LIVING, FAMILY_BARBARIAN)] = animan;
+	animations[PIX(ORDER_LIVING, FAMILY_SUMMONER)] = aniskel; //KAT
 	animations[PIX(ORDER_LIVING, FAMILY_ARCHMAGE)] = animage;
 	animations[PIX(ORDER_LIVING, FAMILY_GOLEM)] = animan;
 	animations[PIX(ORDER_LIVING, FAMILY_GIANT_SKELETON)] = anigs;
 	animations[PIX(ORDER_LIVING, FAMILY_TOWER1)] = anifood;
+	
+	
 
     // AI's understanding of how much range its ranged attack has so it will try to shoot.
 	lineofsight[PIX(ORDER_LIVING, FAMILY_SOLDIER)] = 7;
 	lineofsight[PIX(ORDER_LIVING, FAMILY_ELF)] = 8;
 	lineofsight[PIX(ORDER_LIVING, FAMILY_ARCHER)] = 12;
 	lineofsight[PIX(ORDER_LIVING, FAMILY_THIEF)] = 10;
-	lineofsight[PIX(ORDER_LIVING, FAMILY_MAGE)] = 7;
+	lineofsight[PIX(ORDER_LIVING, FAMILY_MAGE)] = 7;	
 	lineofsight[PIX(ORDER_LIVING, FAMILY_SKELETON)] = 7;
 	lineofsight[PIX(ORDER_LIVING, FAMILY_CLERIC)] = 4;
 	lineofsight[PIX(ORDER_LIVING, FAMILY_FIREELEMENTAL)] = 10;
@@ -445,7 +453,8 @@ loader::loader()
 	lineofsight[PIX(ORDER_LIVING, FAMILY_ORC)] = 20;
 	lineofsight[PIX(ORDER_LIVING, FAMILY_BIG_ORC)] = 25;
 	lineofsight[PIX(ORDER_LIVING, FAMILY_BARBARIAN)] = 12;
-	lineofsight[PIX(ORDER_LIVING, FAMILY_ARCHMAGE)] = 10;
+	lineofsight[PIX(ORDER_LIVING, FAMILY_SUMMONER)] = 7; // KAT
+	lineofsight[PIX(ORDER_LIVING, FAMILY_ARCHMAGE)] = 10;	
 	lineofsight[PIX(ORDER_LIVING, FAMILY_GOLEM)] = 20;
 	lineofsight[PIX(ORDER_LIVING, FAMILY_GIANT_SKELETON)] = 20;
 	lineofsight[PIX(ORDER_LIVING, FAMILY_TOWER1)] = 10;
@@ -914,6 +923,15 @@ walker  *loader::set_walker(walker *ob,
 					ob->stats->special_cost[5] = 100; // heartburst
 					ob->stats->weapon_cost = 5;
 					ob->default_weapon = FAMILY_FIREBALL;
+					break;
+				case FAMILY_SUMMONER:
+					ob->stats->special_cost[1] = 15;  // cost to teleport
+					ob->stats->special_cost[2] = 60; // warp space
+					ob->stats->special_cost[3] = 500;  // freeze time
+					ob->stats->special_cost[4] = 70; // energy wave
+					ob->stats->special_cost[5] = 100; // heartburst
+					ob->stats->weapon_cost = 2;
+					ob->default_weapon = FAMILY_METEOR;
 					break;
 				case FAMILY_ARCHMAGE:
 					ob->stats->special_cost[1] = 10;  // cost to teleport

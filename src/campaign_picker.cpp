@@ -287,20 +287,21 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
 
     // Load campaigns
     std::list<std::string> campaign_ids = list_campaigns();
-    int i = 0;
-    for(std::list<std::string>::iterator e = campaign_ids.begin(); e != campaign_ids.end(); e++)
     {
-        int num_completed = -1;
-        if(save_data != NULL)
-            num_completed = save_data->get_num_levels_completed(*e);
-        entries.push_back(new CampaignEntry(*e, num_completed));
+        int i = 0;
+        for(std::list<std::string>::iterator e = campaign_ids.begin(); e != campaign_ids.end(); e++)
+        {
+            int num_completed = -1;
+            if(save_data != NULL)
+                num_completed = save_data->get_num_levels_completed(*e);
+            entries.push_back(new CampaignEntry(*e, num_completed));
 
-        if(*e == old_campaign_id)
-            current_campaign_index = i;
+            if(*e == old_campaign_id)
+                current_campaign_index = i;
 
-        i++;
+            i++;
+        }
     }
-
     // Figure out how good the player's army is
     int army_power = -1;
     if(save_data != NULL)

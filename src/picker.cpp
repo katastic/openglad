@@ -225,17 +225,17 @@ void picker_quit()
 #ifndef DISABLE_MULTIPLAYER
 button mainmenu_buttons[] =
     {
-        button("", KEYSTATE_UNKNOWN, 80, 50, 140, 20, BEGINMENU, 1 , MenuNav::Down(1), false), // BEGIN NEW GAME
-        button("CONTINUE GAME", KEYSTATE_UNKNOWN, 80, 75, 140, 20, CREATE_TEAM_MENU, -1 , MenuNav::UpDown(0, 5)),
+        button("", KEYSTATE_b, 80, 50, 140, 20, BEGINMENU, 1 , MenuNav::Down(1), false), // BEGIN NEW GAME
+        button("CONTINUE GAME", KEYSTATE_c, 80, 75, 140, 20, CREATE_TEAM_MENU, -1 , MenuNav::UpDown(0, 5)),
 
         button("4 PLAYER", KEYSTATE_4, 152,125,68,20, SET_PLAYER_MODE, 4 , MenuNav::UpDownLeft(4, 6, 3)),
         button("3 PLAYER", KEYSTATE_3, 80,125,68,20, SET_PLAYER_MODE,3 , MenuNav::UpDownRight(5, 6, 2)),
         button("2 PLAYER", KEYSTATE_2, 152,100,68,20, SET_PLAYER_MODE,2 , MenuNav::UpDownLeft(1, 2, 5)),
         button("1 PLAYER", KEYSTATE_1, 80,100,68,20, SET_PLAYER_MODE,1 , MenuNav::UpDownRight(1, 3, 4)),
 
-        button("DIFFICULTY", KEYSTATE_UNKNOWN, 80, 148, 140, 10, SET_DIFFICULTY, -1, MenuNav::UpDown(3, 7)),
+        button("DIFFICULTY", KEYSTATE_d, 80, 148, 140, 10, SET_DIFFICULTY, -1, MenuNav::UpDown(3, 7)),
 
-        button("PVP: Allied", KEYSTATE_UNKNOWN, 80, 160, 68, 10, ALLIED_MODE, -1, MenuNav::UpDownRight(6, 9, 8)),
+        button("PVP: Allied", KEYSTATE_p, 80, 160, 68, 10, ALLIED_MODE, -1, MenuNav::UpDownRight(6, 9, 8)),
         button("Level Edit", KEYSTATE_UNKNOWN, 152, 160, 68, 10, DO_LEVEL_EDIT, -1, MenuNav::UpDownLeft(6, 9, 7)),
 
         button("QUIT ", KEYSTATE_ESCAPE, 120, 175, 60, 20, QUIT_MENU, 0 , MenuNav::UpLeft(7, 10)),
@@ -386,14 +386,14 @@ button loadteam_buttons[] =
 
 button yes_or_no_buttons[] =
     {
-        button("YES", KEYSTATE_RETURN,  70, 130, 50, 20, YES_OR_NO, YES, MenuNav::Right(1)),
-        button("NO", KEYSTATE_ESCAPE,  SCREEN_W-50-70, SCREEN_H/2+130, 50, 20, YES_OR_NO, NO, MenuNav::Left(0))
+        button("YES", KEYSTATE_y,  70, 130, 50, 20, YES_OR_NO, YES, MenuNav::Right(1)),
+        button("NO", KEYSTATE_n,  160-50-70, 100+130, 50, 20, YES_OR_NO, NO, MenuNav::Left(0))
     };
 
 button no_or_yes_buttons[] =
     {
-        button("NO", KEYSTATE_ESCAPE,  70, 130, 50, 20, YES_OR_NO, NO, MenuNav::Right(1)),
-        button("YES", KEYSTATE_RETURN,  SCREEN_W-50-70, SCREEN_H/2+130, 50, 20, YES_OR_NO, YES, MenuNav::Left(0))
+        button("NO", KEYSTATE_n,  70, 130, 50, 20, YES_OR_NO, NO, MenuNav::Right(1)),
+        button("YES", KEYSTATE_y,  160-50-70, 100+130, 50, 20, YES_OR_NO, YES, MenuNav::Left(0))
     };
 
 button popup_dialog_buttons[] =

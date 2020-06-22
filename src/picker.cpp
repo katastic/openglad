@@ -2064,7 +2064,7 @@ bool no_or_yes_prompt(const char* title, const char* message, bool default_value
         draw_buttons(buttons, num_buttons);
 
         draw_highlight_interior(buttons[highlighted_button]);
-        myscreen->buffer_to_screen(0,0,SCREEN_H, SCREEN_H);
+        myscreen->buffer_to_screen(0,0,SCREEN_W, SCREEN_H);
         SDL_Delay(10);
 	}
 

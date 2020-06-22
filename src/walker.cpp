@@ -3709,12 +3709,12 @@ short walker::special()
 			{
 				case 1:  // some rocks (normal)
 					stats->magicpoints += (2*stats->weapon_cost);
-					fireob = (weap*) fire();
+					fireob = static_cast<weap*>(fire());
                     if (!fireob) // failsafe
                         return 0;
 					fireob->lastx *= 0.8f + 0.4f*(rand()%101)/100.0f;
 					fireob->lasty *= 0.8f + 0.4f*(rand()%101)/100.0f;
-					fireob = (weap*) fire();
+					fireob = static_cast<weap*>(fire());
                     if (!fireob) // failsafe
                         return 0;
 					fireob->lastx *= 0.8f + 0.4f*(rand()%101)/100.0f;
@@ -3724,7 +3724,7 @@ short walker::special()
 					stats->magicpoints += (3*stats->weapon_cost);
 					for (i=0; i < 2; i++)
 					{
-						fireob = (weap*) fire();
+						fireob = static_cast<weap*>(fire());
 						if (!fireob) // failsafe
 							return 0;
 						fireob->lineofsight *= 3;  // we get 50% longer, too!
@@ -3738,7 +3738,7 @@ short walker::special()
 					stats->magicpoints += (4*stats->weapon_cost);
 					for (i=0; i < 3; i++)
 					{
-						fireob = (weap*) fire();
+						fireob = static_cast<weap*>(fire());
 						if (!fireob) // failsafe
 							return 0;
 						fireob->lineofsight *= 2;  // get double distance
@@ -3752,7 +3752,7 @@ short walker::special()
 					stats->magicpoints += (5*stats->weapon_cost);
 					for (i=0; i < 4; i++)
 					{
-						fireob = (weap*) fire();
+						fireob = static_cast<weap*>(fire());
 						if (!fireob) // failsafe
 							return 0;
 						fireob->lineofsight *= 5;  // we get 150% longer, too!
@@ -4158,7 +4158,7 @@ short walker::fire_check(short xdelta, short ydelta)
 {
 	walker  *weapon = NULL;
 	//  short newx=0, newy=0;
-	short i, loops;
+	//short i;//, loops;
 	Sint32 distance;
 	short targetdir;
 
@@ -4236,7 +4236,7 @@ short walker::fire_check(short xdelta, short ydelta)
 	*/
 
 	// Run weapon through where it would go if all went well ..
-	for (i=0; i < weapon->lineofsight; i++)
+	for (short i=0; i < weapon->lineofsight; i++)
 	{
 		weapon->setxy(weapon->xpos + i*weapon->lastx,
 		              weapon->ypos + i*weapon->lasty);

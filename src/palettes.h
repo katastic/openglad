@@ -15,6 +15,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+#ifndef HEADER_PAL
+#define HEADER_PAL
+
 char rainbow_pal[] =
     {
         0, 0, 0, 1, 1, 0, 2, 2, 0, 3, 3, 0,
@@ -82,3 +85,5 @@ char rainbow_pal[] =
         0, 7, 7, 0, 6, 6, 0, 5, 5, 0, 4, 4,
         0, 3, 3, 0, 2, 2, 0, 1, 1, 0, 0, 0
     };
+
+#endif

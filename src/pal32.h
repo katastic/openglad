@@ -17,6 +17,8 @@
 //
 // H file for palette.cpp
 //
+#ifndef HEADER_PAL32
+#define HEADER_PAL32
 
 //#include <stdio.h>
 //the above is included in palette.cpp now
@@ -33,3 +35,5 @@ void query_palette_reg(unsigned char index, int *red, int *green, int *blue);
 void set_palette_reg(unsigned char index,int red,int green,int blue);
 short save_palette(unsigned char * whatpalette);
 
+
+#endif

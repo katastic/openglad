@@ -15,8 +15,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef _SAVE_DATA_H__
-#define _SAVE_DATA_H__
+#ifndef SAVE_DATA_H__
+#define SAVE_DATA_H__
 
 #include "SDL.h"
 #include <string>
@@ -66,6 +66,6 @@ public:
     void reset_campaign(const std::string& campaign);
 };
 
-#include "walker.h"
+#include "walker.h"  //why is WALKER included at the end?!?!?! Who did this?!
 
 #endif

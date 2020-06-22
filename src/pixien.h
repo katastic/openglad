@@ -14,8 +14,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-#ifndef __PIXIEN_H
-#define __PIXIEN_H
+#ifndef PIXIEN_HEADER
+#define PIXIEN_HEADER
 
 // Definition of PIXIEN class
 

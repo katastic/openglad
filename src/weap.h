@@ -14,7 +14,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-#pragma once
+#ifndef HEADER_WEAP
+#define HEADER_WEAP
 // Definition of WEAP class
 
 #include "base.h"
@@ -24,7 +25,7 @@ class weap : public walker
 {
 	public:
 		explicit weap(const PixieData& data);
-		virtual ~weap();
+		virtual ~weap() override;
 
 		short act() override;
 		short animate() override;
@@ -43,3 +44,4 @@ class weap : public walker
 
 
 
+#endif

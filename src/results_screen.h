@@ -1,5 +1,5 @@
-#ifndef _RESULTS_SCREEN_H__
-#define _RESULTS_SCREEN_H__
+#ifndef RESULTS_SCREEN_H__
+#define RESULTS_SCREEN_H__
 
 #include <map>
 #include "guy.h"

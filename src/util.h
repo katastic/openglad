@@ -19,8 +19,8 @@
 //
 // misc helper functions, and timer
 //
-#ifndef _UTIL_H__
-#define _UTIL_H__
+#ifndef UTIL_H__
+#define UTIL_H__
 
 #include "SDL.h"
 #include <ctype.h>

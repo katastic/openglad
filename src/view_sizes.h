@@ -1,5 +1,5 @@
-#ifndef _VIEW_SIZES_H__
-#define _VIEW_SIZES_H__
+#ifndef VIEW_SIZES_H__
+#define VIEW_SIZES_H__
 
 #include "common.h"
 

@@ -14,7 +14,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-#pragma once
+#ifndef HEADER_WALKER
+#define HEADER_WALKER
 // Definition of WALKER class
 
 #include "base.h"
@@ -95,7 +96,7 @@ class walker : public pixieN
 				return 1;
 			else
 				return 0;
-		};
+		}
 
 
 		Uint32 keys; // used to open doors
@@ -191,3 +192,5 @@ class walker : public pixieN
 
 };
 
+
+#endif

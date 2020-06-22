@@ -98,7 +98,7 @@ public:
     pixieN* back[PIX_MAX];
     Sint32 topx, topy;
     
-    LevelData(int id);
+    explicit LevelData(int id);
     ~LevelData();
     
     bool load();

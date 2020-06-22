@@ -17,7 +17,9 @@
 //
 // Smooth.h
 //
-#pragma once
+//#pragma once
+#ifndef	 HEADER_SMOOTH
+#define	 HEADER_SMOOTH
 #include "SDL.h"
 #include "pixie_data.h"
 
@@ -61,3 +63,4 @@ class smoother
 		unsigned char  *mygrid; // our grid to change
 		Sint32 maxx, maxy;   // dimensions of our grid ..
 };
+#endif

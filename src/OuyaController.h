@@ -1,5 +1,5 @@
-#ifndef _OUYACONTROLLER_H__
-#define _OUYACONTROLLER_H__
+#ifndef OUYACONTROLLER_H__
+#define OUYACONTROLLER_H__
 
 #include "SDL.h"
 

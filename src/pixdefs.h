@@ -21,6 +21,10 @@
 // things in the array.
 //
 
+#ifndef HEADER_PIXDEFS
+#define HEADER_PIXDEFS
+//did this one even have header guards before??
+
 #define PIX_H_WALL1     0
 #define PIX_GRASS1      1
 #define PIX_WATER1      2
@@ -195,3 +199,4 @@
 // This should be the largest #defined pix +1
 #define PIX_MAX 134  //last currently = PIX_CARPET_SMALL_TINY
 
+#endif

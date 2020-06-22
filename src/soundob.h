@@ -15,8 +15,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 // Soundob.h file ..
-#ifndef __SOUNDOB_H
-#define __SOUNDOB_H
+#ifndef SOUNDOB_HEADER
+#define SOUNDOB_HEADER
 
 #include "SDL_mixer.h"
 

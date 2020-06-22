@@ -289,7 +289,7 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
     std::list<std::string> campaign_ids = list_campaigns();
     {
         int i = 0;
-        for(std::list<std::string>::iterator e = campaign_ids.begin(); e != campaign_ids.end(); e++)
+        for(std::list<std::string>::iterator e = campaign_ids.begin(); e != campaign_ids.end(); ++e)
         {
             int num_completed = -1;
             if(save_data != NULL)
@@ -460,7 +460,7 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
                remount_campaign_package();  // Just in case we deleted the current campaign
 
                // Reload the picker
-               for(std::vector<CampaignEntry*>::iterator e = entries.begin(); e != entries.end(); e++)
+               for(std::vector<CampaignEntry*>::iterator e = entries.begin(); e != entries.end(); ++e)
                {
                    delete *e;
                }
@@ -468,7 +468,7 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
 
                campaign_ids = list_campaigns();
 
-                for(std::list<std::string>::iterator e = campaign_ids.begin(); e != campaign_ids.end(); e++)
+                for(std::list<std::string>::iterator e = campaign_ids.begin(); e != campaign_ids.end(); ++e)
                 {
                     int num_completed = -1;
                     if(save_data != NULL)
@@ -585,7 +585,7 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
         ret_value.first_level = result->first_level;
     }
 
-    for(std::vector<CampaignEntry*>::iterator e = entries.begin(); e != entries.end(); e++)
+    for(std::vector<CampaignEntry*>::iterator e = entries.begin(); e != entries.end(); ++e)
     {
         delete *e;
     }

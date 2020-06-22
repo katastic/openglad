@@ -460,7 +460,7 @@ bool walker::walkstep(float x, float y)
                         if (gotup || gotover) // we moved somewhere?
                         {
                             cycle = mycycle;
-                            cycle++;
+                            ++cycle;
                             if (ani[curdir][cycle] == -1)
                                 cycle = 0;
                             set_frame(ani[curdir][cycle]);
@@ -510,7 +510,7 @@ bool walker::walk(float x, float y)
 		{
 			// Control object does complete redraw anyway
 			worldmove(x,y);
-			cycle++;
+			++cycle;
 			//if (!ani || (curdir*cycle > sizeof(ani)) )
 			//  Log("WALKER::WALK: Bad ani!\n");
 			if (ani[curdir][cycle] == -1)
@@ -524,7 +524,7 @@ bool walker::walk(float x, float y)
 
 			if (stats->query_bit_flags(BIT_ANIMATE) )  // animate regardless..
 			{
-				cycle++;
+				++cycle;
 				if (ani[curdir][cycle] == -1)
 					cycle = 0;
 				set_frame(ani[curdir][cycle]);
@@ -1208,7 +1208,7 @@ short walker::draw(viewscreen  *view_buf)
         e->y -= 1.5f;
         if(view_buf->control == this)
             e->draw(view_buf);
-        e++;
+        ++e;
     }
 
 	if(debug_draw_paths)
@@ -1522,7 +1522,7 @@ void walker::draw_path(viewscreen* view_buf)
 
         myscreen->draw_line(px, py, x1, y1, mycolor);
         myscreen->fastbox_outline(x1-1, y1-1, 2, 2, mycolor);
-        e++;
+        ++e;
         px = x1;
         py = y1;
     }
@@ -2489,7 +2489,7 @@ short walker::special()
                         std::list<walker*> newlist = myscreen->find_foes_in_range(myscreen->level_data.oblist,
                                                               32+stats->level*2, &howmany, this);
 
-                        for(auto e = newlist.begin(); e != newlist.end(); e++)
+                        for(auto e = newlist.begin(); e != newlist.end(); ++e)
                         {
                             walker* w = *e;
                             if (w)
@@ -2519,7 +2519,7 @@ short walker::special()
 
                         generic = 0;
 
-                        for(auto e = newlist.begin(); e != newlist.end(); e++)
+                        for(auto e = newlist.begin(); e != newlist.end(); ++e)
                         {
                             walker* w = *e;
                             if (w)
@@ -2559,7 +2559,7 @@ short walker::special()
 						didheal = 0;
 						if (howmany > 1) // some friends here ..
 						{
-						    for(auto e = newlist.begin(); e != newlist.end(); e++)
+						    for(auto e = newlist.begin(); e != newlist.end(); ++e)
 							{
 								newob = *e;
 								if (newob->stats->hitpoints < newob->stats->max_hitpoints &&
@@ -2847,7 +2847,7 @@ short walker::special()
 						}
 						// Remove a marker, if present
 						generic = 0; // used to check progress
-						for(auto e = myscreen->level_data.oblist.begin(); e != myscreen->level_data.oblist.end(); e++)
+						for(auto e = myscreen->level_data.oblist.begin(); e != myscreen->level_data.oblist.end(); ++e)
 						{
 						    walker* ob = *e;
 							if (ob &&
@@ -2956,7 +2956,7 @@ short walker::special()
 						std::list<walker*> newlist = myscreen->find_friends_in_range(
 						              myscreen->level_data.oblist, 30000, &howmany, this);
 
-						for(auto e = newlist.begin(); e != newlist.end(); e++)
+						for(auto e = newlist.begin(); e != newlist.end(); ++e)
 						{
 						    walker* w = *e;
 							if (w)
@@ -2995,7 +2995,7 @@ short walker::special()
 					busy += 5;
 
 					// Create explosions on top of the target objects
-					for(auto e = newlist.begin(); e != newlist.end(); e++)
+					for(auto e = newlist.begin(); e != newlist.end(); ++e)
 					{
 					    walker* ob = *e;
 
@@ -3084,7 +3084,7 @@ short walker::special()
 						}
 						// Remove a marker, if present
 						generic = 0; // used to check progress
-						for(auto e = myscreen->level_data.oblist.begin(); e != myscreen->level_data.oblist.end(); e++)
+						for(auto e = myscreen->level_data.oblist.begin(); e != myscreen->level_data.oblist.end(); ++e)
 						{
 						    walker* ob = *e;
 							if (ob &&
@@ -3166,7 +3166,7 @@ short walker::special()
                             busy += 5;
 
                             // Create explosions on the target objects
-                            for(auto e = newlist.begin(); e != newlist.end(); e++)
+                            for(auto e = newlist.begin(); e != newlist.end(); ++e)
                             {
                                 walker* ob = *e;
                                 newob = myscreen->level_data.add_ob(ORDER_FX, FAMILY_EXPLOSION);
@@ -3208,7 +3208,7 @@ short walker::special()
 
                             // find closest of our foes in range
                             generic = 30000;
-                            for(auto e = newlist.begin(); e != newlist.end(); e++)
+                            for(auto e = newlist.begin(); e != newlist.end(); ++e)
                             {
                                 walker* w = *e;
                                 short dist = distance_to_ob_center(w);
@@ -3438,7 +3438,7 @@ short walker::special()
                         didheal = 0; // howmany actually done yet?
                         generic2 = stats->magicpoints - stats->special_cost[(int)current_special] + 10;
 
-                        for(auto e = newlist.begin(); e != newlist.end() && (generic2 >= 10); e++)
+                        for(auto e = newlist.begin(); e != newlist.end() && (generic2 >= 10); ++e)
                         {
                             walker* ob = *e;
                             if ( (ob->real_team_num == 255) && // never been charmed
@@ -3593,7 +3593,7 @@ short walker::special()
                             std::list<walker*> newlist = myscreen->find_foes_in_range(myscreen->level_data.oblist,
                                                                   80+4*stats->level, &howmany, this);
 
-                            for(auto e = newlist.begin(); e != newlist.end(); e++)
+                            for(auto e = newlist.begin(); e != newlist.end(); ++e)
                             {
                                 walker* ob = *e;
                                 if (ob && (random(stats->level) >=
@@ -3631,7 +3631,7 @@ short walker::special()
                                 return 0; // noone to influence
 
                             didheal = 0; // howmany actually done yet?
-                            for(auto e = newlist.begin(); e != newlist.end() && !didheal; e++)
+                            for(auto e = newlist.begin(); e != newlist.end() && !didheal; ++e)
                             {
                                 walker* ob = *e;
                                 if ( (ob->real_team_num == 255) && // never been charmed
@@ -3815,7 +3815,7 @@ short walker::special()
                         if (howmany > 1) // some friends here ..
                         {
                             //Log("Found %d friends\n", howmany-1);
-                            for(auto e = newlist.begin(); e != newlist.end(); e++)
+                            for(auto e = newlist.begin(); e != newlist.end(); ++e)
                             {
                                 newob = *e;
                                 if (newob != this) // not for ourselves
@@ -3899,7 +3899,7 @@ short walker::special()
                         std::list<walker*> newlist = myscreen->find_foes_in_range(myscreen->level_data.oblist,
 					                                      160+(20*stats->level), &howmany, this);
 
-                        for(auto e = newlist.begin(); e != newlist.end(); e++)
+                        for(auto e = newlist.begin(); e != newlist.end(); ++e)
                         {
                             walker* ob = *e;
                             if (ob)
@@ -4039,7 +4039,7 @@ short walker::teleport()
 
 	// First check to see if we have a marker to go to
 	// NOTE: it must be a bit away from us ..
-	for(auto e = myscreen->level_data.oblist.begin(); e != myscreen->level_data.oblist.end(); e++)
+	for(auto e = myscreen->level_data.oblist.begin(); e != myscreen->level_data.oblist.end(); ++e)
 	{
 	    walker* ob = *e;
 		if (ob &&
@@ -4116,7 +4116,7 @@ Sint32 walker::turn_undead(Sint32 range, Sint32 power)
 	if (!targets)
 		return -1;
 
-    for(auto e = deadlist.begin(); e != deadlist.end(); e++)
+    for(auto e = deadlist.begin(); e != deadlist.end(); ++e)
 	{
 	    walker* w = *e;
 		if (w

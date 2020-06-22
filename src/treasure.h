@@ -14,9 +14,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-#ifndef _TREASURE_H
-#define _TREASURE_H
-
+//#ifndef HEADER_TREASURE
+//#define HEADER_TREASURE
+#pragma once
 // Definition of TREASURE class
 
 #include "base.h"
@@ -37,6 +37,4 @@ class treasure : public walker
 			return ORDER_TREASURE;
 		}
 };
-
-#endif
 

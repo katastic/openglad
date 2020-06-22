@@ -240,7 +240,7 @@ short text::write_xy(short x, short y, const char *string, unsigned char color,
 short text::write_xy(short x, short y, const char *string, short to_buffer)
 {
 	unsigned short i = 0;
-	unsigned short width;
+//	unsigned short width;
 	while(string[i])
 	{
 		if (!to_buffer)
@@ -251,9 +251,9 @@ short text::write_xy(short x, short y, const char *string, short to_buffer)
 	}
 	if (to_buffer)
 	{
-		width = (unsigned short) ((sizex+1)*strlen(string));
-		width -= width%4;
-		width +=4;
+	//	width = (unsigned short) ((sizex+1)*strlen(string));
+	//	width -= width%4;
+	//	width +=4;
 		//myscreen->buffer_to_screen(x, y, width, sizey);
 	}
 
@@ -701,8 +701,8 @@ char * text::input_string_ex(short x, short y, short maxlength, const char* mess
             {
 
                 int len = strlen(temptext);
-                int i;
-                for(i = 0; i < len; i++)
+                
+                for(int t = 0; t < len; t++)
                 {
                     unsigned char c = temptext[i];
                     if(c != 255)

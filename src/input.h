@@ -20,8 +20,8 @@
 // input code
 //
 
-#ifndef _INPUT_H__
-#define _INPUT_H__
+#ifndef INPUT_HEADER
+#define INPUT_HEADER
 
 #include "SDL.h"
 #include <ctype.h>

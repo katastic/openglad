@@ -14,9 +14,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-#ifndef WEAP_HEADER
-#define WEAP_HEADER
-
+#pragma once
 // Definition of WEAP class
 
 #include "base.h"
@@ -42,6 +40,6 @@ class weap : public walker
 
 };
 
-#endif
+
 
 

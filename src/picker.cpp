@@ -1347,7 +1347,7 @@ Sint32 create_hire_menu(Sint32 arg1)
         }
 
         int i = 0;
-        for(std::list<std::string>::iterator e = desc.begin(); e != desc.end(); e++)
+        for(std::list<std::string>::iterator e = desc.begin(); e != desc.end(); ++e)
         {
             mytext.write_xy(description_box_content.x, description_box_content.y + i*10, DARK_BLUE, "%s", e->c_str());
             i++;
@@ -1906,7 +1906,7 @@ bool yes_or_no_prompt(const char* title, const char* message, bool default_value
     // Get the max dimensions needed to display it
     int w = strlen(title)*9;
     int h = 30 + 10*ls.size();
-    for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); e++)
+    for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); ++e)
     {
         if(int(e->size()*pix_per_char) > w)
             w = e->size()*pix_per_char;
@@ -1960,7 +1960,7 @@ bool yes_or_no_prompt(const char* title, const char* message, bool default_value
 		// Draw
 		dumbcount = myscreen->draw_dialog(leftside, 80 - h/2, rightside, 80 + h/2, title);
 		j = 0;
-        for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); e++)
+        for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); ++e)
         {
             gladtext.write_xy(dumbcount + 3*pix_per_char/2, 104 - h/2 + 10*j, e->c_str(), (unsigned char) DARK_BLUE, 1);
             j++;
@@ -2003,7 +2003,7 @@ bool no_or_yes_prompt(const char* title, const char* message, bool default_value
     // Get the max dimensions needed to display it
     int w = strlen(title)*9;
     int h = 30 + 10*ls.size();
-    for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); e++)
+    for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); ++e)
     {
         if(int(e->size()*pix_per_char) > w)
             w = e->size()*pix_per_char;
@@ -2057,7 +2057,7 @@ bool no_or_yes_prompt(const char* title, const char* message, bool default_value
 		// Draw
 		dumbcount = myscreen->draw_dialog(leftside, 80 - h/2, rightside, 80 + h/2, title);
 		j = 0;
-        for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); e++)
+        for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); ++e)
         {
             gladtext.write_xy(dumbcount + 3*pix_per_char/2, 104 - h/2 + 10*j, e->c_str(), (unsigned char) DARK_BLUE, 1);
             j++;
@@ -2099,7 +2099,7 @@ void popup_dialog(const char* title, const char* message)
     // Get the max dimensions needed to display it
     int w = strlen(title)*9;
     int h = 30 + 10*ls.size();
-    for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); e++)
+    for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); ++e)
     {
         if(int(e->size()*pix_per_char) > w)
             w = e->size()*pix_per_char;
@@ -2151,7 +2151,7 @@ void popup_dialog(const char* title, const char* message)
 		// Draw
 		dumbcount = myscreen->draw_dialog(leftside, 80 - h/2, rightside, 80 + h/2, title);
 		j = 0;
-        for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); e++)
+        for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); ++e)
         {
             gladtext.write_xy(dumbcount + 3*pix_per_char/2 + w/2 - e->size()*pix_per_char/2, 104 - h/2 + 10*j, e->c_str(), (unsigned char) DARK_BLUE, 1);
             j++;
@@ -2165,16 +2165,13 @@ void popup_dialog(const char* title, const char* message)
 	}
 }
 
-Sint32 create_save_menu(Sint32 arg1)
+Sint32 create_save_menu(int uselessarg)
 {
 	Sint32 retvalue=0;
 	Sint32 i;
 	char temp_filename[20];
 	text& savetext = myscreen->text_normal;
 	char message[80];
-
-	if (arg1)
-		arg1 = 1;
 
 	if (localbuttons)
 		delete (localbuttons);

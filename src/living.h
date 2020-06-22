@@ -35,7 +35,7 @@ class living : public walker
 		short          facing(short x, short y) override;
 		void           set_difficulty(Uint32 whatlevel) override;
 		short          shove(walker  *target, short x, short y) override;
-		char           query_order()
+		char           query_order() override
 		{
 			return ORDER_LIVING;
 		}

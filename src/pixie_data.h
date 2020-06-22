@@ -15,9 +15,10 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef _PIXIE_DATA_H__
-#define _PIXIE_DATA_H__
-
+//#pragma once this blows up static analzers because they have HEADERS that include HEADERS.
+//still compiles though.
+#ifndef HEADER_PIXIEDATA
+#define HEADER_PIXIEDATA
 
 class PixieData
 {
@@ -35,6 +36,4 @@ class PixieData
     void clear();
     void free();
 };
-
-
 #endif

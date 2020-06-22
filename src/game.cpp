@@ -28,7 +28,7 @@ short load_saved_game(const char *filename, screen  *myscreen)
 	walker        *temp_walker,  *replace_walker;
 	short         myord, myfam;
 	int           multi_team = 0;
-	int           i;
+	
 	
 	myscreen->numviews = myscreen->save_data.numplayers;
 	
@@ -57,7 +57,7 @@ short load_saved_game(const char *filename, screen  *myscreen)
 	}
 
 	std::list<walker*> foelist = myscreen->level_data.oblist;
-	for(auto e = foelist.begin(); e != foelist.end(); e++)
+	for(auto e = foelist.begin(); e != foelist.end(); ++e)
 	{
 	    walker* w = *e;
 		if (w)
@@ -115,7 +115,7 @@ short load_saved_game(const char *filename, screen  *myscreen)
 	{
 		//                Log("already done level\n");
 		foelist = myscreen->level_data.oblist;
-		for(auto e = foelist.begin(); e != foelist.end(); e++)
+		for(auto e = foelist.begin(); e != foelist.end(); ++e)
 		{
 		    walker* w = *e;
 			if (w)
@@ -136,7 +136,7 @@ short load_saved_game(const char *filename, screen  *myscreen)
 		}
 		
 		foelist = myscreen->level_data.weaplist;
-		for(auto e = foelist.begin(); e != foelist.end(); e++)
+		for(auto e = foelist.begin(); e != foelist.end(); ++e)
 		{
 		    walker* w = *e;
 			if (w)
@@ -157,7 +157,7 @@ short load_saved_game(const char *filename, screen  *myscreen)
 		}
 
 		foelist = myscreen->level_data.fxlist;
-		for(auto e = foelist.begin(); e != foelist.end(); e++)
+		for(auto e = foelist.begin(); e != foelist.end(); ++e)
 		{
 		    walker* w = *e;
 			if (w)
@@ -182,12 +182,12 @@ short load_saved_game(const char *filename, screen  *myscreen)
 	// team 0, or if they're playing competing teams ..
 	if (multi_team)
 	{
-		for (i=0; i < myscreen->numviews; i++)
+		for (int i=0; i < myscreen->numviews; i++)
 			myscreen->viewob[i]->my_team = i;
 	}
 	else
 	{
-		for (i=0; i < myscreen->numviews; i++)
+		for (int i=0; i < myscreen->numviews; i++)
 			myscreen->viewob[i]->my_team = 0;
 	}
 

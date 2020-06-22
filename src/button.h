@@ -14,8 +14,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-#ifndef __BUTTON_H
-#define __BUTTON_H
+#ifndef BUTTON_HEADER
+#define BUTTON_HEADER
 
 #include "base.h"
 #include "obmap.h"

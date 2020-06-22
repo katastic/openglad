@@ -14,10 +14,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-#ifndef __EFFECT_H
-#define __EFFECT_H
+//#pragma once
 
 // Definition of EFFECT class
+#ifndef HEADER_EFFECT
+#define HEADER_EFFECT
+
+
 
 #include "base.h"
 #include "obmap.h"
@@ -30,7 +33,7 @@ class effect : public walker
 {
 	public:
 		effect(const PixieData& data);
-		virtual ~effect();
+		virtual ~effect() override;
 		short act() override;
 		short animate() override;
 		short death() override; // called on destruction
@@ -41,4 +44,3 @@ class effect : public walker
 };
 
 #endif
-

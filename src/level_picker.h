@@ -15,8 +15,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef _LEVEL_PICKER_H__
-#define _LEVEL_PICKER_H__
+#ifndef LEVEL_PICKER_HEADER
+#define LEVEL_PICKER_HEADER
 
 #include "screen.h"
 

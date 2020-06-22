@@ -88,42 +88,9 @@ button.cpp:181:5: performance: Variable 'height' is assigned in constructor body
 button.cpp:184:5: performance: Variable 'label' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
     label = msg;
     ^
-text.h:32:3: style: Class 'text' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
-  text(const char * filename);
-  ^
-input.h:169:5: style: Class 'JoyData' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
-    JoyData(int index);
-    ^
-soundob.h:49:3: style: Class 'soundob' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
-  soundob(bool silent);
-  ^
-pixie.h:27:3: style: Class 'pixie' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
-  pixie(const PixieData& data);
-  ^
-pixien.h:28:3: style: Class 'pixieN' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
-  pixieN(const PixieData& data);
-  ^
-level_data.h:56:5: style: Class 'CampaignData' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
-    CampaignData(const std::string& id);
-    ^
 level_data.h:102:5: style: Class 'LevelData' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
     LevelData(int id);
     ^
-walker.h:31:3: style: Class 'walker' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
-  walker(const PixieData& data);
-  ^
-screen.h:39:3: style: Class 'screen' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
-  screen(short howmany);
-  ^
-walker.h:34:9: style: The function 'move' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  short move(short x, short y);
-        ^
-pixie.h:31:17: note: Virtual function in base class
-  virtual short move (short x, short y);
-                ^
-walker.h:34:9: note: Function in derived class
-  short move(short x, short y);
-        ^
 button.cpp:436:17: style: Variable 'mymouse' can be declared with const [constVariable]
     MouseState& mymouse = query_mouse();
                 ^
@@ -142,201 +109,24 @@ campaign_picker.cpp:142:13: warning: Class 'CampaignEntry' does not have a copy 
 campaign_picker.cpp:142:13: warning: Class 'CampaignEntry' does not have a operator= which is recommended since it has dynamic memory/resource allocation(s). [noOperatorEq]
             icon = new pixie(icondata);
             ^
-stats.h:56:3: style: Class 'statistics' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
-  statistics(walker  *);
-  ^
-guy.h:30:3: style: Class 'guy' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
-  guy (int whatfamily);
-  ^
-campaign_picker.cpp:309:17: style: Local variable 'i' shadows outer variable [shadowVariable]
-        for(int i=0; i<MAX_TEAM_SIZE; i++)
-                ^
-campaign_picker.cpp:290:9: note: Shadowed declaration
-    int i = 0;
-        ^
-campaign_picker.cpp:309:17: note: Shadow variable
-        for(int i=0; i<MAX_TEAM_SIZE; i++)
-                ^
-campaign_picker.cpp:328:41: style: Argument 'area.x-30-20' to function Sint16 is always 94 [constArgument]
-    SDL_Rect prev = {Sint16(area.x - 30 - 20), Sint16(area.y), 30, 10};
-                                        ^
-campaign_picker.cpp:320:12: note: area.x is assigned value 144
+campaign_picker.cpp:329:47: style: Argument 'area.x-30-20' to function Sint16 is always 94 [constArgument]
+    const SDL_Rect prev = {Sint16(area.x - 30 - 20), Sint16(area.y), 30, 10};
+                                              ^
+campaign_picker.cpp:321:12: note: area.x is assigned value 144
     area.x = 160 - 16;
            ^
-campaign_picker.cpp:328:41: note: Argument 'area.x-30-20' to function Sint16 is always 94
-    SDL_Rect prev = {Sint16(area.x - 30 - 20), Sint16(area.y), 30, 10};
-                                        ^
-campaign_picker.cpp:331:41: style: Argument 'screenW/2+20' to function Sint16 is always 220 [constArgument]
-    SDL_Rect choose = {Sint16(screenW/2 + 20), Sint16(screenH - 15), 30, 10};
-                                        ^
-campaign_picker.cpp:326:22: note: Assignment 'screenW=SCREEN_W', assigned value is 400
-    Sint16 screenW = SCREEN_W;
-                     ^
-campaign_picker.cpp:331:41: note: Argument 'screenW/2+20' to function Sint16 is always 220
-    SDL_Rect choose = {Sint16(screenW/2 + 20), Sint16(screenH - 15), 30, 10};
-                                        ^
-campaign_picker.cpp:331:63: style: Argument 'screenH-15' to function Sint16 is always 285 [constArgument]
-    SDL_Rect choose = {Sint16(screenW/2 + 20), Sint16(screenH - 15), 30, 10};
-                                                              ^
-campaign_picker.cpp:327:22: note: Assignment 'screenH=SCREEN_H', assigned value is 300
-    Sint16 screenH = SCREEN_H;
-                     ^
-campaign_picker.cpp:331:63: note: Argument 'screenH-15' to function Sint16 is always 285
-    SDL_Rect choose = {Sint16(screenW/2 + 20), Sint16(screenH - 15), 30, 10};
-                                                              ^
-campaign_picker.cpp:332:46: style: Argument 'screenW/2-38-20' to function Sint16 is always 142 [constArgument]
-    SDL_Rect cancel = {Sint16(screenW/2 - 38 - 20), Sint16(screenH - 15), 38, 10};
-                                             ^
-campaign_picker.cpp:326:22: note: Assignment 'screenW=SCREEN_W', assigned value is 400
-    Sint16 screenW = SCREEN_W;
-                     ^
-campaign_picker.cpp:332:46: note: Argument 'screenW/2-38-20' to function Sint16 is always 142
-    SDL_Rect cancel = {Sint16(screenW/2 - 38 - 20), Sint16(screenH - 15), 38, 10};
-                                             ^
-campaign_picker.cpp:332:68: style: Argument 'screenH-15' to function Sint16 is always 285 [constArgument]
-    SDL_Rect cancel = {Sint16(screenW/2 - 38 - 20), Sint16(screenH - 15), 38, 10};
-                                                                   ^
-campaign_picker.cpp:327:22: note: Assignment 'screenH=SCREEN_H', assigned value is 300
-    Sint16 screenH = SCREEN_H;
-                     ^
-campaign_picker.cpp:332:68: note: Argument 'screenH-15' to function Sint16 is always 285
-    SDL_Rect cancel = {Sint16(screenW/2 - 38 - 20), Sint16(screenH - 15), 38, 10};
-                                                                   ^
-campaign_picker.cpp:333:46: style: Argument 'screenW-50' to function Sint16 is always 350 [constArgument]
-    SDL_Rect delete_button = {Sint16(screenW - 50), 10, 38, 10};
-                                             ^
-campaign_picker.cpp:326:22: note: Assignment 'screenW=SCREEN_W', assigned value is 400
-    Sint16 screenW = SCREEN_W;
-                     ^
-campaign_picker.cpp:333:46: note: Argument 'screenW-50' to function Sint16 is always 350
-    SDL_Rect delete_button = {Sint16(screenW - 50), 10, 38, 10};
-                                             ^
-campaign_picker.cpp:291:93: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
-    for(std::list<std::string>::iterator e = campaign_ids.begin(); e != campaign_ids.end(); e++)
-                                                                                            ^
-campaign_picker.cpp:462:99: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
-               for(std::vector<CampaignEntry*>::iterator e = entries.begin(); e != entries.end(); e++)
-                                                                                                  ^
-campaign_picker.cpp:470:105: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
-                for(std::list<std::string>::iterator e = campaign_ids.begin(); e != campaign_ids.end(); e++)
-                                                                                                        ^
-campaign_picker.cpp:587:88: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
-    for(std::vector<CampaignEntry*>::iterator e = entries.begin(); e != entries.end(); e++)
-                                                                                       ^
+campaign_picker.cpp:329:47: note: Argument 'area.x-30-20' to function Sint16 is always 94
+    const SDL_Rect prev = {Sint16(area.x - 30 - 20), Sint16(area.y), 30, 10};
+                                              ^
 effect.h:32:3: style: Class 'effect' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
   effect(const PixieData& data);
   ^
-effect.h:34:9: style: The function 'act' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  short act();
-        ^
-walker.h:50:17: note: Virtual function in base class
-  virtual short act();
-                ^
-effect.h:34:9: note: Function in derived class
-  short act();
-        ^
-effect.h:35:9: style: The function 'animate' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  short animate();
-        ^
-walker.h:58:17: note: Virtual function in base class
-  virtual short animate();
-                ^
-effect.h:35:9: note: Function in derived class
-  short animate();
-        ^
-effect.h:36:9: style: The function 'death' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  short death(); // called on destruction
-        ^
-walker.h:82:17: note: Virtual function in base class
-  virtual short death(); // called when death/destruction occurs ..
-                ^
-effect.h:36:9: note: Function in derived class
-  short death(); // called on destruction
-        ^
-effect.h:37:8: style: The function 'query_order' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  char query_order()
-       ^
-walker.h:60:16: note: Virtual function in base class
-  virtual char query_order()
-               ^
-effect.h:37:8: note: Function in derived class
-  char query_order()
-       ^
 effect.cpp:48:8: style: The scope of the variable 'numfoes' can be reduced. [variableScope]
  short numfoes;
        ^
 living.h:28:3: style: Class 'living' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
   living(const PixieData& data);
   ^
-weap.h:28:3: style: Class 'weap' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
-  weap(const PixieData& data);
-  ^
-treasure.h:28:3: style: Class 'treasure' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
-  treasure(const PixieData& data);
-  ^
-living.h:30:18: style: The function 'act' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  short          act();
-                 ^
-walker.h:50:17: note: Virtual function in base class
-  virtual short act();
-                ^
-living.h:30:18: note: Function in derived class
-  short          act();
-                 ^
-living.h:31:18: style: The function 'check_special' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  short          check_special(); // determine if we should do special ..
-                 ^
-walker.h:85:17: note: Virtual function in base class
-  virtual short check_special();
-                ^
-living.h:31:18: note: Function in derived class
-  short          check_special(); // determine if we should do special ..
-                 ^
-living.h:32:18: style: The function 'collide' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  short          collide(walker  *ob);
-                 ^
-walker.h:56:17: note: Virtual function in base class
-  virtual short collide(walker  *ob);
-                ^
-living.h:32:18: note: Function in derived class
-  short          collide(walker  *ob);
-                 ^
-living.h:34:18: style: The function 'do_summon' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  walker*        do_summon(char whatfamily, unsigned short lifetime);
-                 ^
-walker.h:84:20: note: Virtual function in base class
-  virtual walker  *do_summon(char whatfamily, unsigned short lifetime);
-                   ^
-living.h:34:18: note: Function in derived class
-  walker*        do_summon(char whatfamily, unsigned short lifetime);
-                 ^
-living.h:35:18: style: The function 'facing' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  short          facing(short x, short y);
-                 ^
-walker.h:90:17: note: Virtual function in base class
-  virtual short facing(short x, short y);
-                ^
-living.h:35:18: note: Function in derived class
-  short          facing(short x, short y);
-                 ^
-living.h:36:18: style: The function 'set_difficulty' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  void           set_difficulty(Uint32 whatlevel);
-                 ^
-walker.h:87:16: note: Virtual function in base class
-  virtual void set_difficulty(Uint32 whatlevel);
-               ^
-living.h:36:18: note: Function in derived class
-  void           set_difficulty(Uint32 whatlevel);
-                 ^
-living.h:37:18: style: The function 'shove' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  short          shove(walker  *target, short x, short y);
-                 ^
-walker.h:75:17: note: Virtual function in base class
-  virtual short shove(walker  *target, short x, short y);
-                ^
-living.h:37:18: note: Function in derived class
-  short          shove(walker  *target, short x, short y);
-                 ^
 living.h:38:18: style: The function 'query_order' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
   char           query_order()
                  ^
@@ -346,105 +136,24 @@ walker.h:60:16: note: Virtual function in base class
 living.h:38:18: note: Function in derived class
   char           query_order()
                  ^
-living.h:42:16: style: The function 'walk' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  virtual bool walk(float x, float y);
-               ^
-walker.h:40:16: note: Virtual function in base class
-  virtual bool walk(float x, float y);
-               ^
-living.h:42:16: note: Function in derived class
-  virtual bool walk(float x, float y);
-               ^
-living.h:44:9: style: The function 'act_random' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  short act_random();
-        ^
-walker.h:188:17: note: Virtual function in base class
-  virtual short act_random();
-                ^
-living.h:44:9: note: Function in derived class
-  short act_random();
-        ^
-weap.h:31:9: style: The function 'act' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  short act();
-        ^
-walker.h:50:17: note: Virtual function in base class
-  virtual short act();
-                ^
-weap.h:31:9: note: Function in derived class
-  short act();
-        ^
-weap.h:32:9: style: The function 'animate' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  short animate();
-        ^
-walker.h:58:17: note: Virtual function in base class
-  virtual short animate();
-                ^
-weap.h:32:9: note: Function in derived class
-  short animate();
-        ^
-weap.h:33:9: style: The function 'death' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  short death(); // called on destruction
-        ^
-walker.h:82:17: note: Virtual function in base class
-  virtual short death(); // called when death/destruction occurs ..
-                ^
-weap.h:33:9: note: Function in derived class
-  short death(); // called on destruction
-        ^
-weap.h:34:9: style: The function 'setxy' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  short setxy(short x, short y);
-        ^
-walker.h:36:17: note: Virtual function in base class
-  virtual short setxy(short x, short y);
-                ^
-weap.h:34:9: note: Function in derived class
-  short setxy(short x, short y);
-        ^
-weap.h:35:9: style: The function 'query_order' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  char  query_order()
-        ^
-walker.h:60:16: note: Virtual function in base class
-  virtual char query_order()
-               ^
-weap.h:35:9: note: Function in derived class
-  char  query_order()
-        ^
-treasure.h:30:18: style: The function 'act' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  short          act();
-                 ^
-walker.h:50:17: note: Virtual function in base class
-  virtual short act();
-                ^
-treasure.h:30:18: note: Function in derived class
-  short          act();
-                 ^
-treasure.h:32:18: style: The function 'eat_me' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  short          eat_me(walker  * eater);
-                 ^
-walker.h:76:17: note: Virtual function in base class
-  virtual short eat_me(walker  *eater);
-                ^
-treasure.h:32:18: note: Function in derived class
-  short          eat_me(walker  * eater);
-                 ^
-treasure.h:34:16: style: The function 'set_direct_frame' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  void         set_direct_frame(short whatframe);
-               ^
+treasure.h:34:8: style: The function 'set_direct_frame' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  void set_direct_frame(short whatframe);
+       ^
 walker.h:77:16: note: Virtual function in base class
   virtual void set_direct_frame(short whichframe);
                ^
-treasure.h:34:16: note: Function in derived class
-  void         set_direct_frame(short whatframe);
-               ^
-treasure.h:35:16: style: The function 'query_order' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
-  char         query_order()
-               ^
+treasure.h:34:8: note: Function in derived class
+  void set_direct_frame(short whatframe);
+       ^
+treasure.h:35:8: style: The function 'query_order' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  char query_order()
+       ^
 walker.h:60:16: note: Virtual function in base class
   virtual char query_order()
                ^
-treasure.h:35:16: note: Function in derived class
-  char         query_order()
-               ^
+treasure.h:35:8: note: Function in derived class
+  char query_order()
+       ^
 game.cpp:28:17: style: The scope of the variable 'temp_walker' can be reduced. [variableScope]
  walker        *temp_walker,  *replace_walker;
                 ^
@@ -514,15 +223,6 @@ gloader.cpp:341:2: warning: Class 'loader' does not have a copy constructor whic
 gloader.cpp:341:2: warning: Class 'loader' does not have a operator= which is recommended since it has dynamic memory/resource allocation(s). [noOperatorEq]
  graphics = new PixieData[SIZE_ORDERS*SIZE_FAMILIES];
  ^
-gloader.cpp:532:45: style: Variable 'act_types[22*1+15]' is reassigned a value before the old one has been used. [redundantAssignment]
- act_types[PIX(ORDER_WEAPON, FAMILY_WAVE3)] = ACT_FIRE;
-                                            ^
-gloader.cpp:531:45: note: act_types[22*1+15] is assigned
- act_types[PIX(ORDER_WEAPON, FAMILY_WAVE3)] = ACT_FIRE;
-                                            ^
-gloader.cpp:532:45: note: act_types[22*1+15] is overwritten
- act_types[PIX(ORDER_WEAPON, FAMILY_WAVE3)] = ACT_FIRE;
-                                            ^
 gparser.cpp:179:34: style: Parameter 'argc' can be declared with const [constParameter]
 void cfg_store::commandline(int &argc, char **&argv)
                                  ^
@@ -1498,6 +1198,9 @@ screen.cpp:952:12: style: Variable 'loop' is assigned a value that is never used
 screen.cpp:1138:11: style: Variable 'howmany' is assigned a value that is never used. [unreadVariable]
   howmany = howmany;
           ^
+screen.cpp:1378:7: style: Unused variable: memreport [unusedVariable]
+ char memreport[80];
+      ^
 sound.cpp:189:14: warning: Comparison of a boolean expression with an integer. [compareBoolExpressionWithInt]
  if (silence == silent)      // Are we already set this way?
              ^

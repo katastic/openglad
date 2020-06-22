@@ -14,9 +14,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-#ifndef BASE_H
-#define BASE_H
-
+#pragma once
 // BASE definitions (perhaps this should be broken up some more
 
 /* ChangeLog
@@ -381,8 +379,7 @@ PixieData read_pixie_file(const char  * filename);
 typedef struct
 {
 	char r, g, b;
-}
-rgb;
+}rgb;
 
 typedef rgb palette[256];
 
@@ -390,6 +387,4 @@ void set_vga_palette(palette p);
 rgb set_rgb(char r, char g, char b);
 short read_palette(FILE  *f, palette p);
 
-
-#endif
 

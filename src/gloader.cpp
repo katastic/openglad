@@ -33,23 +33,23 @@ void popup_dialog(const char* title, const char* message);
 extern float derived_bonuses[NUM_FAMILIES][8];
 
 // These are for monsters and us
-signed char bit1[] = {(char) 1,(char) 5,(char) 1,(char) 9,(signed char) -1};     // up
-signed char bit2[] = {(char) 13,(char) 17,(char) 13,(char) 21,(signed char) -1}; // up-right
-signed char bit3[] = {(char) 2,(char) 6,(char) 2,(char) 10,(signed char) -1};    // right
-signed char bit4[] = {(char) 14,(char) 18,(char) 14,(char) 22,(signed char) -1}; // down-right
-signed char bit5[] = {(char) 0,(char) 4,(char) 0,(char) 8,(signed char) -1};     // down
-signed char bit6[] = {(char) 12,(char) 16,(char) 12,(char) 20,(signed char) -1}; // down-left
-signed char bit7[] = {(char) 3,(char) 7,(char) 3,(char) 11,(signed char) -1};    // left
-signed char bit8[] = {(char) 15,(char) 19,(char) 15,(char) 23,(signed char) -1}; // up-left
+static signed char bit1[] = {(char) 1,(char) 5,(char) 1,(char) 9,(signed char) -1};     // up
+static signed char bit2[] = {(char) 13,(char) 17,(char) 13,(char) 21,(signed char) -1}; // up-right
+static signed char bit3[] = {(char) 2,(char) 6,(char) 2,(char) 10,(signed char) -1};    // right
+static signed char bit4[] = {(char) 14,(char) 18,(char) 14,(char) 22,(signed char) -1}; // down-right
+static signed char bit5[] = {(char) 0,(char) 4,(char) 0,(char) 8,(signed char) -1};     // down
+static signed char bit6[] = {(char) 12,(char) 16,(char) 12,(char) 20,(signed char) -1}; // down-left
+static signed char bit7[] = {(char) 3,(char) 7,(char) 3,(char) 11,(signed char) -1};    // left
+static signed char bit8[] = {(char) 15,(char) 19,(char) 15,(char) 23,(signed char) -1}; // up-left
 
-signed char att1[] = {1,5,1,-1};       // up
-signed char att2[] = {13,17,13,-1};    // up-right
-signed char att3[] = {2,6,2,-1};       // right
-signed char att4[] = {14,18,14,-1};    // down-right
-signed char att5[] = {0,4,0,-1};       // down
-signed char att6[] = {12,16,12,-1};    // down-left
-signed char att7[] = {3,7,3,-1};       // left
-signed char att8[] = {15,19,15,-1};    // up-left
+static signed char att1[] = {1,5,1,-1};       // up
+static signed char att2[] = {13,17,13,-1};    // up-right
+static signed char att3[] = {2,6,2,-1};       // right
+static signed char att4[] = {14,18,14,-1};    // down-right
+static signed char att5[] = {0,4,0,-1};       // down
+static signed char att6[] = {12,16,12,-1};    // down-left
+static signed char att7[] = {3,7,3,-1};       // left
+static signed char att8[] = {15,19,15,-1};    // up-left
 
 signed char bitm2[] = {21,25,21,29,-1};  // up-right
 signed char bitm4[] = {22,26,22,30,-1};  // down-right
@@ -66,56 +66,56 @@ signed char mageatt7[] = {7,19,3,-1};    // left
 signed char mageatt8[] = {27,35,23,-1};  // up-left
 
 
-signed char tele_out1[] = {12,13,14,15,-1};
-signed char tele_in1[] = {15,14,13,12,1,-1};  // up
-signed char tele_in2[] = {15,14,13,12,2,-1};  // right
-signed char tele_in3[] = {15,14,13,12,0,-1};  // down
-signed char tele_in4[] = {15,14,13,12,3,-1};  // left
+static signed char tele_out1[] = {12,13,14,15,-1};
+static signed char tele_in1[] = {15,14,13,12,1,-1};  // up
+static signed char tele_in2[] = {15,14,13,12,2,-1};  // right
+static signed char tele_in3[] = {15,14,13,12,0,-1};  // down
+static signed char tele_in4[] = {15,14,13,12,3,-1};  // left
 
 // Big skeleton, who is currently different ...
-signed char gs_down[] = {0, 1, 2, 3, -1}; // true "down"
-signed char gs_up[] = {3, 2, 1, 0, -1}; // faked up :)
+static signed char gs_down[] = {0, 1, 2, 3, -1}; // true "down"
+static signed char gs_up[] = {3, 2, 1, 0, -1}; // faked up :)
 
 // Skeleton growing
-signed char skel_grow[] =   {27, 26, 25, 24, 0, -1};
-signed char skel_shrink[] = {0, 24, 25, 26, 27, -1};
+static signed char skel_grow[] =   {27, 26, 25, 24, 0, -1};
+static signed char skel_shrink[] = {0, 24, 25, 26, 27, -1};
 
 // For slime unidirectional movement
-signed char slime_pulse[] = { 0, 0, 1, 1, 2, 2, 1, 1, -1 };
+static signed char slime_pulse[] = { 0, 0, 1, 1, 2, 2, 1, 1, -1 };
 
-signed char slime_split[] = { 8, 8, 9, 9, 10, 10,
+static signed char slime_split[] = { 8, 8, 9, 9, 10, 10,
                               11,11,12,12, 13, 13, -1 };
 
-signed char small_slime[] = { 0, 0, 1, 1, 2, 2, 3, 3,
+static signed char small_slime[] = { 0, 0, 1, 1, 2, 2, 3, 3,
                               4, 4, 5, 5, 6, 6, 7, 7,
                               6, 6, 5, 5, 4 ,4, 3, 3,
                               2, 2, 1, 1, -1 };
 
 // These are for the 'effect' objects
-signed char series_8[] = {0, 1, 2, 3, 4, 5, 6, 7, -1};
-signed char  *aniexpand8[] = { series_8, series_8, series_8, series_8,
+static signed char series_8[] = {0, 1, 2, 3, 4, 5, 6, 7, -1};
+static signed char  *aniexpand8[] = { series_8, series_8, series_8, series_8,
                                series_8, series_8, series_8, series_8,
                                series_8, series_8, series_8, series_8,
                                series_8, series_8, series_8, series_8 };
 
 //signed char series_16[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -1};
-signed char series_16[] = {0, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, -1};
-signed char *ani16[] = {series_16, series_16, series_16, series_16,
+static signed char series_16[] = {0, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, -1};
+static signed char *ani16[] = {series_16, series_16, series_16, series_16,
                         series_16, series_16, series_16, series_16,
                         series_16, series_16, series_16, series_16,
                         series_16, series_16, series_16, series_16};
 
-signed char bomb1[] = {0, 1, 0, 1, 0, 1, 0, 1, 2, 3, 2, 3, 2, 3, 2, 3,
+static signed char bomb1[] = {0, 1, 0, 1, 0, 1, 0, 1, 2, 3, 2, 3, 2, 3, 2, 3,
                        4, 5, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 6, 7,
                        8, 9, 8, 9, 8, 9, 8, 9, 10, 11, 10, 11, 10, 11, 10, 11,
                        12, 12, -1};
-signed char  *anibomb1[] = {bomb1, bomb1, bomb1, bomb1,
+static signed char  *anibomb1[] = {bomb1, bomb1, bomb1, bomb1,
                             bomb1, bomb1, bomb1, bomb1,
                             bomb1, bomb1, bomb1, bomb1,
                             bomb1, bomb1, bomb1, bomb1 };
 
-signed char explosion1[] = {0, 1, 2, -1};
-signed char  *aniexplosion1[] = {explosion1, explosion1, explosion1, explosion1,
+static signed char explosion1[] = {0, 1, 2, -1};
+static signed char  *aniexplosion1[] = {explosion1, explosion1, explosion1, explosion1,
                                  explosion1, explosion1, explosion1, explosion1,
                                  explosion1, explosion1, explosion1, explosion1,
                                  explosion1, explosion1, explosion1, explosion1 };
@@ -129,10 +129,10 @@ The animation can be directional due to the use of curdir.
 The signed char[] are the actual frame indices for the animation.  -1 means to end the animation.
 */
 
-signed char hit1[] = {0, 1, -1};
-signed char hit2[] = {0, 2, -1};
-signed char hit3[] = {0, 3, -1};
-signed char  *anihit[] = {hit1, hit1, hit1, hit1,
+static signed char hit1[] = {0, 1, -1};
+static signed char hit2[] = {0, 2, -1};
+static signed char hit3[] = {0, 3, -1};
+static signed char  *anihit[] = {hit1, hit1, hit1, hit1,
                                  hit1, hit1, hit1, hit1,
                                  hit1, hit1, hit1, hit1,
                                  hit1, hit1, hit1, hit1,
@@ -141,28 +141,28 @@ signed char  *anihit[] = {hit1, hit1, hit1, hit1,
                                  hit3, hit3, hit3, hit3,
                                  hit3, hit3, hit3, hit3 };
 
-signed char cloud_cycle[] = {0, 1, 2, 3, 2, 1, -1};
-signed char *anicloud[] = {cloud_cycle, cloud_cycle, cloud_cycle, cloud_cycle,
+static signed char cloud_cycle[] = {0, 1, 2, 3, 2, 1, -1};
+static signed char *anicloud[] = {cloud_cycle, cloud_cycle, cloud_cycle, cloud_cycle,
                            cloud_cycle, cloud_cycle, cloud_cycle, cloud_cycle,
                            cloud_cycle, cloud_cycle, cloud_cycle, cloud_cycle,
                            cloud_cycle, cloud_cycle, cloud_cycle, cloud_cycle};
 
-signed char marker_cycle[] = {0, 1, 2, 3, 4,      // mage TP marker
+static signed char marker_cycle[] = {0, 1, 2, 3, 4,      // mage TP marker
                               5, 6, 7, 8, 9,
                               10,11,12,13,14,
                               15,16,17,18,19,-1};
-signed char *animarker[] = {marker_cycle, marker_cycle, marker_cycle, marker_cycle,
+static signed char *animarker[] = {marker_cycle, marker_cycle, marker_cycle, marker_cycle,
                             marker_cycle, marker_cycle, marker_cycle, marker_cycle,
                             marker_cycle, marker_cycle, marker_cycle, marker_cycle,
                             marker_cycle, marker_cycle, marker_cycle, marker_cycle };
 
 // These are for livings now
-signed char  *animan[] = {
+static signed char  *animan[] = {
                              bit1, bit2, bit3, bit4, bit5, bit6, bit7, bit8,
                              att1, att2, att3, att4, att5, att6, att7, att8,
                          };
 
-signed char  *aniskel[] = {
+static signed char  *aniskel[] = {
                               bit1, bit2, bit3, bit4,
                               bit5, bit6, bit7, bit8,
                               att1, att2, att3, att4,
@@ -174,7 +174,7 @@ signed char  *aniskel[] = {
 
                           };
 
-signed char  *animage[] = {
+static signed char  *animage[] = {
                               bit1, bitm2, bit3, bitm4,
                               bit5, bitm6, bit7, bitm8,
                               mageatt1, mageatt2, mageatt3, mageatt4,       // 8 == attack
@@ -186,14 +186,14 @@ signed char  *animage[] = {
                           };
 
 // giant skeleton ..
-signed char *anigs[] = {
+static signed char *anigs[] = {
                            gs_down, gs_up, gs_down, gs_up,
                            gs_down, gs_up, gs_down, gs_up,
                            gs_down, gs_up, gs_down, gs_up,
                            gs_down, gs_up, gs_down, gs_up,
                        };
 
-signed char  *anislime[] = {
+static signed char  *anislime[] = {
                                slime_pulse, slime_pulse, slime_pulse, slime_pulse, // 0 == walk
                                slime_pulse, slime_pulse, slime_pulse, slime_pulse,
                                slime_pulse, slime_pulse, slime_pulse, slime_pulse, // 8 == attack
@@ -206,7 +206,7 @@ signed char  *anislime[] = {
                                slime_split, slime_split, slime_split, slime_split,
                            };
 
-signed char  *ani_small_slime[] = {
+static signed char  *ani_small_slime[] = {
                                       small_slime, small_slime, small_slime, small_slime,
                                       small_slime, small_slime, small_slime, small_slime,
                                       small_slime, small_slime, small_slime, small_slime,
@@ -215,50 +215,50 @@ signed char  *ani_small_slime[] = {
 
 
 // These are for the knives
-signed char kni1[] = {7,6,5,4,3,2,1,0,-1};  // clockwise?
-signed char kni2[] = {0,1,2,3,4,5,6,7,-1};  // counter?
-signed char  *anikni[] = { kni2, kni2, kni1, kni1,
+static signed char kni1[] = {7,6,5,4,3,2,1,0,-1};  // clockwise?
+static signed char kni2[] = {0,1,2,3,4,5,6,7,-1};  // counter?
+static signed char  *anikni[] = { kni2, kni2, kni1, kni1,
                            kni1, kni1, kni2, kni2,
                            kni2, kni2, kni1, kni1,
                            kni1, kni1, kni2, kni2 };
 
 // These are for the rocks
-signed char rock1[] = {0, -1};
-signed char  *anirock[] = { rock1, rock1, rock1, rock1,
+static signed char rock1[] = {0, -1};
+static signed char  *anirock[] = { rock1, rock1, rock1, rock1,
                             rock1, rock1, rock1, rock1,
                             rock1, rock1, rock1, rock1,
                             rock1, rock1, rock1, rock1 };
 
-signed char grow1[] = {4, 3, 2, 1, 0, -1};
-signed char  *anitree[] = { rock1, rock1, rock1, rock1,
+static signed char grow1[] = {4, 3, 2, 1, 0, -1};
+static signed char  *anitree[] = { rock1, rock1, rock1, rock1,
                             rock1, rock1, rock1, rock1,
                             grow1, grow1, grow1, grow1,
                             grow1, grow1, grow1, grow1 };
 
-signed char door1[] = {0, -1};
-signed char door2[] = {1, -1};
-signed char *anidoor[] = { door1, door1, door2, door2,
+static signed char door1[] = {0, -1};
+static signed char door2[] = {1, -1};
+static signed char *anidoor[] = { door1, door1, door2, door2,
                            door1, door1, door2, door2,
                            door1, door1, door2, door2,
                            door1, door1, door2, door2 };
 
 
-signed char dooropen1[] = {0, 2, 3, 4, 1, -1};
-signed char dooropen2[] = {1, 4, 3, 2, 0, -1};
-signed char *anidooropen[] = { door2, door2, door1, door1,
+static signed char dooropen1[] = {0, 2, 3, 4, 1, -1};
+static signed char dooropen2[] = {1, 4, 3, 2, 0, -1};
+static signed char *anidooropen[] = { door2, door2, door1, door1,
                                door2, door2, door1, door1,
                                dooropen1, dooropen1, dooropen2, dooropen2,
                                dooropen1, dooropen1, dooropen2, dooropen2 };
 
-signed char arrow1[] = {1, -1}; // up
-signed char arrow2[] = {5, -1}; // up-right
-signed char arrow3[] = {2, -1}; // right
-signed char arrow4[] = {6, -1}; // down-right
-signed char arrow5[] = {0, -1}; // down
-signed char arrow6[] = {4, -1}; // down-left
-signed char arrow7[] = {3, -1}; // left
-signed char arrow8[] = {7, -1}; // up-left
-signed char  *aniarrow[] = { arrow1, arrow2, arrow3, arrow4,
+static signed char arrow1[] = {1, -1}; // up
+static signed char arrow2[] = {5, -1}; // up-right
+static signed char arrow3[] = {2, -1}; // right
+static signed char arrow4[] = {6, -1}; // down-right
+static signed char arrow5[] = {0, -1}; // down
+static signed char arrow6[] = {4, -1}; // down-left
+static signed char arrow7[] = {3, -1}; // left
+static signed char arrow8[] = {7, -1}; // up-left
+static signed char  *aniarrow[] = { arrow1, arrow2, arrow3, arrow4,
                              arrow5, arrow6, arrow7, arrow8,
                              arrow1, arrow2, arrow3, arrow4,
                              arrow5, arrow6, arrow7, arrow8 };

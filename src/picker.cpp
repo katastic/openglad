@@ -2158,7 +2158,7 @@ void popup_dialog(const char* title, const char* message)
         draw_buttons(buttons, num_buttons);
 
         draw_highlight_interior(buttons[highlighted_button]);
-        myscreen->buffer_to_screen(0,0,SCREEN_H, SCREEN_H);
+        myscreen->buffer_to_screen(0,0,SCREEN_W, SCREEN_H);
         SDL_Delay(10);
 	}
 }
@@ -2229,7 +2229,7 @@ Sint32 create_save_menu(int uselessarg)
                            allbuttons[10]->yend, 0, 0, 1);
 
         draw_highlight(buttons[highlighted_button]);
-        myscreen->buffer_to_screen(0,0,SCREEN_H, SCREEN_H);
+        myscreen->buffer_to_screen(0,0,SCREEN_W, SCREEN_H);
         SDL_Delay(10);
 	}
 	return REDRAW;
@@ -2798,7 +2798,7 @@ Sint32 name_guy(Sint32 arg)  // 0 == current_guy, 1 == ourteam[editguy]
 
 	myscreen->draw_button(174,  8, 306, 30, 1, 1); // text box
 	nametext.write_xy(176, 12, "NAME THIS CHARACTER:", DARK_BLUE, 1);
-	myscreen->buffer_to_screen(0, 0, SCREEN_H, SCREEN_H);
+	myscreen->buffer_to_screen(0, 0, SCREEN_W, SCREEN_H);
 
 	clear_keyboard();
 	char* new_text = nametext.input_string(176, 20, 11, someguy->name);

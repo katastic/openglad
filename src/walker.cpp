@@ -310,14 +310,14 @@ short walker::shove(walker  *target, short x, short y)
 bool walker::walkstep(float x, float y)
 {
 	short returnvalue;
-	short ret1 = 0, ret2 = 0;
+	//short ret1 = 0, ret2 = 0;
 	short oldcurdir = curdir;
 	float step = stepsize;
 	float halfstep;
-	Sint32 i;
+	//Sint32 i;
 	//walker *control1 = myscreen->viewob[0]->control;
 	//walker *control2;
-	short mycycle;
+	//short mycycle;
 
 	// Repeat last walk.
 	lastx = x*stepsize;
@@ -339,8 +339,10 @@ bool walker::walkstep(float x, float y)
 		returnvalue = walk(x*halfstep, y*halfstep); // Now try a baby step
 		if (!returnvalue) // if we still fail
 		{
+			short ret1, ret2;
+			
 			if (user == -1) // means we are an npc
-			{
+			{			 
 				switch (facing(x, y))
 				{
 					case FACE_UP:    // For cardinal directions, fail if
@@ -395,6 +397,7 @@ bool walker::walkstep(float x, float y)
 			    // We can't move where we want to.  Can we slide against the wall?
 
 				// Store our cycle
+				short mycycle;
 				mycycle = cycle;
 				short myfacing = facing(x, y);
                 bool gotup = false, gotover = false;
@@ -431,7 +434,7 @@ bool walker::walkstep(float x, float y)
 
 				if(dx != 0 || dy != 0)
                 {
-                    for (i = 0; i < step; i++)
+                    for (int i = 0; i < step; i++)
                     {
                         if (myscreen->query_passable(xpos, ypos + dy, this))
                         {
@@ -1530,7 +1533,7 @@ void walker::draw_path(viewscreen* view_buf)
 
 short walker::act()
 {
-	short temp;
+	
 
 	// Make sure everyone we're pointing to is valid
 	if (foe && foe->dead)
@@ -1570,6 +1573,7 @@ short walker::act()
 	// Are we performing some action?
 	if (stats->has_commands())
 	{
+		short temp;
 		temp = stats->do_command();
 		if (temp)
 			return 1;
@@ -1879,16 +1883,16 @@ void walker::do_combat_damage(walker* attacker, walker* target, short tempdamage
 
 short walker::attack(walker  *target)
 {
-	walker  *blood; // temporary stain
+	//walker  *blood; // temporary stain
 	walker *headguy; // guy at top of chain..
 	short playerteam = -1;
 	char message[80];
 	float tempdamage = get_base_damage(this);
 	short getscore=0;
 	char targetorder = target->query_order();
-	char targetfamily= target->query_family();
+	char targetfamily = target->query_family();
 	walker *attacker; // us or our owner ..
-	static short tom = 0;
+	//static short tom = 0;
 
 	if (myguy != NULL || team_num == 0)
 		getscore = 1;
@@ -1914,8 +1918,8 @@ short walker::attack(walker  *target)
 	while (headguy->owner && (headguy->owner != headguy) )
 		headguy = headguy->owner;
 
-	if (headguy->myguy && headguy->user == 0 && order == ORDER_WEAPON)
-		tom++;
+	//if (headguy->myguy && headguy->user == 0 && order == ORDER_WEAPON)
+		//tom++;  		
 
 	// Modify attack value based on things like magical attacks, etc.
 	switch (targetorder) // generally going to be livings..
@@ -2141,6 +2145,7 @@ short walker::attack(walker  *target)
 
 			/* Blood splats at death */
 			// Make temporary stain:
+			walker *blood; // temporary stain
 			blood = myscreen->level_data.add_ob(ORDER_WEAPON, FAMILY_BLOOD);
 			blood->team_num = target->team_num;
 			blood->ani_type = ANI_GROW;
@@ -2165,7 +2170,7 @@ short walker::attack(walker  *target)
 
 short walker::animate()
 {
-	walker  * newob;
+	walker* newob;
 
 	set_frame(ani[curdir+ani_type*NUM_FACINGS][cycle]);
 	cycle++;
@@ -2357,9 +2362,9 @@ short walker::query_next_to()
 
 short walker::special()
 {
-	walker  * newob;
-	weap * fireob;
-	walker  * alive, *tempwalk;
+	walker* newob;
+	weap* fireob;
+	walker* alive, *tempwalk;
 	short tempx, tempy;
 	short i, j;
 	short targetx, targety;
@@ -2398,8 +2403,8 @@ short walker::special()
 			switch(current_special)
 			{
 				case 1: // fire arrows
-					tempx = lastx;
-					tempy = lasty;
+			//		tempx = lastx; //cppcheck: never used
+			//		tempy = lasty; //cppcheck: never used
 					curdir = -1;
 					lastx = 0;
 					lasty = 0;
@@ -2470,8 +2475,8 @@ short walker::special()
 					if (busy)
 						return 0; // can't do while attacking, etc.
 					busy += 8;
-					tempx = lastx;
-					tempy = lasty;
+					//tempx = lastx;
+					//tempy = lasty;
 					curdir = -1;
 					lastx = 0;
 					lasty = 0;
@@ -3966,7 +3971,7 @@ short walker::special()
 						return 0;
 					ani_type = ANI_TELE_OUT;
 					cycle = 0;
-					break;
+					//break;
 					break; // end of tunnel case
 			} // end of skeleton case
 			break; // end of Skeleton
@@ -4051,7 +4056,7 @@ short walker::teleport()
 		{
 			// Found our marker!
 			if (myscreen->query_passable(ob->xpos, ob->ypos, this)
-			        && (distance = distance_to_ob(ob) > 64) )
+			        && (distance = distance_to_ob(ob) > 64) ) //KAT whoever wrote this deserves to be slapped
 			{
 				center_on(ob);
 				ob->lifetime--;
@@ -4154,8 +4159,6 @@ short walker::fire_check(short xdelta, short ydelta)
 	walker  *weapon = NULL;
 	//  short newx=0, newy=0;
 	short i, loops;
-	short xdir = 0;
-	short ydir = 0;
 	Sint32 distance;
 	short targetdir;
 
@@ -4206,12 +4209,13 @@ short walker::fire_check(short xdelta, short ydelta)
 		return 0;
 	}
 
+/* cppcheck: never used
 	if (xdelta != 0)
 		xdir = xdelta / abs(xdelta);
 
 	if (ydelta != 0)
 		ydir = ydelta / abs(ydelta);
-
+*/
 	/* // why are we assuming walls don't matter in these two cases?
 	  if (!xdelta || !ydelta) // aligned on a major axis
 	  {
@@ -4253,7 +4257,7 @@ short walker::fire_check(short xdelta, short ydelta)
 	// range and didn't hit anyone ..
 	weapon->dead = 1;
 	return 0;
-
+/* DEAD CODE, right?
 	// Determine # of loops to look for guy
 	if ( abs(xdelta) > abs(ydelta) )
 		loops = abs(xdelta);
@@ -4261,6 +4265,8 @@ short walker::fire_check(short xdelta, short ydelta)
 		loops = abs(ydelta);
 
 	// * 16 is to match with grid coords
+	short xdir = 0;
+	short ydir = 0;
 	for (i=0; i <= loops; i+=8)  // half a grid square
 		if ( !myscreen->query_grid_passable(xpos+i*xdir, ypos+i*ydir, weapon) )
 		{
@@ -4273,7 +4279,7 @@ short walker::fire_check(short xdelta, short ydelta)
 
 	// We have a good chance of hitting, so ..
 	return 1;
-
+*/
 }
 
 /****************************************************

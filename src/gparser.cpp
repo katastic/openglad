@@ -176,7 +176,7 @@ bool cfg_store::save_settings()
     }
 }
 
-void cfg_store::commandline(int &argc, char **&argv)
+void cfg_store::commandline(const int &argc, char **&argv)
 {
 	const char helpmsg[] = 
 "Usage: openglad [-d -f ...]\n"

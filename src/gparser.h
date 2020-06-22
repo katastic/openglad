@@ -25,7 +25,7 @@ class cfg_store
 public:
     
 	bool load_settings();
-	void commandline(int &argc, char **&argv);
+	void commandline(const int &argc, char **&argv);
     bool save_settings();
 
     void apply_setting(const std::string& category, const std::string& setting, const std::string& value);

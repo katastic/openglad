@@ -16,10 +16,9 @@
  */
 
 #include "version.h"
-
 #include "graph.h"
 
-screen * myscreen;
+screen* myscreen;
 
 #include "colors.h"
 #include <time.h>
@@ -37,15 +36,17 @@ using namespace std;
 
 extern bool debug_draw_paths;
 extern bool debug_draw_obmap;
-
 // Z's script: #include <process.h>
+unsigned char *radarpic;
+pixie *radarpix;
+// Zardus: FIX: from view.cpp. We need this here so that it doesn't
+// try to create it before main and go nuts trying to load it
+extern options *theprefs;
 
 bool yes_or_no_prompt(const char* title, const char* message, bool default_value);
 void popup_dialog(const char* title, const char* message);
-
 void picker_main(Sint32 argc, char **argv);
 void intro_main(Sint32 argc, char **argv);
-
 short remaining_foes(screen *myscreen, walker* myguy);
 short remaining_team(screen *myscreen, char myteam);
 short score_panel(screen *myscreen);
@@ -57,19 +58,9 @@ void new_draw_value_bar(short left, short top,
 void draw_percentage_bar(short left, short top, unsigned char somecolor,
                          short somelength, screen * myscreen);
 void init_input();
-
 //void draw_radar_gems(screen  *myscreen);
 void draw_gem(short x, short y, short color, screen * myscreen);
-
-unsigned char *radarpic;
-pixie *radarpix;
-
-
 void glad_main(screen *myscreen, Sint32 playermode);
-
-// Zardus: FIX: from view.cpp. We need this here so that it doesn't
-// try to create it before main and go nuts trying to load it
-extern options *theprefs;
 
 int main(int argc, char *argv[])
 {
@@ -99,31 +90,10 @@ int main(int argc, char *argv[])
 
 void glad_main(Sint32 playermode)
 {
-	//  char soundpath[80];
-	//  short cyclemode = 1;            // color cycling on or off
-
-	//Sint32 longtemp;
-	//char message[50];
 	short currentcycle = 0, cycletime = 3;
-
-	//screen  *myscreen;
-
-	// Get sound path ..
-	//if (!get_cfg_item("directories", "sound") )
-	//     exit(1);
-	//strcpy(soundpath, get_cfg_item("directories", "sound") );
-
-	// Zardus: PORT: fade out
 	clear_keyboard();
 	myscreen->fadeblack(0);
-
 	myscreen->clearbuffer();
-
-	// Draw rainbow background
-	//for (i = 0; i<320; i++)
-	//  for (j = 0; j < 200; j++)
-	//    myscreen->point(i,j,(unsigned char) (i-j)); //not sure if this is ok
-
 
 	// Load the default saved-game ..
 	load_saved_game("save0", myscreen);
@@ -137,17 +107,13 @@ void glad_main(Sint32 playermode)
 	myscreen->redraw();
 	myscreen->fadeblack(1);
 
-
 	//******************************
 	// Keyboard loop
 	//******************************
 
-
 	//
 	// This is the main program loop
 	//
-
-
 	myscreen->redraw();
 	myscreen->refresh();
 	read_scenario(myscreen);
@@ -481,13 +447,11 @@ void new_draw_value_bar(short left, short top,
                         walker  * control, short mode, screen * myscreen)
 {
 	float points;
-	//short totallength = 60;
-	short bar_length=0;
-	//short bar_remainder = totallength - bar_length;
 	char whatcolor;
 
 	if (mode == 0) // hitpoint bar
 	{
+		short bar_length=0;
 		points = control->stats->hitpoints;
 
 		if (float_eq(points, control->stats->max_hitpoints))
@@ -513,6 +477,7 @@ void new_draw_value_bar(short left, short top,
 	}  // end of doing hp stuff..
 	else if (mode == 1) // sp stuff ..
 	{
+		short bar_length=0;
 		points = control->stats->magicpoints;
 
 		if (float_eq(points, control->stats->max_magicpoints))
@@ -551,19 +516,19 @@ short new_score_panel(screen *myscreen, short do_it)
 	char message[50];
 	//static
 	char tempname[20];
-	short tempfoes = 0;
+	
 	//short player;
-	short tempallies = 0;
+
 	text& mytext = myscreen->text_normal;
 #if 0
 	static Uint32 family[5]={-1,-1,-1,-1,-1},
 	                               act[5]={-1, -1,-1,-1,-1};
 #endif
 
-	walker  *control;
+	
 	short lm, tm; // left and top margins
 	short rm, bm; // right and bottom margins
-	(void)bm;
+//	(void)bm;
 	char draw_button;  // do we draw a button background?
 	char text_color;
 	static char namelist[NUM_FAMILIES][20] =
@@ -586,7 +551,8 @@ short new_score_panel(screen *myscreen, short do_it)
 
 	for (short player = 0; player < myscreen->numviews; player++)
 	{
-		control = myscreen->viewob[player]->control;
+		walker* control = myscreen->viewob[player]->control; //unit-being-controlled by player
+		
 		lm = myscreen->viewob[player]->xloc + OVERSCAN_PADDING; //left
 		tm = myscreen->viewob[player]->yloc + OVERSCAN_PADDING; //top
 		rm = myscreen->viewob[player]->endx - OVERSCAN_PADDING; //right
@@ -632,8 +598,10 @@ short new_score_panel(screen *myscreen, short do_it)
 				text_color = YELLOW;
 
 			// Get current number of foes
+			short tempfoes = 0;
 			tempfoes = remaining_foes(myscreen, control);
 			// Get current number of team-members
+			short tempallies = 0;
 			tempallies = remaining_team(myscreen, control->team_num);
 
 			// Draw the pretty gems
@@ -701,7 +669,7 @@ short new_score_panel(screen *myscreen, short do_it)
 				int special_offset = -24;
 				#ifdef USE_TOUCH_INPUT
 				// Upper left instead
-				int bm = tm + 54;
+				bm = tm + 54;
 				special_offset = 0;
 				#endif
 
@@ -714,6 +682,8 @@ short new_score_panel(screen *myscreen, short do_it)
 					myscore = myscreen->save_data.m_score[control->team_num];
 				else
 					myscore = 0;
+					goto out_of_bullcrap; //if we don't have a controled character, none of the rest of this matters, so bail.
+
 				if (scorecountup[control->team_num] > myscore)
 					scorecountup[control->team_num] = myscore;
 				if (scorecountup[control->team_num] < myscore)
@@ -771,6 +741,8 @@ short new_score_panel(screen *myscreen, short do_it)
                 #endif
 
 			} // end of score/exp display
+			out_of_bullcrap: // THATS RIGHT.
+
 
 			// Skip act-type for now
 			/*
@@ -822,7 +794,6 @@ short new_score_panel(screen *myscreen, short do_it)
 void draw_percentage_bar(short left, short top, unsigned char somecolor,
                          short somelength, screen * myscreen)
 {
-	short i, j;
 	//unsigned char tempcolor;
 
 	// Draw the black border ..
@@ -850,8 +821,8 @@ void draw_percentage_bar(short left, short top, unsigned char somecolor,
 		//  myscreen->fastbox(left+1, top+1+(2-j), 1, 1, somecolor+(j%16), 1);
 		//  myscreen->fastbox(left+1, top+1+(2+j), 1, 1, somecolor+(j%16), 1);
 		//}
-		for (i=0; i < (somelength-4)/2;i++)
-			for (j=0; j < 3; j++)
+		for (short i=0; i < (somelength-4)/2;i++)
+			for (short j=0; j < 3; j++)
 			{
 				myscreen->fastbox(left+(somelength/2)-i-1, top+1+(2-j), 1, 1, somecolor+((i+j)%16), 1);
 				myscreen->fastbox(left+(somelength/2)-i-1, top+1+(2+j), 1, 1, somecolor+((i+j)%16), 1);

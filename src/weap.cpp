@@ -34,7 +34,7 @@ weap::~weap()
 
 short weap::act()
 {
-	static char message[80];
+	
 
 	// Make sure everyone we're pointing to is valid
 	if (foe && foe->dead)
@@ -106,6 +106,7 @@ short weap::act()
 			// We are randomly walking toward enemy
 		case ACT_RANDOM:
 			{
+				char message[80];
 				sprintf(message, "Weapon %d doing act random?", family);
 				//Log("Weapon doing act_random?\n");
 				myscreen->do_notify(message, this);

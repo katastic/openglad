@@ -28,7 +28,7 @@ class walker : public pixieN
 		friend class statistics;
 		friend class command;
 		explicit walker(const PixieData& data);
-		virtual ~walker();
+		virtual ~walker() override;
 		short reset(void);
 		short move(short x, short y) override;
 		void worldmove(float x, float y);

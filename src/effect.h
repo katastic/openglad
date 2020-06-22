@@ -32,7 +32,7 @@
 class effect : public walker
 {
 	public:
-		effect(const PixieData& data);
+		explicit effect(const PixieData& data);
 		virtual ~effect() override;
 		short act() override;
 		short animate() override;

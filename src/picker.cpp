@@ -75,7 +75,7 @@ extern options *theprefs;
 guy  *current_guy = NULL;
 guy  *old_guy = NULL;
 
-char  message[80];
+//char  message[80];
 Sint32 editguy = 0;        // Global for editing guys ..
 PixieData main_title_logo_data, main_columns_data;
 pixieN  *main_title_logo_pix,*main_columns_pix;
@@ -1357,6 +1357,7 @@ Sint32 create_hire_menu(Sint32 arg1)
         myscreen->draw_button(cost_box, 1);
         myscreen->draw_button_inverted(cost_box_inner);
 
+        char  message[80];
         sprintf(message, "CASH: %u", myscreen->save_data.m_totalcash[current_team_num]);
         mytext.write_xy(cost_box_content.x, cost_box_content.y, message,(unsigned char) DARK_BLUE, 1);
         current_cost = calculate_hire_cost();
@@ -1610,6 +1611,7 @@ Sint32 create_train_menu(Sint32 arg1)
                    || old_guy->armor < current_guy->armor);
 
         // Strength
+        char  message[80];
         sprintf(message, "%d", current_guy->strength);
         mytext.write_xy(stat_box_content.x, DOWN(linesdown), "  STR:",
                          (unsigned char) STAT_COLOR, 1);
@@ -2111,8 +2113,6 @@ void popup_dialog(const char* title, const char* message)
     int dumbcount;
 
     // Draw message
-    int j = 0;
-
 	if (localbuttons)
 		delete (localbuttons);
 
@@ -2148,7 +2148,7 @@ void popup_dialog(const char* title, const char* message)
 
 		// Draw
 		dumbcount = myscreen->draw_dialog(leftside, 80 - h/2, rightside, 80 + h/2, title);
-		j = 0;
+		int j = 0;
         for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); ++e)
         {
             gladtext.write_xy(dumbcount + 3*pix_per_char/2 + w/2 - e->size()*pix_per_char/2, 104 - h/2 + 10*j, e->c_str(), (unsigned char) DARK_BLUE, 1);
@@ -3374,6 +3374,7 @@ Sint32 create_detail_menu(guy *arg1)
        switch (thisguy->family)
        {
            case FAMILY_SOLDIER:
+               char  message[80];
                sprintf(message, "Level %d soldier has:", thisguy->get_level());
                mytext.write_xy(DETAIL_LM+1, DETAIL_LD(0)+1, message, 10, 1);
                mytext.write_xy(DETAIL_LM, DETAIL_LD(0), message, DARK_BLUE, 1);

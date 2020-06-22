@@ -25,7 +25,7 @@
 class living : public walker
 {
 	public:
-		living(const PixieData& data);
+		explicit living(const PixieData& data);
 		virtual ~living();
 		short          act() override;
 		short          check_special() override; // determine if we should do special ..

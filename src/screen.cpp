@@ -1371,8 +1371,8 @@ void screen::do_notify(const char *message, walker  *who)
 
 void screen::report_mem()
 {
-	meminfo Memory;
-	Memory.FreeLinAddrSpace = 0;
+	//meminfo Memory;
+	//Memory.FreeLinAddrSpace = 0;
 	// Zardus: PORT: this is aparently an incomplete type:  union REGS regs;
 	// Same here:  struct SREGS sregs;
 	char memreport[80];
@@ -1389,11 +1389,11 @@ void screen::report_mem()
 	//sprintf(memreport, "Largest Block: %lu bytes",
 	//  Memory.LargestBlockAvail);
 	//viewob[0]->set_display_text(memreport, STANDARD_TEXT_TIME);
-	sprintf(memreport, "Free Linear address: %u pages",
-	        Memory.FreeLinAddrSpace);
+	//sprintf(memreport, "Free Linear address: %u pages",
+	        //Memory.FreeLinAddrSpace);
 	//  Log(memreport);
 	//  Log("\n");
-	viewob[0]->set_display_text(memreport, 25);
+	//viewob[0]->set_display_text(memreport, 25);
 	/*
 	       Log( "Largest available block (in bytes): %lu\n",
 	               MemInfo.LargestBlockAvail );

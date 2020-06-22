@@ -14,8 +14,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-#ifndef __TREASURE_H
-#define __TREASURE_H
+#ifndef _TREASURE_H
+#define _TREASURE_H
 
 // Definition of TREASURE class
 
@@ -25,14 +25,14 @@
 class treasure : public walker
 {
 	public:
-		treasure(const PixieData& data);
+		explicit treasure(const PixieData& data);
 		virtual ~treasure();
-		short          act();
+		short act() override;
 		//short                    death(); // called upon destruction
-		short          eat_me(walker  * eater);
-		walker  * find_teleport_target();
-		void         set_direct_frame(short whatframe);
-		char         query_order()
+		short eat_me(walker  * eater) override;
+		walker *find_teleport_target();
+		void set_direct_frame(short whatframe);
+		char query_order()
 		{
 			return ORDER_TREASURE;
 		}

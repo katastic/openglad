@@ -25,7 +25,7 @@
 class pixieN : public pixie
 {
 	public:
-		pixieN(const PixieData& data);
+		explicit pixieN(const PixieData& data);
 		pixieN(const PixieData& data, int doaccel);
 		virtual ~pixieN();
 		short set_frame(short framenum);

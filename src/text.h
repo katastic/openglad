@@ -14,8 +14,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-#ifndef __TEXT_H
-#define __TEXT_H
+#ifndef TEXT_H
+#define TEXT_H
 
 // Definition of TEXT class
 
@@ -29,7 +29,7 @@ class text
 {
 	public:
 		friend class vbutton;
-		text(const char * filename);
+		explicit text(const char * filename);
 		short query_width(const char *string); // returns width, in pixels
 		short write_xy(short x, short y, const char  *string);
 		short write_xy(short x, short y, const char  *string, unsigned char color);

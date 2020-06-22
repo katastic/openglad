@@ -15,8 +15,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
  
-#ifndef _LEVEL_DATA_H__
-#define _LEVEL_DATA_H__
+#ifndef LEVEL_DATA_H__
+#define LEVEL_DATA_H__
 
 #include "SDL.h"
 #include <list>
@@ -53,7 +53,7 @@ public:
     PixieData icondata;
     pixie* icon;
     
-    CampaignData(const std::string& id);
+    explicit CampaignData(const std::string& id);
     ~CampaignData();
     
     bool load();

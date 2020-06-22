@@ -14,8 +14,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-#ifndef __WALKER_H
-#define __WALKER_H
+#ifndef WALKER_H
+#define WALKER_H
 
 // Definition of WALKER class
 
@@ -28,10 +28,10 @@ class walker : public pixieN
 	public:
 		friend class statistics;
 		friend class command;
-		walker(const PixieData& data);
+		explicit walker(const PixieData& data);
 		virtual ~walker();
 		short reset(void);
-		short move(short x, short y);
+		short move(short x, short y) override;
 		void worldmove(float x, float y);
 		virtual short setxy(short x, short y);
 		void setworldxy(float x, float y);

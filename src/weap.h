@@ -14,8 +14,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-#ifndef __WEAP_H
-#define __WEAP_H
+#ifndef WEAP_HEADER
+#define WEAP_HEADER
 
 // Definition of WEAP class
 
@@ -25,14 +25,14 @@
 class weap : public walker
 {
 	public:
-		weap(const PixieData& data);
+		explicit weap(const PixieData& data);
 		virtual ~weap();
 
-		short act();
-		short animate();
-		short death(); // called on destruction
-		short setxy(short x, short y);
-		char  query_order()
+		short act() override;
+		short animate() override;
+		short death() override; // called on destruction
+		short setxy(short x, short y) override;
+		char  query_order() override 
 		{
 			return ORDER_WEAPON;
 		}

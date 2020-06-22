@@ -324,16 +324,16 @@ CampaignResult pick_campaign(SaveData* save_data, bool enable_delete)
     area.h = 32;
 
     // Buttons
-    Sint16 screenW = SCREEN_W;
-    Sint16 screenH = SCREEN_H;
-    SDL_Rect prev = {Sint16(area.x - 30 - 20), Sint16(area.y), 30, 10};
-    SDL_Rect next = {Sint16(area.x + area.w + 20), Sint16(area.y), 30, 10};
+    const Sint16 screenW = SCREEN_W;
+    const Sint16 screenH = SCREEN_H;
+    const SDL_Rect prev = {Sint16(area.x - 30 - 20), Sint16(area.y), 30, 10};
+    const SDL_Rect next = {Sint16(area.x + area.w + 20), Sint16(area.y), 30, 10};
 
-    SDL_Rect choose = {Sint16(screenW/2 + 20), Sint16(screenH - 15), 30, 10};
-    SDL_Rect cancel = {Sint16(screenW/2 - 38 - 20), Sint16(screenH - 15), 38, 10};
-    SDL_Rect delete_button = {Sint16(screenW - 50), 10, 38, 10};
-    SDL_Rect id_button = {Sint16(delete_button.x - 52 - 10), 10, 52, 10};
-    SDL_Rect reset_button = delete_button;
+    const SDL_Rect choose = {Sint16(screenW/2 + 20), Sint16(screenH - 15), 30, 10};
+    const SDL_Rect cancel = {Sint16(screenW/2 - 38 - 20), Sint16(screenH - 15), 38, 10};
+    const SDL_Rect delete_button = {Sint16(screenW - 50), 10, 38, 10};
+    const SDL_Rect id_button = {Sint16(delete_button.x - 52 - 10), 10, 52, 10};
+    const SDL_Rect reset_button = delete_button;
 
 
     // Controller input

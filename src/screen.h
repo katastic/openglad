@@ -14,8 +14,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-#ifndef __SCREEN_H
-#define __SCREEN_H
+#ifndef SCREEN_HEADER
+#define SCREEN_HEADER
 
 // Definition of SCREEN class
 
@@ -36,7 +36,7 @@ class screen : public video
 {
 	public:
 		screen();  // called with '1' for numviews
-		screen(short howmany);
+		explicit screen(short howmany);
 
 		void reset(short howmany);
 		void ready_for_battle(short howmany);

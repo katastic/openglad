@@ -166,7 +166,7 @@ class JoyData
     int key_index[NUM_KEYS];
     
     JoyData();
-    JoyData(int index);
+   explicit JoyData(int index);
     
     void setKeyFromEvent(int key_enum, const SDL_Event& event);
     

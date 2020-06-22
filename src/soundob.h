@@ -46,7 +46,7 @@ class soundob
 {
 	public:
 		soundob();
-		soundob(bool silent);
+		explicit soundob(bool silent);
 		~soundob();
 		int init();
 		void shutdown();

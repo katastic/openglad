@@ -14,8 +14,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-#ifndef __PIXIE_H
-#define __PIXIE_H
+#ifndef PIXIE_H
+#define PIXIE_H
 
 // Definition of PIXIE class
 
@@ -24,7 +24,7 @@
 class pixie
 {
 	public:
-		pixie(const PixieData& data);
+		explicit pixie(const PixieData& data);
 		pixie(const PixieData& data, int doaccel);
 		virtual ~pixie();
 		short setxy(short x, short y);

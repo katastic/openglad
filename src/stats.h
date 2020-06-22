@@ -14,8 +14,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-#ifndef __STATS_H
-#define __STATS_H
+#ifndef STATS_HEADER
+#define STATS_HEADER
 
 // Definition of STATS class
 
@@ -53,7 +53,7 @@
 class statistics
 {
 	public:
-		statistics(walker  *);
+		explicit statistics(walker  *);
 		~statistics();
 		short  try_command(short whatcommand, short iterations, short info1, short info2);
 		short  try_command(short whatcommand, short iterations);

@@ -14,8 +14,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-#ifndef __BASE_H
-#define __BASE_H
+#ifndef BASE_H
+#define BASE_H
 
 // BASE definitions (perhaps this should be broken up some more
 
@@ -32,7 +32,7 @@
 #include <math.h>
 #include <ctype.h>
 #include "sounds.h"
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include "input.h"
 #include "util.h"
 #include "gparser.h"
@@ -66,11 +66,11 @@ class smoother;
 
 Uint32 random(Uint32 x);
 
-#define VIDEO_ADDRESS 0xA000
-#define VIDEO_LINEAR ( (VIDEO_ADDRESS) << 4)
+#define VIDEO_ADDRESS 0xA000	//old crap, still used
+#define VIDEO_LINEAR ( (VIDEO_ADDRESS) << 4) //old crap, still used
 
 #define DPMI_INT        0x31
-struct meminfo
+/*struct meminfo			// OLD CRAP but still used in screen.cpp:1374
 {
 	unsigned LargestBlockAvail;
 	unsigned MaxUnlockedPage;
@@ -82,14 +82,12 @@ struct meminfo
 	unsigned FreeLinAddrSpace;
 	unsigned SizeOfPageFile;
 	unsigned Reserved[3];
-};
+};*/
 
-extern screen * myscreen; // global, availible to anyone
+extern screen* myscreen; // global, availible to anyone
 
 #define MAX_LEVELS 500 // Maximum number of scenarios allowed ..
-
 #define GRID_SIZE 16
-
 #define PROT_MODE 1  // comment this out when not in protected mode
 #ifdef PROT_MODE
   #define init_sound(x,y,z)  while (0)

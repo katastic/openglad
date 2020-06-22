@@ -940,19 +940,19 @@ void draw_smallHealthBar(walker* w, viewscreen* view_buf)
     if(w->query_order() != ORDER_LIVING && w->query_order() != ORDER_GENERATOR)
         {return;}
 
-	Sint32 xscreen = (Sint32) (w->xpos - view_buf->topx + view_buf->xloc);
-	Sint32 yscreen = (Sint32) (w->ypos - view_buf->topy + view_buf->yloc);
+	const Sint32 xscreen = (Sint32) (w->xpos - view_buf->topx + view_buf->xloc);
+	const Sint32 yscreen = (Sint32) (w->ypos - view_buf->topy + view_buf->yloc);
 
 
-    Sint32 walkerstartx = xscreen;
-    Sint32 walkerstarty = yscreen;
-    Sint32 portstartx = view_buf->xloc;
-    Sint32 portstarty = view_buf->yloc;
-    Sint32 portendx = view_buf->endx;
-    Sint32 portendy = view_buf->endy;
+    const Sint32 walkerstartx = xscreen;
+    const Sint32 walkerstarty = yscreen;
+    const Sint32 portstartx = view_buf->xloc;
+    const Sint32 portstarty = view_buf->yloc;
+    const Sint32 portendx = view_buf->endx;
+    const Sint32 portendy = view_buf->endy;
 
 
-    SDL_Rect r = {Sint16(walkerstartx), Sint16(walkerstarty + w->sizey + 1), Uint16(w->sizex), 1};
+    const SDL_Rect r = {Sint16(walkerstartx), Sint16(walkerstarty + w->sizey + 1), Uint16(w->sizex), 1};
     if(r.x < portstartx || r.x > portendx
        || r.y < portstarty || r.y > portendy)
        return;

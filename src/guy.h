@@ -27,7 +27,7 @@ class guy
 {
 	public:
 		guy ();
-		guy (int whatfamily);
+		explicit guy (int whatfamily);
 		guy (const guy& copy);
 		~guy();
 		Sint32 query_heart_value(); // how much are we worth?

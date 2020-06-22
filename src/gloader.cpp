@@ -924,13 +924,13 @@ walker  *loader::set_walker(walker *ob,
 					ob->default_weapon = FAMILY_FIREBALL;
 					break;
 				case FAMILY_SUMMONER:
-					ob->stats->special_cost[1] = 15;  // cost to teleport
-					ob->stats->special_cost[2] = 60; // warp space
-					ob->stats->special_cost[3] = 500;  // freeze time
-					ob->stats->special_cost[4] = 70; // energy wave
-					ob->stats->special_cost[5] = 100; // heartburst
+					ob->stats->special_cost[1] = 200; // summon elf
+					ob->stats->special_cost[2] = 100;
+					ob->stats->special_cost[3] = 100;
+					ob->stats->special_cost[4] = 100; 
+					ob->stats->special_cost[5] = 100; 
 					ob->stats->weapon_cost = 2;
-					ob->default_weapon = FAMILY_METEOR;
+					ob->default_weapon = FAMILY_SPRINKLE;
 					break;
 				case FAMILY_ARCHMAGE:
 					ob->stats->special_cost[1] = 10;  // cost to teleport

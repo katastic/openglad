@@ -226,8 +226,10 @@ short viewscreen::redraw()
 	if (topy < 0)
 		yneg = 1;
 
-	for (int j=(topy/GRID_SIZE)-yneg;j < ((topy+(yview))/GRID_SIZE)+1; j++)
-		for (int i=(topx/GRID_SIZE)-xneg;i < ((topx+(xview))/GRID_SIZE)+1; i++)
+	int i;
+	int j;
+	for (j=(topy/GRID_SIZE)-yneg;j < ((topy+(yview))/GRID_SIZE)+1; j++)
+		for ( i=(topx/GRID_SIZE)-xneg;i < ((topx+(xview))/GRID_SIZE)+1; i++)
 		{
             // KAT <----------------
 			// NOTE: back is a PIXIE.
@@ -241,10 +243,12 @@ short viewscreen::redraw()
 				else                                                                  // show only top of wall
 					backp[PIX_WALLTOP_H]->draw(i*GRID_SIZE,j*GRID_SIZE, this);
 			}
-			else if(gridp.valid())
+			else if(gridp.valid()) 
+				{
 				SDL_SetTextureColorMod(E_Screen->render_tex,255,128,128);
 				backp[(int)gridp.data[i + maxx * j]]->draw(i*GRID_SIZE,j*GRID_SIZE, this);
 				//<--------KAT main tile drawing.
+				}
 				
 		}
 

@@ -20,10 +20,10 @@ CXXFLAGS := -I/usr/include/SDL2    -I../src/external/yam/    -I../src/external/l
 
 opengladvs: $(OBJ_FILES)
 #	g++ $(LDFLAGS)  -o $@ $^
-	LD_RUN_PATH='./build_deps/' g++ -std=c++17 -ggdb $(CXXFLAGS) $(OBJ_FILES) $(LDFLAGS) -o ../openglad
+	LD_RUN_PATH='./build_deps/' g++ -std=c++17 -g $(CXXFLAGS) $(OBJ_FILES) $(LDFLAGS) -o ../openglad
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	g++ -std=c++17 -ggdb $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
+	g++ -std=c++17 -g $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 	
 clean:	
 	rm -r ../obj/*

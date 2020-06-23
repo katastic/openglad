@@ -98,13 +98,13 @@ SDL_Joystick* joysticks[MAX_NUM_JOYSTICKS];
 
 int player_keys[4][NUM_KEYS] = {
     {
-        SDLK_w, SDLK_e, SDLK_d, SDLK_c,  // movements
+        SDLK_w, SDLK_e, SDLK_d, SDLK_c,  // movements 
         SDLK_x, SDLK_z, SDLK_a, SDLK_q,
-        SDLK_LCTRL, SDLK_LALT,                  // fire & special
+        SDLK_LCTRL, SDLK_LSHIFT,                  // fire & special
         SDLK_BACKQUOTE,                         // switch guys
         SDLK_TAB,                               // change special
         SDLK_s,                                 // Yell
-        SDLK_LSHIFT,                            // Shifter
+        SDLK_r,                                 // Shifter
         SDLK_1,                                 // Options menu
         SDLK_F5,                                // Cheat key
     },

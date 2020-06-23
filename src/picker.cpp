@@ -180,7 +180,7 @@ void picker_main(Sint32 argc, char  **argv)
 		myscreen->save_data.load("save0");
 	}
 
-	mainmenu(1);
+	mainmenu();
 }
 
 void picker_quit()
@@ -730,12 +730,9 @@ void redraw_mainmenu()
 
 #define ARRAY_SIZE(a) (sizeof(a)/sizeof(a[0]))
 
-Sint32 mainmenu(Sint32 arg1)
+Sint32 mainmenu()
 {
 	Sint32 retvalue=0;
-
-	if(arg1)
-		arg1 = 1;
 
 	if(localbuttons != NULL)
 		delete localbuttons; //we'll make a new set
@@ -979,12 +976,9 @@ Sint32 create_team_menu(Sint32 arg1)
 	return REDRAW;
 }
 
-Sint32 create_view_menu(Sint32 arg1)
+Sint32 create_view_menu()
 {
 	Sint32 retvalue = 0;
-
-	if (arg1)
-		arg1 = 1;
 
 	myscreen->clearbuffer();
 
@@ -2110,7 +2104,7 @@ void popup_dialog(const char* title, const char* message)
     int rightside = 160 + w/2 + 12;
 
     // Draw background
-    int dumbcount;
+    //int dumbcount;
 
     // Draw message
 	if (localbuttons)
@@ -2147,7 +2141,7 @@ void popup_dialog(const char* title, const char* message)
         reset_buttons(localbuttons, buttons, num_buttons, retvalue);
 
 		// Draw
-		dumbcount = myscreen->draw_dialog(leftside, 80 - h/2, rightside, 80 + h/2, title);
+		int dumbcount = myscreen->draw_dialog(leftside, 80 - h/2, rightside, 80 + h/2, title);
 		int j = 0;
         for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); ++e)
         {

@@ -199,11 +199,9 @@ short statistics::do_command()
 {
 //	command *here;
 	short commandtype, com1, com2;
-	short i;
-
-	walker * target;
-	short deltax, deltay;
-	Sint32 distance;
+	//short i;
+	//short deltax, deltay;
+	//Sint32 distance;
 
 	short newx = 0;
 	short newy = 0;
@@ -285,7 +283,7 @@ short statistics::do_command()
 			// Do we have a leader now?
 			if(controller->leader)
 			{
-				distance = controller->distance_to_ob(controller->leader);
+				short distance = controller->distance_to_ob(controller->leader);
 				if (distance < 60)
 				{
 					controller->leader = NULL;
@@ -315,7 +313,7 @@ short statistics::do_command()
 			controller->fire();
 			break;
 		case COMMAND_MULTIDO: // Lets you do <com1> commands in one round
-			for(i=0;i<com1; i++)
+			for(int i=0;i<com1; i++)
 				do_command();
 			break;
 		case COMMAND_RUSH:    // Fighter's special
@@ -326,6 +324,7 @@ short statistics::do_command()
 				controller->walkstep(com1, com2);
 				if (controller->collide_ob) // We hit someone
 				{
+					walker* target;
 					target = controller->collide_ob;
 					controller->attack(target);
 					target->stats->clear_command();
@@ -353,7 +352,7 @@ short statistics::do_command()
 		case COMMAND_RIGHT_WALK: // right-hand-walk ONLY
 			if (controller->foe)
 			{
-				distance = controller->distance_to_ob(controller->foe);
+				short distance = controller->distance_to_ob(controller->foe);
 				if (distance > 120 && distance < 240)
 					right_walk();
 				else
@@ -369,6 +368,7 @@ short statistics::do_command()
 				break;
 			}
 			// Try to walk toward foe, and/or attack ..
+			short deltax, deltay;
 			deltax = (short) (controller->foe->xpos - controller->xpos);
 			deltay = (short) (controller->foe->ypos - controller->ypos);
 			if (abs(deltax) > abs(3*deltay))
@@ -426,10 +426,8 @@ short statistics::do_command()
 // 'controller' is our parent walker object
 void statistics::hit_response(walker  *who)
 {
-	Sint32 distance, i;
-	short myfamily;
-	Sint32 deltax, deltay;
-	walker *foe; // who is attacking us?
+	Sint32 distance;
+	short myfamily;		
 	Sint32 possible_specials[NUM_SPECIALS];
 	float threshold; // for hitpoint 'running away'
 	short howmany;
@@ -447,15 +445,16 @@ void statistics::hit_response(walker  *who)
 
 	// Set quick-reference values ..
 	myfamily = controller->query_family();
+	walker *foe; // who is attacking us?
 	if (who->query_order() == ORDER_WEAPON && who->owner)
 		foe = who->owner;
 	else
 		foe = who;
 
 	// Determine which specials we can do (by level and sp) ..
-	for (i=0; i < NUM_SPECIALS; i++) // first initialize to CAN'T
+	for (int i=0; i < NUM_SPECIALS; i++) // first initialize to CAN'T
 		possible_specials[i] = 0;
-	for (i=0; i <= (level+2)/3; i++) // for all our 'possibles' by level
+	for (int i=0; i <= (level+2)/3; i++) // for all our 'possibles' by level
 		if ( (i < NUM_SPECIALS) &&
 		        (magicpoints >= special_cost[i]) )
 			possible_specials[i] = 1;    // then we can do it.
@@ -596,6 +595,7 @@ void statistics::hit_response(walker  *who)
 				distance = controller->distance_to_ob(foe);
 				if (distance < 64) // too close!
 				{
+					Sint32 deltax, deltay;
 					deltax = (short) (controller->xpos - foe->xpos);
 					if (deltax)
 						deltax = (short) (deltax / abs(deltax));
@@ -701,9 +701,8 @@ bool statistics::right_blocked()
 {
 	float xdelta, ydelta;
 	float controlx = controller->xpos, controly = controller->ypos;
-	float mystep = controller->stepsize;
-
-	mystep = CHECK_STEP_SIZE;
+	float mystep = CHECK_STEP_SIZE;
+	
 	switch (controller->curdir)
 	{
 		case FACE_UP:
@@ -751,9 +750,8 @@ bool statistics::right_blocked()
 bool statistics::right_forward_blocked()
 {
 	float controlx = controller->xpos, controly = controller->ypos;
-	float mystep = controller->stepsize;
+	float mystep = CHECK_STEP_SIZE;
 
-	mystep = CHECK_STEP_SIZE;
 	switch (controller->curdir)
 	{
 		case FACE_UP:
@@ -784,9 +782,8 @@ bool statistics::right_forward_blocked()
 bool statistics::right_back_blocked()
 {
 	float controlx = controller->xpos, controly = controller->ypos;
-	float mystep = controller->stepsize;
-
-	mystep = CHECK_STEP_SIZE;
+	float mystep = CHECK_STEP_SIZE;
+	
 	switch (controller->curdir)
 	{
 		case FACE_UP:
@@ -1098,9 +1095,7 @@ bool statistics::direct_walk()
 
 bool statistics::walk_to_foe()
 {
-    walker* foe = controller->foe;
-	float xdest, ydest;
-	float xdelta, ydelta;
+    walker* foe = controller->foe;	
 	Uint32 tempdistance = 9999999L;
 	short howmany;
 
@@ -1118,9 +1113,11 @@ bool statistics::walk_to_foe()
 	    controller->path_check_counter = 5 + rand()%10;
 	    controller->path_to_foe.clear();
 
+		float xdest, ydest;
+		float xdelta, ydelta;
+
 		xdest = foe->xpos;
 		ydest = foe->ypos;
-
 		xdelta = xdest - controller->xpos;
 		ydelta = ydest - controller->ypos;
 

@@ -149,7 +149,7 @@ void draw_buttons(button * buttons, Sint32 numbuttons);
 
 // These are for picker ..
 Sint32 score_panel(screen *myscreen);
-Sint32 mainmenu(Sint32 arg1);
+Sint32 mainmenu();
 Sint32 beginmenu(Sint32 arg1);
 void quit(Sint32 arg1);
 Sint32 load1(Sint32 arg1);  // Begin a preset scenario ..
@@ -157,7 +157,7 @@ Sint32 load2(Sint32 arg1);
 Sint32 load3(Sint32 arg1);
 Sint32 create_team_menu(Sint32 arg1); // Create / modify team members
 Sint32 create_detail_menu(guy *arg1); // detailed character information
-Sint32 create_view_menu(Sint32 arg1); // View team members
+Sint32 create_view_menu(); // View team members
 Sint32 create_hire_menu(Sint32 arg1);  // Purchase new team members
 Sint32 create_train_menu(Sint32 arg1); // Edit or sell team members
 Sint32 create_load_menu(Sint32 arg1); // Load a team

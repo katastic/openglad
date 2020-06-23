@@ -559,7 +559,7 @@ Sint32 vbutton::do_call(Sint32 whatfunc, Sint32 arg)
         quit(arg);
         return 1;
     case CREATE_VIEW_MENU:
-        return create_view_menu(arg);
+        return create_view_menu();
     case CREATE_TRAIN_MENU:
         return create_train_menu(arg);
     case CREATE_HIRE_MENU:

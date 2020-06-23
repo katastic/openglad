@@ -45,11 +45,13 @@ class pixie
 		short on_screen();                                                                // on ANY viewscreen?
 		short on_screen(viewscreen  *viewp);  // on a specific viewscreen?
 		
+		SDL_Surface *bmp_surface; //you think I give a shiiiiii
+
 	protected:
 		unsigned short size;
 		unsigned char  *bmp,  *oldbmp;
 		//buffers: same data as bmp but in a convient SDL_Surface
-		SDL_Surface *bmp_surface;
+		
 };
 
 #endif

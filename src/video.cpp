@@ -29,10 +29,7 @@
 #define CY_SCREEN SCREEN_H
 #define ASSERT(x) if (!(x)) return 0;
 
-
-
 unsigned char * videoptr = (unsigned char*) VIDEO_LINEAR;
-
 Screen *E_Screen;
 
 video::video()

@@ -2366,7 +2366,7 @@ short walker::special()
 	weap* fireob;
 	walker* alive, *tempwalk;
 	short tempx, tempy;
-	short i, j;
+//	short i, j;
 	short targetx, targety;
 	Uint32 distance;
 	short howmany;
@@ -2918,8 +2918,8 @@ short walker::special()
 						generic = 0;
 					// Now face each direction and fire ..
 					stats->magicpoints += (8*stats->weapon_cost);
-					for (i=-1;i<2;i++)
-						for (j=-1;j<2;j++)
+					for (int i=-1;i<2;i++)
+						for (int j=-1;j<2;j++)
 						{
 							if (i || j)
 							{
@@ -3240,8 +3240,8 @@ short walker::special()
 							return 0; // failsafe
 						// We need to check for a space around the archmage...
 						generic = 0; // this means we have or haven't found room
-						for (i=-1; i <= 1; i++)
-							for (j=-1; j <= 1; j++)
+						for (int i=-1; i <= 1; i++)
+							for (int j=-1; j <= 1; j++)
 							{
 								if ( (i==0 && j==0) || (generic) )
 									continue;
@@ -3387,8 +3387,8 @@ short walker::special()
 							return 0; // failsafe
 						// We need to check for a space around the archmage...
 						generic = 0; // this means we have or haven't found room
-						for (i=-1; i <= 1; i++)
-							for (j=-1; j <= 1; j++)
+						for (int i=-1; i <= 1; i++)
+							for (int j=-1; j <= 1; j++)
 							{
 								if ( (i==0 && j==0) || (generic) )
 									continue;
@@ -3501,8 +3501,8 @@ short walker::special()
 					tempy = lasty;
 					// Now face each direction and fire ..
 					stats->magicpoints += (8*stats->weapon_cost);
-					for (i=-1;i<2;i++)
-						for (j=-1;j<2;j++)
+					for (int i=-1;i<2;i++)
+						for (int j=-1;j<2;j++)
 						{
 							if (i || j)
 							{
@@ -3564,7 +3564,7 @@ short walker::special()
 					newob->owner = this;
 					// Run away if we're AI
 					person = 0;
-					for (i=0; i < myscreen->numviews; i++)
+					for (int i=0; i < myscreen->numviews; i++)
 						if (myscreen->viewob[i]->control == this)
 							person = 1;
 					if (!person)
@@ -3713,7 +3713,7 @@ short walker::special()
 					break;
 				case 2:  // more rocks, and bouncing
 					stats->magicpoints += (3*stats->weapon_cost);
-					for (i=0; i < 2; i++)
+					for (int i=0; i < 2; i++)
 					{
 						fireob = static_cast<weap*>(fire());
 						if (!fireob) // failsafe
@@ -3727,7 +3727,7 @@ short walker::special()
 					break;
 				case 3:
 					stats->magicpoints += (4*stats->weapon_cost);
-					for (i=0; i < 3; i++)
+					for (int i=0; i < 3; i++)
 					{
 						fireob = static_cast<weap*>(fire());
 						if (!fireob) // failsafe
@@ -3741,7 +3741,7 @@ short walker::special()
 				case 4:
 				default:
 					stats->magicpoints += (5*stats->weapon_cost);
-					for (i=0; i < 4; i++)
+					for (int i=0; i < 4; i++)
 					{
 						fireob = static_cast<weap*>(fire());
 						if (!fireob) // failsafe
@@ -4418,8 +4418,8 @@ short walker::spaces_clear()
 	short count = 0;
 	short i, j;
 
-	for (i=-1; i < 2; i++)
-		for (j=-1; j < 2; j++)
+	for (int i=-1; i < 2; i++)
+		for (int j=-1; j < 2; j++)
 			if (i || j) // don't check our own location
 				if (myscreen->query_passable(xpos+(i*sizex), ypos+(j*sizey), this) )
 					count++;
@@ -4445,7 +4445,7 @@ void walker::transfer_stats(walker  *newob)
 
 	newob->stats->level = stats->level;
 	newob->stats->frozen_delay = stats->frozen_delay;
-	for (i=0; i < 5; i++)
+	for (int i=0; i < 5; i++)
 		newob->stats->special_cost[i] = stats->special_cost[i];
 	newob->stats->weapon_cost = stats->weapon_cost;
 
@@ -4629,7 +4629,7 @@ short walker::death()
 			}  // end of family switch
 			break;  // end of order livings case
 		case ORDER_GENERATOR:  // go up in flames :>
-			for (i=0; i < 4; i++)
+			for (int i=0; i < 4; i++)
 			{
 				newob = myscreen->level_data.add_ob(ORDER_FX, FAMILY_EXPLOSION, 1);
 				if (!newob) // failsafe

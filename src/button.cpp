@@ -111,7 +111,7 @@ MenuNav::MenuNav(int up, int down, int left, int right)
 
 //vbutton functions, vbutton is a button class that will be self controlled
 vbutton::vbutton(Sint32 xpos, Sint32 ypos, Sint32 wide, Sint32 high,
-                 Sint32 func(Sint32), Sint32 pass, const std::string& msg, int hot )
+                 Sint32 func(Sint32), Sint32 pass, const std::string& msg, int hot )                 
 {
     arg = pass;
     fun = func;
@@ -433,7 +433,7 @@ Sint32 vbutton::mouse_on()
     if(hidden)
         return 0;
     Sint32 mousex,mousey;
-    MouseState& mymouse = query_mouse();
+    const MouseState& mymouse = query_mouse();
     mousex = mymouse.x;
     mousey = mymouse.y;
 

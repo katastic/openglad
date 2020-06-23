@@ -2,7 +2,7 @@ SRC_DIR := ../src
 OBJ_DIR := ../obj
 SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
-LDFLAGS  := -Wl,--copy-dt-needed-entries -L../build_deps/ -lSDL2_mixer -lSDL2main -lSDL2   -lpng16  -lcdeps -lcppdeps    
+LDFLAGS  := -Wl,--copy-dt-needed-entries -L../build_deps/ -lSDL2_mixer -lSDL2main -lSDL2   -lpng16   
 CPPFLAGS :=   
 CXXFLAGS := -I/usr/include/SDL2    -I../src/external/yam/    -I../src/external/libzip/    -I../src/external/libyaml/include/            -I../src/external/physfs/   -I../src/external/physfs/extras/  -I../src/external/physfs/extras/zlib123/  -I../src/external/micropather/  
 
@@ -20,12 +20,12 @@ CXXFLAGS := -I/usr/include/SDL2    -I../src/external/yam/    -I../src/external/l
 
 opengladvs: $(OBJ_FILES)
 #	g++ $(LDFLAGS)  -o $@ $^
-	LD_RUN_PATH='./build_deps/' g++ -std=c++17 -g $(CXXFLAGS) $(OBJ_FILES) $(LDFLAGS) -o ../opengladm
+	LD_RUN_PATH='./build_deps/' g++ -std=c++17 -D_REENTRANT -g $(CXXFLAGS) $(OBJ_FILES) ../build_deps/*.o $(LDFLAGS) -o ../opengladm
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	g++ -std=c++17 -g $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
+	g++ -std=c++17 -D_REENTRANT -g $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 	
 clean:	
 	rm -r ../obj/*
-	rm ../openglad
+	rm ../opengladm
 	echo "DELETING OBJ files"

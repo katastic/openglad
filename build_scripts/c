@@ -1,4 +1,5 @@
-gcc -g -DPHYSFS_SUPPORTS_ZIP ../src/external/libyaml/src/*.c ../src/external/libzip/*.c ../src/external/physfs/*.c  ../src/external/physfs/zlib123/*.c ../src/external/physfs/platform/*.c ../src/external/physfs/extras/*.c ../src/external/physfs/archivers/*.c  -I/usr/include/SDL2        -I../src/external/yam/	        -I../src/external/libzip/        -I../src/external/libyaml/include/	       -I../src/external/physfs/   	        -I../src/external/physfs/extras/  	        -I../src/external/physfs/extras/zlib123/	        -I../src/external/micropather/	    -lSDL2  -shared -fPIC	               -o ../build_deps/libcdeps.so  
+gcc -g -D_REENTRANT -DPHYSFS_SUPPORTS_ZIP ../src/external/libyaml/src/*.c ../src/external/libzip/*.c ../src/external/physfs/*.c  ../src/external/physfs/zlib123/*.c ../src/external/physfs/platform/*.c ../src/external/physfs/extras/*.c ../src/external/physfs/archivers/*.c  -I/usr/include/SDL2        -I../src/external/yam/	        -I../src/external/libzip/        -I../src/external/libyaml/include/	       -I../src/external/physfs/   	        -I../src/external/physfs/extras/  	        -I../src/external/physfs/extras/zlib123/	        -I../src/external/micropather/	    -lSDL2 -c 
+
 #	&&  ar rcs ../build_deps/libcdeps.a ../build_deps/libcdeps.o && ranlib ../build_deps/libcdeps.a
 
 # NOT a shared so no need for fPIC

@@ -1033,7 +1033,7 @@ short walker::draw(viewscreen  *view_buf)
 		Log("drawing a dead guy!\n");
 		return 0;
 	}
-	//if (!bmp) {Log("No bitmap!\n"); return 0;}
+	if (!bmp) {Log("No bitmap!\n"); return 0;}
 	drawcycle++;
 
 	xscreen = (Sint32) (xpos - view_buf->topx + view_buf->xloc);

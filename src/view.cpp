@@ -245,8 +245,14 @@ short viewscreen::redraw()
 			}
 			else if(gridp.valid()) 
 				{
-				SDL_SetTextureColorMod(E_Screen->render_tex,255,128,128);
-				backp[(int)gridp.data[i + maxx * j]]->draw(i*GRID_SIZE,j*GRID_SIZE, this);
+				
+				int tile_number = (int)gridp.data[i + maxx * j];
+				//int blood_count = myscreen->level_data.blood_data[i][j];
+				//int blood_value = 256 - blood_count*16;
+//				if(blood_value < 0)blood_value=0;
+
+				//SDL_SetTextureColorMod(E_Screen->render_tex,blood_value,128,128);
+				backp[tile_number]->draw(i*GRID_SIZE, j*GRID_SIZE, this);
 				//<--------KAT main tile drawing.
 				}
 				

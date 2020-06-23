@@ -2,16 +2,84 @@
 version: 1
 effects:
   attack_lunge: on
-  damage_numbers: off
+  damage_numbers: on
+  gore: on
   heal_numbers: on
   hit_anim: on
   hit_flash: on
   hit_recoil: off
   mini_hp_bar: on
-  gore: on
 graphics:
   fullscreen: off
   overscan_percentage: 0
   render: normal
+player1:
+  cheat: 1073741886
+  down: 120
+  down-left: 122
+  down-right: 99
+  fire: 1073742048
+  left: 97
+  prefs: 49
+  right: 100
+  shifter: 114
+  special: 1073742049
+  special-switch: 9
+  switch: 96
+  up: 119
+  up-left: 113
+  up-right: 101
+  yell: 115
+player2:
+  cheat: 1073741886
+  down: 1073741905
+  down-left: 0
+  down-right: 0
+  fire: 46
+  left: 1073741904
+  prefs: 49
+  right: 1073741903
+  shifter: 1073742053
+  special: 47
+  special-switch: 39
+  switch: 13
+  up: 1073741906
+  up-left: 0
+  up-right: 0
+  yell: 92
+player3:
+  cheat: 1073741888
+  down: 98
+  down-left: 0
+  down-right: 0
+  fire: 53
+  left: 102
+  prefs: 51
+  right: 104
+  shifter: 48
+  special: 54
+  special-switch: 57
+  switch: 45
+  up: 116
+  up-left: 0
+  up-right: 0
+  yell: 107
+player4:
+  cheat: 1073741889
+  down: 120
+  down-left: 0
+  down-right: 0
+  fire: 53
+  left: 97
+  prefs: 52
+  right: 100
+  shifter: 56
+  special: 54
+  special-switch: 55
+  switch: 61
+  up: 119
+  up-left: 0
+  up-right: 0
+  yell: 103
 sound:
   sound: on

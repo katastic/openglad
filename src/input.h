@@ -138,7 +138,7 @@
 #define KEY_SHIFTER             13
 #define KEY_PREFS               14
 #define KEY_CHEAT               15
-#define NUM_KEYS               16
+#define NUM_KEYS                16
 
 
 class JoyData

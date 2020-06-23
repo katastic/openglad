@@ -312,7 +312,7 @@ button viewteam_buttons[] =
 button details_buttons[] =
     {
         button("BACK", KEYSTATE_ESCAPE, 10, 170, 40, 20, RETURN_MENU , EXIT, MenuNav::UpRight(1, 1)),
-        button(160, 4, SCREEN_W-5 - 160, 66 - 4, 0 , -1, MenuNav::DownLeft(0, 0), false, true) // PROMOTE
+        button(160, 4, 160-5 - 160, 66 - 4, 0 , -1, MenuNav::DownLeft(0, 0), false, true) // PROMOTE
     };
 
 button trainmenu_buttons[] =
@@ -387,18 +387,18 @@ button loadteam_buttons[] =
 button yes_or_no_buttons[] =
     {
         button("YES", KEYSTATE_y,  70, 130, 50, 20, YES_OR_NO, YES, MenuNav::Right(1)),
-        button("NO", KEYSTATE_n,  160-50-70, 100+130, 50, 20, YES_OR_NO, NO, MenuNav::Left(0))
+        button("NO", KEYSTATE_n,  205, 130, 50, 20, YES_OR_NO, NO, MenuNav::Left(0))
     };
 
 button no_or_yes_buttons[] =
     {
         button("NO", KEYSTATE_n,  70, 130, 50, 20, YES_OR_NO, NO, MenuNav::Right(1)),
-        button("YES", KEYSTATE_y,  160-50-70, 100+130, 50, 20, YES_OR_NO, YES, MenuNav::Left(0))
+        button("YES", KEYSTATE_y,  205, 130, 50, 20, YES_OR_NO, YES, MenuNav::Left(0))
     };
 
 button popup_dialog_buttons[] =
     {
-        button("OK", KEYSTATE_ESCAPE,  160 - 25, 130, 50, 20, YES_OR_NO, YES, MenuNav::None())
+        button("OK", KEYSTATE_o,  160 - 25, 130, 50, 20, YES_OR_NO, YES, MenuNav::None())
     };
 
 Sint32 leftmouse(button* buttons)

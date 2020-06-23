@@ -95,7 +95,57 @@ JoyData player_joy[4];
 #define JOY_DEAD_ZONE 8000
 #define MAX_NUM_JOYSTICKS 10  // Just in case there are joysticks attached that are not useable (e.g. accelerometer)
 SDL_Joystick* joysticks[MAX_NUM_JOYSTICKS];
+/*
+{
+        SDLK_w, SDLK_e, SDLK_d, SDLK_c,  // movements 
+        SDLK_x, SDLK_z, SDLK_a, SDLK_q,
+        SDLK_LCTRL, SDLK_LSHIFT,                  // fire & special
+        SDLK_BACKQUOTE,                         // switch guys
+        SDLK_TAB,                               // change special
+        SDLK_s,                                 // Yell
+        SDLK_r,                                 // Shifter
+        SDLK_1,                                 // Options menu
+        SDLK_F5,                                // Cheat key
+    },
+    
+    
+    {
+        SDLK_UP, SDLK_UNKNOWN, SDLK_RIGHT, SDLK_UNKNOWN,  // movements
+        SDLK_DOWN, SDLK_UNKNOWN, SDLK_LEFT, SDLK_UNKNOWN,
+        SDLK_PERIOD, SDLK_SLASH,                // fire & special
+        SDLK_RETURN,                            // switch guys
+        SDLK_QUOTE,                             // change special
+        SDLK_BACKSLASH,                         // Yell
+        SDLK_RSHIFT,                            // Shifter
+        SDLK_2,                                 // Options menu
+        SDLK_F6,                                // Cheat key
+    },
+    {
+        SDLK_i, SDLK_o, SDLK_l, SDLK_PERIOD,  // movements
+        SDLK_COMMA, SDLK_m, SDLK_j, SDLK_u,
+        SDLK_SPACE, SDLK_SEMICOLON,             // fire & special
+        SDLK_MINUS,                             // switch guys
+        SDLK_9,                                 // change special
+        SDLK_k,                                 // Yell
+        SDLK_0,                                 // Shifter
+        SDLK_3,                                 // Options menu
+        SDLK_F7,                                // Cheat key
+    },
+    {
+        SDLK_t, SDLK_y, SDLK_h, SDLK_n,  // movements
+        SDLK_b, SDLK_v, SDLK_f, SDLK_r,
+        SDLK_5, SDLK_6,                         // fire & special
+        SDLK_EQUALS,                            // switch guys
+        SDLK_7,                                 // change special
+        SDLK_g,                                 // Yell
+        SDLK_8,                                 // Shifter
+        SDLK_4,                                 // Options menu
+        SDLK_F8,                                // Cheat key
+    }
+    
+    */
 
+// I'm keeping these "non-zeroed" so if a key isn't found in YAML, it'll use the defaults.
 int player_keys[4][NUM_KEYS] = {
     {
         SDLK_w, SDLK_e, SDLK_d, SDLK_c,  // movements 
@@ -131,8 +181,8 @@ int player_keys[4][NUM_KEYS] = {
         SDLK_F7,                                // Cheat key
     },
     {
-        SDLK_t, SDLK_y, SDLK_h, SDLK_n,  // movements
-        SDLK_b, SDLK_v, SDLK_f, SDLK_r,
+        SDLK_t, SDLK_y, SDLK_h, SDLK_n,  // movements up,   ,right,
+        SDLK_b, SDLK_v, SDLK_f, SDLK_r,  //           down, ,left,
         SDLK_5, SDLK_6,                         // fire & special
         SDLK_EQUALS,                            // switch guys
         SDLK_7,                                 // change special
@@ -775,7 +825,7 @@ bool query_key_event(int key, const SDL_Event& event)
 }
 
 
-bool isAnyPlayerKey(SDLKey key)
+bool isAnyPlayerKey(SDLKey key) //KAT: Check if any player is currently using this key
 {
     for(int player_num = 0; player_num < 4; player_num++)
     {

@@ -21,6 +21,7 @@ const int WINDOWS_H = SCREEN_H;
 const int DEFAULT_TIMER_SPEED = 4; // 6 is original. Lower is faster. 2 values is "1" value change in the options menu. 4 is "9" speed which I much prefer as default.
 
 
-
+#include "input.h"
+extern int player_keys[4][NUM_KEYS]; //for config loading. normally in [input.cpp]
 
 #endif

@@ -250,7 +250,7 @@ short viewscreen::redraw()
 				int blood_count = myscreen->level_data.blood_data[i][j];
 
 				backp[tile_number]->draw(i*GRID_SIZE, j*GRID_SIZE, this);
-				if(blood_count > 0)backp[10]->drawAlpha(i*GRID_SIZE, j*GRID_SIZE, this, 128);
+				if(blood_count > 0)backp[i]->drawAlpha(i*GRID_SIZE, j*GRID_SIZE, this, 128);
 
 				//<--------KAT main tile drawing.
 				}

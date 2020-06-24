@@ -16,6 +16,7 @@
  */
 #include "button.h"
 #include "common.h"
+#include <cassert>
 extern short scen_level;
 extern pixieN *backdrops[5];
 
@@ -131,12 +132,17 @@ vbutton::vbutton(Sint32 xpos, Sint32 ypos, Sint32 wide, Sint32 high,
 
     mypixie = NULL; // by default, no graphic picture
 
+    
     hotkey = hot;
+    assert(hotkey < 1080000000);     
+                    //1442195624
 
     //vdisplay();
     color = BUTTON_FACING;
     hidden = false;
     no_draw = false;
+
+    
 }
 
 vbutton::vbutton(Sint32 xpos, Sint32 ypos, Sint32 wide, Sint32 high,
@@ -160,7 +166,9 @@ vbutton::vbutton(Sint32 xpos, Sint32 ypos, Sint32 wide, Sint32 high,
 
     mypixie = NULL; // no graphic by default
 
+    
     hotkey = hot;
+    assert(hotkey < 1080000000);  
 
     //vdisplay();
     color = BUTTON_FACING;
@@ -190,7 +198,9 @@ vbutton::vbutton(Sint32 xpos, Sint32 ypos, Sint32 wide, Sint32 high,
 
     mypixie = myscreen->level_data.myloader->create_pixieN(ORDER_BUTTON1, family);
 
+       
     hotkey = hot;
+    assert(hotkey < 1080000000);  
 
     width = mypixie->sizex;
     height = mypixie->sizey;
@@ -366,13 +376,13 @@ Sint32 vbutton::rightclick(button* buttons)
     return 0; // none worked
 }
 
-Sint32 vbutton::leftclick(Sint32 whichbutton)
+Sint32 vbutton::leftclick(Sint32 use_1_for_hotkey)
 {
     if(hidden)
         return -1;
     Sint32 retvalue=0;
 
-    if (whichbutton == 1) // hotkeys
+    if (use_1_for_hotkey == 1) // hotkeys
     {
         if (keystates[hotkey])
         {
@@ -388,7 +398,7 @@ Sint32 vbutton::leftclick(Sint32 whichbutton)
             return retvalue;
         }
     }
-    else if(whichbutton == 2) // Normal click
+    else if(use_1_for_hotkey == 2) // Normal click
     {
         if (mouse_on())
         {
@@ -469,19 +479,21 @@ Sint32 vbutton::mouse_on()
 }
 
 vbutton * init_buttons(button * buttons, Sint32 numbuttons)
-{
-    Sint32 i;
+{ 
 
-    for (i=1; i < MAX_BUTTONS; i++) // skip # 0!
+    for (Sint32 i=1; i < MAX_BUTTONS; i++) // skip # 0!
     {
         if (allbuttons[i])
             delete allbuttons[i];
         allbuttons[i] = NULL;
     }
 
-    for (i=0; i < numbuttons; i++)
+    for (Sint32 i=0; i < numbuttons; i++)
     {
-        allbuttons[i] = new vbutton(buttons[i].x,buttons[i].y,
+        printf("%d\n", i);
+        assert(buttons[i].hotkey < 1080000000);     
+//                                 1443735192
+        allbuttons[i] = new vbutton(buttons[i].x, buttons[i].y,
                                     buttons[i].sizex, buttons[i].sizey,
                                     buttons[i].myfun, buttons[i].arg1,
                                     buttons[i].label, buttons[i].hotkey);

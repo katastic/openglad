@@ -133,25 +133,27 @@ bool cfg_store::load_settings()
         {
         player_string[6] = i+'0';
 
-        player_keys[0][KEY_UP] = toInt(get_setting(player_string, "up"));
-        player_keys[0][KEY_UP_RIGHT] = toInt(get_setting(player_string, "up-right"));
-        player_keys[0][KEY_RIGHT] = toInt(get_setting(player_string, "right"));
-        player_keys[0][KEY_DOWN_RIGHT] = toInt(get_setting(player_string, "down-right"));
-        player_keys[0][KEY_DOWN] = toInt(get_setting(player_string, "down"));  
-        player_keys[0][KEY_DOWN_LEFT] = toInt(get_setting(player_string, "down-left"));
-        player_keys[0][KEY_LEFT] = toInt(get_setting(player_string, "left"));
-        player_keys[0][KEY_UP_LEFT] = toInt(get_setting(player_string, "up-left"));
+        player_keys[i-1][KEY_UP] = toInt(get_setting(player_string, "up"));
+        player_keys[i-1][KEY_UP_RIGHT] = toInt(get_setting(player_string, "up-right"));
+        player_keys[i-1][KEY_RIGHT] = toInt(get_setting(player_string, "right"));
+        player_keys[i-1][KEY_DOWN_RIGHT] = toInt(get_setting(player_string, "down-right"));
+        player_keys[i-1][KEY_DOWN] = toInt(get_setting(player_string, "down"));  
+        player_keys[i-1][KEY_DOWN_LEFT] = toInt(get_setting(player_string, "down-left"));
+        player_keys[i-1][KEY_LEFT] = toInt(get_setting(player_string, "left"));
+        player_keys[i-1][KEY_UP_LEFT] = toInt(get_setting(player_string, "up-left"));
         
-        player_keys[0][KEY_FIRE] = toInt(get_setting(player_string, "fire"));
-        player_keys[0][KEY_SPECIAL] = toInt(get_setting(player_string, "special"));
-        player_keys[0][KEY_SWITCH] = toInt(get_setting(player_string, "switch"));
-        player_keys[0][KEY_SPECIAL_SWITCH] = toInt(get_setting(player_string, "special-switch"));
-        player_keys[0][KEY_YELL] = toInt(get_setting(player_string, "yell"));
-        player_keys[0][KEY_SHIFTER] = toInt(get_setting(player_string, "shifter"));
-        player_keys[0][KEY_PREFS] = toInt(get_setting(player_string, "prefs"));
-        player_keys[0][KEY_CHEAT] = toInt(get_setting(player_string, "cheat"));
+        player_keys[i-1][KEY_FIRE] = toInt(get_setting(player_string, "fire"));
+        printf("%s fire key: [[%s]]\n", player_string, get_setting(player_string, "fire").c_str());        
+        
+        player_keys[i-1][KEY_SPECIAL] = toInt(get_setting(player_string, "special"));
+        player_keys[i-1][KEY_SWITCH] = toInt(get_setting(player_string, "switch"));
+        player_keys[i-1][KEY_SPECIAL_SWITCH] = toInt(get_setting(player_string, "special-switch"));
+        player_keys[i-1][KEY_YELL] = toInt(get_setting(player_string, "yell"));
+        player_keys[i-1][KEY_SHIFTER] = toInt(get_setting(player_string, "shifter"));
+        player_keys[i-1][KEY_PREFS] = toInt(get_setting(player_string, "prefs"));
+        player_keys[i-1][KEY_CHEAT] = toInt(get_setting(player_string, "cheat"));
 
-        printf("%s [[%s]]\n", player_string, get_setting(player_string, "fire").c_str());
+        
         }
    /*
    #define KEY_UP                  0

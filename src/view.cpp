@@ -243,20 +243,21 @@ short viewscreen::redraw()
 				else                                                                  // show only top of wall
 					backp[PIX_WALLTOP_H]->draw(i*GRID_SIZE,j*GRID_SIZE, this);
 			}
-			else if(gridp.valid()) 
+			else if(gridp.valid())
 				{
-				
-				int tile_number = (int)gridp.data[i + maxx * j];
-				//int blood_count = myscreen->level_data.blood_data[i][j];
-				//int blood_value = 256 - blood_count*16;
-//				if(blood_value < 0)blood_value=0;
 
-				//SDL_SetTextureColorMod(E_Screen->render_tex,blood_value,128,128);
+				int tile_number = (int)gridp.data[i + maxx * j];
+				int blood_count = myscreen->level_data.blood_data[i][j];
+
 				backp[tile_number]->draw(i*GRID_SIZE, j*GRID_SIZE, this);
+				if(blood_count > 0)backp[FAMILY_STAIN]->draw(i*GRID_SIZE, j*GRID_SIZE, this);
+
 				//<--------KAT main tile drawing.
 				}
-				
+
 		}
+
+
 
 	draw_obs(); //moved here to put the radar on top of obs
 	if (control && !control->dead && control->user == mynum && prefs[PREF_RADAR] == PREF_RADAR_ON)
@@ -310,7 +311,7 @@ short viewscreen::redraw(LevelData* data, bool draw_radar)
 					backp[PIX_WALLTOP_H]->draw(i*GRID_SIZE,j*GRID_SIZE, this);
 			}
 			else if(gridp.valid())
-				backp[(int)gridp.data[i + maxx * j]]->draw(i*GRID_SIZE,j*GRID_SIZE, this);
+				{backp[(int)gridp.data[i + maxx * j]]->draw(i*GRID_SIZE,j*GRID_SIZE, this);}
 		}
 
 	draw_obs(data); //moved here to put the radar on top of obs

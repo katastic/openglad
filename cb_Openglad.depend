@@ -1571,11 +1571,11 @@
 
 1538914477 /home/novous/Desktop/openglad-master/src/common.h
 
-1592330000 source:/home/novous/Desktop/git/openglad/src/button.cpp
+1592891705 source:/home/novous/Desktop/git/openglad/src/button.cpp
 	"button.h"
 	"common.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/button.h
+1592889151 /home/novous/Desktop/git/openglad/src/button.h
 	"base.h"
 	"obmap.h"
 	"gloader.h"
@@ -1585,7 +1585,7 @@
 	<math.h>
 	"input.h"
 
-1592265498 /home/novous/Desktop/git/openglad/src/base.h
+1592885674 /home/novous/Desktop/git/openglad/src/base.h
 	<stdio.h>
 	<stdlib.h>
 	<string>
@@ -1593,7 +1593,7 @@
 	<math.h>
 	<ctype.h>
 	"sounds.h"
-	<SDL2/SDL.h>
+	<SDL.h>
 	"input.h"
 	"util.h"
 	"gparser.h"
@@ -1602,9 +1602,9 @@
 	"soundob.h"
 	"pixie_data.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/sounds.h
+1592884506 /home/novous/Desktop/git/openglad/src/sounds.h
 
-1550134864 /home/novous/Desktop/git/openglad/src/input.h
+1592889151 /home/novous/Desktop/git/openglad/src/input.h
 	"SDL.h"
 	<ctype.h>
 	<string>
@@ -1625,56 +1625,56 @@
 	"begin_code.h"
 	"close_code.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/video.h
+1592885674 /home/novous/Desktop/git/openglad/src/video.h
 	"base.h"
 	"text.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/text.h
+1592885674 /home/novous/Desktop/git/openglad/src/text.h
 	"base.h"
 	"pixie_data.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/pixie_data.h
+1592885674 /home/novous/Desktop/git/openglad/src/pixie_data.h
 
-1474064848 /home/novous/Desktop/git/openglad/src/util.h
+1592885674 /home/novous/Desktop/git/openglad/src/util.h
 	"SDL.h"
 	<ctype.h>
 	<string>
 	"io.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/io.h
+1592884506 /home/novous/Desktop/git/openglad/src/io.h
 	"SDL.h"
 	<list>
 	<vector>
 	<string>
 
-1474064848 /home/novous/Desktop/git/openglad/src/gparser.h
+1592885674 /home/novous/Desktop/git/openglad/src/gparser.h
 	<string>
 	<map>
 
-1474064848 /home/novous/Desktop/git/openglad/src/pal32.h
+1592885674 /home/novous/Desktop/git/openglad/src/pal32.h
 	"SDL_types.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/pixdefs.h
+1592885674 /home/novous/Desktop/git/openglad/src/pixdefs.h
 
-1592265010 /home/novous/Desktop/git/openglad/src/soundob.h
+1592885674 /home/novous/Desktop/git/openglad/src/soundob.h
 	"SDL_mixer.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/obmap.h
+1592885674 /home/novous/Desktop/git/openglad/src/obmap.h
 	"base.h"
 	<map>
 	<list>
 
-1474064848 /home/novous/Desktop/git/openglad/src/gloader.h
+1592885674 /home/novous/Desktop/git/openglad/src/gloader.h
 	"base.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/pixien.h
+1592885674 /home/novous/Desktop/git/openglad/src/pixien.h
 	"base.h"
 	"pixie.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/pixie.h
+1592889151 /home/novous/Desktop/git/openglad/src/pixie.h
 	"base.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/screen.h
+1592885674 /home/novous/Desktop/git/openglad/src/screen.h
 	"base.h"
 	"video.h"
 	"gloader.h"
@@ -1687,11 +1687,11 @@
 	"save_data.h"
 	"text.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/smooth.h
+1592885674 /home/novous/Desktop/git/openglad/src/smooth.h
 	"SDL.h"
 	"pixie_data.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/level_data.h
+1592893218 /home/novous/Desktop/git/openglad/src/level_data.h
 	"SDL.h"
 	<list>
 	<string>
@@ -1699,7 +1699,7 @@
 	"pixie_data.h"
 	"pixdefs.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/save_data.h
+1592885674 /home/novous/Desktop/git/openglad/src/save_data.h
 	"SDL.h"
 	<string>
 	<map>
@@ -1707,12 +1707,12 @@
 	<list>
 	"walker.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/walker.h
+1592885674 /home/novous/Desktop/git/openglad/src/walker.h
 	"base.h"
 	"pixien.h"
 	"obmap.h"
 
-1592276493 source:/home/novous/Desktop/git/openglad/src/campaign_picker.cpp
+1592885674 source:/home/novous/Desktop/git/openglad/src/campaign_picker.cpp
 	"campaign_picker.h"
 	"io.h"
 	"yam.h"
@@ -1725,32 +1725,32 @@
 	<string>
 	"common.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/campaign_picker.h
+1592884506 /home/novous/Desktop/git/openglad/src/campaign_picker.h
 	"screen.h"
 	<map>
 	<string>
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/yam/yam.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/yam/yam.h
 	"yaml.h"
 	<list>
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/libyaml/include/yaml.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/libyaml/include/yaml.h
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
 
-1474064848 /home/novous/Desktop/git/openglad/src/guy.h
+1592885674 /home/novous/Desktop/git/openglad/src/guy.h
 	"base.h"
 	"stats.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/stats.h
+1592885674 /home/novous/Desktop/git/openglad/src/stats.h
 	"base.h"
 	<list>
 
-1592324407 source:/home/novous/Desktop/git/openglad/src/effect.cpp
+1592885515 source:/home/novous/Desktop/git/openglad/src/effect.cpp
 	"effect.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/effect.h
+1592885674 /home/novous/Desktop/git/openglad/src/effect.h
 	"base.h"
 	"obmap.h"
 	"screen.h"
@@ -1758,39 +1758,39 @@
 	"walker.h"
 	"guy.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libyaml/src/api.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libyaml/src/api.c
 	"yaml_private.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/libyaml/src/yaml_private.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/libyaml/src/yaml_private.h
 	"config.h"
 	"yaml.h"
 	<assert.h>
 	<limits.h>
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/libyaml/src/config.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/libyaml/src/config.h
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libyaml/src/dumper.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libyaml/src/dumper.c
 	"yaml_private.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libyaml/src/emitter.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libyaml/src/emitter.c
 	"yaml_private.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libyaml/src/loader.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libyaml/src/loader.c
 	"yaml_private.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libyaml/src/parser.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libyaml/src/parser.c
 	"yaml_private.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libyaml/src/reader.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libyaml/src/reader.c
 	"yaml_private.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libyaml/src/scanner.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libyaml/src/scanner.c
 	"yaml_private.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libyaml/src/writer.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libyaml/src/writer.c
 	"yaml_private.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/mkstemp.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/mkstemp.c
 	<sys/types.h>
 	<sys/stat.h>
 	<assert.h>
@@ -1801,44 +1801,44 @@
 	<stdio.h>
 	<stdlib.h>
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_add.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_add.c
 	"zipint.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/libzip/zipint.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/libzip/zipint.h
 	<zlib.h>
 	<io.h>
 	"zip.h"
 	"config.h"
 	<windows.h>
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/physfs/zlib123/zlib.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/physfs/zlib123/zlib.h
 	"zconf.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/physfs/zlib123/zconf.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/physfs/zlib123/zconf.h
 	<windows.h>
 	<sys/types.h>
 	<unistd.h>
 	<unixio.h>
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/libzip/zip.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/libzip/zip.h
 	"zipconf.h"
 	<sys/types.h>
 	<stdio.h>
 	<time.h>
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/libzip/zipconf.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/libzip/zipconf.h
 	<inttypes.h>
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/libzip/config.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/libzip/config.h
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_add_dir.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_add_dir.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_add_entry.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_add_entry.c
 	<stdlib.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_close.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_close.c
 	"zipint.h"
 	<stdio.h>
 	<stdlib.h>
@@ -1851,15 +1851,15 @@
 	<io.h>
 	<fcntl.h>
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_delete.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_delete.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_dir_add.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_dir_add.c
 	<stdlib.h>
 	<string.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_dirent.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_dirent.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -1868,72 +1868,72 @@
 	<sys/stat.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_discard.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_discard.c
 	<stdlib.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_entry.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_entry.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_err_str.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_err_str.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_error.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_error.c
 	<stdlib.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_error_clear.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_error_clear.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_error_get.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_error_get.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_error_get_sys_type.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_error_get_sys_type.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_error_strerror.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_error_strerror.c
 	<errno.h>
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_error_to_str.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_error_to_str.c
 	<errno.h>
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_extra_field.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_extra_field.c
 	"zipint.h"
 	<errno.h>
 	<stdlib.h>
 	<string.h>
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_extra_field_api.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_extra_field_api.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_fclose.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_fclose.c
 	<stdlib.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_fdopen.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_fdopen.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_file_add.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_file_add.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_file_error_clear.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_file_error_clear.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_file_error_get.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_file_error_get.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_file_get_comment.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_file_get_comment.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_file_get_offset.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_file_get_offset.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -1942,87 +1942,87 @@
 	<sys/stat.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_file_rename.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_file_rename.c
 	<string.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_file_replace.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_file_replace.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_file_set_comment.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_file_set_comment.c
 	<stdlib.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_file_strerror.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_file_strerror.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_filerange_crc.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_filerange_crc.c
 	<stdio.h>
 	<errno.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_fopen.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_fopen.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_fopen_encrypted.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_fopen_encrypted.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_fopen_index.c
-	<errno.h>
-	<stdio.h>
-	<stdlib.h>
-	"zipint.h"
-
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_fopen_index_encrypted.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_fopen_index.c
 	<errno.h>
 	<stdio.h>
 	<stdlib.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_fread.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_fopen_index_encrypted.c
+	<errno.h>
+	<stdio.h>
+	<stdlib.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_get_archive_comment.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_fread.c
+	"zipint.h"
+
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_get_archive_comment.c
 	<string.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_get_archive_flag.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_get_archive_flag.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_get_compression_implementation.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_get_compression_implementation.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_get_encryption_implementation.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_get_encryption_implementation.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_get_file_comment.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_get_file_comment.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_get_name.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_get_name.c
 	<string.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_get_num_entries.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_get_num_entries.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_get_num_files.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_get_num_files.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_memdup.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_memdup.c
 	<stdlib.h>
 	<string.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_name_locate.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_name_locate.c
 	<string.h>
 	<strings.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_new.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_new.c
 	<stdlib.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_open.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_open.c
 	<sys/stat.h>
 	<errno.h>
 	<limits.h>
@@ -2031,64 +2031,64 @@
 	<string.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_rename.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_rename.c
 	<string.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_replace.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_replace.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_set_archive_comment.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_set_archive_comment.c
 	<stdlib.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_set_archive_flag.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_set_archive_flag.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_set_default_password.c
-	<stdlib.h>
-	<string.h>
-	"zipint.h"
-
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_set_file_comment.c
-	<stdlib.h>
-	"zipint.h"
-
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_set_file_compression.c
-	"zipint.h"
-
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_set_name.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_set_default_password.c
 	<stdlib.h>
 	<string.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_buffer.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_set_file_comment.c
+	<stdlib.h>
+	"zipint.h"
+
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_set_file_compression.c
+	"zipint.h"
+
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_set_name.c
 	<stdlib.h>
 	<string.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_close.c
-	"zipint.h"
-
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_crc.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_buffer.c
 	<stdlib.h>
 	<string.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_deflate.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_close.c
+	"zipint.h"
+
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_crc.c
 	<stdlib.h>
 	<string.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_error.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_deflate.c
+	<stdlib.h>
+	<string.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_file.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_error.c
+	"zipint.h"
+
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_file.c
 	<errno.h>
 	<stdio.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_filep.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_filep.c
 	<sys/stat.h>
 	<errno.h>
 	<stdio.h>
@@ -2096,93 +2096,93 @@
 	<string.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_free.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_free.c
 	<stdlib.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_function.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_function.c
 	<stdlib.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_layered.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_layered.c
 	<stdlib.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_open.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_open.c
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_pkware.c
-	<stdlib.h>
-	<string.h>
-	"zipint.h"
-
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_pop.c
-	<stdlib.h>
-	"zipint.h"
-
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_read.c
-	"zipint.h"
-
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_stat.c
-	"zipint.h"
-
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_window.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_pkware.c
 	<stdlib.h>
 	<string.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_zip.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_pop.c
+	<stdlib.h>
+	"zipint.h"
+
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_read.c
+	"zipint.h"
+
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_stat.c
+	"zipint.h"
+
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_window.c
 	<stdlib.h>
 	<string.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_zip_new.c
-	<stdlib.h>
-	"zipint.h"
-
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_stat.c
-	"zipint.h"
-
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_stat_index.c
-	"zipint.h"
-
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_stat_init.c
-	"zipint.h"
-
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_strerror.c
-	"zipint.h"
-
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_string.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_zip.c
 	<stdlib.h>
 	<string.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_unchange.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_source_zip_new.c
 	<stdlib.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_unchange_all.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_stat.c
+	"zipint.h"
+
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_stat_index.c
+	"zipint.h"
+
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_stat_init.c
+	"zipint.h"
+
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_strerror.c
+	"zipint.h"
+
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_string.c
+	<stdlib.h>
+	<string.h>
+	"zipint.h"
+
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_unchange.c
 	<stdlib.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_unchange_archive.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_unchange_all.c
 	<stdlib.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_unchange_data.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_unchange_archive.c
+	<stdlib.h>
 	"zipint.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_utf-8.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_unchange_data.c
+	"zipint.h"
+
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/libzip/zip_utf-8.c
 	"zipint.h"
 	<stdlib.h>
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/micropather/micropather.cpp
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/micropather/micropather.cpp
 	<vector>
 	<memory.h>
 	<stdio.h>
 	"micropather.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/micropather/micropather.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/micropather/micropather.h
 	<vector>
 	<float.h>
 	<cstring>
@@ -2192,23 +2192,23 @@
 	<stdlib.h>
 	<cstdint>
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/archivers/dir.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/archivers/dir.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"physfs.h"
 	"physfs_internal.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/physfs/physfs.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/physfs/physfs.h
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/physfs/physfs_internal.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/physfs/physfs_internal.h
 	"physfs.h"
 	<stdlib.h>
 	<assert.h>
 	<malloc.h>
 	<alloca.h>
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/archivers/zip.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/archivers/zip.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -2218,34 +2218,34 @@
 	"zlib.h"
 	"physfs_internal.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/extras/physfsrwops.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/extras/physfsrwops.c
 	<stdio.h>
 	"physfsrwops.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/physfs/extras/physfsrwops.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/physfs/extras/physfsrwops.h
 	"physfs.h"
 	"SDL.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/physfs.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/physfs.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"physfs.h"
 	"physfs_internal.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/physfs_byteorder.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/physfs_byteorder.c
 	<stdio.h>
 	<stdlib.h>
 	"physfs_internal.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/physfs_unicode.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/physfs_unicode.c
 	"physfs.h"
 	"physfs_internal.h"
 	"physfs_casefolding.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/physfs/physfs_casefolding.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/physfs/physfs_casefolding.h
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/platform/beos.cpp
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/platform/beos.cpp
 	"physfs_platforms.h"
 	<os/kernel/OS.h>
 	<os/app/Roster.h>
@@ -2274,10 +2274,10 @@
 	<unistd.h>
 	"physfs_internal.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/physfs/physfs_platforms.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/physfs/physfs_platforms.h
 	<TargetConditionals.h>
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/platform/macosx.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/platform/macosx.c
 	"physfs_platforms.h"
 	<Carbon/Carbon.h>
 	<IOKit/storage/IOMedia.h>
@@ -2287,7 +2287,7 @@
 	<sys/stat.h>
 	"physfs_internal.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/platform/os2.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/platform/os2.c
 	"physfs_platforms.h"
 	<os2.h>
 	<stdio.h>
@@ -2298,13 +2298,13 @@
 	<ctype.h>
 	"physfs_internal.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/platform/pocketpc.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/platform/pocketpc.c
 	"physfs_platforms.h"
 	<stdio.h>
 	<windows.h>
 	"physfs_internal.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/platform/posix.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/platform/posix.c
 	"physfs_platforms.h"
 	<stdio.h>
 	<stdlib.h>
@@ -2320,7 +2320,7 @@
 	<linux/unistd.h>
 	"physfs_internal.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/platform/unix.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/platform/unix.c
 	"physfs_platforms.h"
 	<stdio.h>
 	<stdlib.h>
@@ -2340,7 +2340,7 @@
 	<mntent.h>
 	"physfs_internal.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/platform/windows.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/platform/windows.c
 	"physfs_platforms.h"
 	<windows.h>
 	<stdio.h>
@@ -2351,19 +2351,19 @@
 	<time.h>
 	"physfs_internal.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/adler32.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/adler32.c
 	"zlib.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/compress.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/compress.c
 	"zlib.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/crc32.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/crc32.c
 	<stdio.h>
 	"zutil.h"
 	<limits.h>
 	"crc32.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/physfs/zlib123/zutil.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/physfs/zlib123/zutil.h
 	"zlib.h"
 	<stddef.h>
 	<string.h>
@@ -2375,41 +2375,41 @@
 	<unix.h>
 	<stdio.h>
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/physfs/zlib123/crc32.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/physfs/zlib123/crc32.h
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/deflate.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/deflate.c
 	"deflate.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/physfs/zlib123/deflate.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/physfs/zlib123/deflate.h
 	"zutil.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/gzio.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/gzio.c
 	<stdio.h>
 	"zutil.h"
 	<stdarg.h>
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/infback.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/infback.c
 	"zutil.h"
 	"inftrees.h"
 	"inflate.h"
 	"inffast.h"
 	"inffixed.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/physfs/zlib123/inftrees.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/physfs/zlib123/inftrees.h
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/physfs/zlib123/inflate.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/physfs/zlib123/inflate.h
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/physfs/zlib123/inffast.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/physfs/zlib123/inffast.h
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/physfs/zlib123/inffixed.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/physfs/zlib123/inffixed.h
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/inffast.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/inffast.c
 	"zutil.h"
 	"inftrees.h"
 	"inflate.h"
 	"inffast.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/inflate.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/inflate.c
 	"zutil.h"
 	"inftrees.h"
 	"inflate.h"
@@ -2417,34 +2417,34 @@
 	"inffixed.h"
 	<stdio.h>
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/inftrees.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/inftrees.c
 	"zutil.h"
 	"inftrees.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/trees.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/trees.c
 	"deflate.h"
 	<ctype.h>
 	"trees.h"
 	<stdio.h>
 
-1474064848 /home/novous/Desktop/git/openglad/src/external/physfs/zlib123/trees.h
+1592884506 /home/novous/Desktop/git/openglad/src/external/physfs/zlib123/trees.h
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/uncompr.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/uncompr.c
 	"zlib.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/zutil.c
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/physfs/zlib123/zutil.c
 	"zutil.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/external/yam/yam.cpp
+1592884506 source:/home/novous/Desktop/git/openglad/src/external/yam/yam.cpp
 	"yam.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/game.cpp
+1592885674 source:/home/novous/Desktop/git/openglad/src/game.cpp
 	"graph.h"
 	"smooth.h"
 	"util.h"
 	"campaign_picker.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/graph.h
+1592885674 /home/novous/Desktop/git/openglad/src/graph.h
 	"base.h"
 	"video.h"
 	"gloader.h"
@@ -2463,30 +2463,31 @@
 	"guy.h"
 	"radar.h"
 
-1538817910 /home/novous/Desktop/git/openglad/src/view.h
+1592885674 /home/novous/Desktop/git/openglad/src/view.h
 	"common.h"
 	"base.h"
 	"level_data.h"
 
-1592331260 /home/novous/Desktop/git/openglad/src/common.h
+1592889151 /home/novous/Desktop/git/openglad/src/common.h
+	"input.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/living.h
+1592885674 /home/novous/Desktop/git/openglad/src/living.h
 	"base.h"
 	"walker.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/weap.h
+1592885674 /home/novous/Desktop/git/openglad/src/weap.h
 	"base.h"
 	"walker.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/treasure.h
+1592885674 /home/novous/Desktop/git/openglad/src/treasure.h
 	"base.h"
 	"walker.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/radar.h
+1592885674 /home/novous/Desktop/git/openglad/src/radar.h
 	"base.h"
 	"level_data.h"
 
-1592329690 source:/home/novous/Desktop/git/openglad/src/glad.cpp
+1592885674 source:/home/novous/Desktop/git/openglad/src/glad.cpp
 	"version.h"
 	"graph.h"
 	"colors.h"
@@ -2498,18 +2499,18 @@
 	"results_screen.h"
 	"OuyaController.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/version.h
+1592885674 /home/novous/Desktop/git/openglad/src/version.h
 
-1474064848 /home/novous/Desktop/git/openglad/src/colors.h
+1592884506 /home/novous/Desktop/git/openglad/src/colors.h
 
-1474064848 /home/novous/Desktop/git/openglad/src/results_screen.h
+1592885674 /home/novous/Desktop/git/openglad/src/results_screen.h
 	<map>
 	"guy.h"
 
-1474064848 /home/novous/Desktop/git/openglad/src/OuyaController.h
+1592885674 /home/novous/Desktop/git/openglad/src/OuyaController.h
 	"SDL.h"
 
-1592326336 source:/home/novous/Desktop/git/openglad/src/gloader.cpp
+1592885674 source:/home/novous/Desktop/git/openglad/src/gloader.cpp
 	"gloader.h"
 	"stats.h"
 	"walker.h"
@@ -2519,7 +2520,7 @@
 	"effect.h"
 	<cstring>
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/gparser.cpp
+1592889151 source:/home/novous/Desktop/git/openglad/src/gparser.cpp
 	"version.h"
 	<iostream>
 	<fstream>
@@ -2530,25 +2531,26 @@
 	"util.h"
 	"yam.h"
 	"input.h"
+	"common.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/graphlib.cpp
+1592884506 source:/home/novous/Desktop/git/openglad/src/graphlib.cpp
 	"graph.h"
 	<string>
 	"util.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/guy.cpp
+1592885515 source:/home/novous/Desktop/git/openglad/src/guy.cpp
 	"graph.h"
 	<math.h>
 	<cstring>
 
-1592329970 source:/home/novous/Desktop/git/openglad/src/help.cpp
+1592885515 source:/home/novous/Desktop/git/openglad/src/help.cpp
 	<string.h>
 	<stdio.h>
 	"graph.h"
 	"util.h"
 	"common.h"
 
-1592330103 source:/home/novous/Desktop/git/openglad/src/input.cpp
+1592889151 source:/home/novous/Desktop/git/openglad/src/input.cpp
 	"input.h"
 	"screen.h"
 	<stdio.h>
@@ -2563,12 +2565,12 @@
 	"stats.h"
 	"walker.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/intro.cpp
+1592889151 source:/home/novous/Desktop/git/openglad/src/intro.cpp
 	"graph.h"
 	<cstring>
 	"input.h"
 
-1592327428 source:/home/novous/Desktop/git/openglad/src/io.cpp
+1592885515 source:/home/novous/Desktop/git/openglad/src/io.cpp
 	"io.h"
 	"input.h"
 	"util.h"
@@ -2594,7 +2596,7 @@
 	<libgen.h>
 	<string.h>
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/level_data.cpp
+1592884506 source:/home/novous/Desktop/git/openglad/src/level_data.cpp
 	"level_data.h"
 	"yam.h"
 	"pixie.h"
@@ -2606,7 +2608,7 @@
 	"view.h"
 	<algorithm>
 
-1592328773 source:/home/novous/Desktop/git/openglad/src/level_editor.cpp
+1592885515 source:/home/novous/Desktop/git/openglad/src/level_editor.cpp
 	"screen.h"
 	"view.h"
 	"radar.h"
@@ -2627,13 +2629,13 @@
 	<vector>
 	<stdlib.h>
 
-1474064848 /home/novous/Desktop/git/openglad/src/level_picker.h
+1592885674 /home/novous/Desktop/git/openglad/src/level_picker.h
 	"screen.h"
 
-1592281281 /home/novous/Desktop/git/openglad/src/sai2x.h
+1592885515 /home/novous/Desktop/git/openglad/src/sai2x.h
 	"SDL.h"
 
-1592329438 source:/home/novous/Desktop/git/openglad/src/level_picker.cpp
+1592885515 source:/home/novous/Desktop/git/openglad/src/level_picker.cpp
 	"level_picker.h"
 	"level_data.h"
 	"radar.h"
@@ -2650,23 +2652,23 @@
 	<dirent.h>
 	<cstring>
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/living.cpp
+1592885515 source:/home/novous/Desktop/git/openglad/src/living.cpp
 	"graph.h"
 	"smooth.h"
 	<cstring>
 
-1538817926 source:/home/novous/Desktop/git/openglad/src/obmap.cpp
+1592884506 source:/home/novous/Desktop/git/openglad/src/obmap.cpp
 	"graph.h"
 	<cmath>
 	<algorithm>
 	"common.h"
 
-1592328912 source:/home/novous/Desktop/git/openglad/src/pal32.cpp
+1592885515 source:/home/novous/Desktop/git/openglad/src/pal32.cpp
 	"pal32.h"
 	<stdio.h>
 	"SDL_types.h"
 
-1592330084 source:/home/novous/Desktop/git/openglad/src/picker.cpp
+1592889151 source:/home/novous/Desktop/git/openglad/src/picker.cpp
 	"common.h"
 	"version.h"
 	"graph.h"
@@ -2680,19 +2682,19 @@
 	"level_picker.h"
 	<cstring>
 
-1592329415 source:/home/novous/Desktop/git/openglad/src/pixie.cpp
+1592890437 source:/home/novous/Desktop/git/openglad/src/pixie.cpp
 	"graph.h"
 
-1538817948 source:/home/novous/Desktop/git/openglad/src/pixie_data.cpp
+1592884506 source:/home/novous/Desktop/git/openglad/src/pixie_data.cpp
 	"pixie_data.h"
 	<cstdlib>
 	"common.h"
 
-1592329296 source:/home/novous/Desktop/git/openglad/src/pixien.cpp
+1592885515 source:/home/novous/Desktop/git/openglad/src/pixien.cpp
 	"graph.h"
 	"common.h"
 
-1592276586 source:/home/novous/Desktop/git/openglad/src/results_screen.cpp
+1592885515 source:/home/novous/Desktop/git/openglad/src/results_screen.cpp
 	"results_screen.h"
 	"base.h"
 	"button.h"
@@ -2704,21 +2706,21 @@
 	<cstring>
 	"OuyaController.h"
 
-1592338898 source:/home/novous/Desktop/git/openglad/src/sai2x.cpp
+1592885674 source:/home/novous/Desktop/git/openglad/src/sai2x.cpp
 	"common.h"
 	"SDL.h"
 	"sai2x.h"
 	"util.h"
 	"input.h"
 
-1592326330 source:/home/novous/Desktop/git/openglad/src/save_data.cpp
+1592885515 source:/home/novous/Desktop/git/openglad/src/save_data.cpp
 	"save_data.h"
 	"walker.h"
 	"guy.h"
 	"campaign_picker.h"
 	<cstring>
 
-1592331027 source:/home/novous/Desktop/git/openglad/src/screen.cpp
+1592885674 source:/home/novous/Desktop/git/openglad/src/screen.cpp
 	"graph.h"
 	"smooth.h"
 	"util.h"
@@ -2729,15 +2731,15 @@
 	<cstring>
 	"common.h"
 
-1592272749 /home/novous/Desktop/git/openglad/src/view_sizes.h
+1592885674 /home/novous/Desktop/git/openglad/src/view_sizes.h
 	"common.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/smooth.cpp
+1592884506 source:/home/novous/Desktop/git/openglad/src/smooth.cpp
 	"smooth.h"
 	"base.h"
 	"graph.h"
 
-1592329215 source:/home/novous/Desktop/git/openglad/src/sound.cpp
+1592885515 source:/home/novous/Desktop/git/openglad/src/sound.cpp
 	<string.h>
 	<stdlib.h>
 	<stdio.h>
@@ -2746,17 +2748,17 @@
 	<string>
 	"util.h"
 
-1538818560 source:/home/novous/Desktop/git/openglad/src/stats.cpp
+1592889151 source:/home/novous/Desktop/git/openglad/src/stats.cpp
 	"graph.h"
 	"stats.h"
 	<math.h>
 
-1592328022 source:/home/novous/Desktop/git/openglad/src/text.cpp
+1592885674 source:/home/novous/Desktop/git/openglad/src/text.cpp
 	"graph.h"
 	<cstring>
 	"common.h"
 
-1592338909 source:/home/novous/Desktop/git/openglad/src/treasure.cpp
+1592885515 source:/home/novous/Desktop/git/openglad/src/treasure.cpp
 	<math.h>
 	"obmap.h"
 	"gloader.h"
@@ -2768,7 +2770,7 @@
 	<algorithm>
 	<cstring>
 
-1592330149 source:/home/novous/Desktop/git/openglad/src/util.cpp
+1592885515 source:/home/novous/Desktop/git/openglad/src/util.cpp
 	"util.h"
 	"version.h"
 	<stdio.h>
@@ -2782,17 +2784,19 @@
 	<time.h>
 	<direct.h>
 
-1592330233 source:/home/novous/Desktop/git/openglad/src/video.cpp
+1592894778 source:/home/novous/Desktop/git/openglad/src/video.cpp
 	"graph.h"
 	"sai2x.h"
 	<cstring>
 	"common.h"
 	"../util/savepng.h"
 
-1474064848 /home/novous/Desktop/git/openglad/util/savepng.h
+1592884506 /home/novous/Desktop/git/openglad/util/savepng.h
 	"SDL_video.h"
 
-1592330130 source:/home/novous/Desktop/git/openglad/src/view.cpp
+1592895040 source:/home/novous/Desktop/git/openglad/src/view.cpp
+	"sai2x.h"
+	"SDL.h"
 	"input.h"
 	"graph.h"
 	"colors.h"
@@ -2802,22 +2806,22 @@
 	<algorithm>
 	<cstring>
 
-1592330666 source:/home/novous/Desktop/git/openglad/src/walker.cpp
+1592894521 source:/home/novous/Desktop/git/openglad/src/walker.cpp
 	<assert.h>
 	"graph.h"
 	"smooth.h"
 	"micropather.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/src/weap.cpp
+1592885674 source:/home/novous/Desktop/git/openglad/src/weap.cpp
 	"graph.h"
 	"smooth.h"
 
-1474064848 source:/home/novous/Desktop/git/openglad/util/savepng.c
+1592884506 source:/home/novous/Desktop/git/openglad/util/savepng.c
 	"SDL.h"
 	"png.h"
 	<stdlib.h>
 
-1592267371 source:/home/novous/Desktop/git/openglad/src/radar.cpp
+1592885515 source:/home/novous/Desktop/git/openglad/src/radar.cpp
 	"graph.h"
 	"colors.h"
 

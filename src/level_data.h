@@ -70,7 +70,7 @@ public:
     int id;
     std::string title;
     
-//    int blood_data[256][256];
+    int blood_data[256][256];
 
     static const char TYPE_CAN_EXIT_WHENEVER = 0x1;  // Can exit without defeating all enemies
     static const char TYPE_MUST_DESTROY_GENERATORS = 0x2;  // Must destroy generators to exit

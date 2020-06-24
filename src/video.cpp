@@ -1035,6 +1035,7 @@ void video::putbuffer(Sint32 tilestartx, Sint32 tilestarty,
 	temp.y = ymin;
 	temp.w = (xmax-xmin);
 	temp.h = (ymax-ymin);
+
 	SDL_BlitSurface(sourceptr,&temp,E_Screen->render,&rect);
 }
 

@@ -151,9 +151,7 @@ bool cfg_store::load_settings()
         player_keys[i-1][KEY_YELL] = toInt(get_setting(player_string, "yell"));
         player_keys[i-1][KEY_SHIFTER] = toInt(get_setting(player_string, "shifter"));
         player_keys[i-1][KEY_PREFS] = toInt(get_setting(player_string, "prefs"));
-        player_keys[i-1][KEY_CHEAT] = toInt(get_setting(player_string, "cheat"));
-
-        
+        player_keys[i-1][KEY_CHEAT] = toInt(get_setting(player_string, "cheat"));        
         }
    /*
    #define KEY_UP                  0
@@ -174,9 +172,6 @@ bool cfg_store::load_settings()
 #define KEY_CHEAT               15
 #define NUM_KEYS                16
 */
-
-
-
 	return true;
 }
 

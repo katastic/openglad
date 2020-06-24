@@ -1796,13 +1796,13 @@ void walker::do_heal_effects(walker* healer, walker* target, short amount)
 
 void walker::do_hit_effects(walker* attacker, walker* target, short tempdamage)
 {
-/*
+
 	int i = attacker->xpos/GRID_SIZE;
 	int j = attacker->ypos/GRID_SIZE;
 	assert(i>=0);
 	assert(j>=0);
 	myscreen->level_data.blood_data[i][j]++;
-*/
+
 	
     if(cfg.is_on("effects", "damage_numbers"))
     {

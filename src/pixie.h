@@ -32,6 +32,7 @@ class pixie
 		virtual short move (short x, short y);
 		short draw (viewscreen  *view_buf);
 		short draw (short x, short y, viewscreen  *view_buf);
+		short drawAlpha (short x, short y, viewscreen * view_buf, float alpha);
 		short drawMix (viewscreen *view_buf);
 		short drawMix (short x, short y, viewscreen *view_buf);
 		short put_screen(short x, short y);

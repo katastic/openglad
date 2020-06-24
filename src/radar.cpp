@@ -22,6 +22,12 @@
 #include "graph.h"
 #include "colors.h"
 
+
+void draw_double_pixel(int x, int y)
+	{
+	
+	}
+
 #define RADAR_X 60  // These are the dimensions of the radar
 #define RADAR_Y 44  // viewport
 

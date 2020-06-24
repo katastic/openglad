@@ -20,12 +20,12 @@ CXXFLAGS := -I/usr/include/SDL2    -I../src/external/yam/    -I../src/external/l
 
 opengladvs: $(OBJ_FILES)
 #	g++ $(LDFLAGS)  -o $@ $^
-	LD_RUN_PATH='./build_deps/' g++ -std=c++17 -D_REENTRANT -g $(CXXFLAGS) $(OBJ_FILES) ../build_deps/*.o $(LDFLAGS) -o ../opengladm
+	LD_RUN_PATH='./build_deps/' g++ -std=c++17 -D_REENTRANT -g $(CXXFLAGS) $(OBJ_FILES) ../build_deps/*.o $(LDFLAGS) -o ../openglad
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	g++ -std=c++17 -D_REENTRANT -g $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 	
 clean:	
 	rm -r ../obj/*
-	rm ../opengladm
+	rm ../openglad
 	echo "DELETING OBJ files"

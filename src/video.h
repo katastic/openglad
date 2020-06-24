@@ -68,16 +68,21 @@ class video
 		               Sint32 portstartx, Sint32 portstarty,
 		               Sint32 portendx, Sint32 portendy,
 		               unsigned char * sourceptr);
-		void putbuffer_alpha(Sint32 tilestartx, Sint32 tilestarty,
-		               Sint32 tilewidth, Sint32 tileheight,
-		               Sint32 portstartx, Sint32 portstarty,
-		               Sint32 portendx, Sint32 portendy,
-		               unsigned char * sourceptr, unsigned char alpha);
 		void putbuffer(Sint32 tilestartx, Sint32 tilestarty,
 		               Sint32 tilewidth, Sint32 tileheight,
 		               Sint32 portstartx, Sint32 portstarty,
 		               Sint32 portendx, Sint32 portendy,
 		               SDL_Surface *sourceptr);
+		void putbuffer_alpha(Sint32 tilestartx, Sint32 tilestarty,
+		               Sint32 tilewidth, Sint32 tileheight,
+		               Sint32 portstartx, Sint32 portstarty,
+		               Sint32 portendx, Sint32 portendy,
+		               unsigned char * sourceptr, unsigned char alpha);
+		void putbuffer_alpha(Sint32 tilestartx, Sint32 tilestarty,
+		               Sint32 tilewidth, Sint32 tileheight,
+		               Sint32 portstartx, Sint32 portstarty,
+		               Sint32 portendx, Sint32 portendy,
+		               SDL_Surface *sourceptr, unsigned char alpha);
 		void walkputbuffer(Sint32 walkerstartx, Sint32 walkerstarty,
 		                   Sint32 walkerwidth, Sint32 walkerheight,
 		                   Sint32 portstartx, Sint32 portstarty,

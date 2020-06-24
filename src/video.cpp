@@ -930,62 +930,6 @@ void video::putbuffer(Sint32 tilestartx, Sint32 tilestarty,
 	}
 }
 
-void video::putbuffer_alpha(Sint32 tilestartx, Sint32 tilestarty,
-                      Sint32 tilewidth, Sint32 tileheight,
-                      Sint32 portstartx, Sint32 portstarty,
-                      Sint32 portendx, Sint32 portendy,
-                      unsigned char * sourceptr, unsigned char alpha)
-{
-	int i,j,num;
-	Sint32 xmin=0, xmax=tilewidth, ymin=0, ymax=tileheight;
-	//Uint32 targetshifter,sourceshifter; //these let you wrap around in the arrays
-	Sint32 totrows,rowsize; //number of rows and width of each row in the source
-	//Uint32 offssource,offstarget; //offsets into each array, for clipping and wrap
-	unsigned char * sourcebufptr = &sourceptr[0];
-	if (tilestartx >= portendx || tilestarty >= portendy )
-		return; // abort, the tile is drawing outside the clipping region
-
-	if ((tilestartx + tilewidth) > portendx)   //this clips on the right edge
-		xmax = portendx - tilestartx; //stop drawing after xmax bytes
-
-	else if (tilestartx < portstartx) //this clips on the left edge
-	{
-		xmin = portstartx - tilestartx;
-		tilestartx = portstartx;
-	}
-
-	if ((tilestarty + tileheight) > portendy) //this clips on the bottom edge
-		ymax = portendy - tilestarty;
-
-	else if (tilestarty < portstarty) //this clips the top edge
-	{
-		ymin = portstarty - tilestarty;
-		tilestarty = portstarty;
-	}
-
-	totrows = (ymax-ymin); //how many rows to copy
-	rowsize = (xmax-xmin); //how many bytes to copy
-	if (totrows <= 0 || rowsize <= 0)
-		return; //this happens on bad args
-
-	//targetshifter = VIDEO_BUFFER_WIDTH - rowsize; //this will wrap the target around
-	//sourceshifter = tilewidth - rowsize;  //this will wrap the source around
-
-	//offstarget = (tilestarty*VIDEO_BUFFER_WIDTH) + tilestartx; //start at u-l position
-	//offssource = (ymin * tilewidth) + xmin; //start at u-l position
-
-	//buffers: draws graphic. actually uses the above bound checking now (7/18/02)
-	num=0;
-	for(i=ymin;i<ymax;i++)
-	{
-		for(j=xmin;j<xmax;j++)
-		{
-			num = i*tilewidth + j;
-			pointb(j+tilestartx-xmin,i+tilestarty-ymin,sourcebufptr[num], alpha);
-		}
-	}
-}
-
 //buffers: this is the SDL_Surface accelerated version of putbuffer
 void video::putbuffer(Sint32 tilestartx, Sint32 tilestarty,
                       Sint32 tilewidth, Sint32 tileheight,
@@ -1037,7 +981,130 @@ void video::putbuffer(Sint32 tilestartx, Sint32 tilestarty,
 	temp.h = (ymax-ymin);
 
 	SDL_BlitSurface(sourceptr,&temp,E_Screen->render,&rect);
+
 }
+
+
+
+void video::putbuffer_alpha(Sint32 tilestartx, Sint32 tilestarty,
+                      Sint32 tilewidth, Sint32 tileheight,
+                      Sint32 portstartx, Sint32 portstarty,
+                      Sint32 portendx, Sint32 portendy,
+                      unsigned char* sourceptr, unsigned char alpha)
+{
+	int i,j,num;
+	Sint32 xmin=0, xmax=tilewidth, ymin=0, ymax=tileheight;
+	//Uint32 targetshifter,sourceshifter; //these let you wrap around in the arrays
+	Sint32 totrows,rowsize; //number of rows and width of each row in the source
+	//Uint32 offssource,offstarget; //offsets into each array, for clipping and wrap
+	unsigned char * sourcebufptr = &sourceptr[0];
+	if (tilestartx >= portendx || tilestarty >= portendy )
+		return; // abort, the tile is drawing outside the clipping region
+
+	if ((tilestartx + tilewidth) > portendx)   //this clips on the right edge
+		xmax = portendx - tilestartx; //stop drawing after xmax bytes
+
+	else if (tilestartx < portstartx) //this clips on the left edge
+	{
+		xmin = portstartx - tilestartx;
+		tilestartx = portstartx;
+	}
+
+	if ((tilestarty + tileheight) > portendy) //this clips on the bottom edge
+		ymax = portendy - tilestarty;
+
+	else if (tilestarty < portstarty) //this clips the top edge
+	{
+		ymin = portstarty - tilestarty;
+		tilestarty = portstarty;
+	}
+
+	totrows = (ymax-ymin); //how many rows to copy
+	rowsize = (xmax-xmin); //how many bytes to copy
+	if (totrows <= 0 || rowsize <= 0)
+		return; //this happens on bad args
+
+	//targetshifter = VIDEO_BUFFER_WIDTH - rowsize; //this will wrap the target around
+	//sourceshifter = tilewidth - rowsize;  //this will wrap the source around
+
+	//offstarget = (tilestarty*VIDEO_BUFFER_WIDTH) + tilestartx; //start at u-l position
+	//offssource = (ymin * tilewidth) + xmin; //start at u-l position
+
+	//buffers: draws graphic. actually uses the above bound checking now (7/18/02)
+	num=0;
+	for(i=ymin;i<ymax;i++)
+	{
+		for(j=xmin;j<xmax;j++)
+		{
+			num = i*tilewidth + j;
+			pointb(j+tilestartx-xmin,i+tilestarty-ymin,sourcebufptr[num], alpha);
+		}
+	}
+	}
+
+
+
+
+
+
+
+void video::putbuffer_alpha(Sint32 tilestartx, Sint32 tilestarty,
+                      Sint32 tilewidth, Sint32 tileheight,
+                      Sint32 portstartx, Sint32 portstarty,
+                      Sint32 portendx, Sint32 portendy,
+                      SDL_Surface* sourceptr, unsigned char alpha)
+{
+
+SDL_Rect rect,temp;
+	Sint32 xmin=0, xmax=tilewidth, ymin=0, ymax=tileheight;
+	//Uint32 targetshifter,sourceshifter; //these let you wrap around in the arrays
+	Sint32 totrows,rowsize; //number of rows and width of each row in the source
+	//Uint32 offssource,offstarget; //offsets into each array, for clipping and wrap
+	//buffers: unsigned char * sourcebufptr = &sourceptr[0];
+	if (tilestartx >= portendx || tilestarty >= portendy )
+		return; // abort, the tile is drawing outside the clipping region
+
+	if ((tilestartx + tilewidth) > portendx)   //this clips on the right edge
+		xmax = portendx - tilestartx; //stop drawing after xmax bytes
+	else if (tilestartx < portstartx) //this clips on the left edge
+	{
+		xmin = portstartx - tilestartx;
+		tilestartx = portstartx;
+	}
+
+	if ((tilestarty + tileheight) > portendy) //this clips on the bottom edge
+		ymax = portendy - tilestarty;
+	else if (tilestarty < portstarty) //this clips the top edge
+	{
+		ymin = portstarty - tilestarty;
+		tilestarty = portstarty;
+	}
+
+	totrows = (ymax-ymin); //how many rows to copy
+	rowsize = (xmax-xmin); //how many bytes to copy
+	if (totrows <= 0 || rowsize <= 0)
+		return; //this happens on bad args
+	rect.x = (tilestartx);
+	rect.y = (tilestarty);
+	temp.x = xmin;
+	temp.y = ymin;
+	temp.w = (xmax-xmin);
+	temp.h = (ymax-ymin);
+	//SDL_SetTextureAlphaMod(sourceptr, 128);
+	SDL_SetSurfaceBlendMode(sourceptr, SDL_BLENDMODE_ADD); //https://wiki.libsdl.org/SDL_SetSurfaceBlendMode
+	//SDL_SetRenderDrawBlendMode(E_Screen->renderer, SDL_BLENDMODE_ADD);
+	SDL_BlitSurface(sourceptr,&temp,E_Screen->render,&rect);
+}
+
+
+
+
+
+
+
+
+
+
 
 
 // walkputbuffer draws active guys to the screen (basically all non-tiles

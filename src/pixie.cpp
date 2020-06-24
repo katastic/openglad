@@ -129,6 +129,40 @@ short pixie::draw(viewscreen * view_buf)
 	return 1;
 }
 
+
+short pixie::drawAlpha(short x, short y, viewscreen * view_buf, float alpha)
+{
+	setxy(x, y);
+	Sint32 xscreen, yscreen;
+
+	//  if (!on_screen(view_buf))
+	//         return 0;
+	//we actually don't need to waste time on the above since the clipper
+	//will handle it
+
+	xscreen = (Sint32) (xpos - view_buf->topx + view_buf->xloc);
+	yscreen = (Sint32) (ypos - view_buf->topy + view_buf->yloc);
+
+	if(accel)
+	{
+		myscreen->putbuffer_alpha(xscreen, yscreen, sizex, sizey,
+		                             view_buf->xloc, view_buf->yloc,
+		                             view_buf->endx, view_buf->endy,
+		                             bmp_surface, alpha);
+	}
+	else
+	{
+		myscreen->putbuffer_alpha(xscreen, yscreen, sizex, sizey,
+		                             view_buf->xloc, view_buf->yloc,
+		                             view_buf->endx, view_buf->endy,
+		                             bmp, alpha);
+	}
+
+	return 1;
+}
+
+
+
 // Allows the pixie to be placed using pixel coord data
 short pixie::drawMix(short x, short y, viewscreen  * view_buf)
 {

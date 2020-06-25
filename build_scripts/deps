@@ -1,0 +1,4 @@
+#!/bin/bash
+rm ../build_deps/*.o		# remove old o files
+(./c && ./cpp) || echo compile  failure						# make c and cpp o files
+mv *.o ../build_deps/		# move them in

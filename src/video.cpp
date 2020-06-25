@@ -1091,6 +1091,7 @@ SDL_Rect rect,temp;
 	temp.w = (xmax-xmin);
 	temp.h = (ymax-ymin);
 	//SDL_SetTextureAlphaMod(sourceptr, 128);
+	SDL_SetSurfaceAlphaMod(sourceptr, alpha);
 	SDL_SetSurfaceBlendMode(sourceptr, SDL_BLENDMODE_ADD); //https://wiki.libsdl.org/SDL_SetSurfaceBlendMode
 	//SDL_SetRenderDrawBlendMode(E_Screen->renderer, SDL_BLENDMODE_ADD);
 	SDL_BlitSurface(sourceptr,&temp,E_Screen->render,&rect);

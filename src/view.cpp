@@ -32,6 +32,7 @@
 #include "view_sizes.h"
 #include <algorithm>
 #include <cstring>
+#include <cmath>
 
 //these are for chad's team info page
 #define VIEW_TEAM_TOP    2
@@ -226,10 +227,8 @@ short viewscreen::redraw()
 	if (topy < 0)
 		yneg = 1;
 
-	int i;
-	int j;
-	for (j=(topy/GRID_SIZE)-yneg;j < ((topy+(yview))/GRID_SIZE)+1; j++)
-		for ( i=(topx/GRID_SIZE)-xneg;i < ((topx+(xview))/GRID_SIZE)+1; i++)
+	for (int j=(topy/GRID_SIZE)-yneg;j < ((topy+(yview))/GRID_SIZE)+1; j++)
+		for (int i=(topx/GRID_SIZE)-xneg;i < ((topx+(xview))/GRID_SIZE)+1; i++)
 		{
             // KAT <----------------
 			// NOTE: back is a PIXIE.
@@ -245,12 +244,23 @@ short viewscreen::redraw()
 			}
 			else if(gridp.valid())
 				{
-
+				int cx = topx + (topx - endx)/2; //maybe? wtf is with these coordinate systems
+				int cy = topy + (topy - endy)/2; //center xy
+				int distance = sqrt((i*GRID_SIZE-xpos)+(j*GRID_SIZE-ypos));
+				
 				int tile_number = (int)gridp.data[i + maxx * j];
 				int blood_count = myscreen->level_data.blood_data[i][j];
 
 				backp[tile_number]->draw(i*GRID_SIZE, j*GRID_SIZE, this);
-				if(blood_count > 0)backp[i]->drawAlpha(i*GRID_SIZE, j*GRID_SIZE, this, 128);
+				int alpha = 255-distance;
+				if(alpha < 0)alpha=0;
+				if(alpha>255)alpha=255;
+				backp[10]->drawAlpha(i*GRID_SIZE, j*GRID_SIZE, this, alpha);
+
+				if(blood_count > 0)
+					{
+					backp[i]->drawAlpha(i*GRID_SIZE, j*GRID_SIZE, this, 200);
+					}
 
 				//<--------KAT main tile drawing.
 				}

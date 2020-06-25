@@ -1,0 +1,1 @@
+Run ./deps to compile all C and CPP extra utility dependencies. (It also kills old o files for utilities.) then make. Run make clean to nuke main o files.

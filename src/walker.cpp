@@ -1796,12 +1796,6 @@ void walker::do_heal_effects(walker* healer, walker* target, short amount)
 
 void walker::do_hit_effects(walker* attacker, walker* target, short tempdamage)
 {
-
-	int i = target->xpos/GRID_SIZE;
-	int j = target->ypos/GRID_SIZE;
-	assert(i>=0);
-	assert(j>=0);
-	myscreen->level_data.blood_data[i][j]++;
 	
     if(cfg.is_on("effects", "damage_numbers"))
     {
@@ -1866,6 +1860,15 @@ void walker::do_combat_damage(walker* attacker, walker* target, short tempdamage
 		attacker->myguy->total_damage += tempdamage;
 		attacker->myguy->scen_damage += tempdamage;
     }
+
+	int i = target->xpos/GRID_SIZE;
+	int j = target->ypos/GRID_SIZE;
+	assert(i>=0);
+	assert(j>=0);
+	myscreen->level_data.blood_data[i][j]++; 
+	// you would think we'd want it in the claus above for == ORDER_LIVING but 
+	// it apparently doesn't work consistently. It might be one of the secondary clauses.
+
 
     // Deal the damage
     target->last_hitpoints = target->stats->hitpoints;

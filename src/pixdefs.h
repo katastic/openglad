@@ -197,6 +197,11 @@
 #define PIX_JAGGED_GROUND_4 126
 
 // This should be the largest #defined pix +1
-#define PIX_MAX 134  //last currently = PIX_CARPET_SMALL_TINY
+//#define PIX_MAX 134  //last currently = PIX_CARPET_SMALL_TINY
+
+#define PIX_NEW_BLACK   134
+#define PIX_NEW_FOG     135
+#define PIX_NEW_BLOOD   136
+#define PIX_MAX         137      //+1 the last element
 
 #endif

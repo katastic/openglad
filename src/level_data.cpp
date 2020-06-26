@@ -1258,6 +1258,10 @@ short load_scenario_version(SDL_RWops* infile, LevelData* data, short version)
 
 bool LevelData::load()
 {
+    for(int i=0;i<256;i++)
+        for(int j=0;j<256;j++)
+            blood_data[i][j]=0; //reset bloodmap data
+
 	SDL_RWops  *infile = NULL;
 	char temptext[10];
 	memset(temptext, 0, 10);

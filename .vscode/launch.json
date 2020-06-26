@@ -8,7 +8,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "openglad_mk",
+            "program": "openglad",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

@@ -15,6 +15,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 //pixie.cpp
+#include "sai2x.h" //for pixie::drawBlackAlpha()
 
 /* ChangeLog
 	buffers: 7/31/02:

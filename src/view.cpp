@@ -33,6 +33,7 @@
 #include <algorithm>
 #include <cstring>
 #include <cmath>
+#include <cassert>
 
 //these are for chad's team info page
 #define VIEW_TEAM_TOP    2
@@ -203,9 +204,9 @@ short viewscreen::redraw()
 	//short i,j;
 	short xneg = 0;
 	short yneg = 0;
-	walker  *controlob = control;
-	pixieN  **backp = myscreen->level_data.back;
-	PixieData& gridp = myscreen->level_data.grid;
+	walker* 	controlob = control;
+	pixieN** 	backp = myscreen->level_data.back;
+	PixieData& 	gridp = myscreen->level_data.grid;
 	unsigned short maxx = gridp.w;
 	unsigned short maxy = gridp.h;
 
@@ -227,6 +228,10 @@ short viewscreen::redraw()
 	if (topy < 0)
 		yneg = 1;
 
+
+
+	// Main Tile Drawing (plus my new blood decals)
+	// -----------------------------------------------------------------------------
 	for (int j=(topy/GRID_SIZE)-yneg;j < ((topy+(yview))/GRID_SIZE)+1; j++)
 		for (int i=(topx/GRID_SIZE)-xneg;i < ((topx+(xview))/GRID_SIZE)+1; i++)
 		{
@@ -243,33 +248,80 @@ short viewscreen::redraw()
 					backp[PIX_WALLTOP_H]->draw(i*GRID_SIZE,j*GRID_SIZE, this);
 			}
 			else if(gridp.valid())
-				{
-				int cx = topx + (topx - endx)/2; //maybe? wtf is with these coordinate systems
-				int cy = topy + (topy - endy)/2; //center xy
-				int distance = sqrt((i*GRID_SIZE-xpos)+(j*GRID_SIZE-ypos));
-				
-				int tile_number = (int)gridp.data[i + maxx * j];
-				int blood_count = myscreen->level_data.blood_data[i][j];
+				{								
+				// normal draw function
+				int tile_number = (int)gridp.data[i + maxx * j];				
+				backp[tile_number]->draw(i*GRID_SIZE, j*GRID_SIZE, this); 				
 
-				backp[tile_number]->draw(i*GRID_SIZE, j*GRID_SIZE, this);
-				int alpha = 255-distance;
-				if(alpha < 0)alpha=0;
-				if(alpha>255)alpha=255;
-				backp[10]->drawAlpha(i*GRID_SIZE, j*GRID_SIZE, this, alpha);
-
+				// new blood decals
+				int blood_count = myscreen->level_data.blood_data[i][j];				
 				if(blood_count > 0)
 					{
-					backp[i]->drawAlpha(i*GRID_SIZE, j*GRID_SIZE, this, 200);
+					int alpha = 64+32*blood_count-1  / 2;
+					if(alpha>255/2)alpha=255 /2;
+					backp[PIX_NEW_BLOOD]->drawAlpha(i*GRID_SIZE, j*GRID_SIZE, this, alpha);
 					}
-
 				//<--------KAT main tile drawing.
 				}
 
 		}
 
 
-
+	// Main Object Drawing
+	// -----------------------------------------------------------------------------
 	draw_obs(); //moved here to put the radar on top of obs
+
+	// New Top-Layer Tile Drawing (but below GUI)
+	// -----------------------------------------------------------------------------
+	for (int j=(topy/GRID_SIZE)-yneg;j < ((topy+(yview))/GRID_SIZE)+1; j++)
+		for (int i=(topx/GRID_SIZE)-xneg;i < ((topx+(xview))/GRID_SIZE)+1; i++)
+		{
+			if (i<0 || j<0 || i>=maxx || j>=maxy)
+			{
+					/*
+				if (j == -1 && i>-1 && i<maxx)  // show side of wall
+					backp[PIX_WALLSIDE1]->draw(i*GRID_SIZE,j*GRID_SIZE, this);
+				else if (j == -2 && i>-1 && i<maxx)  // show top side of wall
+					backp[PIX_H_WALL1]->draw(i*GRID_SIZE,j*GRID_SIZE, this);
+				else                                                                  // show only top of wall
+					backp[PIX_WALLTOP_H]->draw(i*GRID_SIZE,j*GRID_SIZE, this);
+					*/
+			}
+			else if(gridp.valid())
+				{
+				// extra stuff
+				int cx = topx + xview/2;
+				int cy = topy + yview/2;
+				
+				float arg1 = (cx-i*(float)GRID_SIZE);
+				float arg2 = (cy-j*(float)GRID_SIZE);
+				float distance = sqrt(arg1*arg1 + arg2*arg2)/(float)GRID_SIZE;				 
+				
+				//int tile_number = (int)gridp.data[i + maxx * j];				
+
+				// extra stuff (lighting/fog of war)
+				int alpha = 0;
+				if(distance >=  0 && distance < 4)alpha = 32;
+				if(distance >=  4 && distance < 6)alpha = 64;
+				if(distance >= 6 && distance < 7)alpha = 128;
+				if(distance >= 7 && distance < 11)alpha = 192;
+				if(distance >= 11                 )alpha = 255;
+				assert(distance != NAN);
+
+				backp[PIX_NEW_BLACK]->drawAlpha(i*GRID_SIZE, j*GRID_SIZE, this, alpha);
+				}
+
+		}
+
+
+
+
+
+
+
+
+
+
 	if (control && !control->dead && control->user == mynum && prefs[PREF_RADAR] == PREF_RADAR_ON)
 		myradar->draw();
 	display_text();

@@ -116,7 +116,6 @@ void radar::start(LevelData* data)
 
 }
 
-
 // Destruct the radar and its variables
 radar::~radar()
 {

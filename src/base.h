@@ -85,7 +85,9 @@ Uint32 random(Uint32 x);
 extern screen* myscreen; // global, availible to anyone
 
 #define MAX_LEVELS 500 // Maximum number of scenarios allowed ..
-#define GRID_SIZE 16
+//#define GRID_SIZE 16
+const int GRID_SIZE = 16; //screw your lack of define debug symbols
+
 #define PROT_MODE 1  // comment this out when not in protected mode
 #ifdef PROT_MODE
   #define init_sound(x,y,z)  while (0)

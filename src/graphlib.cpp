@@ -248,5 +248,8 @@ void load_map_data(PixieData* whereto)
 	whereto[PIX_JAGGED_GROUND_3] = read_pixie_file("16jwg3.pix");
 	whereto[PIX_JAGGED_GROUND_4] = read_pixie_file("16jwg1.pix");
 
+	// KAT new PIX files
+	whereto[PIX_NEW_BLACK] = read_pixie_file("newblack.pix");
+	whereto[PIX_NEW_BLOOD] = read_pixie_file("newblood.pix");
 }
 

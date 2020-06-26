@@ -128,8 +128,8 @@ class viewscreen
 		options *prefsob;
 
 		short size;
-		short xview;
-		short yview;
+		short xview; // viewport width
+		short yview; // viewport height
 		unsigned char  *bmp,  *oldbmp;
 };
 

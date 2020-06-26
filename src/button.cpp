@@ -478,7 +478,7 @@ Sint32 vbutton::mouse_on()
     }
 }
 
-vbutton * init_buttons(button * buttons, Sint32 numbuttons)
+vbutton* init_buttons(button* buttons, Sint32 numbuttons)
 { 
 
     for (Sint32 i=1; i < MAX_BUTTONS; i++) // skip # 0!
@@ -490,7 +490,7 @@ vbutton * init_buttons(button * buttons, Sint32 numbuttons)
 
     for (Sint32 i=0; i < numbuttons; i++)
     {
-        printf("%d\n", i);
+//        printf("%d\n", i);
         assert(buttons[i].hotkey < 1080000000);     
 //                                 1443735192
         allbuttons[i] = new vbutton(buttons[i].x, buttons[i].y,

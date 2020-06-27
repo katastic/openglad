@@ -258,7 +258,7 @@ short viewscreen::redraw()
 				if(blood_count > 0)
 					{
 					int alpha = 64+32*blood_count-1  / 2;
-					if(alpha>255/2)alpha=255 /2;
+					if(alpha>150)alpha=150;
 					backp[PIX_NEW_BLOOD]->drawAlpha(i*GRID_SIZE, j*GRID_SIZE, this, alpha);
 					}
 				//<--------KAT main tile drawing.

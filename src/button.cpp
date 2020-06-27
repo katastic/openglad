@@ -386,15 +386,35 @@ Sint32 vbutton::leftclick(Sint32 use_1_for_hotkey)
         assert(hotkey < 300);
         if (keystates[hotkey])
         {
+        assert(hotkey < 300);
             myscreen->soundp->play_sound(SOUND_BOW);
+        assert(hotkey < 300);
             vdisplay(1);
+        assert(hotkey < 300);
             vdisplay();
+        assert(hotkey < 300);
             if (myfunc)
             {
-                retvalue = do_call(myfunc, arg);
+                retvalue = do_call(myfunc, arg); // whatever THIS IS, it has just modified and ruined hotkey.
+                // do_call(10,-1)  -- GO_MENU
+                // so we're fading in, and immediately pressing GO?
+                // or is it the STACK situation where we hit TRAIN and GO or something like that.
+                // CREATE_TEAM_MENU == 2
+                // GO menu == 10
+                //  ALSO the CREATE_TEAM menu DELETES BUTTONS.
+                // so what if we're in the stack, and it deletes them, then goes further up
+                // and only blows up when we get BACK to where we were when we try to check those buttons.
+                
+                // KAT: YEP!!!! Spamming (G)o and (T)eam menu after leaving a round explodes it!
+                // I don't understand why these buttons don't exist on the stack.
+                assert(hotkey < 300);
             }
+                assert(hotkey < 300);
             while (keystates[hotkey])
+                {
+                assert(hotkey < 300);
                 get_input_events(WAIT);
+                }
             return retvalue;
         }
     }

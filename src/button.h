@@ -193,11 +193,59 @@ Sint32 main_options();
 Sint32 overscan_adjust(Sint32 arg);
 
 // Function definitions ..
-#define BEGINMENU               1
+enum function_defs {
+ BEGINMENU = 1             
+, CREATE_TEAM_MENU        
+, SET_PLAYER_MODE         
+, QUIT_MENU               
+, CREATE_VIEW_MENU   
+, CREATE_TRAIN_MENU        
+, CREATE_HIRE_MENU         
+, CREATE_LOAD_MENU        
+, CREATE_SAVE_MENU        
+, GO_MENU                 
+, RETURN_MENU             
+, CYCLE_TEAM_GUY          
+, DECREASE_STAT          
+, INCREASE_STAT           
+, EDIT_GUY                
+, CYCLE_GUY               
+, ADD_GUY                 
+, DO_SAVE                 
+, DO_LOAD                 
+, NAME_GUY                
+, CREATE_DETAIL_MENU      
+, NULLMENU                
+, DO_SET_SCEN_LEVEL       
+, SET_DIFFICULTY          
+, CHANGE_TEAM             
+, ALLIED_MODE             
+, CHANGE_HIRE_TEAM        
+, YES_OR_NO               
+, DO_PICK_CAMPAIGN        
+, DO_LEVEL_EDIT           
+, MAIN_OPTIONS            
+, TOGGLE_SOUND            
+, TOGGLE_RENDERING_ENGINE 
+, TOGGLE_FULLSCREEN       
+, OVERSCAN_ADJUST         
+, TOGGLE_MINI_HP_BAR      
+, TOGGLE_HIT_FLASH        
+, TOGGLE_HIT_RECOIL       
+, TOGGLE_ATTACK_LUNGE     
+, TOGGLE_HIT_ANIM         
+, TOGGLE_DAMAGE_NUMBERS   
+, TOGGLE_HEAL_NUMBERS     
+, TOGGLE_GORE             
+, RESTORE_DEFAULT_SETTINGS };
+
+
+
+/*#define BEGINMENU               1
 #define CREATE_TEAM_MENU        2
 #define SET_PLAYER_MODE         3
 #define QUIT_MENU               4
-#define CREATE_VIEW_MENU        5
+const unsigned int CREATE_VIEW_MENU        5
 #define CREATE_TRAIN_MENU        6
 #define CREATE_HIRE_MENU         7
 #define CREATE_LOAD_MENU        8
@@ -237,4 +285,5 @@ Sint32 overscan_adjust(Sint32 arg);
 #define TOGGLE_HEAL_NUMBERS     42
 #define TOGGLE_GORE             43
 #define RESTORE_DEFAULT_SETTINGS 44
+*/
 #endif

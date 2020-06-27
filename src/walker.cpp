@@ -1761,8 +1761,6 @@ short exp_from_action(ExpActionEnum action, walker* w, walker* target, short val
     return 0;
 }
 
-
-
 float get_base_damage(walker* w)
 {
     float d = w->damage;
@@ -1781,7 +1779,6 @@ float get_damage_reduction(walker* w, float damage, walker* target)
     return result;
 }
 
-
 void walker::do_heal_effects(walker* healer, walker* target, short amount)
 {
     if(!cfg.is_on("effects", "heal_numbers"))
@@ -1796,7 +1793,6 @@ void walker::do_heal_effects(walker* healer, walker* target, short amount)
 
 void walker::do_hit_effects(walker* attacker, walker* target, short tempdamage)
 {
-	
     if(cfg.is_on("effects", "damage_numbers"))
     {
         // Orange numbers for the attacker to see

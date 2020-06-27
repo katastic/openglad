@@ -16,6 +16,8 @@
  */
 #include "common.h"
 
+#include <cassert>
+
 #include "version.h"
 #include "graph.h"
 #include "button.h"
@@ -759,7 +761,10 @@ Sint32 mainmenu()
 	{
 	    // Input
 		if(leftmouse(buttons))
+            {
+            assert(localbuttons != NULL);
 			retvalue = localbuttons->leftclick();
+            }
 
         handle_menu_nav(buttons, highlighted_button, retvalue);
 
@@ -938,7 +943,10 @@ Sint32 create_team_menu(Sint32 arg1)
 	{
 	    // Input
 		if(leftmouse(buttons))
+            {
+            assert(localbuttons != NULL);
 			retvalue = localbuttons->leftclick();
+            }
 
         handle_menu_nav(buttons, highlighted_button, retvalue);
 

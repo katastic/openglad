@@ -133,9 +133,8 @@ vbutton::vbutton(Sint32 xpos, Sint32 ypos, Sint32 wide, Sint32 high,
     mypixie = NULL; // by default, no graphic picture
 
     
-    hotkey = hot;
-    assert(hotkey < 1080000000);     
-                    //1442195624
+    hotkey = hot; // these are NOT in scancodes which can be in the millions/billions. scancodes != keycodes!
+    assert(hotkey < 300);
 
     //vdisplay();
     color = BUTTON_FACING;
@@ -167,8 +166,8 @@ vbutton::vbutton(Sint32 xpos, Sint32 ypos, Sint32 wide, Sint32 high,
     mypixie = NULL; // no graphic by default
 
     
-    hotkey = hot;
-    assert(hotkey < 1080000000);  
+    hotkey = hot; // these are NOT in scancodes which can be in the millions/billions. scancodes != keycodes!
+    assert(hotkey < 300);
 
     //vdisplay();
     color = BUTTON_FACING;
@@ -199,8 +198,8 @@ vbutton::vbutton(Sint32 xpos, Sint32 ypos, Sint32 wide, Sint32 high,
     mypixie = myscreen->level_data.myloader->create_pixieN(ORDER_BUTTON1, family);
 
        
-    hotkey = hot;
-    assert(hotkey < 1080000000);  
+    hotkey = hot; // these are NOT in scancodes which can be in the millions/billions. scancodes != keycodes!
+    assert(hotkey < 300);
 
     width = mypixie->sizex;
     height = mypixie->sizey;
@@ -384,6 +383,7 @@ Sint32 vbutton::leftclick(Sint32 use_1_for_hotkey)
 
     if (use_1_for_hotkey == 1) // hotkeys
     {
+        assert(hotkey < 300);
         if (keystates[hotkey])
         {
             myscreen->soundp->play_sound(SOUND_BOW);
@@ -491,7 +491,7 @@ vbutton* init_buttons(button* buttons, Sint32 numbuttons)
     for (Sint32 i=0; i < numbuttons; i++)
     {
 //        printf("%d\n", i);
-        assert(buttons[i].hotkey < 1080000000);     
+        assert(buttons[i].hotkey < 300);     
 //                                 1443735192
         allbuttons[i] = new vbutton(buttons[i].x, buttons[i].y,
                                     buttons[i].sizex, buttons[i].sizey,

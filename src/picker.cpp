@@ -913,6 +913,7 @@ void family_name_copy(char *name, short family)
 
 Sint32 create_team_menu(Sint32 arg1)
 {
+    printf("we're calling [create_team_menu]\n");
 	Sint32 retvalue=0;
 
 	if (arg1 == 1)
@@ -3051,6 +3052,7 @@ Sint32 delete_all()
 
 Sint32 go_menu(Sint32 arg1)
 {
+    printf("we're calling [go_menu]\n");
 	// Save the current team in memory to save0.gtl, and
 	// run gladiator.
 

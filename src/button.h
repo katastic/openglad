@@ -134,7 +134,7 @@ class vbutton
 		char do_outline; // force an outline
 		char depressed;
 		pixieN *mypixie;
-		int hotkey;
+		unsigned int hotkey; //KAT changed to unsigned
 		unsigned char color;
 		bool hidden;
         bool no_draw;  // Does not draw but still accepts clicks

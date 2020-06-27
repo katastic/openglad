@@ -395,6 +395,7 @@ Sint32 vbutton::leftclick(Sint32 use_1_for_hotkey)
         assert(hotkey < 300);
             if (myfunc)
             {
+                printf("we're calling do_call with myfunc=%d\n",myfunc);
                 retvalue = do_call(myfunc, arg); // whatever THIS IS, it has just modified and ruined hotkey.
                 // do_call(10,-1)  -- GO_MENU
                 // so we're fading in, and immediately pressing GO?
@@ -602,7 +603,7 @@ Sint32 vbutton::do_call(Sint32 whatfunc, Sint32 arg)
         return create_save_menu(arg);
     case GO_MENU:
         return go_menu(arg);
-    case RETURN_MENU:
+    case RETURN_MENU: //=11
         return arg;
     case CYCLE_TEAM_GUY:
         return cycle_team_guy(arg);
@@ -638,8 +639,8 @@ Sint32 vbutton::do_call(Sint32 whatfunc, Sint32 arg)
         return change_allied();
     case DO_LEVEL_EDIT:
         return level_editor();
-    case YES_OR_NO:
-        return yes_or_no(arg);
+    case YES_OR_NO://=28
+        return yes_or_no(arg); 
     case MAIN_OPTIONS:
         return main_options();
     case TOGGLE_SOUND:
@@ -683,6 +684,7 @@ Sint32 vbutton::do_call(Sint32 whatfunc, Sint32 arg)
         cfg.load_settings();
         return REDRAW;
     default:
+        assert(0);
         return OK;
     }
 }

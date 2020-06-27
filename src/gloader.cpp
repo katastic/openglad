@@ -924,7 +924,7 @@ walker  *loader::set_walker(walker *ob,
 					ob->default_weapon = FAMILY_FIREBALL;
 					break;
 				case FAMILY_SUMMONER:
-					ob->stats->special_cost[1] = 200; // summon elf
+					ob->stats->special_cost[1] = 25; // summon elf
 					ob->stats->special_cost[2] = 100;
 					ob->stats->special_cost[3] = 100;
 					ob->stats->special_cost[4] = 100; 

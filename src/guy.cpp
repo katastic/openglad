@@ -287,7 +287,7 @@ Sint32 statcosts[NUM_FAMILIES][6] =
         { 6,15, 5,40,50, 200},  // 'big' orc
         { 5,35, 5,35,50, 200},  // barbarian
         //  {25,15,20, 5,50, 200},  // archmage
-        {30,20,25, 7,55, 200},  // SUMMONER. BEFORE archmage
+        {30,20,25, 7,55, 100},  // SUMMONER. BEFORE archmage
         {30,20,25, 7,55, 200},  // archmage        
     };
 

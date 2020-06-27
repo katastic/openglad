@@ -859,7 +859,7 @@ const char* get_family_string(short family)
 		case FAMILY_GHOST:
 			return "GHOST";
 		case FAMILY_SUMMONER:
-			return "xXxSuMmOnErxXx";
+			return "SUMMONER";
 		default:
 			return "BEAST";
 	}
@@ -1187,7 +1187,7 @@ std::string get_class_description(unsigned char family)
                  "Special: Teleport";
         break;
     case FAMILY_SUMMONER:
-        result = "The MOTHER FUCKER HIMSELF \n"
+        result = "The Summoner does things. \n"
                  "                          \n"
                  "                          \n"
                  "                          \n"

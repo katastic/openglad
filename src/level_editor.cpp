@@ -29,6 +29,7 @@
 #include "campaign_picker.h"
 #include "sai2x.h"
 #include <cstring>
+#include <cassert>
 
 #include "common.h"
 
@@ -251,7 +252,7 @@ bool save_level_and_map(screen* ascreen);
 bool does_campaign_exist(const std::string& campaign_id)
 {
     std::list<std::string> ls = list_campaigns();
-    for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); e++)
+    for(std::list<std::string>::iterator e = ls.begin(); e != ls.end(); ++e)
     {
         if(campaign_id == *e)
             return true;
@@ -628,7 +629,7 @@ bool prompt_for_string_block(const std::string& message, std::list<std::string>&
                 {
                     // Go to next line
                     current_line++;
-                    s++;
+                    ++s;
                     cursor_pos = 0;
                 }
                 else  // No next line
@@ -677,7 +678,7 @@ bool prompt_for_string_block(const std::string& message, std::list<std::string>&
         if(current_line > 3)
             offset = (current_line - 3)*10;
         int j = 0;
-        for(std::list<std::string>::iterator e = result.begin(); e != result.end(); e++)
+        for(std::list<std::string>::iterator e = result.begin(); e != result.end(); ++e)
         {
             int ypos = y + j*10 - offset;
             if(y <= ypos && ypos <= y + h)
@@ -1152,7 +1153,7 @@ bool LevelEditorData::saveLevelAs(int id)
 
 bool button_showing(const std::list<std::pair<SimpleButton*, std::set<SimpleButton*> > >& ls, SimpleButton* elem)
 {
-    for(std::list<std::pair<SimpleButton*, std::set<SimpleButton*> > >::const_iterator e = ls.begin(); e != ls.end(); e++)
+    for(std::list<std::pair<SimpleButton*, std::set<SimpleButton*> > >::const_iterator e = ls.begin(); e != ls.end(); ++e)
     {
         const std::set<SimpleButton*>& s = e->second;
         if(s.find(elem) != s.end())
@@ -1164,13 +1165,13 @@ bool button_showing(const std::list<std::pair<SimpleButton*, std::set<SimpleButt
 // Wouldn't spatial partitioning be nice?  Too bad!
 bool LevelEditorData::mouse_on_menus(int mx, int my)
 {
-    for(set<SimpleButton*>::const_iterator e = menu_buttons.begin(); e != menu_buttons.end(); e++)
+    for(set<SimpleButton*>::const_iterator e = menu_buttons.begin(); e != menu_buttons.end(); ++e)
     {
         if((*e)->contains(mx, my))
             return true;
     }
 
-    for(set<SimpleButton*>::const_iterator e = mode_buttons.begin(); e != mode_buttons.end(); e++)
+    for(set<SimpleButton*>::const_iterator e = mode_buttons.begin(); e != mode_buttons.end(); ++e)
     {
         if((*e)->contains(mx, my))
             return true;
@@ -1180,7 +1181,7 @@ bool LevelEditorData::mouse_on_menus(int mx, int my)
     if(pan_buttons.size() > 0 && Rect(panLeftButton.area.x, panUpButton.area.y, panRightButton.area.x + panRightButton.area.w - panLeftButton.area.x, panDownButton.area.y + panDownButton.area.h - panUpButton.area.y).contains(mx, my))
         return true;
 
-    for(std::list<std::pair<SimpleButton*, std::set<SimpleButton*> > >::const_iterator e = current_menu.begin(); e != current_menu.end(); e++)
+    for(std::list<std::pair<SimpleButton*, std::set<SimpleButton*> > >::const_iterator e = current_menu.begin(); e != current_menu.end(); ++e)
     {
         const set<SimpleButton*>& s = e->second;
         for(set<SimpleButton*>::const_iterator f = s.begin(); f != s.end(); f++)
@@ -1308,7 +1309,7 @@ void LevelEditorData::activate_mode_button(SimpleButton* button)
     {
         if(mode == SELECT)
         {
-            for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+            for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); ++e)
             {
                 walker* obj = e->get_object(level);
                 if(obj != NULL)
@@ -1333,7 +1334,7 @@ void LevelEditorData::activate_mode_button(SimpleButton* button)
     {
         if(mode == SELECT)
         {
-            for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+            for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); ++e)
             {
                 walker* obj = e->get_object(level);
                 if(obj != NULL)
@@ -1356,7 +1357,7 @@ void LevelEditorData::activate_mode_button(SimpleButton* button)
     }
     else if(button == &prevLevelButton)
     {
-        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); ++e)
         {
             walker* obj = e->get_object(level);
             if(obj != NULL)
@@ -1372,7 +1373,7 @@ void LevelEditorData::activate_mode_button(SimpleButton* button)
     }
     else if(button == &nextLevelButton)
     {
-        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); ++e)
         {
             walker* obj = e->get_object(level);
             if(obj != NULL)
@@ -1385,7 +1386,7 @@ void LevelEditorData::activate_mode_button(SimpleButton* button)
     }
     else if(button == &prevClassButton)
     {
-        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); ++e)
         {
             walker* obj = e->get_object(level);
             if(obj != NULL && obj->query_order() == ORDER_LIVING)
@@ -1407,7 +1408,7 @@ void LevelEditorData::activate_mode_button(SimpleButton* button)
     }
     else if(button == &nextClassButton)
     {
-        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); ++e)
         {
             walker* obj = e->get_object(level);
             if(obj != NULL && obj->query_order() == ORDER_LIVING)
@@ -1429,7 +1430,7 @@ void LevelEditorData::activate_mode_button(SimpleButton* button)
     }
     else if(button == &facingButton)
     {
-        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); ++e)
         {
             walker* obj = e->get_object(level);
             if(obj != NULL)
@@ -1445,7 +1446,7 @@ void LevelEditorData::activate_mode_button(SimpleButton* button)
     }
     else if(button == &deleteButton)
     {
-        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); ++e)
         {
             walker* obj = e->get_object(level);
             if(obj != NULL)
@@ -1465,7 +1466,7 @@ bool activate_sub_menu_button(int mx, int my, std::list<std::pair<SimpleButton*,
     if(!button.contains(mx, my) || (!is_in_top_menu && !button_showing(current_menu, &button)))
         return false;
 
-    MouseState& mymouse = query_mouse_no_poll();
+    const MouseState& mymouse = query_mouse_no_poll();
     while (mymouse.left)
         get_input_events(WAIT);
 
@@ -1499,7 +1500,7 @@ bool activate_menu_choice(int mx, int my, LevelEditorData& data, SimpleButton& b
     if(!button.contains(mx, my) || (!is_in_top_menu && !button_showing(data.current_menu, &button)))
         return false;
 
-    MouseState& mymouse = query_mouse_no_poll();
+    const MouseState& mymouse = query_mouse_no_poll();
     while (mymouse.left)
         get_input_events(WAIT);
 
@@ -1516,7 +1517,7 @@ bool activate_menu_toggle_choice(int mx, int my, LevelEditorData& data, SimpleBu
     if(!button.contains(mx, my) || (!is_in_top_menu && !button_showing(data.current_menu, &button)))
         return false;
 
-    MouseState& mymouse = query_mouse_no_poll();
+    const MouseState& mymouse = query_mouse_no_poll();
     while (mymouse.left)
         get_input_events(WAIT);
 
@@ -1547,7 +1548,7 @@ void get_connected_level_exits(int current_level, const std::list<int>& levels, 
 
     // Get the exits
     std::set<int> exits;
-    for(auto e = d.fxlist.begin(); e != d.fxlist.end(); e++)
+    for(auto e = d.fxlist.begin(); e != d.fxlist.end(); ++e)
     {
         walker* w = *e;
         if(w->query_order() == ORDER_TREASURE && w->query_family() == FAMILY_EXIT && w->stats != NULL)
@@ -1559,7 +1560,7 @@ void get_connected_level_exits(int current_level, const std::list<int>& levels, 
     {
         // Does the next sequential level exist?
         bool has_next = false;
-        for(std::list<int>::const_iterator e = levels.begin(); e != levels.end(); e++)
+        for(std::list<int>::const_iterator e = levels.begin(); e != levels.end(); ++e)
         {
             if(current_level+1 == *e)
             {
@@ -1582,7 +1583,7 @@ void get_connected_level_exits(int current_level, const std::list<int>& levels, 
     }
 
     // Recursively call on exits
-    for(std::set<int>::iterator e = exits.begin(); e != exits.end(); e++)
+    for(std::set<int>::iterator e = exits.begin(); e != exits.end(); ++e)
     {
         get_connected_level_exits(*e, levels, connected, problems);
     }
@@ -1639,7 +1640,7 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
     // Draw selection indicators
     if(mode == SELECT && selection.size() > 0)
     {
-        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); ++e)
         {
             // Draw cursor
             int mx, my;
@@ -1661,19 +1662,19 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
     myradar.draw(level);
 
     // Draw mode-specific buttons
-    for(set<SimpleButton*>::iterator e = mode_buttons.begin(); e != mode_buttons.end(); e++)
+    for(set<SimpleButton*>::iterator e = mode_buttons.begin(); e != mode_buttons.end(); ++e)
         (*e)->draw(myscreen);
 
     if(pan_buttons.size() > 0)
     {
         Rect r(panLeftButton.area.x, panUpButton.area.y, panRightButton.area.x + panRightButton.area.w - panLeftButton.area.x, panDownButton.area.y + panDownButton.area.h - panUpButton.area.y);
         myscreen->fastbox(r.x, r.y, r.w, r.h, 13);
-        for(set<SimpleButton*>::iterator e = pan_buttons.begin(); e != pan_buttons.end(); e++)
+        for(set<SimpleButton*>::iterator e = pan_buttons.begin(); e != pan_buttons.end(); ++e)
             (*e)->draw(myscreen);
     }
 
 	char message[50];
-	Sint32 i, j; // for loops
+	//Sint32 i, j; // for loops
 	//   static Sint32 family=-1, hitpoints=-1, score=-1, act=-1;
 	Sint32 numobs = myscreen->level_data.numobs;
 	Sint32 lm = 245;
@@ -1717,7 +1718,7 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
         if(selection.size() > 1)
             scentext.write_xy(lm, L_D(curline++), "Selected:", RED, 1);
         int i = 0;
-        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+        for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); ++e)
         {
             bool showing_name = false;
 
@@ -1903,9 +1904,9 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
         myscreen->draw_box(lm+25, PIX_TOP-16-1, lm+25+GRID_SIZE, PIX_TOP-16-1+GRID_SIZE, RED, 0, 1);
 
         // Show the background grid
-        for (i=0; i < PIX_OVER; i++)
+        for (int i=0; i < PIX_OVER; i++)
         {
-            for (j=0; j < 4; j++)
+            for (int j=0; j < 4; j++)
             {
                 whichback = (i+(j+rowsdown)*4) % (sizeof(backgrounds)/4);
                 myscreen->putbuffer(S_RIGHT+i*GRID_SIZE, PIX_TOP+j*GRID_SIZE,
@@ -1960,9 +1961,9 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
         myscreen->draw_box(S_RIGHT, PIX_TOP,
                            S_RIGHT+4*GRID_SIZE, PIX_TOP+4*GRID_SIZE, WHITE, 0, 1);
 
-        for (i=0; i < PIX_OVER; i++)
+        for (int i=0; i < PIX_OVER; i++)
         {
-            for (j=0; j < 4; j++)
+            for (int j=0; j < 4; j++)
             {
                 int index = (i + ((j+rowsdown) * PIX_OVER)) % (object_pane.size());
                 if(index < int(object_pane.size()))
@@ -2025,11 +2026,11 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
 
 
     // Draw top menu
-    for(set<SimpleButton*>::iterator e = menu_buttons.begin(); e != menu_buttons.end(); e++)
+    for(set<SimpleButton*>::iterator e = menu_buttons.begin(); e != menu_buttons.end(); ++e)
         (*e)->draw(myscreen);
 
     // Draw submenus
-    for(list<pair<SimpleButton*, set<SimpleButton*> > >::iterator e = current_menu.begin(); e != current_menu.end(); e++)
+    for(list<pair<SimpleButton*, set<SimpleButton*> > >::iterator e = current_menu.begin(); e != current_menu.end(); ++e)
     {
         set<SimpleButton*>& s = e->second;
         for(set<SimpleButton*>::iterator f = s.begin(); f != s.end(); f++)
@@ -2089,7 +2090,7 @@ void LevelEditorData::mouse_motion(int mx, int my, int dx, int dy)
                 under_cursor = get_object(worldx, worldy);
 
                 walker* got_one = NULL;
-                for(vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+                for(vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); ++e)
                 {
                     if(e->target == under_cursor)
                     {
@@ -2104,7 +2105,7 @@ void LevelEditorData::mouse_motion(int mx, int my, int dx, int dy)
             {
                 // Drag the selected objects
                 dragging = true;
-                for(vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+                for(vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); ++e)
                 {
                     walker* w = e->get_object(level);
                     if(w != NULL)
@@ -2142,7 +2143,7 @@ void LevelEditorData::mouse_motion(int mx, int my, int dx, int dy)
 
 bool is_in_selection(walker* w, const vector<SelectionInfo>& selection)
 {
-    for(vector<SelectionInfo>::const_iterator e = selection.begin(); e != selection.end(); e++)
+    for(vector<SelectionInfo>::const_iterator e = selection.begin(); e != selection.end(); ++e)
     {
         if(e->target == w)
             return true;
@@ -2153,7 +2154,7 @@ bool is_in_selection(walker* w, const vector<SelectionInfo>& selection)
 // Make sure to use reset_mode_buttons() after this
 void add_contained_objects_to_selection(LevelData* level, const Rectf& area, vector<SelectionInfo>& selection)
 {
-    for(auto e = level->oblist.begin(); e != level->oblist.end(); e++)
+    for(auto e = level->oblist.begin(); e != level->oblist.end(); ++e)
 	{
 	    walker* w = *e;
 		if(w && area.contains(w->xpos + w->sizex/2, w->ypos + w->sizey/2))
@@ -2163,7 +2164,7 @@ void add_contained_objects_to_selection(LevelData* level, const Rectf& area, vec
 		}
 	}
 
-    for(auto e = level->fxlist.begin(); e != level->fxlist.end(); e++)
+    for(auto e = level->fxlist.begin(); e != level->fxlist.end(); ++e)
 	{
 	    walker* w = *e;
 		if(w && area.contains(w->xpos + w->sizex/2, w->ypos + w->sizey/2))
@@ -2173,7 +2174,7 @@ void add_contained_objects_to_selection(LevelData* level, const Rectf& area, vec
 		}
 	}
 
-    for(auto e = level->weaplist.begin(); e != level->weaplist.end(); e++)
+    for(auto e = level->weaplist.begin(); e != level->weaplist.end(); ++e)
 	{
 	    walker* w = *e;
 		if(w && area.contains(w->xpos + w->sizex/2, w->ypos + w->sizey/2))
@@ -2680,7 +2681,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
             int current_level = campaign->first_level;
             get_connected_level_exits(current_level, levels, connected, problems);
 
-            for(std::list<int>::iterator e = levels.begin(); e != levels.end(); e++)
+            for(std::list<int>::iterator e = levels.begin(); e != levels.end(); ++e)
             {
                 if(connected.find(*e) == connected.end())
                 {
@@ -2711,7 +2712,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
 
                 // Put all the problems together for the printer
                 buf[0] = '\0';
-                for(std::list<std::string>::iterator e = problems.begin(); e != problems.end(); e++)
+                for(std::list<std::string>::iterator e = problems.begin(); e != problems.end(); ++e)
                 {
                     if(e->size() + strlen(buf) + 1 >= 512)
                         break;
@@ -2969,7 +2970,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
         else
         {
             // Check mode-specific buttons
-            for(std::set<SimpleButton*>::iterator e = mode_buttons.begin(); e != mode_buttons.end(); e++)
+            for(std::set<SimpleButton*>::iterator e = mode_buttons.begin(); e != mode_buttons.end(); ++e)
             {
                 if((*e)->contains(mx, my))
                 {
@@ -3058,7 +3059,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
                             {
                                 // Select/deselect another guy
                                 bool deselected = false;
-                                for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); e++)
+                                for(std::vector<SelectionInfo>::iterator e = selection.begin(); e != selection.end(); ++e)
                                 {
                                     // Identify the guy.  Not the best way...
                                     if(e->x == w->xpos && e->y == w->ypos && e->w == w->sizex && e->h == w->sizey)
@@ -3109,6 +3110,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
                     {
                         // Create new object here (apply brush)
                         levelchanged = 1;
+                        assert(newob != NULL);
                         newob = level->add_ob(object_brush.order, object_brush.family);
                         newob->setxy(windowx, windowy);
                         newob->team_num = object_brush.team;
@@ -3259,21 +3261,21 @@ bool are_objects_outside_area(LevelData* level, int x, int y, int w, int h)
     w *= GRID_SIZE;
     h *= GRID_SIZE;
 
-    for(auto e = level->oblist.begin(); e != level->oblist.end(); e++)
+    for(auto e = level->oblist.begin(); e != level->oblist.end(); ++e)
 	{
 	    walker* ob = *e;
 		if(ob && (x > ob->xpos || ob->xpos >= x + w || y > ob->ypos || ob->ypos >= y + h))
 		    return true;
 	}
 
-    for(auto e = level->fxlist.begin(); e != level->fxlist.end(); e++)
+    for(auto e = level->fxlist.begin(); e != level->fxlist.end(); ++e)
 	{
 	    walker* ob = *e;
 		if(ob && (x > ob->xpos || ob->xpos >= x + w || y > ob->ypos || ob->ypos >= y + h))
 		    return true;
 	}
 
-    for(auto e = level->weaplist.begin(); e != level->weaplist.end(); e++)
+    for(auto e = level->weaplist.begin(); e != level->weaplist.end(); ++e)
 	{
 	    walker* ob = *e;
 		if(ob && (x > ob->xpos || ob->xpos >= x + w || y > ob->ypos || ob->ypos >= y + h))
@@ -3384,7 +3386,7 @@ Sint32 level_editor()
     ModeEnum& mode = data.mode;
     radar& myradar = data.myradar;
 
-	Sint32 i,j;
+//	Sint32 i,j;
 	Sint32 windowx, windowy;
 	Sint32 mx, my;
 
@@ -3922,8 +3924,8 @@ Sint32 level_editor()
                                 levelchanged = 1;
                                 if (terrain_brush.use_smoothing) // smooth a few squares, if not control
                                 {
-                                    for (i=windowx-1; i <= windowx+1; i++)
-                                        for (j=windowy-1; j <=windowy+1; j++)
+                                    for (int i=windowx-1; i <= windowx+1; i++)
+                                        for (int j=windowy-1; j <=windowy+1; j++)
                                             if (i >= 0 && i < data.level->grid.w &&
                                                     j >= 0 && j < data.level->grid.h)
                                                 data.level->mysmoother.smooth(i, j);
@@ -4172,7 +4174,7 @@ Sint32 check_collide(Sint32 x,  Sint32 y,  Sint32 xsize,  Sint32 ysize,
 // The old-fashioned hit check ..
 walker * some_hit(Sint32 x, Sint32 y, walker  *ob, LevelData* data)
 {
-    for(auto e = data->oblist.begin(); e != data->oblist.end(); e++)
+    for(auto e = data->oblist.begin(); e != data->oblist.end(); ++e)
 	{
 	    walker* w = *e;
 		if (w && w != ob
@@ -4185,7 +4187,7 @@ walker * some_hit(Sint32 x, Sint32 y, walker  *ob, LevelData* data)
         }
 	}
 
-    for(auto e = data->fxlist.begin(); e != data->fxlist.end(); e++)
+    for(auto e = data->fxlist.begin(); e != data->fxlist.end(); ++e)
 	{
 	    walker* w = *e;
 		if (w && w != ob
@@ -4198,7 +4200,7 @@ walker * some_hit(Sint32 x, Sint32 y, walker  *ob, LevelData* data)
         }
 	}
 
-    for(auto e = data->weaplist.begin(); e != data->weaplist.end(); e++)
+    for(auto e = data->weaplist.begin(); e != data->weaplist.end(); ++e)
 	{
 	    walker* w = *e;
 		if (w && w != ob

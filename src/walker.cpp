@@ -3034,11 +3034,23 @@ short walker::special()
 
 		case FAMILY_BUILDER:
 			{
-/*			PixieData& gridp = myscreen->level_data.grid;
-			int i = xpos/GRID_SIZE;
-			int j = ypos/GRID_SIZE;
-			gridp.data[i + j*gridp.w] = PIX_WALLSIDE1;*/
-
+			switch(current_special)
+			{
+			case 1:
+				{
+				PixieData& gridp = myscreen->level_data.grid;
+				int i = xpos/GRID_SIZE;
+				int j = ypos/GRID_SIZE;
+				if(gridp.data[i + j*gridp.w] != PIX_WALLSIDE1)
+					{
+					gridp.data[i + j*gridp.w] = PIX_WALLSIDE1;
+					}else{
+					return 1; // no mana cost
+					}
+				}
+			break;
+			case 2:
+				{
 				int FAMILY = FAMILY_TOWER1; 
 				walker* newobj;
 				// First make the guy we'd summon, at least physically
@@ -3116,8 +3128,8 @@ short walker::special()
 				}
 				stats->special_cost[1] += 25; //25, 50, 75, etc
 				busy += 15;						
-
-
+				}
+			}
 			}
 			break;
 

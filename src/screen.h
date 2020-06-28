@@ -98,14 +98,13 @@ class screen : public video
 		char special_name[NUM_FAMILIES][NUM_SPECIALS][20];
 		char alternate_name[NUM_FAMILIES][NUM_SPECIALS][20];
 		unsigned short enemy_freeze; // stops enemies from acting
-		soundob *soundp;
+		soundob* soundp;
 		short redrawme;
-		viewscreen  * viewob[5];
+		viewscreen* viewob[5];		// text for all FOUR viewports and 0 is displayed on all four at once? KAT
 		short numviews;
 		Uint32 timerstart;
 		Uint32 framecount;
 };
-
 
 #endif
 

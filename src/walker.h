@@ -98,6 +98,7 @@ class walker : public pixieN
 				return 0;
 		}
 
+		bool is_a_summon=false; /// KAT. Set true when summoned by a SUMMONER. (no affect on archmage unless we add it)
 
 		Uint32 keys; // used to open doors
 		short view_all;     // used for seeing treasures, etc. on radar

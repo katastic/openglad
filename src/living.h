@@ -39,7 +39,7 @@ class living : public walker
 		{
 			return ORDER_LIVING;
 		}
-		virtual bool walk(float x, float y) override;
+		virtual bool walk(float x, float y) override;		
 	protected:
 		short act_random() override;
 };

@@ -221,7 +221,7 @@ enum function_defs {
 , CHANGE_TEAM             
 , ALLIED_MODE             
 , CHANGE_HIRE_TEAM        
-, YES_OR_NO               
+, YES_OR_NO      	//28          
 , DO_PICK_CAMPAIGN        
 , DO_LEVEL_EDIT           
 , MAIN_OPTIONS            

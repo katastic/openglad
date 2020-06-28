@@ -1533,8 +1533,6 @@ void walker::draw_path(viewscreen* view_buf)
 
 short walker::act()
 {
-	
-
 	// Make sure everyone we're pointing to is valid
 	if (foe && foe->dead)
 		foe = NULL;
@@ -1622,6 +1620,13 @@ short walker::act()
 			}
 		case ACT_DIE:
 			{
+				/* KAT: This didn't work. Never gets called.
+				if(this->owner->query_family() == FAMILY_SUMMONER)
+					{
+					owner->stats->special_cost[1] -= 25;
+					if(owner->stats->special_cost[1] < 25)owner->stats->special_cost[1] = 25;
+			        printf("living.cpp:340 ACT_DIE\n"); 
+					}*/
 				this->dead = 1;
 				return 1;
 			}
@@ -2090,10 +2095,13 @@ short walker::attack(walker  *target)
 				else
 				{
 					// Alert us of the death
-					if ( (target->owner || target->lifetime) // summoned?
-					        && (strlen(target->stats->name) ) ) // and have name
+					if (target->owner && target->is_a_summon)
+						{
+						sprintf(message, "%s Dispelled! -25 mana cost\n", target->stats->name);
+						}else if ( (target->owner || target->lifetime) // summoned?
+					        && (strlen(target->stats->name) ) ) {// and have name
 						sprintf(message, "%s Dispelled!", target->stats->name);
-					else if (strlen(target->stats->name)) // do we have an NPC name?
+							}else if (strlen(target->stats->name)) // do we have an NPC name?
 						sprintf(message, "%s DIED!", target->stats->name);
 					else if (target->myguy && strlen(target->myguy->name) )
 						sprintf(message, "%s Died!", target->myguy->name);
@@ -3065,7 +3073,6 @@ short walker::special()
 				if (myscreen->query_passable(xpos+((newobj->sizex+xoffset*GRID_SIZE)),
 													ypos+((newobj->sizey+yoffset*GRID_SIZE)), newobj))
 						{
-							printf("NEW METHOD\n");	
 							// We've found a legal spot ..
 							found_room = 1;
 							newobj->setxy(xpos+((newobj->sizex+xoffset*GRID_SIZE)),
@@ -3075,6 +3082,9 @@ short walker::special()
 							newobj->team_num = team_num; // set to our team
 							newobj->owner = this; // we're owned!
 							newobj->lifetime = 200 + 60*stats->level;
+							newobj->is_a_summon = true;
+							sprintf(message, "Cost %d", stats->special_cost[1]);
+							myscreen->viewob[0]->set_display_text(message, STANDARD_TEXT_TIME);
 						} // end of successfully put summoned creature
 						else{
 
@@ -3095,6 +3105,9 @@ short walker::special()
 										newobj->team_num = team_num; // set to our team
 										newobj->owner = this; // we're owned!
 										newobj->lifetime = 200 + 60*stats->level;
+										newobj->is_a_summon = true;
+										sprintf(message, "Cost %d", stats->special_cost[1]);
+										myscreen->viewob[0]->set_display_text(message, STANDARD_TEXT_TIME);
 									} // end of successfully put summoned creature
 								} // end of I and J loops
 						}
@@ -4590,19 +4603,30 @@ void walker::transform_to(char whatorder, char whatfamily)
 // for special effects ..
 short walker::death()
 {
+
 	// Note that the 'dead' variable should ALREADY be set by the
 	// time this function is called, so that we can easily reverse
 	// the decision :)
 	walker  *newob = NULL;
 	Sint32 i;
 
+	if(is_a_summon)
+		{
+		owner->stats->special_cost[1] -= 25;
+		if(owner->stats->special_cost[1] < 25)owner->stats->special_cost[1] = 25;
+		printf("%s:%d death()\n", __FILE__, __LINE__); 
+		}
+
 	if (death_called)
 		return 0;
 
 	death_called = 1;
 
+
 	if (myguy) // were we a real character?  Then make a heart ..
 	{
+
+
 		newob = myscreen->level_data.add_ob(ORDER_TREASURE, FAMILY_LIFE_GEM, 1);
 		newob->stats->hitpoints = myguy->query_heart_value();
 		newob->stats->hitpoints *= 0.75 / 2;  // 75%, divided by 2, since score is doubled at end of level

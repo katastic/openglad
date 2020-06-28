@@ -67,23 +67,25 @@ Sint32 do_set_scen_level(Sint32 arg1);
 Sint32 leftmouse(button* buttons);
 void family_name_copy(char *name, short family);
 
+namespace g{
+    guy  *current_guy = NULL;
+    guy  *old_guy = NULL;
+    Sint32 editguy = 0;        // Global for editing guys ..
+    short current_team_num = 0;
+    Sint32 current_type = 0; // guy type we're looking at
+    }
+
 // Zardus: PORT: put in a backpics var here so we can free the pixie files themselves
 PixieData backpics[5];
 pixieN *backdrops[5];
 
 // Zardus: FIX: this is from view.cpp, so that we can delete it here
 extern options *theprefs;
-
-guy  *current_guy = NULL;
-guy  *old_guy = NULL;
-
-//char  message[80];
-Sint32 editguy = 0;        // Global for editing guys ..
 PixieData main_title_logo_data, main_columns_data;
-pixieN  *main_title_logo_pix,*main_columns_pix;
+pixieN* main_title_logo_pix,*main_columns_pix;
 
-vbutton * localbuttons; //global so we can delete the buttons anywhere
-short current_team_num = 0;
+vbutton* localbuttons; //global so we can delete the buttons anywhere
+    //KAT: moving this into globals has wierd parsing errors when g:: is combined with &* etc
 
 Sint32 allowable_guys[] =
     { FAMILY_SUMMONER,
@@ -103,10 +105,10 @@ Sint32 allowable_guys[] =
       FAMILY_GHOST
     };
 
-Sint32 current_type = 0; // guy type we're looking at
 
 // Used to label new hires, like "SOLDIER5"
-Sint32 numbought[NUM_FAMILIES] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+Sint32 numbought[NUM_FAMILIES] = 
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 // See guy.cpp
 extern Sint32 costlist[NUM_FAMILIES];
@@ -130,16 +132,14 @@ char difficulty_names[DIFFICULTY_SETTINGS][80] =
 
 void picker_main(Sint32 argc, char  **argv)
 {
-	Sint32 i;
-
-	for (i=0; i < MAX_BUTTONS; i++)
+	for (int i=0; i < MAX_BUTTONS; i++)
 		allbuttons[i] = NULL;
 
 	// Get main dir ..
 	//strcpy(main_dir, "");
 
 	// Set backdrops to NULL
-	for (i=0; i < 5; i++)
+	for (int i=0; i < 5; i++)
 		backdrops[i] = NULL;
 
 	backpics[0] = read_pixie_file("mainul.pix");
@@ -187,9 +187,7 @@ void picker_main(Sint32 argc, char  **argv)
 
 void picker_quit()
 {
-	int i;
-
-	for (i = 0; i < 5; i ++)
+	for (int i = 0; i < 5; i ++)
 	{
 		if (backdrops[i])
 		{
@@ -200,7 +198,7 @@ void picker_quit()
         backpics[i].free();
 	}
 
-	for (i = 0; i < MAX_BUTTONS; i++)
+	for (int i = 0; i < MAX_BUTTONS; i++)
 	{
 		if (allbuttons[i])
 			delete allbuttons[i];
@@ -810,7 +808,7 @@ Sint32 beginmenu(Sint32 arg1)
 
     // Reset the save data so we have a fresh, new team
 	myscreen->save_data.reset();
-	current_guy = NULL;
+	g::current_guy = NULL;
 
 	// Clear the labeling counter
 	for (int i = 0; i < NUM_FAMILIES; i++)
@@ -1283,7 +1281,7 @@ Sint32 create_hire_menu(Sint32 arg1)
     change_hire_teamnum(0);
 
 
-    unsigned char last_family = current_guy->family;
+    unsigned char last_family = g::current_guy->family;
     std::string description = get_class_description(last_family);
     std::list<std::string> desc = explode(description);
     const char* family_name = get_family_string(last_family);
@@ -1321,7 +1319,7 @@ Sint32 create_hire_menu(Sint32 arg1)
         draw_backdrop();
         draw_buttons(buttons, num_buttons);
 
-        if (!current_guy)
+        if (!g::current_guy)
             cycle_guy(0);
 
         // Name box
@@ -1339,10 +1337,10 @@ Sint32 create_hire_menu(Sint32 arg1)
         myscreen->draw_button(description_box, 1);
         myscreen->draw_button_inverted(description_box_inner);
 
-        if(current_guy->family != last_family)
+        if(g::current_guy->family != last_family)
         {
             // Update description
-            last_family = current_guy->family;
+            last_family = g::current_guy->family;
             description = get_class_description(last_family);
             desc = explode(description);
 
@@ -1361,12 +1359,12 @@ Sint32 create_hire_menu(Sint32 arg1)
         myscreen->draw_button_inverted(cost_box_inner);
 
         char  message[80];
-        sprintf(message, "CASH: %u", myscreen->save_data.m_totalcash[current_team_num]);
+        sprintf(message, "CASH: %u", myscreen->save_data.m_totalcash[g::current_team_num]);
         mytext.write_xy(cost_box_content.x, cost_box_content.y, message,(unsigned char) DARK_BLUE, 1);
         current_cost = calculate_hire_cost();
         mytext.write_xy(cost_box_content.x, cost_box_content.y + 10, "COST: ", DARK_BLUE, 1);
         sprintf(message, "      %u", current_cost );
-        if (current_cost > myscreen->save_data.m_totalcash[current_team_num])
+        if (current_cost > myscreen->save_data.m_totalcash[g::current_team_num])
             mytext.write_xy(cost_box_content.x + 10, cost_box_content.y + 10, message, STAT_CHANGED, 1);
         else
             mytext.write_xy(cost_box_content.x + 10, cost_box_content.y + 10, message, STAT_COLOR, 1);
@@ -1383,7 +1381,7 @@ Sint32 create_hire_menu(Sint32 arg1)
         showcolor = STAT_COLOR;
 
         // Strength
-        sprintf(message, "%d", current_guy->strength);
+        sprintf(message, "%d", g::current_guy->strength);
         mytext.write_xy(stat_box_content.x, stat_box_content.y + linesdown*line_height, "STR:",
                          (unsigned char) STAT_COLOR, 1);
 
@@ -1392,7 +1390,7 @@ Sint32 create_hire_menu(Sint32 arg1)
 
         linesdown++;
         // Dexterity
-        sprintf(message, "%d", current_guy->dexterity);
+        sprintf(message, "%d", g::current_guy->dexterity);
         mytext.write_xy(stat_box_content.x, stat_box_content.y + linesdown*line_height, "DEX:",
                          (unsigned char) STAT_COLOR, 1);
 
@@ -1401,7 +1399,7 @@ Sint32 create_hire_menu(Sint32 arg1)
 
         linesdown++;
         // Constitution
-        sprintf(message, "%d", current_guy->constitution);
+        sprintf(message, "%d", g::current_guy->constitution);
         mytext.write_xy(stat_box_content.x, stat_box_content.y + linesdown*line_height, "CON:",
                          (unsigned char) STAT_COLOR, 1);
 
@@ -1410,7 +1408,7 @@ Sint32 create_hire_menu(Sint32 arg1)
 
         linesdown++;
         // Intelligence
-        sprintf(message, "%d", current_guy->intelligence);
+        sprintf(message, "%d", g::current_guy->intelligence);
         mytext.write_xy(stat_box_content.x, stat_box_content.y + linesdown*line_height, "INT:",
                          (unsigned char) STAT_COLOR, 1);
 
@@ -1419,7 +1417,7 @@ Sint32 create_hire_menu(Sint32 arg1)
 
         linesdown++;
         // Armor
-        sprintf(message, "%d", current_guy->armor);
+        sprintf(message, "%d", g::current_guy->armor);
         mytext.write_xy(stat_box_content.x, stat_box_content.y + linesdown*line_height, "ARMOR:",
                          (unsigned char) STAT_COLOR, 1);
 
@@ -1432,26 +1430,26 @@ Sint32 create_hire_menu(Sint32 arg1)
 		int derived_offset = 3*STAT_NUM_OFFSET/4;
         linesdown++;
         mytext.write_xy(stat_box_content.x, stat_box_content.y + linesdown*line_height + 4, "HP:", STAT_DERIVED, 1);
-        mytext.write_xy(stat_box_content.x + derived_offset - 9, stat_box_content.y + linesdown*line_height + 4, HIGH_HP_COLOR, "%.0f", ceilf(myscreen->level_data.myloader->hitpoints[PIX(ORDER_LIVING, last_family)] + current_guy->get_hp_bonus()));
+        mytext.write_xy(stat_box_content.x + derived_offset - 9, stat_box_content.y + linesdown*line_height + 4, HIGH_HP_COLOR, "%.0f", ceilf(myscreen->level_data.myloader->hitpoints[PIX(ORDER_LIVING, last_family)] + g::current_guy->get_hp_bonus()));
 
         mytext.write_xy(stat_box_content.x + derived_offset + 18, stat_box_content.y + linesdown*line_height + 4, "MP:", STAT_DERIVED, 1);
-        mytext.write_xy(stat_box_content.x + 2*derived_offset + 18 - 9, stat_box_content.y + linesdown*line_height + 4, MAX_MP_COLOR, "%.0f", ceilf(current_guy->get_mp_bonus()));
+        mytext.write_xy(stat_box_content.x + 2*derived_offset + 18 - 9, stat_box_content.y + linesdown*line_height + 4, MAX_MP_COLOR, "%.0f", ceilf(g::current_guy->get_mp_bonus()));
 
 		linesdown++;
         mytext.write_xy(stat_box_content.x, stat_box_content.y + linesdown*line_height + 4, "ATK:", STAT_DERIVED, 1);
-        mytext.write_xy(stat_box_content.x + derived_offset - 3, stat_box_content.y + linesdown*line_height + 4, showcolor, "%.0f", myscreen->level_data.myloader->damage[PIX(ORDER_LIVING, last_family)] + current_guy->get_damage_bonus());
+        mytext.write_xy(stat_box_content.x + derived_offset - 3, stat_box_content.y + linesdown*line_height + 4, showcolor, "%.0f", myscreen->level_data.myloader->damage[PIX(ORDER_LIVING, last_family)] +  g::current_guy->get_damage_bonus());
 
         mytext.write_xy(stat_box_content.x + derived_offset + 18, stat_box_content.y + linesdown*line_height + 4, "DEF:", STAT_DERIVED, 1);
-        mytext.write_xy(stat_box_content.x + 2*derived_offset + 18 - 3, stat_box_content.y + linesdown*line_height + 4, showcolor, "%.0f", current_guy->get_armor_bonus());
+        mytext.write_xy(stat_box_content.x + 2*derived_offset + 18 - 3, stat_box_content.y + linesdown*line_height + 4, showcolor, "%.0f",  g::current_guy->get_armor_bonus());
 
 		linesdown++;
         mytext.write_xy(stat_box_content.x, stat_box_content.y + linesdown*line_height + 4, "SPD:", STAT_DERIVED, 1);
-        mytext.write_xy(stat_box_content.x + derived_offset, stat_box_content.y + linesdown*line_height + 4, showcolor, "%.1f", myscreen->level_data.myloader->stepsizes[PIX(ORDER_LIVING, last_family)] + current_guy->get_speed_bonus());
+        mytext.write_xy(stat_box_content.x + derived_offset, stat_box_content.y + linesdown*line_height + 4, showcolor, "%.1f", myscreen->level_data.myloader->stepsizes[PIX(ORDER_LIVING, last_family)] +  g::current_guy->get_speed_bonus());
 
 		linesdown++;
         mytext.write_xy(stat_box_content.x, stat_box_content.y + linesdown*line_height + 4, "ATK SPD:", STAT_DERIVED, 1);
         // The 10.0f/fire_frequency is somewhat arbitrary, but it makes for good comparison info.
-        float fire_freq = myscreen->level_data.myloader->fire_frequency[PIX(ORDER_LIVING, last_family)] - current_guy->get_fire_frequency_bonus();
+        float fire_freq = myscreen->level_data.myloader->fire_frequency[PIX(ORDER_LIVING, last_family)] -  g::current_guy->get_fire_frequency_bonus();
         if(fire_freq < 1)
             fire_freq = 1;
         mytext.write_xy(stat_box_content.x + derived_offset + 21, stat_box_content.y + linesdown*line_height + 4, showcolor, "%.1f", 10.0f/fire_freq);
@@ -1533,7 +1531,7 @@ Sint32 create_train_menu(Sint32 arg1)
 
 	// Set to first guy on list using global variable ..
 	cycle_team_guy(0);
-    guy* here = ourteam[editguy];
+    guy* here = ourteam[g::editguy];
     current_cost = calculate_train_cost(here);
 
 	grab_mouse();
@@ -1571,10 +1569,10 @@ Sint32 create_train_menu(Sint32 arg1)
 				cycle_team_guy(0);
             }
 
-            if (!current_guy)
+            if (! g::current_guy)
                 cycle_team_guy(0);
-            if (here != ourteam[editguy])
-                here = ourteam[editguy];
+            if (here != ourteam[g::editguy])
+                here = ourteam[g::editguy];
             current_cost = calculate_train_cost(here);
             retvalue = 0;
         }
@@ -1587,7 +1585,7 @@ Sint32 create_train_menu(Sint32 arg1)
         draw_backdrop();
         draw_buttons(buttons, num_buttons);
 
-		show_guy(query_timer()-start_time, 1); // 1 means ourteam[editguy]
+		show_guy(query_timer()-start_time, 1); // 1 means ourteam[g::editguy]
 
 
         linesdown = 0;
@@ -1596,86 +1594,86 @@ Sint32 create_train_menu(Sint32 arg1)
         myscreen->draw_text_bar(36, 10, 124, 22);
 
         text& mytext = myscreen->text_normal;
-        mytext.write_xy(80 - mytext.query_width(current_guy->name)/2, 14,
-                         current_guy->name,(unsigned char) DARK_BLUE, 1);
+        mytext.write_xy(80 - mytext.query_width( g::current_guy->name)/2, 14,
+                          g::current_guy->name,(unsigned char) DARK_BLUE, 1);
         myscreen->draw_button(38, 66, 120, 160, 1, 1); // stats box
         myscreen->draw_text_bar(42, 70, 116, 156);
 
 
-        bool level_increased = (old_guy->get_level() < current_guy->get_level());
+        bool level_increased = (g::old_guy->get_level() <  g::current_guy->get_level());
         bool stat_increased;
         if(level_increased)
             stat_increased = false;
         else
-            stat_increased = (old_guy->strength < current_guy->strength
-                   || old_guy->dexterity < current_guy->dexterity
-                   || old_guy->constitution < current_guy->constitution
-                   || old_guy->intelligence < current_guy->intelligence
-                   || old_guy->armor < current_guy->armor);
+            stat_increased = (g::old_guy->strength <  g::current_guy->strength
+                   || g::old_guy->dexterity <  g::current_guy->dexterity
+                   || g::old_guy->constitution <  g::current_guy->constitution
+                   || g::old_guy->intelligence <  g::current_guy->intelligence
+                   || g::old_guy->armor <  g::current_guy->armor);
 
         // Strength
         char  message[80];
-        sprintf(message, "%d", current_guy->strength);
+        sprintf(message, "%d",  g::current_guy->strength);
         mytext.write_xy(stat_box_content.x, DOWN(linesdown), "  STR:",
                          (unsigned char) STAT_COLOR, 1);
         if (level_increased)
             showcolor = STAT_LEVELED;
-        else if (here->strength < current_guy->strength)
+        else if (here->strength <  g::current_guy->strength)
             showcolor = STAT_CHANGED;
         else
             showcolor = STAT_COLOR;
         mytext.write_xy(stat_box_content.x + STAT_NUM_OFFSET, DOWN(linesdown++), message, showcolor, 1);
 
         // Dexterity
-        sprintf(message, "%d", current_guy->dexterity);
+        sprintf(message, "%d",  g::current_guy->dexterity);
         mytext.write_xy(stat_box_content.x, DOWN(linesdown), "  DEX:",
                          (unsigned char) STAT_COLOR, 1);
         if (level_increased)
             showcolor = STAT_LEVELED;
-        else if (here->dexterity < current_guy->dexterity)
+        else if (here->dexterity <  g::current_guy->dexterity)
             showcolor = STAT_CHANGED;
         else
             showcolor = STAT_COLOR;
         mytext.write_xy(stat_box_content.x + STAT_NUM_OFFSET, DOWN(linesdown++), message, showcolor, 1);
 
         // Constitution
-        sprintf(message, "%d", current_guy->constitution);
+        sprintf(message, "%d",  g::current_guy->constitution);
         mytext.write_xy(stat_box_content.x, DOWN(linesdown), "  CON:",
                          (unsigned char) STAT_COLOR, 1);
         if (level_increased)
             showcolor = STAT_LEVELED;
-        else if (here->constitution < current_guy->constitution)
+        else if (here->constitution <  g::current_guy->constitution)
             showcolor = STAT_CHANGED;
         else
             showcolor = STAT_COLOR;
         mytext.write_xy(stat_box_content.x + STAT_NUM_OFFSET, DOWN(linesdown++), message, showcolor, 1);
 
         // Intelligence
-        sprintf(message, "%d", current_guy->intelligence);
+        sprintf(message, "%d",  g::current_guy->intelligence);
         mytext.write_xy(stat_box_content.x, DOWN(linesdown), "  INT:",
                          (unsigned char) STAT_COLOR, 1);
         if (level_increased)
             showcolor = STAT_LEVELED;
-        else if (here->intelligence < current_guy->intelligence)
+        else if (here->intelligence <  g::current_guy->intelligence)
             showcolor = STAT_CHANGED;
         else
             showcolor = STAT_COLOR;
         mytext.write_xy(stat_box_content.x + STAT_NUM_OFFSET, DOWN(linesdown++), message, showcolor, 1);
 
         // Armor
-        sprintf(message, "%d", current_guy->armor);
+        sprintf(message, "%d",  g::current_guy->armor);
         mytext.write_xy(stat_box_content.x, DOWN(linesdown), "ARMOR:",
                          (unsigned char) STAT_COLOR, 1);
         if (level_increased)
             showcolor = STAT_LEVELED;
-        else if (here->armor < current_guy->armor)
+        else if (here->armor <  g::current_guy->armor)
             showcolor = STAT_CHANGED;
         else
             showcolor = STAT_COLOR;
         mytext.write_xy(stat_box_content.x + STAT_NUM_OFFSET, DOWN(linesdown++), message, showcolor, 1);
 
         // Level
-        sprintf(message, "%d", current_guy->get_level());
+        sprintf(message, "%d",  g::current_guy->get_level());
         mytext.write_xy(stat_box_content.x, DOWN(linesdown), "LEVEL:",
                          (unsigned char) STAT_COLOR, 1);
         if (level_increased)
@@ -1697,14 +1695,14 @@ Sint32 create_train_menu(Sint32 arg1)
 
 		int derived_offset = 3*STAT_NUM_OFFSET/4;
 
-        sprintf(message, "Total Kills: %d", current_guy->kills);
+        sprintf(message, "Total Kills: %d",  g::current_guy->kills);
         mytext.write_xy(180, info_box_content.y + linesdown*line_height, message, DARK_BLUE, 1);
 
         linesdown++;
-        if (current_guy->total_hits && current_guy->total_shots) // have we at least hit something? :)
+        if ( g::current_guy->total_hits &&  g::current_guy->total_shots) // have we at least hit something? :)
         {
             sprintf(message, "   Accuracy: %d%% ",
-                    (current_guy->total_hits*100)/current_guy->total_shots);
+                    ( g::current_guy->total_hits*100)/ g::current_guy->total_shots);
             mytext.write_xy(180, info_box_content.y + linesdown*line_height, message, DARK_BLUE, 1);
         }
         else // haven't ever hit anyone
@@ -1714,7 +1712,7 @@ Sint32 create_train_menu(Sint32 arg1)
         }
 
         linesdown++;
-        sprintf(message, " EXPERIENCE: %u", current_guy->exp);
+        sprintf(message, " EXPERIENCE: %u",  g::current_guy->exp);
         mytext.write_xy(180, info_box_content.y + linesdown*line_height, message,(unsigned char) DARK_BLUE, 1);
 
 
@@ -1726,25 +1724,25 @@ Sint32 create_train_menu(Sint32 arg1)
         linesdown += 0.4f;
 
         mytext.write_xy(info_box_content.x, info_box_content.y + linesdown*line_height, "HP:", STAT_DERIVED, 1);
-        mytext.write_xy(info_box_content.x + derived_offset - 9, info_box_content.y + linesdown*line_height, HIGH_HP_COLOR, "%.0f", ceilf(myscreen->level_data.myloader->hitpoints[PIX(ORDER_LIVING, current_guy->family)] + current_guy->get_hp_bonus()));
+        mytext.write_xy(info_box_content.x + derived_offset - 9, info_box_content.y + linesdown*line_height, HIGH_HP_COLOR, "%.0f", ceilf(myscreen->level_data.myloader->hitpoints[PIX(ORDER_LIVING,  g::current_guy->family)] +  g::current_guy->get_hp_bonus()));
 
         mytext.write_xy(info_box_content.x + derived_offset + 18, info_box_content.y + linesdown*line_height, "MP:", STAT_DERIVED, 1);
-        mytext.write_xy(info_box_content.x + 2*derived_offset + 18 - 9, info_box_content.y + linesdown*line_height, MAX_MP_COLOR, "%.0f", ceilf(current_guy->get_mp_bonus()));
+        mytext.write_xy(info_box_content.x + 2*derived_offset + 18 - 9, info_box_content.y + linesdown*line_height, MAX_MP_COLOR, "%.0f", ceilf( g::current_guy->get_mp_bonus()));
 
 		linesdown++;
         mytext.write_xy(info_box_content.x, info_box_content.y + linesdown*line_height, "ATK:", STAT_DERIVED, 1);
-        mytext.write_xy(info_box_content.x + derived_offset - 3, info_box_content.y + linesdown*line_height, showcolor, "%.0f", myscreen->level_data.myloader->damage[PIX(ORDER_LIVING, current_guy->family)] + current_guy->get_damage_bonus());
+        mytext.write_xy(info_box_content.x + derived_offset - 3, info_box_content.y + linesdown*line_height, showcolor, "%.0f", myscreen->level_data.myloader->damage[PIX(ORDER_LIVING,  g::current_guy->family)] +  g::current_guy->get_damage_bonus());
 
         mytext.write_xy(info_box_content.x + derived_offset + 18, info_box_content.y + linesdown*line_height, "DEF:", STAT_DERIVED, 1);
-        mytext.write_xy(info_box_content.x + 2*derived_offset + 18 - 3, info_box_content.y + linesdown*line_height, showcolor, "%.0f", current_guy->get_armor_bonus());
+        mytext.write_xy(info_box_content.x + 2*derived_offset + 18 - 3, info_box_content.y + linesdown*line_height, showcolor, "%.0f",  g::current_guy->get_armor_bonus());
 
 		linesdown++;
         mytext.write_xy(info_box_content.x, info_box_content.y + linesdown*line_height, "SPD:", STAT_DERIVED, 1);
-        mytext.write_xy(info_box_content.x + derived_offset, info_box_content.y + linesdown*line_height, showcolor, "%.1f", myscreen->level_data.myloader->stepsizes[PIX(ORDER_LIVING, current_guy->family)] + current_guy->get_speed_bonus());
+        mytext.write_xy(info_box_content.x + derived_offset, info_box_content.y + linesdown*line_height, showcolor, "%.1f", myscreen->level_data.myloader->stepsizes[PIX(ORDER_LIVING,  g::current_guy->family)] +  g::current_guy->get_speed_bonus());
 
 		linesdown++;
         mytext.write_xy(info_box_content.x, info_box_content.y + linesdown*line_height, "ATK SPD:", STAT_DERIVED, 1);
-        float fire_freq = myscreen->level_data.myloader->fire_frequency[PIX(ORDER_LIVING, current_guy->family)] - current_guy->get_fire_frequency_bonus();
+        float fire_freq = myscreen->level_data.myloader->fire_frequency[PIX(ORDER_LIVING,  g::current_guy->family)] -  g::current_guy->get_fire_frequency_bonus();
         if(fire_freq < 1)
             fire_freq = 1;
         // The 10.0f/fire_frequency is somewhat arbitrary, but it makes for good comparison info.
@@ -1757,19 +1755,19 @@ Sint32 create_train_menu(Sint32 arg1)
 		myscreen->draw_button_inverted(r2);
 
         linesdown += 0.4f;
-        sprintf(message, "CASH: %u", myscreen->save_data.m_totalcash[current_guy->teamnum]);
+        sprintf(message, "CASH: %u", myscreen->save_data.m_totalcash[ g::current_guy->teamnum]);
         mytext.write_xy(180, info_box_content.y + linesdown*line_height, message,(unsigned char) DARK_BLUE, 1);
 
         linesdown++;
         mytext.write_xy(180, info_box_content.y + linesdown*line_height, "COST: ", DARK_BLUE, 1);
         sprintf(message, "      %u", current_cost );
-        if (current_cost > myscreen->save_data.m_totalcash[current_guy->teamnum])
+        if (current_cost > myscreen->save_data.m_totalcash[ g::current_guy->teamnum])
             mytext.write_xy(180, info_box_content.y + linesdown*line_height, message, STAT_CHANGED, 1);
         else
             mytext.write_xy(180, info_box_content.y + linesdown*line_height, message, STAT_COLOR, 1);
 
         // Display our team setting ..
-        sprintf(message, "Playing on Team %d", current_guy->teamnum+1);
+        sprintf(message, "Playing on Team %d",  g::current_guy->teamnum+1);
         allbuttons[18]->label = message;
         allbuttons[18]->vdisplay();
 
@@ -2241,44 +2239,44 @@ Sint32 create_save_menu(int uselessarg)
 
 Sint32 increase_stat(Sint32 whatstat, Sint32 howmuch)
 {
-    bool level_increased = (old_guy->get_level() < current_guy->get_level());
+    bool level_increased = (g::old_guy->get_level() <  g::current_guy->get_level());
     bool stat_increased;
     if(level_increased){
         stat_increased = false;}
     else{
-        stat_increased = (old_guy->strength < current_guy->strength
-               || old_guy->dexterity < current_guy->dexterity
-               || old_guy->constitution < current_guy->constitution
-               || old_guy->intelligence < current_guy->intelligence
-               || old_guy->armor < current_guy->armor);
+        stat_increased = (g::old_guy->strength <  g::current_guy->strength
+               || g::old_guy->dexterity <  g::current_guy->dexterity
+               || g::old_guy->constitution <  g::current_guy->constitution
+               || g::old_guy->intelligence <  g::current_guy->intelligence
+               || g::old_guy->armor <  g::current_guy->armor);
 }
 	switch(whatstat)
 	{
 		case BUT_STR:
 			if(!level_increased)
-                current_guy->strength+=howmuch;
+                 g::current_guy->strength+=howmuch;
 			break;
 		case BUT_DEX:
 			if(!level_increased)
-                current_guy->dexterity+=howmuch;
+                 g::current_guy->dexterity+=howmuch;
 			break;
 		case BUT_CON:
 			if(!level_increased)
-                current_guy->constitution+=howmuch;
+                 g::current_guy->constitution+=howmuch;
 			break;
 		case BUT_INT:
 			if(!level_increased)
-                current_guy->intelligence+=howmuch;
+                 g::current_guy->intelligence+=howmuch;
 			break;
 		case BUT_ARMOR:
 			if(!level_increased)
-                current_guy->armor+=howmuch;
+                 g::current_guy->armor+=howmuch;
 			break;
 		case BUT_LEVEL:
 		    if(!stat_increased)
 		    {
-                short newlevel = current_guy->get_level() + howmuch;
-                current_guy->upgrade_to_level(newlevel);
+                short newlevel =  g::current_guy->get_level() + howmuch;
+                 g::current_guy->upgrade_to_level(newlevel);
 		    }
 			break;
 		default:
@@ -2290,48 +2288,48 @@ Sint32 increase_stat(Sint32 whatstat, Sint32 howmuch)
 
 Sint32 decrease_stat(Sint32 whatstat, Sint32 howmuch)
 {
-    bool level_increased = (old_guy->get_level() < current_guy->get_level());
+    bool level_increased = (g::old_guy->get_level() <  g::current_guy->get_level());
     bool stat_increased;
     if(level_increased)
         {stat_increased = false;}
     else{
-        stat_increased = (old_guy->strength < current_guy->strength
-               || old_guy->dexterity < current_guy->dexterity
-               || old_guy->constitution < current_guy->constitution
-               || old_guy->intelligence < current_guy->intelligence
-               || old_guy->armor < current_guy->armor);}
+        stat_increased = (g::old_guy->strength <  g::current_guy->strength
+               || g::old_guy->dexterity <  g::current_guy->dexterity
+               || g::old_guy->constitution <  g::current_guy->constitution
+               || g::old_guy->intelligence <  g::current_guy->intelligence
+               || g::old_guy->armor <  g::current_guy->armor);}
 
 	switch(whatstat)
 	{
 		case BUT_STR:
 		    if(!level_increased)
-                current_guy->strength-=howmuch;
+                 g::current_guy->strength-=howmuch;
 			break;
 		case BUT_DEX:
 			if(!level_increased)
-                current_guy->dexterity-=howmuch;
+                 g::current_guy->dexterity-=howmuch;
 			break;
 		case BUT_CON:
 			if(!level_increased)
-                current_guy->constitution-=howmuch;
+                 g::current_guy->constitution-=howmuch;
 			break;
 		case BUT_INT:
 			if(!level_increased)
-                current_guy->intelligence-=howmuch;
+                 g::current_guy->intelligence-=howmuch;
 			break;
 		case BUT_ARMOR:
 			if(!level_increased)
-                current_guy->armor-=howmuch;
+                 g::current_guy->armor-=howmuch;
 			break;
 		case BUT_LEVEL:
 			if(!stat_increased)
             {
-			    short newlevel = current_guy->get_level() - howmuch;
-			    if(newlevel > 0 && newlevel >= myscreen->save_data.team_list[editguy]->get_level())
+			    short newlevel =  g::current_guy->get_level() - howmuch;
+			    if(newlevel > 0 && newlevel >= myscreen->save_data.team_list[g::editguy]->get_level())
                 {
-                    current_guy->upgrade_to_level(newlevel);
-                    if(current_guy->get_level() == myscreen->save_data.team_list[editguy]->get_level())
-                        current_guy->exp = myscreen->save_data.team_list[editguy]->exp;
+                     g::current_guy->upgrade_to_level(newlevel);
+                    if( g::current_guy->get_level() == myscreen->save_data.team_list[g::editguy]->get_level())
+                         g::current_guy->exp = myscreen->save_data.team_list[g::editguy]->exp;
                 }
 			}
 			break;
@@ -2344,7 +2342,7 @@ Sint32 decrease_stat(Sint32 whatstat, Sint32 howmuch)
 
 Uint32 calculate_hire_cost()
 {
-	guy  *ob = current_guy;
+	guy  *ob =  g::current_guy;
 	Sint32 temp;
 	Sint32 myfamily;
 
@@ -2388,9 +2386,9 @@ Uint32 calculate_hire_cost()
 
 	if (temp < 0)
 	{
-		//guytemp = new guy(current_guy->family);
-		//delete current_guy;
-		//current_guy = guytemp;
+		//guytemp = new guy( g::current_guy->family);
+		//delete  g::current_guy;
+		// g::current_guy = guytemp;
 		cycle_guy(0);
 		//temp = -1;  // This used to be an error code checked by picker.cpp line 2213
 		temp = 0;
@@ -2398,10 +2396,10 @@ Uint32 calculate_hire_cost()
 	return (Uint32)temp;
 }
 
-// This version compares current_guy versus the old version ..
+// This version compares  g::current_guy versus the old version ..
 Uint32 calculate_train_cost(guy  *oldguy)
 {
-	guy  *ob = current_guy;
+	guy  *ob =  g::current_guy;
 	Sint32 temp;
 	Sint32 myfamily;
 
@@ -2431,7 +2429,7 @@ Uint32 calculate_train_cost(guy  *oldguy)
 	if (calculate_exp(ob->get_level()) > oldguy->exp)
 		temp += (Sint32)(calculate_exp(ob->get_level()) - oldguy->exp);
 
-	if (ob->get_level() <= old_guy->get_level()) // Only count these costs if the level is not being upgraded
+	if (ob->get_level() <= g::old_guy->get_level()) // Only count these costs if the level is not being upgraded
     {
 	// First we have our 'total increased value..'
 	temp += (Sint32)((pow( (Sint32)(ob->strength - statlist[myfamily][BUT_STR]), RAISE))
@@ -2462,7 +2460,7 @@ Uint32 calculate_train_cost(guy  *oldguy)
 	if (temp < 0)
 	{
 		temp = 0;
-		statscopy(current_guy, oldguy);
+		statscopy( g::current_guy, oldguy);
 		cycle_team_guy(0);
 
 	}
@@ -2652,32 +2650,32 @@ Sint32 cycle_guy(Sint32 whichway)
 {
 	Sint32 newfamily;
 
-	if (!current_guy)
+	if (! g::current_guy)
 		newfamily = allowable_guys[0];
 	else
 	{
-		current_type = current_type+ whichway + (sizeof(allowable_guys)/4);
-		current_type %= (sizeof(allowable_guys)/4);
-		if (current_type < 0)
-			current_type = (sizeof(allowable_guys)/4) - 1;
-		newfamily = allowable_guys[current_type];
-		//newfamily = current_guy->family + whichway;
+		g::current_type = g::current_type+ whichway + (sizeof(allowable_guys)/4);
+		g::current_type %= (sizeof(allowable_guys)/4);
+		if (g::current_type < 0)
+			g::current_type = (sizeof(allowable_guys)/4) - 1;
+		newfamily = allowable_guys[g::current_type];
+		//newfamily =  g::current_guy->family + whichway;
 	}
 
 	//newfamily = (newfamily + NUM_FAMILIES) % NUM_FAMILIES;
 
 	// Delete the old guy ..
-	if (current_guy)
+	if ( g::current_guy)
 	{
-		delete current_guy;
-		current_guy = NULL;
+		delete  g::current_guy;
+		 g::current_guy = NULL;
 	}
 
 	// Make the new guy
-	current_guy = new guy(newfamily);
-	current_guy->teamnum = current_team_num;
-	strncpy(current_guy->name, get_new_name(newfamily), 12);
-	current_guy->name[11] = '\0';
+	 g::current_guy = new guy(newfamily);
+	 g::current_guy->teamnum = g::current_team_num;
+	strncpy( g::current_guy->name, get_new_name(newfamily), 12);
+	 g::current_guy->name[11] = '\0';
 
 	show_guy(0, 0);
 	grab_mouse();
@@ -2691,16 +2689,16 @@ void show_guy(Sint32 frames, Sint32 who, short centerx, short centery) // shows 
 	Sint32 i;
 	Sint32 newfamily;
 
-	if (!current_guy)
+	if (! g::current_guy)
 		return;
 
 	frames = abs(frames);
 
-	if (who == 0) // use current_type of guy
-		newfamily = allowable_guys[current_type];
+	if (who == 0) // use g::current_type of guy
+		newfamily = allowable_guys[g::current_type];
 	else
-		newfamily = myscreen->save_data.team_list[editguy]->family;
-	newfamily = current_guy->family;
+		newfamily = myscreen->save_data.team_list[g::editguy]->family;
+	newfamily =  g::current_guy->family;
 
 	mywalker = myscreen->level_data.myloader->create_walker(ORDER_LIVING,
 	           newfamily,myscreen);
@@ -2709,8 +2707,8 @@ void show_guy(Sint32 frames, Sint32 who, short centerx, short centery) // shows 
 	mywalker->ani_type = ANI_WALK;
 	for (i=0; i <= (frames/12)%4; i++)
 		mywalker->animate();
-	//mywalker->team_num = ourteam[editguy]->teamnum;
-	mywalker->team_num = current_guy->teamnum;
+	//mywalker->team_num = ourteam[g::editguy]->teamnum;
+	mywalker->team_num =  g::current_guy->teamnum;
 
 	mywalker->setxy(centerx - (mywalker->sizex/2), centery - (mywalker->sizey/2));
 	myscreen->draw_button(centerx - 80 + 54, centery - 45 + 26, centerx - 80 + 106, centery - 45 + 64, 1, 1);
@@ -2718,7 +2716,7 @@ void show_guy(Sint32 frames, Sint32 who, short centerx, short centery) // shows 
 	mywalker->draw(myscreen->viewob[0]);
 	delete mywalker;
 }
-// Sets current_guy to 'whichguy' in the teamlist, and
+// Sets  g::current_guy to 'whichguy' in the teamlist, and
 // returns a COPY of him as the function result
 Sint32 cycle_team_guy(Sint32 whichway)
 {
@@ -2727,36 +2725,36 @@ Sint32 cycle_team_guy(Sint32 whichway)
 
     guy** ourteam = myscreen->save_data.team_list;
 
-	editguy += whichway;
-	if (editguy < 0)
+	g::editguy += whichway;
+	if (g::editguy < 0)
 	{
-		editguy += MAX_TEAM_SIZE;
-		while (!ourteam[editguy])
-			editguy--;
+		g::editguy += MAX_TEAM_SIZE;
+		while (!ourteam[g::editguy])
+			g::editguy--;
 	}
 
-	if (editguy < 0 || editguy >= MAX_TEAM_SIZE)
-		editguy = 0;
+	if (g::editguy < 0 || g::editguy >= MAX_TEAM_SIZE)
+		g::editguy = 0;
 
-	if (!whichway && !ourteam[editguy])
+	if (!whichway && !ourteam[g::editguy])
 		whichway = 1;
 
-	while (!ourteam[editguy])
+	while (!ourteam[g::editguy])
 	{
-		editguy += whichway;
-		if (editguy < 0 || editguy >= MAX_TEAM_SIZE)
-			editguy = 0;
+		g::editguy += whichway;
+		if (g::editguy < 0 || g::editguy >= MAX_TEAM_SIZE)
+			g::editguy = 0;
 	}
 
-	if (current_guy)
-		delete current_guy;
-	current_guy = new guy(ourteam[editguy]->family);
-	statscopy(current_guy, ourteam[editguy]);
-	old_guy = ourteam[editguy];
+	if ( g::current_guy)
+		delete  g::current_guy;
+	 g::current_guy = new guy(ourteam[g::editguy]->family);
+	statscopy( g::current_guy, ourteam[g::editguy]);
+	g::old_guy = ourteam[g::editguy];
 
 	show_guy(0, 0);
 
-	current_team_num = current_guy->teamnum;
+	g::current_team_num =  g::current_guy->teamnum;
 
 	// Set our team button back to normal color ..
 	// Zardus: FIX: added a check for null pointers
@@ -2784,15 +2782,15 @@ Sint32 add_guy(guy *newguy)
 	return -1;
 }
 
-Sint32 name_guy(Sint32 arg)  // 0 == current_guy, 1 == ourteam[editguy]
+Sint32 name_guy(Sint32 arg)  // 0 ==  g::current_guy, 1 == ourteam[g::editguy]
 {
 	text& nametext = myscreen->text_normal;
 	guy *someguy;
 
 	if (arg)
-		someguy = myscreen->save_data.team_list[editguy];
+		someguy = myscreen->save_data.team_list[g::editguy];
 	else
-		someguy = current_guy;
+		someguy =  g::current_guy;
 
 	if (!someguy)
 		return REDRAW;
@@ -2818,7 +2816,7 @@ Sint32 name_guy(Sint32 arg)  // 0 == current_guy, 1 == ourteam[editguy]
 
 Sint32 add_guy(Sint32 ignoreme)
 {
-	Sint32 newfamily = current_guy->family;
+	Sint32 newfamily =  g::current_guy->family;
 	//buffers: changed typename to type_name due to some compile error
 	char type_name[30];
 	Sint32 i;
@@ -2826,24 +2824,24 @@ Sint32 add_guy(Sint32 ignoreme)
 	if (myscreen->save_data.team_size >= MAX_TEAM_SIZE) // abort abort!
 		return -1;
 
-	if (!current_guy) // we should be adding current_guy
+	if (! g::current_guy) // we should be adding  g::current_guy
 		return -1;
 
     Uint32 cost = calculate_hire_cost();
-	if (cost == 0 || cost > myscreen->save_data.m_totalcash[current_team_num])
+	if (cost == 0 || cost > myscreen->save_data.m_totalcash[g::current_team_num])
 		return OK;
 
-	myscreen->save_data.m_totalcash[current_team_num] -= cost;
+	myscreen->save_data.m_totalcash[g::current_team_num] -= cost;
 
     guy** ourteam = myscreen->save_data.team_list;
 	for (i=0; i < MAX_TEAM_SIZE; i++)
     {
 		if (!ourteam[i]) // found an empty slot
 		{
-			current_guy->teamnum = current_team_num;
-			ourteam[i] = current_guy;
+			 g::current_guy->teamnum = g::current_team_num;
+			ourteam[i] =  g::current_guy;
 			myscreen->save_data.team_size++;
-			current_guy = NULL;
+			 g::current_guy = NULL;
 			release_mouse();
 
 			std::string name = ourteam[i]->name;
@@ -2859,12 +2857,12 @@ Sint32 add_guy(Sint32 ignoreme)
 			ourteam[i]->exp = calculate_exp(ourteam[i]->get_level());
 
 			// Grab a new, generic guy to be edited/bought
-			current_guy = new guy(newfamily);
-			strcpy(type_name, current_guy->name);
-			statscopy(current_guy, ourteam[i]); // set to same stats as just bought
-			strcpy(current_guy->name, type_name);
-            strncpy(current_guy->name, get_new_name(newfamily), 12);
-            current_guy->name[11] = '\0';
+			 g::current_guy = new guy(newfamily);
+			strcpy(type_name,  g::current_guy->name);
+			statscopy( g::current_guy, ourteam[i]); // set to same stats as just bought
+			strcpy( g::current_guy->name, type_name);
+            strncpy( g::current_guy->name, get_new_name(newfamily), 12);
+             g::current_guy->name[11] = '\0';
 
 			// Return okay status
 			return OK;
@@ -2883,10 +2881,10 @@ Sint32 edit_guy(Sint32 arg1)
 	if (arg1)
 		arg1 = 1;
 
-	if (!current_guy)
+	if (! g::current_guy)
 		return -1;
 
-	here = myscreen->save_data.team_list[editguy];
+	here = myscreen->save_data.team_list[g::editguy];
 	if (!here)
 		return -1;  // error case; should never happen
 
@@ -2894,22 +2892,22 @@ Sint32 edit_guy(Sint32 arg1)
 	// When holding down the right mouse button, can always accept free changes
 	if (CHEAT_MODE && cheatmouse.right)
 	{
-		if (here->get_level() != current_guy->get_level())
-			current_guy->upgrade_to_level(current_guy->get_level());
-		statscopy(here, current_guy);
+		if (here->get_level() !=  g::current_guy->get_level())
+			 g::current_guy->upgrade_to_level( g::current_guy->get_level());
+		statscopy(here,  g::current_guy);
 		return OK;
 	}
 
     Uint32 cost = calculate_train_cost(here);
-	if ( (cost > myscreen->save_data.m_totalcash[current_guy->teamnum]) ||  // compare cost of here to current_guy
+	if ( (cost > myscreen->save_data.m_totalcash[ g::current_guy->teamnum]) ||  // compare cost of here to  g::current_guy
 	        (cost < 0) )
 		return OK;
 
-	myscreen->save_data.m_totalcash[current_guy->teamnum] -= cost;  // cost of new - old (current_guy - here)
+	myscreen->save_data.m_totalcash[ g::current_guy->teamnum] -= cost;  // cost of new - old ( g::current_guy - here)
 
-    if (here->get_level() != current_guy->get_level()){
-        current_guy->upgrade_to_level(current_guy->get_level());}
-	statscopy(here, current_guy);
+    if (here->get_level() !=  g::current_guy->get_level()){
+         g::current_guy->upgrade_to_level( g::current_guy->get_level());}
+	statscopy(here,  g::current_guy);
 
 	// Color our team button normally
 	allbuttons[18]->do_outline = 0;
@@ -3078,9 +3076,9 @@ Sint32 go_menu(Sint32 arg1)
         //clear_keyboard();
         //myscreen->fadeblack(0);
 
-        if (current_guy)
-            delete current_guy;
-        current_guy = NULL;
+        if ( g::current_guy)
+            delete  g::current_guy;
+         g::current_guy = NULL;
 
         // Reset viewscreen prefs
         myscreen->ready_for_battle(myscreen->save_data.numplayers);
@@ -3298,7 +3296,7 @@ Sint32 create_detail_menu(guy *arg1)
    if (arg1)
        thisguy = arg1;
    else
-       thisguy = myscreen->save_data.team_list[editguy];
+       thisguy = myscreen->save_data.team_list[g::editguy];
 
    release_mouse();
 
@@ -3317,7 +3315,7 @@ Sint32 create_detail_menu(guy *arg1)
 
    while ( !(retvalue & EXIT) )
    {
-       show_guy(query_timer()-start_time, 1); // 1 means ourteam[editguy]
+       show_guy(query_timer()-start_time, 1); // 1 means ourteam[g::editguy]
 
        bool pressed = handle_menu_nav(buttons, highlighted_button, retvalue);
 
@@ -3369,8 +3367,8 @@ Sint32 create_detail_menu(guy *arg1)
        myscreen->draw_text_bar(36, 10, 124, 22);
 
        text& mytext = myscreen->text_normal;
-       mytext.write_xy(80 - mytext.query_width(current_guy->name)/2, 14,
-                        current_guy->name,(unsigned char) DARK_BLUE, 1);
+       mytext.write_xy(80 - mytext.query_width( g::current_guy->name)/2, 14,
+                         g::current_guy->name,(unsigned char) DARK_BLUE, 1);
        myscreen->draw_dialog(5, 68, SCREEN_W-5, 167, "Character Special Abilities");
        myscreen->draw_text_bar(160, 90, 162, 160);
 
@@ -3866,9 +3864,9 @@ Sint32 change_teamnum(Sint32 arg)
    char  message[80];
 
    // What is our current team number?
-   if (!current_guy)
+   if (! g::current_guy)
        return 0;
-   current_team = current_guy->teamnum;
+   current_team =  g::current_guy->teamnum;
 
    // We can be from team 0 (default) to team 3 .. make sure
    // we don't exceed this range.
@@ -3876,7 +3874,7 @@ Sint32 change_teamnum(Sint32 arg)
    current_team %= 4;
 
    // Set our team number ..
-   current_guy->teamnum = current_team;
+    g::current_guy->teamnum = current_team;
 
    // Update our button display
    sprintf(message, "Playing on Team %d", current_team + 1);
@@ -3894,17 +3892,17 @@ Sint32 change_hire_teamnum(Sint32 arg)
    // Change the team number of the hiring menu ..
    char  message[80];
 
-   current_team_num += arg;
-   current_team_num %= 4;
+   g::current_team_num += arg;
+   g::current_team_num %= 4;
 
    // Change our guy, if he exists ..
-   if (current_guy)
+   if ( g::current_guy)
    {
-       current_guy->teamnum = current_team_num;
+        g::current_guy->teamnum = g::current_team_num;
    }
 
    // Update our button display
-   sprintf(message, "Hiring for Team %d", current_team_num + 1);
+   sprintf(message, "Hiring for Team %d", g::current_team_num + 1);
 
    allbuttons[2]->label = message;
 

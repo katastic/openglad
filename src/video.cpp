@@ -33,11 +33,10 @@ unsigned char * videoptr = (unsigned char*) VIDEO_LINEAR;
 Screen *E_Screen;
 
 video::video()
-    : text_normal(TEXT_1), text_big(TEXT_BIG)
+    : text_normal(TEXT_1), text_big(TEXT_BIG), fullscreen(0)
 {
 	Sint32 i;
 	RenderEngine render;
-	fullscreen = 0;
     render = NoZoom;
 
 	if(cfg.is_on("graphics","fullscreen"))

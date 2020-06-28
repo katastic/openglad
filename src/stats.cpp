@@ -487,6 +487,32 @@ void statistics::hit_response(walker  *who)
 			}
 			break;
 
+		case FAMILY_BUILDER:
+			if (controller->myguy) // are we a player's character?
+				threshold = (3 * max_hitpoints)/5; // then flee at 60%
+			else                   // we're an enemy, so be braver :>
+				threshold = (3 * max_hitpoints)/8; // flee at 3/8
+			if ( (hitpoints < threshold) && possible_specials[1] )
+			{
+				// Clear old command ..
+				// clear_command();
+				// teleport
+				controller->current_special = 1; // teleport to safety
+				controller->shifter_down = 0;    // TELEPORT, not other
+				controller->busy = 0; // force-allow us to special
+				controller->special();
+			}
+			else
+			{
+				if (controller->foe != foe) // we're hit by a new enemy
+				{
+					controller->foe = foe;
+					foe->foe = controller;
+					last_distance = current_distance = 15000;
+				}
+			}
+		break;
+
 
 		case FAMILY_SUMMONER: //from mage
 			if (controller->myguy) // are we a player's character?

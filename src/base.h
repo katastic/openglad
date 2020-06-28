@@ -219,12 +219,13 @@ char* read_one_line(SDL_RWops *infile, short length);
 #define FAMILY_BARBARIAN 16
 #define FAMILY_SUMMONER 17 //HAS TO BE right BEFORE ARCHMAGE. looks like there's a bug if you add a character after empty data (like tower) with no picker stats
 // See [guy.cpp:84]
-#define FAMILY_ARCHMAGE 18 	//17
-#define FAMILY_GOLEM 19 	//18
-#define FAMILY_GIANT_SKELETON 20 //19
-#define FAMILY_TOWER1 21 //20
+#define FAMILY_BUILDER 18
+#define FAMILY_ARCHMAGE 19 	//17
+#define FAMILY_GOLEM 20 	//18
+#define FAMILY_GIANT_SKELETON 21 //19
+#define FAMILY_TOWER1 22 //20
 
-#define NUM_FAMILIES 22  // # of families; make sure to change the
+#define NUM_FAMILIES 23  // # of families; make sure to change the
 // SIZE_FAMILIES in loader.cpp as well
 // (or your code will act weird)
 

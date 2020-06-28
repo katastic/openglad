@@ -1620,13 +1620,6 @@ short walker::act()
 			}
 		case ACT_DIE:
 			{
-				/* KAT: This didn't work. Never gets called.
-				if(this->owner->query_family() == FAMILY_SUMMONER)
-					{
-					owner->stats->special_cost[1] -= 25;
-					if(owner->stats->special_cost[1] < 25)owner->stats->special_cost[1] = 25;
-			        printf("living.cpp:340 ACT_DIE\n"); 
-					}*/
 				this->dead = 1;
 				return 1;
 			}
@@ -3038,6 +3031,15 @@ short walker::special()
 				}
 			}
 			break; // end of mage
+
+		case FAMILY_BUILDER:
+			{
+			PixieData& gridp = myscreen->level_data.grid;
+			int i = xpos/GRID_SIZE;
+			int j = ypos/GRID_SIZE;
+			gridp.data[i + j*gridp.w] = PIX_WALLSIDE1;
+			}
+			break;
 
 		case FAMILY_SUMMONER:
 			{

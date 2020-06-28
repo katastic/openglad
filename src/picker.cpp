@@ -89,6 +89,7 @@ vbutton* localbuttons; //global so we can delete the buttons anywhere
 
 Sint32 allowable_guys[] =
     { FAMILY_SUMMONER,
+      FAMILY_BUILDER,
       FAMILY_SOLDIER,
       FAMILY_BARBARIAN,
       FAMILY_ELF,
@@ -858,6 +859,8 @@ const char* get_family_string(short family)
 			return "GHOST";
 		case FAMILY_SUMMONER:
 			return "SUMMONER";
+		case FAMILY_BUILDER:
+			return "BUILDER";
 		default:
 			return "BEAST";
 	}
@@ -903,6 +906,9 @@ void family_name_copy(char *name, short family)
 			break;
 		case FAMILY_SUMMONER:
 			strcpy(name, "SUMMONER");
+			break;
+		case FAMILY_BUILDER:
+			strcpy(name, "BUILDER");
 			break;
 		default:
 			strcpy(name, "BEAST");
@@ -1188,6 +1194,16 @@ std::string get_class_description(unsigned char family)
         result = "The Summoner does things. \n"
                  "                          \n"
                  "                          \n"
+                 "                          \n"
+                 "                          \n"
+                 "                          \n"
+                 "\n"
+                 "Special: Dicks Dicks Dicks";
+        break;
+    case FAMILY_BUILDER:
+        result = "The Builder does things. \n"
+                 " - A stout dwarf          \n"
+                 " - Sentry goin up         \n"
                  "                          \n"
                  "                          \n"
                  "                          \n"
@@ -2575,6 +2591,8 @@ const char* get_random_name(unsigned char family)
 		case FAMILY_THIEF:
 			return GET_RAND_ELEM(thief_names);
 		case FAMILY_SUMMONER:
+			return GET_RAND_ELEM(ghost_names);
+		case FAMILY_BUILDER:
 			return GET_RAND_ELEM(ghost_names);
 		case FAMILY_ARCHMAGE:
 			return GET_RAND_ELEM(mage_names);

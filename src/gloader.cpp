@@ -27,7 +27,9 @@
 void popup_dialog(const char* title, const char* message);
 
 #define SIZE_ORDERS 7 // see graph.h
-#define SIZE_FAMILIES 22  // see also NUM_FAMILIES in graph.h
+
+#include "base.h"
+const int SIZE_FAMILIES = NUM_FAMILIES;  // see also NUM_FAMILIES in graph.h
 //#define PIX(a,b) (SIZE_FAMILIES*a+b)  //moved to graph.h
 
 extern float derived_bonuses[NUM_FAMILIES][8];
@@ -370,6 +372,7 @@ loader::loader()
 	graphics[PIX(ORDER_LIVING, FAMILY_BIG_ORC)] = read_pixie_file("orc2.pix");
 	graphics[PIX(ORDER_LIVING, FAMILY_BARBARIAN)] = read_pixie_file("barby.pix");
 	graphics[PIX(ORDER_LIVING, FAMILY_SUMMONER)] = read_pixie_file("skeleton.pix");
+	graphics[PIX(ORDER_LIVING, FAMILY_BUILDER)] = read_pixie_file("footman.pix");
 	graphics[PIX(ORDER_LIVING, FAMILY_ARCHMAGE)] = read_pixie_file("archmage.pix");
 	graphics[PIX(ORDER_LIVING, FAMILY_GOLEM)] = read_pixie_file("golem1.pix");
 	graphics[PIX(ORDER_LIVING, FAMILY_GIANT_SKELETON)] = read_pixie_file("gs1.pix");
@@ -405,6 +408,7 @@ loader::loader()
 	act_types[PIX(ORDER_LIVING, FAMILY_BIG_ORC)] = ACT_RANDOM;
 	act_types[PIX(ORDER_LIVING, FAMILY_BARBARIAN)] = ACT_RANDOM;
 	act_types[PIX(ORDER_LIVING, FAMILY_SUMMONER)] = ACT_RANDOM;
+	act_types[PIX(ORDER_LIVING, FAMILY_BUILDER)] = ACT_RANDOM;
 	act_types[PIX(ORDER_LIVING, FAMILY_ARCHMAGE)] = ACT_RANDOM;
 	act_types[PIX(ORDER_LIVING, FAMILY_GOLEM)] = ACT_RANDOM;
 	act_types[PIX(ORDER_LIVING, FAMILY_GIANT_SKELETON)] = ACT_RANDOM;
@@ -428,6 +432,7 @@ loader::loader()
 	animations[PIX(ORDER_LIVING, FAMILY_BIG_ORC)] = animan;
 	animations[PIX(ORDER_LIVING, FAMILY_BARBARIAN)] = animan;
 	animations[PIX(ORDER_LIVING, FAMILY_SUMMONER)] = aniskel; //KAT
+	animations[PIX(ORDER_LIVING, FAMILY_BUILDER)] = animan; //KAT
 	animations[PIX(ORDER_LIVING, FAMILY_ARCHMAGE)] = animage;
 	animations[PIX(ORDER_LIVING, FAMILY_GOLEM)] = animan;
 	animations[PIX(ORDER_LIVING, FAMILY_GIANT_SKELETON)] = anigs;
@@ -454,6 +459,7 @@ loader::loader()
 	lineofsight[PIX(ORDER_LIVING, FAMILY_BIG_ORC)] = 25;
 	lineofsight[PIX(ORDER_LIVING, FAMILY_BARBARIAN)] = 12;
 	lineofsight[PIX(ORDER_LIVING, FAMILY_SUMMONER)] = 7; // KAT
+	lineofsight[PIX(ORDER_LIVING, FAMILY_BUILDER)] = 7; // KAT
 	lineofsight[PIX(ORDER_LIVING, FAMILY_ARCHMAGE)] = 10;	
 	lineofsight[PIX(ORDER_LIVING, FAMILY_GOLEM)] = 20;
 	lineofsight[PIX(ORDER_LIVING, FAMILY_GIANT_SKELETON)] = 20;
@@ -926,6 +932,15 @@ walker  *loader::set_walker(walker *ob,
 				case FAMILY_SUMMONER:
 					ob->stats->special_cost[1] = 25; // summon elf
 					ob->stats->special_cost[2] = 100;
+					ob->stats->special_cost[3] = 100;
+					ob->stats->special_cost[4] = 100; 
+					ob->stats->special_cost[5] = 100; 
+					ob->stats->weapon_cost = 2;
+					ob->default_weapon = FAMILY_SPRINKLE;
+					break;
+				case FAMILY_BUILDER:
+					ob->stats->special_cost[1] = 25; 
+					ob->stats->special_cost[2] = 50;
 					ob->stats->special_cost[3] = 100;
 					ob->stats->special_cost[4] = 100; 
 					ob->stats->special_cost[5] = 100; 

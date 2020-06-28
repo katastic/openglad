@@ -3034,10 +3034,90 @@ short walker::special()
 
 		case FAMILY_BUILDER:
 			{
-			PixieData& gridp = myscreen->level_data.grid;
+/*			PixieData& gridp = myscreen->level_data.grid;
 			int i = xpos/GRID_SIZE;
 			int j = ypos/GRID_SIZE;
-			gridp.data[i + j*gridp.w] = PIX_WALLSIDE1;
+			gridp.data[i + j*gridp.w] = PIX_WALLSIDE1;*/
+
+				int FAMILY = FAMILY_TOWER1; 
+				walker* newobj;
+				// First make the guy we'd summon, at least physically
+				newobj = myscreen->level_data.add_ob(ORDER_LIVING, FAMILY);
+				if (!newobj)
+					return 0; // failsafe
+				// We need to check for a space around the summoner...
+				//-----------------------------				
+				bool found_room = 0; 
+				int xoffset=0;
+				int yoffset=0;
+
+				//try to put one in front of us
+				switch(curdir)
+					{
+					case FACE_UP:yoffset=1;break;
+					case FACE_DOWN:yoffset=-1;break;
+					case FACE_LEFT:xoffset=-1;break;
+					case FACE_RIGHT:xoffset=1;break;
+					case FACE_UP_LEFT:xoffset=-1;yoffset=-1;break;
+					case FACE_UP_RIGHT:xoffset=1;yoffset=-1;break;
+					case FACE_DOWN_LEFT:xoffset=-1;yoffset=1;break;
+					case FACE_DOWN_RIGHT:xoffset=1;yoffset=1;break;
+					default:
+						assert(0);
+						break;
+					}
+
+				// try to spawn where we're looking, if not, do a 3x3 search like old code.
+				if (myscreen->query_passable(xpos+((newobj->sizex+xoffset*GRID_SIZE)),
+													ypos+((newobj->sizey+yoffset*GRID_SIZE)), newobj))
+						{
+							// We've found a legal spot ..
+							found_room = 1;
+							newobj->setxy(xpos+((newobj->sizex+xoffset*GRID_SIZE)),
+											ypos+((newobj->sizey+yoffset*GRID_SIZE)));
+							newobj->stats->level = (stats->level+1)/2;
+							newobj->set_difficulty(newobj->stats->level);
+							newobj->team_num = team_num; // set to our team
+							newobj->owner = this; // we're owned!
+							newobj->lifetime = 200 + 60*stats->level;
+							newobj->is_a_summon = true;
+							sprintf(message, "Cost %d", stats->special_cost[1]);
+							myscreen->viewob[0]->set_display_text(message, STANDARD_TEXT_TIME);
+						} // end of successfully put summoned creature
+						else{
+
+							for (int i=-1; i <= 1; i++)
+								for (int j=-1; j <= 1; j++)
+								{
+									if ( (i==0 && j==0) || (found_room) )
+										continue;
+									if (myscreen->query_passable(xpos+((newobj->sizex+1)*i),
+																ypos+((newobj->sizey+1)*j), newobj))
+									{
+										// We've found a legal spot ..
+										found_room = 1;
+										newobj->setxy(xpos+((newobj->sizex+1)*i),
+														ypos+((newobj->sizey+1)*j));
+										newobj->stats->level = (stats->level+1)/2;
+										newobj->set_difficulty(newobj->stats->level);
+										newobj->team_num = team_num; // set to our team
+										newobj->owner = this; // we're owned!
+										newobj->lifetime = 200 + 60*stats->level;
+										newobj->is_a_summon = true;
+										sprintf(message, "Cost %d", stats->special_cost[1]);
+										myscreen->viewob[0]->set_display_text(message, STANDARD_TEXT_TIME);
+									} // end of successfully put summoned creature
+								} // end of I and J loops
+						}
+				if (!found_room) // we never found a legal spot
+				{
+					newobj->dead = 1;
+					return 0;
+				}
+				stats->special_cost[1] += 25; //25, 50, 75, etc
+				busy += 15;						
+
+
 			}
 			break;
 

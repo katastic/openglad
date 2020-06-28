@@ -54,7 +54,6 @@
 #define PIX_CARPET_SMALL_RIGHT 132
 #define PIX_CARPET_SMALL_TINY  133
 
-
 // More grass .. reorder when all use this
 // defs file
 #define PIX_GRASS2      16

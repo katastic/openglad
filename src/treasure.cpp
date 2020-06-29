@@ -32,8 +32,109 @@
 
 // Zardus: this is the func to get events
 void get_input_events(bool);
-
 bool yes_or_no_prompt(const char* title, const char* message, bool default_value);
+
+//this could be converted to a member function instead of a helper function.
+int tres_exit(walker* this_guy, walker* eater)
+	{
+		short guys_here;
+		char message[80];
+		static char exitname[40];
+
+		if (eater->in_act) return 1;
+		if (eater->query_act_type()!= ACT_CONTROL || (eater->skip_exit > 1))
+			return 1;
+		eater->skip_exit = 10;
+		// See if there are any enemies left ...
+		if (myscreen->level_done == 0)
+			guys_here = 1;
+		else
+			guys_here = 0;
+		// Get the name of our exit..
+		{
+		int n = snprintf(message, sizeof(message), "scen%d", this_guy->stats->level); 
+		if(n <0){}
+		}
+		//turning this into snprintf EXPLODES the compiler for some reason!?
+		// but only when it's in the switch statement! moving it to its own function fixed it.
+		// no stray curleys or anything like that.
+
+		strcpy(exitname, myscreen->get_scen_title(message, myscreen) );
+
+		//buffers: PORT: using strcmp instead of stricmp
+		if (!strcmp(exitname, "none"))
+			sprintf(exitname, "Level %d", this_guy->stats->level);
+
+		// First check to see if we're withdrawing into
+		//    somewhere we've been, in which case we abort
+		//    this level, and set our current level to
+		//    that pointed to by the exit ...
+		if ( myscreen->save_data.is_level_completed(this_guy->stats->level)
+				&& !myscreen->save_data.is_level_completed(myscreen->save_data.scen_num)
+				&& (guys_here != 0)
+			) // okay to leave
+		{
+			char buf[40];
+			{
+				int n = snprintf(buf, sizeof(buf), "Withdraw to %s?", exitname);
+				if(n){}
+			}
+			bool result = yes_or_no_prompt("Exit Field", buf, false);
+			// Redraw screen ..
+			myscreen->redrawme = 1;
+
+			if (result) // accepted level change
+			{
+				clear_keyboard();
+				// Delete all of our current information and abort ..
+				for(auto e = myscreen->level_data.oblist.begin(); e != myscreen->level_data.oblist.end(); ++e)
+				{
+					walker* w = *e;
+					if (w && w->query_order() == ORDER_LIVING)
+					{
+						w->dead = 1;
+						myscreen->level_data.myobmap->remove(w);
+					}
+				}
+
+				// Now reload the autosave to revert our changes during battle (don't use SaveData::update_guys())
+				myscreen->save_data.load("save0");
+
+				// Go to the exit's level
+				myscreen->save_data.scen_num = this_guy->stats->level;
+				myscreen->end = 1;
+
+				// Autosave because we escaped to a new level
+				// Save with the new current level
+				myscreen->save_data.save("save0");
+
+				return myscreen->endgame(1, this_guy->stats->level); // retreat
+			}  // end of accepted withdraw to new level ..
+			clear_keyboard();
+		} // end of checking for withdrawal to completed level
+
+		//buffers: also, allow exit if scenario_type == can exit
+		if (!guys_here || (myscreen->level_data.type == SCEN_TYPE_CAN_EXIT)) // nobody evil left, so okay to exit level ..
+		{
+			char buf[40];
+			{
+				int n = snprintf(buf, sizeof(buf), "Exit to %s?", exitname);
+				if(n < 0){}
+			}
+			bool result = yes_or_no_prompt("Exit Field", buf, false);
+			// Redraw screen ..
+			myscreen->redrawme = 1;
+
+			if(result) // accepted level change
+			{
+				clear_keyboard();
+				return myscreen->endgame(0, this_guy->stats->level);
+			}
+			clear_keyboard();
+			return 1;
+		}
+	return 1;
+	}
 
 treasure::treasure(const PixieData& data)
     : walker(data)
@@ -55,13 +156,12 @@ short treasure::act()
 
 short treasure::eat_me(walker  * eater)
 {
-	short guys_here;
-
+//	short guys_here;
 	char message[80];
 	Sint32 distance;
 	walker  *target, *flash;
 	static char exitname[40];
-	Sint32 leftside, rightside;
+	//Sint32 leftside, rightside;
 
 	switch (family)
 	{
@@ -159,94 +259,8 @@ short treasure::eat_me(walker  * eater)
 			}
 			dead = 1;
 			return 1;
-		case TRES_EXIT: // go to another level, possibly
-			if (eater->in_act) return 1;
-			if (eater->query_act_type()!= ACT_CONTROL || (eater->skip_exit > 1))
-				return 1;
-			eater->skip_exit = 10;
-			// See if there are any enemies left ...
-			if (myscreen->level_done == 0)
-				guys_here = 1;
-			else
-				guys_here = 0;
-			// Get the name of our exit..
-			sprintf(message, "scen%d", stats->level); //turning this into snprintf EXPLODES the compiler for some reason!?
-			strcpy(exitname, myscreen->get_scen_title(message, myscreen) );
-
-			//buffers: PORT: using strcmp instead of stricmp
-			if (!strcmp(exitname, "none"))
-				sprintf(exitname, "Level %d", stats->level);
-
-			leftside  = 160 - ( (strlen(exitname) + 18) * 3);
-			rightside = 160 + ( (strlen(exitname) + 18) * 3);
-			// First check to see if we're withdrawing into
-			//    somewhere we've been, in which case we abort
-			//    this level, and set our current level to
-			//    that pointed to by the exit ...
-			if ( myscreen->save_data.is_level_completed(stats->level)
-			        && !myscreen->save_data.is_level_completed(myscreen->save_data.scen_num)
-			        && (guys_here != 0)
-			   ) // okay to leave
-			{
-				leftside -= 12;
-				rightside += 12;
-
-                char buf[40];
-                int n = snprintf(buf, sizeof(buf), "Withdraw to %s?", exitname);
-				if(n){}
-                bool result = yes_or_no_prompt("Exit Field", buf, false);
-				// Redraw screen ..
-				myscreen->redrawme = 1;
-
-				if (result) // accepted level change
-				{
-					clear_keyboard();
-					// Delete all of our current information and abort ..
-					for(auto e = myscreen->level_data.oblist.begin(); e != myscreen->level_data.oblist.end(); e++)
-					{
-					    walker* w = *e;
-						if (w && w->query_order() == ORDER_LIVING)
-						{
-							w->dead = 1;
-							myscreen->level_data.myobmap->remove(w);
-						}
-					}
-
-					// Now reload the autosave to revert our changes during battle (don't use SaveData::update_guys())
-                    myscreen->save_data.load("save0");
-
-                    // Go to the exit's level
-					myscreen->save_data.scen_num = stats->level;
-					myscreen->end = 1;
-
-                    // Autosave because we escaped to a new level
-					// Save with the new current level
-                    myscreen->save_data.save("save0");
-
-					return myscreen->endgame(1, stats->level); // retreat
-				}  // end of accepted withdraw to new level ..
-				clear_keyboard();
-			} // end of checking for withdrawal to completed level
-
-			//buffers: also, allow exit if scenario_type == can exit
-			if (!guys_here || (myscreen->level_data.type == SCEN_TYPE_CAN_EXIT)) // nobody evil left, so okay to exit level ..
-			{
-                char buf[40];
-                int n = snprintf(buf, sizeof(buf), "Exit to %s?", exitname);
-				if(n < 0){}
-                bool result = yes_or_no_prompt("Exit Field", buf, false);
-				// Redraw screen ..
-				myscreen->redrawme = 1;
-
-				if(result) // accepted level change
-				{
-					clear_keyboard();
-					return myscreen->endgame(0, stats->level);
-				}
-				clear_keyboard();
-				return 1;
-			}
-			return 1;
+		case TRES_EXIT: // go to another level, possibly			
+			return tres_exit(this, eater);
 		case TRES_TELEPORTER:
 			if (eater->skip_exit > 1)
 				return 1;

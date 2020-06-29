@@ -64,6 +64,27 @@ class walker : public pixieN
 		{
 			return family;
 		}
+
+
+		int special_builder();
+		int special_summoner();
+		int special_archer();
+		int special_mage();
+		int special_cleric();
+		int special_orc();
+		int special_archmage();
+		int special_soldier();
+		int special_ghost();
+		int special_faerie();
+		int special_fireelemental();		
+		int special_slime();
+		int special_bigslime();
+		int special_thief();
+		int special_elf();
+		int special_druid();
+		int special_barbarian();
+		int special_skeleton();
+
 		walker  *create_weapon();
 		short fire_check(short xdelta, short ydelta);
 		short query_next_to();

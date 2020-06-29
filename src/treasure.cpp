@@ -106,7 +106,8 @@ short treasure::eat_me(walker  * eater)
 				eater->flight_left += (150*stats->level);
 				if (eater->user != -1)
 				{
-					sprintf(message, "Potion of Flight(%d)!", stats->level);
+					int n = snprintf(message, sizeof(message), "Potion of Flight(%d)!", stats->level);
+					if(n < 0){}
 					myscreen->do_notify(message, eater);
 				}
 				dead = 1;
@@ -119,7 +120,8 @@ short treasure::eat_me(walker  * eater)
 			dead = 1;
 			if (eater->user != -1)
 			{
-				sprintf(message, "Potion of Mana(%d)!", stats->level);
+				int n = snprintf(message, sizeof(message), "Potion of Mana(%d)!", stats->level);
+				if(n < 0){}
 				myscreen->do_notify(message, eater);
 			}
 			return 1;
@@ -130,7 +132,8 @@ short treasure::eat_me(walker  * eater)
 				dead = 1;
 				if (eater->user != -1)
 				{
-					sprintf(message, "Potion of Invulnerability(%d)!", stats->level);
+					int n = snprintf(message, sizeof(message), "Potion of Invulnerability(%d)!", stats->level);
+					if(n < 0){}
 					myscreen->do_notify(message, eater);
 				}
 			}
@@ -139,7 +142,8 @@ short treasure::eat_me(walker  * eater)
 			eater->invisibility_left += (150*stats->level);
 			if (eater->user != -1)
 			{
-				sprintf(message, "Potion of Invisibility(%d)!", stats->level);
+				int n = snprintf(message, sizeof(message), "Potion of Invisibility(%d)!", stats->level);
+				if(n < 0){}
 				myscreen->do_notify(message, eater);
 			}
 			dead = 1;
@@ -149,7 +153,8 @@ short treasure::eat_me(walker  * eater)
 			eater->speed_bonus = stats->level;
 			if (eater->user != -1)
 			{
-				sprintf(message, "Potion of Speed(%d)!", stats->level);
+				int n = snprintf(message, sizeof(message), "Potion of Speed(%d)!", stats->level);
+				if(n < 0){}
 				myscreen->do_notify(message, eater);
 			}
 			dead = 1;
@@ -165,7 +170,7 @@ short treasure::eat_me(walker  * eater)
 			else
 				guys_here = 0;
 			// Get the name of our exit..
-			sprintf(message, "scen%d", stats->level);
+			sprintf(message, "scen%d", stats->level); //turning this into snprintf EXPLODES the compiler for some reason!?
 			strcpy(exitname, myscreen->get_scen_title(message, myscreen) );
 
 			//buffers: PORT: using strcmp instead of stricmp
@@ -187,7 +192,8 @@ short treasure::eat_me(walker  * eater)
 				rightside += 12;
 
                 char buf[40];
-                snprintf(buf, 40, "Withdraw to %s?", exitname);
+                int n = snprintf(buf, sizeof(buf), "Withdraw to %s?", exitname);
+				if(n){}
                 bool result = yes_or_no_prompt("Exit Field", buf, false);
 				// Redraw screen ..
 				myscreen->redrawme = 1;
@@ -226,7 +232,8 @@ short treasure::eat_me(walker  * eater)
 			if (!guys_here || (myscreen->level_data.type == SCEN_TYPE_CAN_EXIT)) // nobody evil left, so okay to exit level ..
 			{
                 char buf[40];
-                snprintf(buf, 40, "Exit to %s?", exitname);
+                int n = snprintf(buf, sizeof(buf), "Exit to %s?", exitname);
+				if(n < 0){}
                 bool result = yes_or_no_prompt("Exit Field", buf, false);
 				// Redraw screen ..
 				myscreen->redrawme = 1;
@@ -287,10 +294,16 @@ short treasure::eat_me(walker  * eater)
 			{
 				eater->keys |= (Sint32) (pow((double)2, stats->level)); // ie, 2, 4, 8, 16...
 				if (eater->myguy)
-					sprintf(message, "%s picks up key %d", eater->myguy->name,
+					{
+					int n = snprintf(message, sizeof(message), "%s picks up key %d", eater->myguy->name,
 					        stats->level);
+					if(n < 0){}
+					}
 				else
-					sprintf(message, "%s picks up key %d", eater->stats->name, stats->level);
+					{
+					int n = snprintf(message, sizeof(message), "%s picks up key %d", eater->stats->name, stats->level);
+					if(n < 0){}
+					}
 				if (eater->team_num == 0) // only show players picking up keys
 				{
 					myscreen->do_notify(message, eater);

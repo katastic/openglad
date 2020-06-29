@@ -2076,12 +2076,12 @@ short walker::attack(walker  *target)
 					if (strlen(target->stats->name) && !(target->lifetime)
 					        && (!target->owner) ) // do we have an NPC name?
 					{
-						sprintf(message, "ENEMY DEATH: %s DIED!", target->stats->name);
+						snprintf(message, sizeof(message), "ENEMY DEATH: %s DIED!", target->stats->name);
 						myscreen->viewob[0]->set_display_text(message, STANDARD_TEXT_TIME);
 					}
 					if(remaining_foes(myscreen, this) == 1)  // This is the last foe
 					{
-						sprintf(message, "All foes defeated!");
+						snprintf(message, sizeof(message), "All foes defeated!");
 						myscreen->viewob[0]->set_display_text(message, STANDARD_TEXT_TIME);
 					}
 				}
@@ -2090,14 +2090,14 @@ short walker::attack(walker  *target)
 					// Alert us of the death
 					if (target->owner && target->is_a_summon)
 						{
-						sprintf(message, "%s Dispelled! -25 mana cost\n", target->stats->name);
+						snprintf(message, sizeof(message),  "%s Dispelled! -25 mana cost\n", target->stats->name);
 						}else if ( (target->owner || target->lifetime) // summoned?
 					        && (strlen(target->stats->name) ) ) {// and have name
-						sprintf(message, "%s Dispelled!", target->stats->name);
+						snprintf(message, sizeof(message),  "%s Dispelled!", target->stats->name);
 							}else if (strlen(target->stats->name)) // do we have an NPC name?
-						sprintf(message, "%s DIED!", target->stats->name);
+						snprintf(message, sizeof(message),  "%s DIED!", target->stats->name);
 					else if (target->myguy && strlen(target->myguy->name) )
-						sprintf(message, "%s Died!", target->myguy->name);
+						snprintf(message, sizeof(message),  "%s Died!", target->myguy->name);
 					else
 						switch (target->query_family())
 						{
@@ -2608,9 +2608,9 @@ short walker::special()
                                 {
                                     // Inform screen/view to print a message ..
                                     if (didheal == 1)
-                                        sprintf(message, "Cleric healed 1 man!");
+                                        snprintf(message, sizeof(message),  "Cleric healed 1 man!");
                                     else
-                                        sprintf(message, "Cleric healed %d men!", didheal);
+                                        snprintf(message, sizeof(message),  "Cleric healed %d men!", didheal);
                                     if (team_num == 0 || myguy) // home team
                                         myscreen->do_notify(message, this);
                                 }
@@ -2686,7 +2686,7 @@ short walker::special()
 							if (team_num == 0 || myguy)
 							{
 								strcpy(message, myguy->name);
-								sprintf(message, "%s turned %d undead.",
+								snprintf(message, sizeof(message),  "%s turned %d undead.",
 								        myguy->name, generic);
 								myscreen->do_notify(message, this);
 							} // end of notify visually
@@ -2746,7 +2746,7 @@ short walker::special()
 							if (team_num == 0 || myguy)
 							{
 								strcpy(message, myguy->name);
-								sprintf(message, "%s turned %d undead.",
+								snprintf(message, sizeof(message),  "%s turned %d undead.",
 								        myguy->name, generic);
 								myscreen->do_notify(message, this);
 							} // end of notify visually
@@ -2893,7 +2893,7 @@ short walker::special()
 							if ((team_num == 0 || myguy) && user != -1)
 							{
 								myscreen->do_notify("Teleport Marker Placed", this);
-								sprintf(message, "(%d Uses)", newob->lifetime);
+								snprintf(message, sizeof(message),  "(%d Uses)", newob->lifetime);
 								myscreen->do_notify(message, this);
 							}
 							busy +=8;
@@ -2960,7 +2960,7 @@ short walker::special()
 						generic = 5 + 2*stats->level;
 						if (generic > 50)
 							generic = 50;
-						sprintf(message, "TIME IS FROZEN! (%d rounds)", generic);
+						snprintf(message, sizeof(message),  "TIME IS FROZEN! (%d rounds)", generic);
 						myscreen->viewob[0]->set_display_text(message, 2);
 						myscreen->viewob[0]->redraw();
 						myscreen->viewob[0]->refresh();
@@ -3107,7 +3107,7 @@ short walker::special()
 							newobj->owner = this; // we're owned!
 							newobj->lifetime = 200 + 60*stats->level;
 							newobj->is_a_summon = true;
-							sprintf(message, "Cost %d", stats->special_cost[1]);
+							snprintf(message, sizeof(message),  "Cost %d", stats->special_cost[1]);
 							myscreen->viewob[0]->set_display_text(message, STANDARD_TEXT_TIME);
 						} // end of successfully put summoned creature
 						else{
@@ -3130,7 +3130,7 @@ short walker::special()
 										newobj->owner = this; // we're owned!
 										newobj->lifetime = 200 + 60*stats->level;
 										newobj->is_a_summon = true;
-										sprintf(message, "Cost %d", stats->special_cost[1]);
+										snprintf(message, sizeof(message),  "Cost %d", stats->special_cost[1]);
 										myscreen->viewob[0]->set_display_text(message, STANDARD_TEXT_TIME);
 									} // end of successfully put summoned creature
 								} // end of I and J loops
@@ -3191,7 +3191,7 @@ short walker::special()
 							newobj->owner = this; // we're owned!
 							newobj->lifetime = 200 + 60*stats->level;
 							newobj->is_a_summon = true;
-							sprintf(message, "Cost %d", stats->special_cost[1]);
+							snprintf(message, sizeof(message),  "Cost %d", stats->special_cost[1]);
 							myscreen->viewob[0]->set_display_text(message, STANDARD_TEXT_TIME);
 						} // end of successfully put summoned creature
 						else{
@@ -3214,7 +3214,7 @@ short walker::special()
 										newobj->owner = this; // we're owned!
 										newobj->lifetime = 200 + 60*stats->level;
 										newobj->is_a_summon = true;
-										sprintf(message, "Cost %d", stats->special_cost[1]);
+										snprintf(message, sizeof(message),  "Cost %d", stats->special_cost[1]);
 										myscreen->viewob[0]->set_display_text(message, STANDARD_TEXT_TIME);
 									} // end of successfully put summoned creature
 								} // end of I and J loops
@@ -3279,7 +3279,7 @@ short walker::special()
 						if (team_num == 0 || myguy)
 						{
 							myscreen->do_notify("Teleport Marker Placed", this);
-							sprintf(message, "(%d Uses)", newob->lifetime);
+							snprintf(message, sizeof(message),  "(%d Uses)", newob->lifetime);
 							myscreen->do_notify(message, this);
 						}
 						busy +=8;
@@ -4032,9 +4032,9 @@ short walker::special()
                             {
                                 // Inform screen/view to print a message ..
                                 if (didheal == 1)
-                                    sprintf(message, "Druid protected 1 man!");
+                                    snprintf(message, sizeof(message),  "Druid protected 1 man!");
                                 else
-                                    sprintf(message, "Druid protected %d men!", didheal);
+                                    snprintf(message, sizeof(message),  "Druid protected %d men!", didheal);
                                 if (team_num == 0 || myguy) // home team
                                     myscreen->do_notify(message, this);
                                 // Play sound ...

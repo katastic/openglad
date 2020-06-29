@@ -60,14 +60,14 @@ class radar;
 class soundob;
 class smoother;
 
-#define DIFFICULTY_SETTINGS 3
+const unsigned int DIFFICULTY_SETTINGS = 3;
 
 Uint32 random(Uint32 x);
 
-#define VIDEO_ADDRESS 0xA000	//old crap, still used
-#define VIDEO_LINEAR ( (VIDEO_ADDRESS) << 4) //old crap, still used
+const unsigned int VIDEO_ADDRESS = 0xA000;	//old crap, still used
+const unsigned int VIDEO_LINEAR = ( (VIDEO_ADDRESS) << 4); //old crap, still used
 
-#define DPMI_INT        0x31
+const unsigned int DPMI_INT = 0x31;
 /*struct meminfo			// OLD CRAP but still used in screen.cpp:1374
 {
 	unsigned LargestBlockAvail;
@@ -84,253 +84,255 @@ Uint32 random(Uint32 x);
 
 extern screen* myscreen; // global, availible to anyone
 
-#define MAX_LEVELS 500 // Maximum number of scenarios allowed ..
-//#define GRID_SIZE 16
+const unsigned int MAX_LEVELS = 500; // Maximum number of scenarios allowed ..
+//const unsigned int GRID_SIZE 16
 const int GRID_SIZE = 16; //screw your lack of define debug symbols
 
-#define PROT_MODE 1  // comment this out when not in protected mode
+const unsigned int PROT_MODE = 1;  // comment this out when not in protected mode
 #ifdef PROT_MODE
   #define init_sound(x,y,z)  while (0)
 //#define play_sound(x)      while (0)
 #endif
 
 // Used for the help-text system:
-#define MAX_LINES 100   // maximum number of lines in helpfile
-#define HELP_WIDTH 100   // maximum length of display line
+const unsigned int MAX_LINES = 100;   // maximum number of lines in helpfile
+const unsigned int HELP_WIDTH = 100;   // maximum length of display line
 short   fill_help_array(char somearray[HELP_WIDTH][MAX_LINES], SDL_RWops *infile);
 short   read_campaign_intro(screen *myscreen);
 short   read_scenario(screen  *myscreen);
 char* read_one_line(SDL_RWops *infile, short length);
 
 //color defines:
-#define DEFAULT_TEXT_COLOR 88
+const unsigned int DEFAULT_TEXT_COLOR = 88;
 
-#define PURE_WHITE   15
-#define PURE_BLACK   0
-#define WHITE        24
-#define BLACK        160
-#define GREY         23
-#define YELLOW       88
-#define RED          40
-#define DARK_BLUE    72
-#define LIGHT_BLUE   120
-#define DARK_GREEN   63
-#define LIGHT_GREEN  56
+const unsigned int PURE_WHITE   = 15;
+const unsigned int PURE_BLACK   = 0;
+const unsigned int WHITE        = 24;
+const unsigned int BLACK        = 160;
+const unsigned int GREY         = 23;
+const unsigned int YELLOW       = 88;
+const unsigned int RED          = 40;
+const unsigned int DARK_BLUE    = 72;
+const unsigned int LIGHT_BLUE   = 120;
+const unsigned int DARK_GREEN   = 63;
+const unsigned int LIGHT_GREEN  = 56;
 
 // Color cycling:
-#define WATER_START  208
-#define WATER_END    223
-#define ORANGE_START 224
-#define ORANGE_END   231
+const unsigned int WATER_START  = 208;
+const unsigned int WATER_END    = 223;
+const unsigned int ORANGE_START = 224;
+const unsigned int ORANGE_END   = 231;
 
 // Random defines:
-//#define PROFILING
+//const unsigned int PROFILING
 //#include "profiler.h"
-#define CHEAT_MODE 1  // set to 0 for no cheats..
+const unsigned int CHEAT_MODE = 1;  // set to 0 for no cheats..
 // Picture Object class defs
 
 // HP BAR COLOR DEFINES
-#define BAR_BACK_COLOR 11
-#define BOX_COLOR 0
-#define LOW_HP_COLOR 42
-#define MID_HP_COLOR 237
-#define HIGH_HP_COLOR 61
-#define MAX_HP_COLOR 56 // When hp's are over max :)
+const unsigned int BAR_BACK_COLOR = 11;
+const unsigned int BOX_COLOR = 0;
+const unsigned int LOW_HP_COLOR = 42;
+const unsigned int MID_HP_COLOR = 237;
+const unsigned int HIGH_HP_COLOR = 61;
+const unsigned int MAX_HP_COLOR = 56; // When hp's are over max :)
 
 // MP BAR COLOR DEFINES
-#define LOW_MP_COLOR 42
-#define MID_MP_COLOR 108
-#define HIGH_MP_COLOR 72
-#define MAX_MP_COLOR 64 // When mp's are over max :)
+const unsigned int LOW_MP_COLOR = 42;
+const unsigned int MID_MP_COLOR = 108;
+const unsigned int HIGH_MP_COLOR = 72;
+const unsigned int MAX_MP_COLOR = 64; // When mp's are over max :)
 
 // Generators are limited by this number
-#define MAXOBS 150
+const unsigned int MAXOBS = 150;
 
 
 
 // Act types
-#define ACT_RANDOM 0
-#define ACT_FIRE 1
-#define ACT_CONTROL 2
-#define ACT_GUARD 3
-#define ACT_GENERATE 4
-#define ACT_DIE 5
-#define ACT_SIT 6
+const unsigned int ACT_RANDOM = 0;
+const unsigned int ACT_FIRE = 1;
+const unsigned int ACT_CONTROL = 2;
+const unsigned int ACT_GUARD = 3;
+const unsigned int ACT_GENERATE = 4;
+const unsigned int ACT_DIE = 5;
+const unsigned int ACT_SIT = 6;
 
 // Team types
 
-//              //#define MY_TEAM 0
-//              #define ELF_TEAM 1
-//              #define KNIGHT_TEAM 2
-//              #define MAX_TEAM 2
+//              //const unsigned int MY_TEAM 0
+//              const unsigned int ELF_TEAM 1
+//              const unsigned int KNIGHT_TEAM 2
+//              const unsigned int MAX_TEAM 2
 
-#define MAX_TEAM 7
+const unsigned int MAX_TEAM = 7;
 
 // Other screen-type things
-#define NUM_SPECIALS 6
+const unsigned int NUM_SPECIALS = 6;
 
 // Animation Types : Livings
-#define ANI_WALK 0
-#define ANI_ATTACK 1
-#define ANI_TELE_OUT 2
-#define ANI_SKEL_GROW 3
-#define ANI_TELE_IN 3
-#define ANI_SLIME_SPLIT 4
+const unsigned int ANI_WALK = 0;
+const unsigned int ANI_ATTACK = 1;
+const unsigned int ANI_TELE_OUT = 2;
+const unsigned int ANI_SKEL_GROW = 3;
+const unsigned int ANI_TELE_IN = 3;
+const unsigned int ANI_SLIME_SPLIT = 4;
 
 // Animations types : weapons
-#define ANI_GROW 1 // Trees have no attack animation
-#define ANI_GLOWGROW 1 // Neither do sparkles
-#define ANI_GLOWPULSE 2 // sparkles cycling
+const unsigned int ANI_GROW = 1; // Trees have no attack animation
+const unsigned int ANI_GLOWGROW = 1; // Neither do sparkles
+const unsigned int ANI_GLOWPULSE = 2; // sparkles cycling
 
 // These are for effect objects ..
-#define ANI_EXPAND_8 1 //1
-#define ANI_DOOR_OPEN 1 // Door opening
-#define ANI_SCARE    1 // 2 ghost scare
-#define ANI_BOMB     1 // 3 thief's bomb
-#define ANI_EXPLODE  1 // 4
-#define ANI_SPIN     1 // for the marker
+const unsigned int ANI_EXPAND_8 = 1; //1
+const unsigned int ANI_DOOR_OPEN = 1; // Door opening
+const unsigned int ANI_SCARE    = 1; // 2 ghost scare
+const unsigned int ANI_BOMB     = 1; // 3 thief's bomb
+const unsigned int ANI_EXPLODE  = 1; // 4
+const unsigned int ANI_SPIN     = 1; // for the marker
 
 // Orders
-#define ORDER_LIVING 0
-#define ORDER_WEAPON 1
-#define ORDER_TREASURE 2
-#define ORDER_GENERATOR 3
-#define ORDER_FX 4
-#define ORDER_SPECIAL 5
-#define ORDER_BUTTON1 6
+const unsigned int ORDER_LIVING = 0;
+const unsigned int ORDER_WEAPON = 1;
+const unsigned int ORDER_TREASURE = 2;
+const unsigned int ORDER_GENERATOR = 3;
+const unsigned int ORDER_FX = 4;
+const unsigned int ORDER_SPECIAL = 5;
+const unsigned int ORDER_BUTTON1 = 6;
 
 // Living families
-#define GUY_SOLDIER 0
-#define GUY_ELF 1
-#define GUY_ARCHER 2
-#define GUY_MAGE 3
-#define GUY_SKELETON 4
-#define GUY_CLERIC 5
-#define GUY_FIREELEMENTAL 6
-#define GUY_FAERIE 7
-#define GUY_SLIME 8
-#define GUY_SMALL_SLIME 9
-#define GUY_MEDIUM_SLIME 10
-#define GUY_THIEF 11
-#define GUY_GHOST 12
-#define GUY_DRUID 13
-#define GUY_ORC   14
-#define GUY_BIG_ORC 15
-#define GUY_BARBARIAN 16
-#define GUY_SUMMONER 17 //HAS TO BE right BEFORE ARCHMAGE. looks like there's a bug if you add a character after empty data (like tower) with no picker stats
+const unsigned int GUY_SOLDIER = 0;
+const unsigned int GUY_ELF = 1;
+const unsigned int GUY_ARCHER = 2;
+const unsigned int GUY_MAGE = 3;
+const unsigned int GUY_SKELETON = 4;
+const unsigned int GUY_CLERIC = 5;
+const unsigned int GUY_FIREELEMENTAL = 6;
+const unsigned int GUY_FAERIE = 7;
+const unsigned int GUY_SLIME = 8;
+const unsigned int GUY_SMALL_SLIME = 9;
+const unsigned int GUY_MEDIUM_SLIME = 10;
+const unsigned int GUY_THIEF = 11;
+const unsigned int GUY_GHOST = 12;
+const unsigned int GUY_DRUID = 13;
+const unsigned int GUY_ORC   = 14;
+const unsigned int GUY_BIG_ORC = 15;
+const unsigned int GUY_BARBARIAN = 16;
+const unsigned int GUY_SUMMONER = 17; //HAS TO BE right BEFORE ARCHMAGE. looks like there's a bug if you add a character after empty data (like tower) with no picker stats
 // See [guy.cpp:84]
-#define GUY_BUILDER 18
-#define GUY_ARCHMAGE 19 	//17
-#define GUY_GOLEM 20 	//18
-#define GUY_GIANT_SKELETON 21 //19
-#define GUY_TOWER1 22 //20
+const unsigned int GUY_BUILDER = 18;
+const unsigned int GUY_ARCHMAGE = 19; 	//17
+const unsigned int GUY_GOLEM = 20; 	//18
+const unsigned int GUY_GIANT_SKELETON = 21; //19
+const unsigned int GUY_TOWER1 = 22; //20
 
-#define NUM_GUYS 23  // # of families; make sure to change the
+const unsigned int NUM_GUYS = 23;  // # of families; make sure to change the
 // SIZE_FAMILIES in loader.cpp as well
 // (or your code will act weird)
 
 #define PIX(a,b) (NUM_GUYS*a+b)
 
+
+
 //Weapon families
-#define WEAP_KNIFE 0
-#define WEAP_ROCK 1
-#define WEAP_ARROW 2
-#define WEAP_FIREBALL 3
-#define WEAP_TREE 4
-#define WEAP_METEOR 5
-#define WEAP_SPRINKLE 6
-#define WEAP_BONE 7
-#define WEAP_BLOOD 8
-#define WEAP_BLOB 9
-#define WEAP_FIRE_ARROW 10
-#define WEAP_LIGHTNING 11
-#define WEAP_GLOW 12
-#define WEAP_WAVE 13
-#define WEAP_WAVE2 14
-#define WEAP_WAVE3 15
-#define WEAP_CIRCLE_PROTECTION 16
-#define WEAP_HAMMER 17
-#define WEAP_DOOR 18
-#define WEAP_BOULDER 19
-#define NUM_WEAPONS 20
+const unsigned int WEAP_KNIFE = 0;
+const unsigned int WEAP_ROCK = 1;
+const unsigned int WEAP_ARROW = 2;
+const unsigned int WEAP_FIREBALL = 3;
+const unsigned int WEAP_TREE = 4;
+const unsigned int WEAP_METEOR = 5;
+const unsigned int WEAP_SPRINKLE = 6;
+const unsigned int WEAP_BONE = 7;
+const unsigned int WEAP_BLOOD = 8;
+const unsigned int WEAP_BLOB = 9;
+const unsigned int WEAP_FIRE_ARROW = 10;
+const unsigned int WEAP_LIGHTNING = 11;
+const unsigned int WEAP_GLOW = 12;
+const unsigned int WEAP_WAVE = 13;
+const unsigned int WEAP_WAVE2 = 14;
+const unsigned int WEAP_WAVE3 = 15;
+const unsigned int WEAP_CIRCLE_PROTECTION = 16;
+const unsigned int WEAP_HAMMER = 17;
+const unsigned int WEAP_DOOR = 18;
+const unsigned int WEAP_BOULDER = 19;
+const unsigned int NUM_WEAPONS = 20;
 
 // Treasure families
-#define TRES_STAIN 0
-#define TRES_DRUMSTICK 1
-#define TRES_GOLD_BAR 2
-#define TRES_SILVER_BAR 3
-#define TRES_MAGIC_POTION 4
-#define TRES_INVIS_POTION 5
-#define TRES_INVULNERABLE_POTION 6
-#define TRES_FLIGHT_POTION 7
-#define TRES_EXIT 8
-#define TRES_TELEPORTER 9
-#define TRES_LIFE_GEM 10 // generated upon death
-#define TRES_KEY 11
-#define TRES_SPEED_POTION 12
-#define MAX_TREASURE 12   // # of biggest treasure..  (why not +1?!?!?!?!)
-#define NUM_TREASURES 13 //kat
+const unsigned int TRES_STAIN = 0;
+const unsigned int TRES_DRUMSTICK = 1;
+const unsigned int TRES_GOLD_BAR = 2;
+const unsigned int TRES_SILVER_BAR = 3;
+const unsigned int TRES_MAGIC_POTION = 4;
+const unsigned int TRES_INVIS_POTION = 5;
+const unsigned int TRES_INVULNERABLE_POTION = 6;
+const unsigned int TRES_FLIGHT_POTION = 7;
+const unsigned int TRES_EXIT = 8;
+const unsigned int TRES_TELEPORTER = 9;
+const unsigned int TRES_LIFE_GEM = 10; // generated upon death
+const unsigned int TRES_KEY = 11;
+const unsigned int TRES_SPEED_POTION = 12;
+const unsigned int MAX_TREASURE = 12;   // # of biggest treasure..  (why not +1?!?!?!?!)
+const unsigned int NUM_TREASURES = 13; //kat
 
 // Generator families
-#define GEN_TENT 0  // skeletons
-#define GEN_TOWER 1 // mages
-#define GEN_BONES 2 // ghosts
-#define GEN_TREEHOUSE 3 // elves :)
+const unsigned int GEN_TENT = 0;  // skeletons
+const unsigned int GEN_TOWER = 1; // mages
+const unsigned int GEN_BONES = 2; // ghosts
+const unsigned int GEN_TREEHOUSE = 3; // elves :)
 
 // FX families
-//#define FX_STAIN 0
-#define FX_EXPAND 0
-#define FX_GHOST_SCARE 1
-#define FX_BOMB 2
-#define FX_EXPLOSION 3      // Bombs, etc.
-#define FX_FLASH 4          // Used for teleporter effects
-#define FX_MAGIC_SHIELD 5   // revolving protective shield
-#define FX_KNIFE_BACK  6    // Returning blade
-#define FX_BOOMERANG  7     // Circling boomerang
-#define FX_CLOUD 8          // purple poison cloud
-#define FX_MARKER 9         // Marker for Mages Teleport
-#define FX_CHAIN 10         // 'Chain lightning' effect
-#define FX_DOOR_OPEN 11     // The open door
-#define FX_HIT 12           // Show when hit
+//const unsigned int FX_STAIN 0
+const unsigned int FX_EXPAND = 0;
+const unsigned int FX_GHOST_SCARE = 1;
+const unsigned int FX_BOMB = 2;
+const unsigned int FX_EXPLOSION = 3;      // Bombs, etc.
+const unsigned int FX_FLASH = 4;          // Used for teleporter effects
+const unsigned int FX_MAGIC_SHIELD = 5;   // revolving protective shield
+const unsigned int FX_KNIFE_BACK = 6;    // Returning blade
+const unsigned int FX_BOOMERANG = 7;     // Circling boomerang
+const unsigned int FX_CLOUD = 8;          // purple poison cloud
+const unsigned int FX_MARKER = 9;         // Marker for Mages Teleport
+const unsigned int FX_CHAIN = 10;         // 'Chain lightning' effect
+const unsigned int FX_DOOR_OPEN = 11;     // The open door
+const unsigned int FX_HIT = 12;           // Show when hit
 
 // Special families
-#define FAMILY_RESERVED_TEAM 0
+const unsigned int FAMILY_RESERVED_TEAM = 0;
 
 // Button graphic families
-#define FAMILY_NORMAL1 0
-#define FAMILY_PLUS 1
-#define FAMILY_MINUS 2
-#define FAMILY_WRENCH 3
+const unsigned int FAMILY_NORMAL1 = 0;
+const unsigned int FAMILY_PLUS = 1;
+const unsigned int FAMILY_MINUS = 2;
+const unsigned int FAMILY_WRENCH = 3;
 
 // Facings
-#define FACE_UP 0
-#define FACE_UP_RIGHT 1
-#define FACE_RIGHT 2
-#define FACE_DOWN_RIGHT 3
-#define FACE_DOWN 4
-#define FACE_DOWN_LEFT 5
-#define FACE_LEFT 6
-#define FACE_UP_LEFT 7
-#define NUM_FACINGS 8
+const unsigned int FACE_UP = 0;
+const unsigned int FACE_UP_RIGHT = 1;
+const unsigned int FACE_RIGHT = 2;
+const unsigned int FACE_DOWN_RIGHT = 3;
+const unsigned int FACE_DOWN = 4;
+const unsigned int FACE_DOWN_LEFT = 5;
+const unsigned int FACE_LEFT = 6;
+const unsigned int FACE_UP_LEFT = 7;
+const unsigned int NUM_FACINGS = 8;
 
 // Stats defines
-#define COMMAND_WALK 1
-#define COMMAND_FIRE 2
-#define COMMAND_RANDOM_WALK 3   // walk random dir ..
-#define COMMAND_DIE 4   // bug fixing ..
-#define COMMAND_FOLLOW 5
-#define COMMAND_RUSH 6  // Rush your enemy!
-#define COMMAND_MULTIDO 7 // Do <com1> commands in one round
-#define COMMAND_QUICK_FIRE 8 // Fires with no busy or animation
-#define COMMAND_SET_WEAPON 9 // set weapon type
-#define COMMAND_RESET_WEAPON 10 // restores weapon to default
-#define COMMAND_SEARCH 11       // use right-hand rule to find foe
-#define COMMAND_ATTACK 12       // attack / move to a close, current foe
-#define COMMAND_RIGHT_WALK 13   // use right-hand rule ONLY; no direct walk
-#define COMMAND_UNCHARM 14      // recover from being 'charmed'
-#define REGEN (Sint32) 4000       // used to calculate time between heals
+const unsigned int COMMAND_WALK = 1;
+const unsigned int COMMAND_FIRE = 2;
+const unsigned int COMMAND_RANDOM_WALK = 3;   // walk random dir ..
+const unsigned int COMMAND_DIE = 4;   // bug fixing ..
+const unsigned int COMMAND_FOLLOW = 5;
+const unsigned int COMMAND_RUSH = 6;  // Rush your enemy!
+const unsigned int COMMAND_MULTIDO = 7; // Do <com1> commands in one round
+const unsigned int COMMAND_QUICK_FIRE = 8; // Fires with no busy or animation
+const unsigned int COMMAND_SET_WEAPON = 9; // set weapon type
+const unsigned int COMMAND_RESET_WEAPON = 10; // restores weapon to default
+const unsigned int COMMAND_SEARCH = 11;       // use right-hand rule to find foe
+const unsigned int COMMAND_ATTACK = 12;       // attack / move to a close, current foe
+const unsigned int COMMAND_RIGHT_WALK = 13;   // use right-hand rule ONLY; no direct walk
+const unsigned int COMMAND_UNCHARM = 14;      // recover from being 'charmed'
+const Sint32 REGEN = 4000;       // used to calculate time between heals
 
-#define STANDARD_TEXT_TIME 75   // how many cycles to display text?
+const unsigned int STANDARD_TEXT_TIME = 75;   // how many cycles to display text?
 #define TEXT_1 "text.pix"       // standard text pixie
 #define TEXT_BIG "textbig.pix"       // standard text pixie
 
@@ -351,27 +353,27 @@ char* get_cfg_item(char *section, char *item);
 // Functions in game.cpp
 short load_saved_game(const char *filename, screen  *myscreen);
 
-#define NORMAL_MODE    0     // #defines for walkputbuffer mode type
-#define INVISIBLE_MODE 1     //
-#define PHANTOM_MODE   2     //
-#define OUTLINE_MODE   3     //
+const unsigned int NORMAL_MODE    =0;     // #defines for walkputbuffer mode type
+const unsigned int INVISIBLE_MODE =1;     //
+const unsigned int PHANTOM_MODE   =2;     //
+const unsigned int OUTLINE_MODE   =3;     //
 
-#define SHIFT_LIGHTER      0  //  #defines for phantomputbuffer
-#define SHIFT_DARKER       1  //
-#define SHIFT_LEFT         2  //
-#define SHIFT_RIGHT        3  //
-#define SHIFT_RIGHT_RANDOM 4  //  shifts right 1 or 2 spaces (whole image)
-#define SHIFT_RANDOM       5  //  shifts 1 or 2 right (on pixel x pixel basis)
-#define SHIFT_BLOCKY       6  //  courtroom style
+const unsigned int SHIFT_LIGHTER      =0;  //  #defines for phantomputbuffer
+const unsigned int SHIFT_DARKER       =1;  //
+const unsigned int SHIFT_LEFT         =2;  //
+const unsigned int SHIFT_RIGHT        =3;  //
+const unsigned int SHIFT_RIGHT_RANDOM =4;  //  shifts right 1 or 2 spaces (whole image)
+const unsigned int SHIFT_RANDOM       =5;  //  shifts 1 or 2 right (on pixel x pixel basis)
+const unsigned int SHIFT_BLOCKY       =6;  //  courtroom style
 
 
-#define SCEN_TYPE_CAN_EXIT (char) 1 // make these go by power of 2, 1,2,4,8
-#define SCEN_TYPE_GEN_EXIT (char) 2
-#define SCEN_TYPE_SAVE_ALL (char) 4 // save named npc's
+const char SCEN_TYPE_CAN_EXIT = 1; // make these go by power of 2, 1,2,4,8
+const char SCEN_TYPE_GEN_EXIT = 2;
+const char SCEN_TYPE_SAVE_ALL = 4; // save named npc's
 
-#define OUTLINE_NAMED         7              // #defines for outline colors
-#define OUTLINE_INVULNERABLE  224            //
-#define OUTLINE_FLYING        208            //
+const unsigned int OUTLINE_NAMED = 7;              // #defines for outline colors
+const unsigned int OUTLINE_INVULNERABLE = 224;            //
+const unsigned int OUTLINE_FLYING = 208;            //
 #define OUTLINE_INVISIBLE query_team_color() //
 
 #define ACTION_FOLLOW (char) 1

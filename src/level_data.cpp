@@ -1030,7 +1030,7 @@ short load_version_5(SDL_RWops  *infile, LevelData* data)
 	for(auto e = data->weaplist.begin(); e != data->weaplist.end(); e++)
 	{
 	    walker* w = *e;
-		if (w && w->query_family()==FAMILY_DOOR)
+		if (w && w->query_family()==WEAP_DOOR)
 		{
 			if (data->mysmoother.query_genre_x_y(w->xpos/GRID_SIZE,
 			        (w->ypos/GRID_SIZE)-1)==TYPE_WALL)
@@ -1208,7 +1208,7 @@ short load_version_6(SDL_RWops  *infile, LevelData* data, short version)
 	for(auto e = data->weaplist.begin(); e != data->weaplist.end(); e++)
 	{
 	    walker* w = *e;
-        if (w && w->query_family()==FAMILY_DOOR)
+        if (w && w->query_family()==WEAP_DOOR)
         {
             if (data->mysmoother.query_genre_x_y(w->xpos/GRID_SIZE,
                     (w->ypos/GRID_SIZE)-1)==TYPE_WALL)

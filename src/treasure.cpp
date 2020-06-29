@@ -65,7 +65,7 @@ short treasure::eat_me(walker  * eater)
 
 	switch (family)
 	{
-		case FAMILY_DRUMSTICK:
+		case TRES_DRUMSTICK:
 			if (eater->stats->hitpoints >= eater->stats->max_hitpoints)
 				return 1;
 			else
@@ -82,7 +82,7 @@ short treasure::eat_me(walker  * eater)
 					myscreen->soundp->play_sound(SOUND_EAT);
 				return 1;
 			}
-		case FAMILY_GOLD_BAR:
+		case TRES_GOLD_BAR:
 			if (eater->team_num == 0 || eater->myguy)
 			{
 				myscreen->save_data.m_score[eater->team_num] += (200*stats->level);
@@ -91,7 +91,7 @@ short treasure::eat_me(walker  * eater)
 					myscreen->soundp->play_sound(SOUND_MONEY);
 			}
 			return 1;
-		case FAMILY_SILVER_BAR:
+		case TRES_SILVER_BAR:
 			if (eater->team_num == 0 || eater->myguy)
 			{
 				myscreen->save_data.m_score[eater->team_num] += (50*stats->level);
@@ -100,7 +100,7 @@ short treasure::eat_me(walker  * eater)
 					myscreen->soundp->play_sound(SOUND_MONEY);
 			}
 			return 1;
-		case FAMILY_FLIGHT_POTION:
+		case TRES_FLIGHT_POTION:
 			if (!eater->stats->query_bit_flags(BIT_FLYING) )
 			{
 				eater->flight_left += (150*stats->level);
@@ -112,7 +112,7 @@ short treasure::eat_me(walker  * eater)
 				dead = 1;
 			}
 			return 1;
-		case FAMILY_MAGIC_POTION:
+		case TRES_MAGIC_POTION:
 			if (eater->stats->magicpoints < eater->stats->max_magicpoints)
 				eater->stats->magicpoints = eater->stats->max_magicpoints;
 			eater->stats->magicpoints += (50*stats->level);
@@ -123,7 +123,7 @@ short treasure::eat_me(walker  * eater)
 				myscreen->do_notify(message, eater);
 			}
 			return 1;
-		case FAMILY_INVULNERABLE_POTION:
+		case TRES_INVULNERABLE_POTION:
 			if (!eater->stats->query_bit_flags(BIT_INVINCIBLE) )
 			{
 				eater->invulnerable_left += (150*stats->level);
@@ -135,7 +135,7 @@ short treasure::eat_me(walker  * eater)
 				}
 			}
 			return 1;
-		case FAMILY_INVIS_POTION:
+		case TRES_INVIS_POTION:
 			eater->invisibility_left += (150*stats->level);
 			if (eater->user != -1)
 			{
@@ -144,7 +144,7 @@ short treasure::eat_me(walker  * eater)
 			}
 			dead = 1;
 			return 1;
-		case FAMILY_SPEED_POTION:
+		case TRES_SPEED_POTION:
 			eater->speed_bonus_left += 50*stats->level;
 			eater->speed_bonus = stats->level;
 			if (eater->user != -1)
@@ -154,7 +154,7 @@ short treasure::eat_me(walker  * eater)
 			}
 			dead = 1;
 			return 1;
-		case FAMILY_EXIT: // go to another level, possibly
+		case TRES_EXIT: // go to another level, possibly
 			if (eater->in_act) return 1;
 			if (eater->query_act_type()!= ACT_CONTROL || (eater->skip_exit > 1))
 				return 1;
@@ -240,7 +240,7 @@ short treasure::eat_me(walker  * eater)
 				return 1;
 			}
 			return 1;
-		case FAMILY_TELEPORTER:
+		case TRES_TELEPORTER:
 			if (eater->skip_exit > 1)
 				return 1;
 			distance = distance_to_ob_center(eater); // how  away?
@@ -268,21 +268,21 @@ short treasure::eat_me(walker  * eater)
 				return 1;
 			}
 			// Now do special effects
-			flash = myscreen->level_data.add_ob(ORDER_FX, FAMILY_FLASH);
+			flash = myscreen->level_data.add_ob(ORDER_FX, FX_FLASH);
 			flash->ani_type = ANI_EXPAND_8;
 			flash->center_on(this);
 			return 1;
-		case FAMILY_LIFE_GEM: // get back some of lost man's xp ..
+		case TRES_LIFE_GEM: // get back some of lost man's xp ..
 			if (eater->team_num != team_num) // only our team can get these
 				return 1;
 			myscreen->save_data.m_score[eater->team_num] += stats->hitpoints;
-			flash = myscreen->level_data.add_ob(ORDER_FX, FAMILY_FLASH);
+			flash = myscreen->level_data.add_ob(ORDER_FX, FX_FLASH);
 			flash->ani_type = ANI_EXPAND_8;
 			flash->center_on(this);
 			dead = 1;
 			death();
 			return 1;
-		case FAMILY_KEY: // get the key to this door ..
+		case TRES_KEY: // get the key to this door ..
 			if (!(eater->keys & (Sint32)(pow((double) 2, stats->level)) )) // just got it?
 			{
 				eater->keys |= (Sint32) (pow((double)2, stats->level)); // ie, 2, 4, 8, 16...
@@ -334,7 +334,7 @@ walker  * treasure::find_teleport_target()
 		if (w && !w->dead)
 		{
 			if (w->query_order() == ORDER_TREASURE &&
-			        w->query_family() == FAMILY_TELEPORTER &&
+			        w->query_family() == TRES_TELEPORTER &&
 			        w->stats->level == stats->level)
 			{
 				//Log(" to target %d\n", number);
@@ -350,7 +350,7 @@ walker  * treasure::find_teleport_target()
 		if (w && !w->dead)
 		{
 			if (w->query_order() == ORDER_TREASURE &&
-			        w->query_family() == FAMILY_TELEPORTER &&
+			        w->query_family() == TRES_TELEPORTER &&
 			        w->stats->level == stats->level)
 			{
 				//Log(" to looped target %d\n", number);

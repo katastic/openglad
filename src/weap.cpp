@@ -69,8 +69,8 @@ short weap::act()
 			}
 		case ACT_SIT: // for things like trees
 			{
-				if (family != FAMILY_TREE && family != FAMILY_BLOOD
-				        && family != FAMILY_DOOR)
+				if (family != WEAP_TREE && family != WEAP_BLOOD
+				        && family != WEAP_DOOR)
 					//Log("weapon sitting\n");
 					myscreen->do_notify("Weapon sitting", this);
 				return 1;
@@ -141,10 +141,10 @@ short weap::death()
 
 	switch (family)
 	{
-		case FAMILY_KNIFE: // for returning knife
-			if (owner && owner->query_family() != FAMILY_SOLDIER)
+		case WEAP_KNIFE: // for returning knife
+			if (owner && owner->query_family() != GUY_SOLDIER)
 				break;  // only soldiers get returning knives
-			newob = myscreen->level_data.add_ob(ORDER_FX, FAMILY_KNIFE_BACK);
+			newob = myscreen->level_data.add_ob(ORDER_FX, FX_KNIFE_BACK);
 			newob->owner = owner;
 			newob->center_on(this);
 			newob->lastx = lastx;
@@ -153,7 +153,7 @@ short weap::death()
 			newob->ani_type = ANI_ATTACK;
 			newob->damage = damage;
 			break;  // end of soldier returning knife
-		case FAMILY_ROCK: // used for the elf's bouncing rock, etc.
+		case WEAP_ROCK: // used for the elf's bouncing rock, etc.
 			if (!do_bounce || !lineofsight || collide_ob) // died of natural causes
 				break;
 			dead = 0; // first, un-dead us so we can collide ..
@@ -188,13 +188,13 @@ short weap::death()
 			// Else we're really stuck, so die :)
 			dead = 1;
 			break;
-		case FAMILY_FIRE_ARROW: // only for exploding, really
-		case FAMILY_BOULDER:
+		case WEAP_FIRE_ARROW: // only for exploding, really
+		case WEAP_BOULDER:
 			if (!skip_exit)
 				break;  // skip_exit means we're supposed to explode :)
 			if (!owner || owner->dead)
 				owner = this;
-			newob = myscreen->level_data.add_ob(ORDER_FX, FAMILY_EXPLOSION, 1);
+			newob = myscreen->level_data.add_ob(ORDER_FX, FX_EXPLOSION, 1);
 			if (!newob)
 				break; // failsafe
 			if (on_screen())
@@ -206,18 +206,18 @@ short weap::death()
 			newob->center_on(this);
 			newob->damage = damage*2;
 			break;  // end fire (exploding) arrows
-		case FAMILY_WAVE: // grow to wave2
+		case WEAP_WAVE: // grow to wave2
 			dead = 0;
-			transform_to(ORDER_WEAPON, FAMILY_WAVE2);
+			transform_to(ORDER_WEAPON, WEAP_WAVE2);
 			stats->hitpoints = stats->max_hitpoints;
 			break;  // end wave -> wave2
-		case FAMILY_WAVE2: // grow to wave3
+		case WEAP_WAVE2: // grow to wave3
 			dead = 0;
-			transform_to(ORDER_WEAPON, FAMILY_WAVE3);
+			transform_to(ORDER_WEAPON, WEAP_WAVE3);
 			stats->hitpoints = stats->max_hitpoints;
 			break;  // end wave2 -> wave3
-		case FAMILY_DOOR: // display open picture
-			newob = myscreen->level_data.add_weap_ob(ORDER_FX, FAMILY_DOOR_OPEN);
+		case WEAP_DOOR: // display open picture
+			newob = myscreen->level_data.add_weap_ob(ORDER_FX, FX_DOOR_OPEN);
 			if (!newob)
 				break;
 			newob->ani_type = ANI_DOOR_OPEN;
@@ -258,8 +258,8 @@ short weap::animate()
 
 	switch (family)
 	{
-		case FAMILY_TREE:
-		case FAMILY_BLOOD:
+		case WEAP_TREE:
+		case WEAP_BLOOD:
 			if (ani_type > 1)
 				ani_type = 0;
 			set_frame(ani[curdir+ani_type*NUM_FACINGS][cycle]);
@@ -270,7 +270,7 @@ short weap::animate()
 				cycle = 0;
 			}
 			break;
-		case FAMILY_CIRCLE_PROTECTION:
+		case WEAP_CIRCLE_PROTECTION:
 			if (!owner || owner->dead || stats->hitpoints <= 0)
 			{
 				dead = 1;
@@ -278,7 +278,7 @@ short weap::animate()
 			}
 			center_on(owner);
 			break;
-		case FAMILY_GLOW:
+		case WEAP_GLOW:
 			if (ani_type > 2) // illegal case
 				ani_type = 2; // pulse case
 			set_frame(ani[curdir+ani_type*NUM_FACINGS][cycle]);

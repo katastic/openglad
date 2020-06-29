@@ -833,7 +833,7 @@ short viewscreen::input(const SDL_Event& event)
 
 		if (query_key_event(SDLK_F2, event)) // generate magic shield
 		{
-			newob = myscreen->level_data.add_ob(ORDER_FX, FAMILY_MAGIC_SHIELD);
+			newob = myscreen->level_data.add_ob(ORDER_FX, FX_MAGIC_SHIELD);
 			newob->owner = control;
 			newob->team_num = control->team_num;
 			newob->ani_type = 1; // dummy, non-zero value
@@ -878,7 +878,7 @@ short viewscreen::input(const SDL_Event& event)
 
 		if (query_key_event(SDLK_t, event)) // transform to new shape
 		{
-			char family = (control->query_family()+1)% NUM_FAMILIES;
+			char family = (control->query_family()+1)% NUM_GUYS;
 			control->transform_to(control->query_order(), family);
 			//clear_key_code(SDLK_t);
 		} //end transform

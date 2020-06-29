@@ -86,7 +86,6 @@ class screen : public video
 		// Save data
 		SaveData save_data;
 		
-		
 		// Game state
 		float control_hp; // last turn's hitpoints
 		char end;
@@ -94,9 +93,8 @@ class screen : public video
 		short level_done; // set true when all our foes are dead
 		bool retry;  // we should reset the level and go again
 		
-
-		char special_name[NUM_FAMILIES][NUM_SPECIALS][20];
-		char alternate_name[NUM_FAMILIES][NUM_SPECIALS][20];
+		char special_name[NUM_GUYS][NUM_SPECIALS][20];
+		char alternate_name[NUM_GUYS][NUM_SPECIALS][20];
 		unsigned short enemy_freeze; // stops enemies from acting
 		soundob* soundp;
 		short redrawme;

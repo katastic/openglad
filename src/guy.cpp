@@ -19,9 +19,9 @@
 #include <cstring>
 #define RAISE 1.85  // please also change in picker.cpp
 
-extern Sint32 costlist[NUM_FAMILIES];
-extern Sint32 statlist[NUM_FAMILIES][6];
-extern Sint32 statcosts[NUM_FAMILIES][6];
+extern Sint32 costlist[NUM_GUYS];
+extern Sint32 statlist[NUM_GUYS][6];
+extern Sint32 statcosts[NUM_GUYS][6];
 // Zardus: PORT, exception doesn't compile (dos thing?): int matherr(struct exception *);
 
 
@@ -40,7 +40,7 @@ int MAX(int a,int b)
 guy::guy()
 {
 	strcpy(name, "SOLDIER");
-	family = FAMILY_SOLDIER;
+	family = GUY_SOLDIER;
 	strength = 0;
 	dexterity = 0;
 	constitution = 0;
@@ -81,7 +81,7 @@ guy::guy(int whatfamily)
     scen_hits = 0;
 	
 	// Set stats
-	if(whatfamily <= FAMILY_ARCHMAGE) // KAT BUG this will break if we don't put summoner BEFORE archmage
+	if(whatfamily <= GUY_ARCHMAGE) // KAT BUG this will break if we don't put summoner BEFORE archmage
 	{ //can we change it to ==, or will that modify ones > ARCHMAGE like guard towers?
         strength = statlist[whatfamily][0];
         dexterity = statlist[whatfamily][1];
@@ -191,7 +191,7 @@ short guy::get_level() const
 
 Uint32 calculate_exp(Sint32 level);
 
-Sint32 costlist[NUM_FAMILIES] =
+Sint32 costlist[NUM_GUYS] =
     {
         250,  // soldier
         150,  // elf
@@ -215,7 +215,7 @@ Sint32 costlist[NUM_FAMILIES] =
         450  // archmage, not used        
     };
 
-Sint32 statlist[NUM_FAMILIES][6] =
+Sint32 statlist[NUM_GUYS][6] =
     {
       // STR, DEX, CON, INT, ARMOR, LEVEL
         {12,  6,   12,  8,   9,     1},  // soldier
@@ -241,7 +241,7 @@ Sint32 statlist[NUM_FAMILIES][6] =
     };
 
 #define BASE_GUY_HP 30
-float derived_bonuses[NUM_FAMILIES][8] =
+float derived_bonuses[NUM_GUYS][8] =
     {
       // HP,  MP,  ATK,  RANGED ATK, RANGE, DEF, SPD,   ATK SPD (delay)
         {BASE_GUY_HP+90,  0,   20,   0,          0,     0,   4,     6},  // soldier
@@ -269,7 +269,7 @@ float derived_bonuses[NUM_FAMILIES][8] =
         {BASE_GUY_HP+100, 0,   0,    0,          0,     0,   0,     5},  // tower
     };
 
-Sint32 statcosts[NUM_FAMILIES][6] =
+Sint32 statcosts[NUM_GUYS][6] =
     {
         // STR, DEX, CON, INT, ARMOR, LEVEL
         { 6,10, 6,25,50, 200},  // soldier
@@ -351,122 +351,122 @@ void guy::upgrade_to_level(short level, bool set_xp)
     
 	switch (family)
 	{
-		case FAMILY_SOLDIER:
+		case GUY_SOLDIER:
 			s *= 1.0f;
 			d *= 1.0f;
 			c *= 1.0f;
 			i *= 1.0f;
 			a *= 1.0f;
 			break;
-		case FAMILY_ELF:
+		case GUY_ELF:
 			s *= 0.75f;
 			d *= 1.5f;
 			c *= 0.75f;
 			i *= 1.0f;
 			a *= 1.0f;
 			break;
-		case FAMILY_ARCHER:
+		case GUY_ARCHER:
 			s *= 0.5f;
 			d *= 1.5f;
 			c *= 1.0f;
 			i *= 1.0f;
 			a *= 1.0f;
 			break;
-		case FAMILY_MAGE:
+		case GUY_MAGE:
 			s *= 0.5f;
 			d *= 1.0f;
 			c *= 0.5f;
 			i *= 2.0f;
 			a *= 1.0f;
 			break;
-		case FAMILY_ARCHMAGE:
+		case GUY_ARCHMAGE:
 			s *= 0.5f;
 			d *= 1.0f;
 			c *= 0.5f;
 			i *= 2.0f;
 			a *= 1.0f;
 			break;
-		case FAMILY_SUMMONER:
+		case GUY_SUMMONER:
 			s *= 0.5f;
 			d *= 1.0f;
 			c *= 0.5f;
 			i *= 2.0f;
 			a *= 1.0f;
 			break;
-		case FAMILY_BUILDER:
+		case GUY_BUILDER:
 			s *= 0.5f;
 			d *= 1.0f;
 			c *= 0.5f;
 			i *= 2.0f;
 			a *= 1.0f;
 			break;
-		case FAMILY_SKELETON:
+		case GUY_SKELETON:
 			s *= 1.0f;
 			d *= 2.0f;
 			c *= 0.5f;
 			i *= 0.5f;
 			a *= 1.0f;
 			break;
-		case FAMILY_CLERIC:
+		case GUY_CLERIC:
 			s *= 1.0f;
 			d *= 1.0f;
 			c *= 1.0f;
 			i *= 1.0f;
 			a *= 1.0f;
 			break;
-		case FAMILY_FIREELEMENTAL:
+		case GUY_FIREELEMENTAL:
 			s *= 1.5f;
 			d *= 1.0f;
 			c *= 0.5f;
 			i *= 1.0f;
 			a *= 1.0f;
 			break;
-		case FAMILY_FAERIE:
+		case GUY_FAERIE:
 			s *= 0.5f;
 			d *= 2.0f;
 			c *= 0.5f;
 			i *= 1.0f;
 			a *= 1.0f;
 			break;
-		case FAMILY_SLIME:
-		case FAMILY_SMALL_SLIME:
-		case FAMILY_MEDIUM_SLIME:
+		case GUY_SLIME:
+		case GUY_SMALL_SLIME:
+		case GUY_MEDIUM_SLIME:
 			s *= 1.0f;
 			d *= 1.0f;
 			c *= 1.0f;
 			i *= 1.0f;
 			a *= 1.0f;
 			break;
-		case FAMILY_THIEF:
+		case GUY_THIEF:
 			s *= 0.5f;
 			d *= 2.0f;
 			c *= 0.5f;
 			i *= 1.0f;
 			a *= 1.0f;
 			break;
-		case FAMILY_GHOST:
+		case GUY_GHOST:
 			s *= 1.0f;
 			d *= 1.0f;
 			c *= 1.0f;
 			i *= 1.0f;
 			a *= 1.0f;
 			break;
-		case FAMILY_DRUID:
+		case GUY_DRUID:
 			s *= 1.0f;
 			d *= 0.5f;
 			c *= 1.0f;
 			i *= 1.5f;
 			a *= 1.0f;
 			break;
-		case FAMILY_ORC:
-		case FAMILY_BIG_ORC:
+		case GUY_ORC:
+		case GUY_BIG_ORC:
 			s *= 1.5f;
 			d *= 0.5f;
 			c *= 1.5f;
 			i *= 0.5f;
 			a *= 1.0f;
 			break;
-		case FAMILY_BARBARIAN:
+		case GUY_BARBARIAN:
 			s *= 1.5f;
 			d *= 0.5f;
 			c *= 1.5f;
@@ -557,7 +557,7 @@ void guy::update_derived_stats(walker* w)
         w->fire_frequency = 1;
 
     // Fighters: limited weapons
-    if (w->query_family() == FAMILY_SOLDIER)
+    if (w->query_family() == GUY_SOLDIER)
         w->weapons_left = (short) ((w->stats->level+1) / 2);
         
 

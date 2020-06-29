@@ -156,80 +156,80 @@ screen::screen(short howmany)
 	buffer_to_screen(0, 0, SCREEN_W, SCREEN_H);
 
 	// Let's set the special names for all walkers ..
-	for (i=0; i < NUM_FAMILIES; i++)
+	for (i=0; i < NUM_GUYS; i++)
 		for (j=0; j < NUM_SPECIALS; j++)
 		{
 			strcpy(special_name[i][j], "NONE");
 			strcpy(alternate_name[i][j], "NONE");
 		}
 
-	strcpy(special_name[FAMILY_SOLDIER][1], "CHARGE");
-	strcpy(special_name[FAMILY_SOLDIER][2], "BOOMERANG");
-	strcpy(special_name[FAMILY_SOLDIER][3], "WHIRLWIND");
-	strcpy(special_name[FAMILY_SOLDIER][4], "DISARM");
+	strcpy(special_name[GUY_SOLDIER][1], "CHARGE");
+	strcpy(special_name[GUY_SOLDIER][2], "BOOMERANG");
+	strcpy(special_name[GUY_SOLDIER][3], "WHIRLWIND");
+	strcpy(special_name[GUY_SOLDIER][4], "DISARM");
 
-	strcpy(special_name[FAMILY_BARBARIAN][1], "HURL BOULDER");
-	strcpy(special_name[FAMILY_BARBARIAN][2], "EXPLODING BOULDER");
+	strcpy(special_name[GUY_BARBARIAN][1], "HURL BOULDER");
+	strcpy(special_name[GUY_BARBARIAN][2], "EXPLODING BOULDER");
 
-	strcpy(special_name[FAMILY_ELF][1], "ROCKS");
-	strcpy(special_name[FAMILY_ELF][2], "BOUNCING ROCKS");
-	strcpy(special_name[FAMILY_ELF][3], "LOTS OF ROCKS");
-	strcpy(special_name[FAMILY_ELF][4], "MEGA ROCKS");
+	strcpy(special_name[GUY_ELF][1], "ROCKS");
+	strcpy(special_name[GUY_ELF][2], "BOUNCING ROCKS");
+	strcpy(special_name[GUY_ELF][3], "LOTS OF ROCKS");
+	strcpy(special_name[GUY_ELF][4], "MEGA ROCKS");
 
-	strcpy(special_name[FAMILY_ARCHER][1], "FIRE ARROWS");
-	strcpy(special_name[FAMILY_ARCHER][2], "BARRAGE");
-	strcpy(special_name[FAMILY_ARCHER][3], "EXPLODING BOLT");
+	strcpy(special_name[GUY_ARCHER][1], "FIRE ARROWS");
+	strcpy(special_name[GUY_ARCHER][2], "BARRAGE");
+	strcpy(special_name[GUY_ARCHER][3], "EXPLODING BOLT");
 
-	strcpy(special_name[FAMILY_MAGE][1], "TELEPORT");
-	strcpy(alternate_name[FAMILY_MAGE][1], "TELEPORT MARKER");
-	strcpy(special_name[FAMILY_MAGE][2], "WARP SPACE");
-	strcpy(special_name[FAMILY_MAGE][3], "FREEZE TIME");
-	strcpy(special_name[FAMILY_MAGE][4], "ENERGY WAVE");
-	strcpy(special_name[FAMILY_MAGE][5], "HEARTBURST");
+	strcpy(special_name[GUY_MAGE][1], "TELEPORT");
+	strcpy(alternate_name[GUY_MAGE][1], "TELEPORT MARKER");
+	strcpy(special_name[GUY_MAGE][2], "WARP SPACE");
+	strcpy(special_name[GUY_MAGE][3], "FREEZE TIME");
+	strcpy(special_name[GUY_MAGE][4], "ENERGY WAVE");
+	strcpy(special_name[GUY_MAGE][5], "HEARTBURST");
 
-	strcpy(special_name[FAMILY_ARCHMAGE][1], "TELEPORT");
-	strcpy(alternate_name[FAMILY_ARCHMAGE][1], "TELEPORT MARKER");
-	strcpy(special_name[FAMILY_ARCHMAGE][2], "HEARTBURST");
-	strcpy(alternate_name[FAMILY_ARCHMAGE][2], "CHAIN LIGHTNING");
-	strcpy(special_name[FAMILY_ARCHMAGE][3], "SUMMON IMAGE");
-	strcpy(alternate_name[FAMILY_ARCHMAGE][3], "SUMMON ELEMENTAL");
-	strcpy(special_name[FAMILY_ARCHMAGE][4], "MIND CONTROL");
-	//strcpy(alternate_name[FAMILY_ARCHMAGE][4], "SUMMON ELEMENTAL");
+	strcpy(special_name[GUY_ARCHMAGE][1], "TELEPORT");
+	strcpy(alternate_name[GUY_ARCHMAGE][1], "TELEPORT MARKER");
+	strcpy(special_name[GUY_ARCHMAGE][2], "HEARTBURST");
+	strcpy(alternate_name[GUY_ARCHMAGE][2], "CHAIN LIGHTNING");
+	strcpy(special_name[GUY_ARCHMAGE][3], "SUMMON IMAGE");
+	strcpy(alternate_name[GUY_ARCHMAGE][3], "SUMMON ELEMENTAL");
+	strcpy(special_name[GUY_ARCHMAGE][4], "MIND CONTROL");
+	//strcpy(alternate_name[GUY_ARCHMAGE][4], "SUMMON ELEMENTAL");
 
 
-	strcpy(special_name[FAMILY_CLERIC][1], "HEAL");
-	strcpy(alternate_name[FAMILY_CLERIC][1], "MYSTIC MACE");
-	strcpy(special_name[FAMILY_CLERIC][2], "RAISE UNDEAD");
-	strcpy(alternate_name[FAMILY_CLERIC][2], "TURN UNDEAD");
-	strcpy(special_name[FAMILY_CLERIC][3], "RAISE GHOST");
-	strcpy(alternate_name[FAMILY_CLERIC][3], "TURN UNDEAD");
-	strcpy(special_name[FAMILY_CLERIC][4], "RESURRECT");
+	strcpy(special_name[GUY_CLERIC][1], "HEAL");
+	strcpy(alternate_name[GUY_CLERIC][1], "MYSTIC MACE");
+	strcpy(special_name[GUY_CLERIC][2], "RAISE UNDEAD");
+	strcpy(alternate_name[GUY_CLERIC][2], "TURN UNDEAD");
+	strcpy(special_name[GUY_CLERIC][3], "RAISE GHOST");
+	strcpy(alternate_name[GUY_CLERIC][3], "TURN UNDEAD");
+	strcpy(special_name[GUY_CLERIC][4], "RESURRECT");
 
-	strcpy(special_name[FAMILY_DRUID][1], "GROW TREE");
-	strcpy(special_name[FAMILY_DRUID][2], "SUMMON FAERIE");
-	strcpy(special_name[FAMILY_DRUID][3], "REVEAL");
-	strcpy(special_name[FAMILY_DRUID][4], "PROTECTION");
+	strcpy(special_name[GUY_DRUID][1], "GROW TREE");
+	strcpy(special_name[GUY_DRUID][2], "SUMMON FAERIE");
+	strcpy(special_name[GUY_DRUID][3], "REVEAL");
+	strcpy(special_name[GUY_DRUID][4], "PROTECTION");
 
-	strcpy(special_name[FAMILY_THIEF][1], "DROP BOMB");
-	strcpy(special_name[FAMILY_THIEF][2], "CLOAK");
-	strcpy(special_name[FAMILY_THIEF][3], "TAUNT ENEMY");
-	strcpy(alternate_name[FAMILY_THIEF][3], "CHARM OPPONENT");
-	strcpy(special_name[FAMILY_THIEF][4], "POISON CLOUD");
+	strcpy(special_name[GUY_THIEF][1], "DROP BOMB");
+	strcpy(special_name[GUY_THIEF][2], "CLOAK");
+	strcpy(special_name[GUY_THIEF][3], "TAUNT ENEMY");
+	strcpy(alternate_name[GUY_THIEF][3], "CHARM OPPONENT");
+	strcpy(special_name[GUY_THIEF][4], "POISON CLOUD");
 
-	strcpy(special_name[FAMILY_GHOST][1], "SCARE");
+	strcpy(special_name[GUY_GHOST][1], "SCARE");
 
-	strcpy(special_name[FAMILY_FIREELEMENTAL][1], "STARBURST");
+	strcpy(special_name[GUY_FIREELEMENTAL][1], "STARBURST");
 
-	strcpy(special_name[FAMILY_ORC][1], "HOWL");
-	strcpy(special_name[FAMILY_ORC][2], "EAT CORPSE");
+	strcpy(special_name[GUY_ORC][1], "HOWL");
+	strcpy(special_name[GUY_ORC][2], "EAT CORPSE");
 
-	strcpy(special_name[FAMILY_SMALL_SLIME][1], "GROW");
+	strcpy(special_name[GUY_SMALL_SLIME][1], "GROW");
 
-	strcpy(special_name[FAMILY_MEDIUM_SLIME][1], "GROW");
+	strcpy(special_name[GUY_MEDIUM_SLIME][1], "GROW");
 
-	strcpy(special_name[FAMILY_SLIME][1], "SPLIT");
+	strcpy(special_name[GUY_SLIME][1], "SPLIT");
 
-	strcpy(special_name[FAMILY_SKELETON][1], "TUNNEL");
+	strcpy(special_name[GUY_SKELETON][1], "TUNNEL");
 
 }
 
@@ -742,7 +742,7 @@ short screen::act()
 		if (ob && !ob->dead)
 		{
 			if (ob->query_order() == ORDER_TREASURE &&
-			        ob->query_family() == FAMILY_EXIT &&
+			        ob->query_family() == TRES_EXIT &&
 			        level_done != 0)
 			{
 				level_done = 1; // 0 => foes, 1 => no foes but exit, 2 => no foes or exit
@@ -1168,7 +1168,7 @@ walker *screen::find_nearest_blood(walker  *who)
 	{
 	    walker *w = *e;
 		if (w && w->query_order() == ORDER_TREASURE &&
-		        w->query_family() == FAMILY_STAIN && !w->dead)
+		        w->query_family() == TRES_STAIN && !w->dead)
 		{
 			newdistance = (Uint32) who->distance_to_ob_center(w);
 			if (newdistance < distance)

@@ -78,7 +78,7 @@ short living::act()
 		// Do other things based on our type ..
 		switch (family)
 		{
-			case FAMILY_FIREELEMENTAL: // we take a toll from our mage ..
+			case GUY_FIREELEMENTAL: // we take a toll from our mage ..
 				if (stats->hitpoints < stats->max_hitpoints) // we're hurt
 				{
 					// Take a 'toll' of one health and 3 mp of mage, if there
@@ -248,7 +248,7 @@ short living::act()
 	// Special things for various different living types
 	switch (family)
 	{
-		case FAMILY_ARCHMAGE:  // gets bonus viewing, at times
+		case GUY_ARCHMAGE:  // gets bonus viewing, at times
 		    {
 		        Sint32 temp;
                 if (stats->level >= 40)
@@ -406,7 +406,7 @@ short living::shove(walker  *target, short x, short y)
 			//   caused by a blocked target.  We do so for now by clearing
 			//   all commands
 			target->stats->clear_command();
-			if (target->query_family()==FAMILY_CLERIC)
+			if (target->query_family()==GUY_CLERIC)
 			{
 				target->current_special = 1; // healing
 				target->special();
@@ -494,14 +494,14 @@ bool living::walk(float x, float y)
 bool walkerIsAutoAttackable(walker* ob)
 {
     return (ob->query_order() == ORDER_LIVING
-             || ob->query_family() == FAMILY_TENT
-             || ob->query_family() == FAMILY_TOWER
-             || ob->query_family() == FAMILY_TOWER1
-             || ob->query_family() == FAMILY_TREEHOUSE
-             || ob->query_family() == FAMILY_BONES
-             || ob->query_family() == FAMILY_GLOW
-             || ob->query_family() == FAMILY_TREE
-             || ob->query_family() == FAMILY_DOOR);
+             || ob->query_family() == GEN_TENT
+             || ob->query_family() == GEN_TOWER
+             || ob->query_family() == GUY_TOWER1
+             || ob->query_family() == GEN_TREEHOUSE
+             || ob->query_family() == GEN_BONES
+             || ob->query_family() == WEAP_GLOW
+             || ob->query_family() == WEAP_TREE
+             || ob->query_family() == WEAP_DOOR);
 }
 
 short living::collide(walker  *ob)
@@ -542,7 +542,7 @@ short living::check_special()
 
 	switch (family)
 	{
-		case FAMILY_SOLDIER:   // Check for foe in range x
+		case GUY_SOLDIER:   // Check for foe in range x
 			if (foe) // already have a foe ..
 			{
 				distance = (Uint32) distance_to_ob(foe);//Sint32 (deltax*deltax) + Sint32 (deltay*deltay);
@@ -561,10 +561,10 @@ short living::check_special()
 				return 0;
 			}
 			//break; // end of fighter case
-		case FAMILY_FIREELEMENTAL:     // Check for foe in range x
-		case FAMILY_ARCHER:
-		case FAMILY_GHOST:
-		case FAMILY_ORC:
+		case GUY_FIREELEMENTAL:     // Check for foe in range x
+		case GUY_ARCHER:
+		case GUY_GHOST:
+		case GUY_ORC:
 			if (foe) // already have a foe ..
 			{
 				distance = (Uint32) distance_to_ob(foe); //Sint32 (deltax*deltax) + Sint32 (deltay*deltay);
@@ -583,7 +583,7 @@ short living::check_special()
 				return 0;
 			}
 			//break; // end of fighter case
-		case FAMILY_THIEF:
+		case GUY_THIEF:
 			if (current_special == 1) // drop bomb
 			{
 				if (foe) // already have a foe ..
@@ -619,7 +619,7 @@ short living::check_special()
 			}
 			else
 				return 1;  // default is go for it
-		case FAMILY_MAGE:  // TP if  away from guys ..
+		case GUY_MAGE:  // TP if  away from guys ..
 			howmany = 0;
 			myscreen->find_foes_in_range(myscreen->level_data.oblist,
 			                                        110, &howmany, this);
@@ -629,7 +629,7 @@ short living::check_special()
 			if (howmany > 3) // too many enemies!
 				return 1;
 			return 0;
-		case FAMILY_SUMMONER:  // TP if  away from guys ..
+		case GUY_SUMMONER:  // TP if  away from guys ..
 			howmany = 0;
 			myscreen->find_foes_in_range(myscreen->level_data.oblist,
 			                                        110, &howmany, this);
@@ -639,7 +639,7 @@ short living::check_special()
 			if (howmany > 3) // too many enemies!
 				return 1;
 			return 0;
-		case FAMILY_BUILDER:  // TP if  away from guys ..
+		case GUY_BUILDER:  // TP if  away from guys ..
 			howmany = 0;
 			myscreen->find_foes_in_range(myscreen->level_data.oblist,
 			                                        110, &howmany, this);
@@ -656,12 +656,12 @@ short living::check_special()
 
 
 			//break; // end of fighter case
-		case FAMILY_SLIME:
+		case GUY_SLIME:
 			if (myscreen->level_data.numobs < MAXOBS)
 				return 1;
 			else
 				return 0;
-		case FAMILY_CLERIC: // any friends?
+		case GUY_CLERIC: // any friends?
 			if (current_special == 1) // healing
 			{
 				myscreen->find_friends_in_range(myscreen->level_data.oblist,
@@ -684,7 +684,7 @@ short living::check_special()
 			else
 				return 1;
 			//break;
-		case FAMILY_SKELETON:  // Tunnel if no foes near ..
+		case GUY_SKELETON:  // Tunnel if no foes near ..
 			howmany = 0;
 			myscreen->find_foes_in_range(myscreen->level_data.oblist,
 			                                        5*GRID_SIZE, &howmany, this);
@@ -708,39 +708,39 @@ void living::set_difficulty(Uint32 whatlevel)
 
 	switch (family)
 	{
-		case FAMILY_ARCHER:
+		case GUY_ARCHER:
 			stats->max_hitpoints   += 11*levmult;
 			stats->max_magicpoints += 12*levmult;
 			damage += 4*whatlevel;
 			stats->armor += levmult;
 			break;
-		case FAMILY_MAGE:
+		case GUY_MAGE:
 			stats->max_hitpoints   += 7*levmult;
 			stats->max_magicpoints += 14*levmult;
 			damage += 3*whatlevel;
 			stats->armor += levmult/2.0f;
 			break;
-		case FAMILY_CLERIC:
-		case FAMILY_DRUID:
+		case GUY_CLERIC:
+		case GUY_DRUID:
 			stats->max_hitpoints   += 9*levmult;
 			stats->max_magicpoints += 12*levmult;
 			damage += 4*whatlevel;
 			stats->armor += levmult/2.0f;
 			break;
-		case FAMILY_SOLDIER:  // default as soldier
+		case GUY_SOLDIER:  // default as soldier
 			stats->max_hitpoints   += 13*levmult;
 			stats->max_magicpoints += 8*levmult;
 			weapons_left = (short) ((whatlevel+1) / 2);
 			damage += 5*whatlevel;
 			stats->armor += 2*levmult;
 			break;
-		case FAMILY_ORC:
+		case GUY_ORC:
 			stats->max_hitpoints   += 14*levmult;
 			stats->max_magicpoints += 7*levmult;
 			damage += 6*whatlevel;
 			stats->armor += 3*levmult;
 			break;
-		case FAMILY_GOLEM:
+		case GUY_GOLEM:
 			stats->max_hitpoints   += 18*levmult;
 			stats->max_magicpoints += 5*levmult;
 			damage += 7*whatlevel;

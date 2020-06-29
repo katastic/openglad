@@ -65,7 +65,7 @@ statistics::statistics(walker  * someguy)
     else
     {
         old_order = ORDER_LIVING;
-        old_family = FAMILY_SOLDIER;
+        old_family = GUY_SOLDIER;
     }
 
 	name[0] = 0; // set to null string
@@ -461,7 +461,7 @@ void statistics::hit_response(walker  *who)
 
 	switch (myfamily)
 	{
-		case FAMILY_MAGE:
+		case GUY_MAGE:
 			if (controller->myguy) // are we a player's character?
 				threshold = (3 * max_hitpoints)/5; // then flee at 60%
 			else                   // we're an enemy, so be braver :>
@@ -487,7 +487,7 @@ void statistics::hit_response(walker  *who)
 			}
 			break;
 
-		case FAMILY_BUILDER:
+		case GUY_BUILDER:
 			if (controller->myguy) // are we a player's character?
 				threshold = (3 * max_hitpoints)/5; // then flee at 60%
 			else                   // we're an enemy, so be braver :>
@@ -514,7 +514,7 @@ void statistics::hit_response(walker  *who)
 		break;
 
 
-		case FAMILY_SUMMONER: //from mage
+		case GUY_SUMMONER: //from mage
 			if (controller->myguy) // are we a player's character?
 				threshold = (3 * max_hitpoints)/5; // then flee at 60%
 			else                   // we're an enemy, so be braver :>
@@ -544,7 +544,7 @@ void statistics::hit_response(walker  *who)
 
 
 
-		case FAMILY_ARCHMAGE:
+		case GUY_ARCHMAGE:
 			controller->busy = 0; // yes, this is a cheat..
 			if (controller->myguy) // are we a player's character?
 				threshold = (3 * max_hitpoints)/5; // then flee at 60%
@@ -610,7 +610,7 @@ void statistics::hit_response(walker  *who)
 				} // end of some foes in range for special attack
 			}
 			break;
-		case FAMILY_ARCHER: // stay at range ..
+		case GUY_ARCHER: // stay at range ..
 			{
 				if (!controller->foe || controller->foe != foe)
 				{

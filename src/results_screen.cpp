@@ -114,7 +114,7 @@ std::string TroopResult::get_name()
 
 char TroopResult::get_family()
 {
-    char family = FAMILY_SOLDIER;
+    char family = GUY_SOLDIER;
     if(before != NULL)
         family = before->family;
     if(after != NULL)

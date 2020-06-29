@@ -88,33 +88,33 @@ vbutton* localbuttons; //global so we can delete the buttons anywhere
     //KAT: moving this into globals has wierd parsing errors when g:: is combined with &* etc
 
 Sint32 allowable_guys[] =
-    { FAMILY_SUMMONER,
-      FAMILY_BUILDER,
-      FAMILY_SOLDIER,
-      FAMILY_BARBARIAN,
-      FAMILY_ELF,
-      FAMILY_ARCHER,
-      FAMILY_MAGE,
-      FAMILY_CLERIC,
-      FAMILY_THIEF,
-      FAMILY_DRUID,
-      FAMILY_ORC,
-      FAMILY_SKELETON,
-      FAMILY_FIREELEMENTAL,
-      FAMILY_SMALL_SLIME,
-      FAMILY_FAERIE,
-      FAMILY_GHOST
+    { GUY_SUMMONER,
+      GUY_BUILDER,
+      GUY_SOLDIER,
+      GUY_BARBARIAN,
+      GUY_ELF,
+      GUY_ARCHER,
+      GUY_MAGE,
+      GUY_CLERIC,
+      GUY_THIEF,
+      GUY_DRUID,
+      GUY_ORC,
+      GUY_SKELETON,
+      GUY_FIREELEMENTAL,
+      GUY_SMALL_SLIME,
+      GUY_FAERIE,
+      GUY_GHOST
     };
 
 
 // Used to label new hires, like "SOLDIER5"
-Sint32 numbought[NUM_FAMILIES] = 
+Sint32 numbought[NUM_GUYS] = 
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 // See guy.cpp
-extern Sint32 costlist[NUM_FAMILIES];
-extern Sint32 statlist[NUM_FAMILIES][6];
-extern Sint32 statcosts[NUM_FAMILIES][6];
+extern Sint32 costlist[NUM_GUYS];
+extern Sint32 statlist[NUM_GUYS][6];
+extern Sint32 statcosts[NUM_GUYS][6];
 
 // Difficulty settings .. in percent, so 100 == normal
 Sint32 current_difficulty = 1; // setting 'normal'
@@ -812,54 +812,54 @@ Sint32 beginmenu(Sint32 arg1)
 	g::current_guy = NULL;
 
 	// Clear the labeling counter
-	for (int i = 0; i < NUM_FAMILIES; i++)
+	for (int i = 0; i < NUM_GUYS; i++)
 		numbought[i] = 0;
 
 	return create_team_menu(1);
 }
 
 
-const char* get_family_string(short family)
+const char* get_family_string(short guy_type)
 {
-	switch(family)
+	switch(guy_type)
 	{
-		case FAMILY_ARCHER:
+		case GUY_ARCHER:
 			return "ARCHER";
-		case FAMILY_CLERIC:
+		case GUY_CLERIC:
 			return "CLERIC";
-		case FAMILY_DRUID:
+		case GUY_DRUID:
 			return "DRUID";
-		case FAMILY_ELF:
+		case GUY_ELF:
 			return "ELF";
-		case FAMILY_MAGE:
+		case GUY_MAGE:
 			return "MAGE";
-		case FAMILY_SOLDIER:
+		case GUY_SOLDIER:
 			return "SOLDIER";
-		case FAMILY_THIEF:
+		case GUY_THIEF:
 			return "THIEF";
-		case FAMILY_ARCHMAGE:
+		case GUY_ARCHMAGE:
 			return "ARCHMAGE";
-		case FAMILY_ORC:
+		case GUY_ORC:
 			return "ORC";
-		case FAMILY_BIG_ORC:
+		case GUY_BIG_ORC:
 			return "ORC CAPTAIN";
-		case FAMILY_BARBARIAN:
+		case GUY_BARBARIAN:
 			return "BARBARIAN";
-		case FAMILY_FIREELEMENTAL:
+		case GUY_FIREELEMENTAL:
 			return "ELEMENTAL";
-		case FAMILY_SKELETON:
+		case GUY_SKELETON:
 			return "SKELETON";
-		case FAMILY_SLIME:
-		case FAMILY_MEDIUM_SLIME:
-		case FAMILY_SMALL_SLIME:
+		case GUY_SLIME:
+		case GUY_MEDIUM_SLIME:
+		case GUY_SMALL_SLIME:
 			return "SLIME";
-		case FAMILY_FAERIE:
+		case GUY_FAERIE:
 			return "FAERIE";
-		case FAMILY_GHOST:
+		case GUY_GHOST:
 			return "GHOST";
-		case FAMILY_SUMMONER:
+		case GUY_SUMMONER:
 			return "SUMMONER";
-		case FAMILY_BUILDER:
+		case GUY_BUILDER:
 			return "BUILDER";
 		default:
 			return "BEAST";
@@ -871,43 +871,43 @@ void family_name_copy(char *name, short family)
 {
 	switch(family)
 	{
-		case FAMILY_ARCHER:
+		case GUY_ARCHER:
 			strcpy(name, "ARCHER");
 			break;
-		case FAMILY_CLERIC:
+		case GUY_CLERIC:
 			strcpy(name, "CLERIC");
 			break;
-		case FAMILY_DRUID:
+		case GUY_DRUID:
 			strcpy(name, "DRUID");
 			break;
-		case FAMILY_ELF:
+		case GUY_ELF:
 			strcpy(name, "ELF");
 			break;
-		case FAMILY_MAGE:
+		case GUY_MAGE:
 			strcpy(name, "MAGE");
 			break;
-		case FAMILY_SOLDIER:
+		case GUY_SOLDIER:
 			strcpy(name, "SOLDIER");
 			break;
-		case FAMILY_THIEF:
+		case GUY_THIEF:
 			strcpy(name, "THIEF");
 			break;
-		case FAMILY_ARCHMAGE:
+		case GUY_ARCHMAGE:
 			strcpy(name, "ARCHMAGE");
 			break;
-		case FAMILY_ORC:
+		case GUY_ORC:
 			strcpy(name, "ORC");
 			break;
-		case FAMILY_BIG_ORC:
+		case GUY_BIG_ORC:
 			strcpy(name, "ORC CAP.");
 			break;
-		case FAMILY_BARBARIAN:
+		case GUY_BARBARIAN:
 			strcpy(name, "BARBAR.");
 			break;
-		case FAMILY_SUMMONER:
+		case GUY_SUMMONER:
 			strcpy(name, "SUMMONER");
 			break;
-		case FAMILY_BUILDER:
+		case GUY_BUILDER:
 			strcpy(name, "BUILDER");
 			break;
 		default:
@@ -1034,7 +1034,7 @@ std::string get_class_description(unsigned char family)
 
     switch(family)
     {
-    case FAMILY_SOLDIER:
+    case GUY_SOLDIER:
         result = "Your basic grunt, can     \n"
                  "absorb and deal damage and\n"
                  "move moderately fast. A   \n"
@@ -1044,7 +1044,7 @@ std::string get_class_description(unsigned char family)
                  "\n"
                  "Special: Charge";
         break;
-    case FAMILY_ELF:
+    case GUY_ELF:
         result = "Elves are small and weak, \n"
                  "but are harder to hit than\n"
                  "most classes. Alone of all\n"
@@ -1053,7 +1053,7 @@ std::string get_class_description(unsigned char family)
                  "\n"
                  "Special: Rocks";
         break;
-    case FAMILY_ARCHER:
+    case GUY_ARCHER:
         result = "Archers are fleet of foot,\n"
                  "and their arrows have a   \n"
                  "long range. Although      \n"
@@ -1063,7 +1063,7 @@ std::string get_class_description(unsigned char family)
                  "\n"
                  "Special: Fire Arrows";
         break;
-    case FAMILY_MAGE:
+    case GUY_MAGE:
         result = "Mages are slow, can't     \n"
                  "stand much damage, and are\n"
                  "horrible at hand-to-hand  \n"
@@ -1073,7 +1073,7 @@ std::string get_class_description(unsigned char family)
                  "\n"
                  "Special: Teleport";
         break;
-    case FAMILY_SKELETON:
+    case GUY_SKELETON:
         result = "Skeletons are the pathetic\n"
                  "remains of those who once \n"
                  "were among the living.    \n"
@@ -1083,7 +1083,7 @@ std::string get_class_description(unsigned char family)
                  "\n"
                  "Special: Tunnel";
         break;
-    case FAMILY_CLERIC:
+    case GUY_CLERIC:
         result = "Clerics, like mages, are  \n"
                  "slow, but have a stronger \n"
                  "hand-to-hand attack.      \n"
@@ -1093,7 +1093,7 @@ std::string get_class_description(unsigned char family)
                  "\n"
                  "Special: Heal";
         break;
-    case FAMILY_FIREELEMENTAL:
+    case GUY_FIREELEMENTAL:
         result = "Strong and quick, fire    \n"
                  "elementals can expel      \n"
                  "flaming meteors in all    \n"
@@ -1102,7 +1102,7 @@ std::string get_class_description(unsigned char family)
                  "\n"
                  "Special: Starburst";
         break;
-    case FAMILY_FAERIE:
+    case GUY_FAERIE:
         result = "The faerie are small,     \n"
                  "flying above friends and  \n"
                  "enemies alike unnoticed.  \n"
@@ -1112,9 +1112,9 @@ std::string get_class_description(unsigned char family)
                  "magic powder which freezes\n"
                  "their enemies.";
         break;
-    case FAMILY_SLIME:
-    case FAMILY_SMALL_SLIME:
-    case FAMILY_MEDIUM_SLIME:
+    case GUY_SLIME:
+    case GUY_SMALL_SLIME:
+    case GUY_MEDIUM_SLIME:
         result = "Slimes are patches of ooze\n"
                  "which grow and split into \n"
                  "two smaller slimes, over- \n"
@@ -1124,7 +1124,7 @@ std::string get_class_description(unsigned char family)
                  "\n"
                  "Special: Grow";
         break;
-    case FAMILY_THIEF:
+    case GUY_THIEF:
         result = "Thieves are fast, though  \n"
                  "not so potent as the      \n"
                  "soldier. Thieves can throw\n"
@@ -1134,7 +1134,7 @@ std::string get_class_description(unsigned char family)
                  "\n"
                  "Special: Drop Bomb";
         break;
-    case FAMILY_GHOST:
+    case GUY_GHOST:
         result = "Ghosts can pass through   \n"
                  "walls, trees, and anything\n"
                  "else that gets in the way.\n"
@@ -1144,7 +1144,7 @@ std::string get_class_description(unsigned char family)
                  "\n"
                  "Special: Scare";
         break;
-    case FAMILY_DRUID:
+    case GUY_DRUID:
         result = "Druids are the magicians  \n"
                  "of nature, and have power \n"
                  "over natural events. They \n"
@@ -1154,7 +1154,7 @@ std::string get_class_description(unsigned char family)
                  "\n"
                  "Special: Plant Tree";
         break;
-    case FAMILY_ORC:
+    case GUY_ORC:
         result = "Orcs are a basic 'grunt'; \n"
                  "strong and hard to hurt,  \n"
                  "they don't do much more   \n"
@@ -1163,14 +1163,14 @@ std::string get_class_description(unsigned char family)
                  "\n"
                  "Special: Howl";
         break;
-    case FAMILY_BIG_ORC:
+    case GUY_BIG_ORC:
         result = "Orcs captains are stronger\n"
                  "and smarter than the basic\n"
                  "orc.  They throw blades   \n"
                  "across the battlefield to \n"
                  "deal damage from afar.";
         break;
-    case FAMILY_BARBARIAN:
+    case GUY_BARBARIAN:
         result = "Barbarians are powerful   \n"
                  "and resist some magic     \n"
                  "damage, but have more will\n"
@@ -1180,7 +1180,7 @@ std::string get_class_description(unsigned char family)
                  "iron hammers.             \n"
                  "Special: Hurl Boulder";
         break;
-    case FAMILY_ARCHMAGE:
+    case GUY_ARCHMAGE:
         result = "An Archmage takes the     \n"
                  "learnings of the Magi one \n"
                  "step further, possessing  \n"
@@ -1190,7 +1190,7 @@ std::string get_class_description(unsigned char family)
                  "\n"
                  "Special: Teleport";
         break;
-    case FAMILY_SUMMONER:
+    case GUY_SUMMONER:
         result = "The Summoner does things. \n"
                  "                          \n"
                  "                          \n"
@@ -1200,7 +1200,7 @@ std::string get_class_description(unsigned char family)
                  "\n"
                  "Special: Dicks Dicks Dicks";
         break;
-    case FAMILY_BUILDER:
+    case GUY_BUILDER:
         result = "The Builder does things. \n"
                  " - A stout dwarf          \n"
                  " - Sentry goin up         \n"
@@ -2576,43 +2576,43 @@ const char* get_random_name(unsigned char family)
 {
 	switch(family)
 	{
-		case FAMILY_ARCHER:
+		case GUY_ARCHER:
 			return GET_RAND_ELEM(archer_names);
-		case FAMILY_CLERIC:
+		case GUY_CLERIC:
 			return GET_RAND_ELEM(cleric_names);
-		case FAMILY_DRUID:
+		case GUY_DRUID:
 			return GET_RAND_ELEM(druid_names);
-		case FAMILY_ELF:
+		case GUY_ELF:
 			return GET_RAND_ELEM(elf_names);
-		case FAMILY_MAGE:
+		case GUY_MAGE:
 			return GET_RAND_ELEM(mage_names);
-		case FAMILY_SOLDIER:
+		case GUY_SOLDIER:
 			return GET_RAND_ELEM(soldier_names);
-		case FAMILY_THIEF:
+		case GUY_THIEF:
 			return GET_RAND_ELEM(thief_names);
-		case FAMILY_SUMMONER:
+		case GUY_SUMMONER:
 			return GET_RAND_ELEM(ghost_names);
-		case FAMILY_BUILDER:
+		case GUY_BUILDER:
 			return GET_RAND_ELEM(ghost_names);
-		case FAMILY_ARCHMAGE:
+		case GUY_ARCHMAGE:
 			return GET_RAND_ELEM(mage_names);
-		case FAMILY_ORC:
+		case GUY_ORC:
 			return GET_RAND_ELEM(orc_names);
-		case FAMILY_BIG_ORC:
+		case GUY_BIG_ORC:
 			return GET_RAND_ELEM(orc_names);
-		case FAMILY_BARBARIAN:
+		case GUY_BARBARIAN:
 			return GET_RAND_ELEM(barbarian_names);
-		case FAMILY_FIREELEMENTAL:
+		case GUY_FIREELEMENTAL:
 			return GET_RAND_ELEM(elemental_names);
-		case FAMILY_SKELETON:
+		case GUY_SKELETON:
 			return GET_RAND_ELEM(skeleton_names);
-		case FAMILY_SLIME:
-		case FAMILY_MEDIUM_SLIME:
-		case FAMILY_SMALL_SLIME:
+		case GUY_SLIME:
+		case GUY_MEDIUM_SLIME:
+		case GUY_SMALL_SLIME:
 			return GET_RAND_ELEM(slime_names);
-		case FAMILY_FAERIE:
+		case GUY_FAERIE:
 			return GET_RAND_ELEM(faerie_names);
-		case FAMILY_GHOST:
+		case GUY_GHOST:
 			return GET_RAND_ELEM(ghost_names);
 		default:
 			return GET_RAND_ELEM(soldier_names);
@@ -3325,7 +3325,7 @@ Sint32 create_detail_menu(guy *arg1)
 	int num_buttons = 2;
 	int highlighted_button = 0;
 
-	buttons[1].hidden = !(thisguy->family == FAMILY_MAGE && thisguy->get_level() >= 6) && !(thisguy->family == FAMILY_ORC && thisguy->get_level() >= 5);
+	buttons[1].hidden = !(thisguy->family == GUY_MAGE && thisguy->get_level() >= 6) && !(thisguy->family == GUY_ORC && thisguy->get_level() >= 5);
 	localbuttons = init_buttons(buttons, num_buttons);
 
    //leftmouse(buttons);
@@ -3350,23 +3350,23 @@ Sint32 create_detail_menu(guy *arg1)
                    detailmouse.y <= 66) || (pressed && highlighted_button == 1));
        if(do_promote)
        {
-           if (thisguy->family == FAMILY_MAGE &&
+           if (thisguy->family == GUY_MAGE &&
                    thisguy->get_level() >= 6)
            {
                // Become an archmage!
                thisguy->upgrade_to_level(( (thisguy->get_level()-6) / 2) + 1);
-               thisguy->family = FAMILY_ARCHMAGE;
+               thisguy->family = GUY_ARCHMAGE;
                myscreen->soundp->play_sound(SOUND_EXPLODE);
                myscreen->soundp->play_sound(SOUND_EXPLODE);
                myscreen->soundp->play_sound(SOUND_EXPLODE);
                return REDRAW;
            }  // end of mage->archmage
-           else if (thisguy->family == FAMILY_ORC &&
+           else if (thisguy->family == GUY_ORC &&
                     thisguy->get_level() >= 5)
            {
                // Become an Orcish Captain!
                thisguy->upgrade_to_level(1);
-               thisguy->family = FAMILY_BIG_ORC; // fake for now
+               thisguy->family = GUY_BIG_ORC; // fake for now
                myscreen->soundp->play_sound(SOUND_DIE1);
                myscreen->soundp->play_sound(SOUND_DIE2);
                myscreen->soundp->play_sound(SOUND_DIE1);
@@ -3393,7 +3393,7 @@ Sint32 create_detail_menu(guy *arg1)
        // Text stuff, determined by character class & level
        switch (thisguy->family)
        {
-           case FAMILY_SOLDIER:
+           case GUY_SOLDIER:
                char  message[80];
                sprintf(message, "Level %d soldier has:", thisguy->get_level());
                mytext.write_xy(DETAIL_LM+1, DETAIL_LD(0)+1, message, 10, 1);
@@ -3428,7 +3428,7 @@ Sint32 create_detail_menu(guy *arg1)
                    WR(8 ,"  strength of attacks. ");
                }
                break;
-           case FAMILY_BARBARIAN:
+           case GUY_BARBARIAN:
                sprintf(message, "Level %d barbarian has:", thisguy->get_level());
                mytext.write_xy(DETAIL_LM+1, DETAIL_LD(0)+1, message, 10, 1);
                mytext.write_xy(DETAIL_LM, DETAIL_LD(0), message, DARK_BLUE, 1);
@@ -3446,7 +3446,7 @@ Sint32 create_detail_menu(guy *arg1)
                    WL(10,"  hits foes all around.  ");
                }
                break;
-           case FAMILY_ELF:
+           case GUY_ELF:
                sprintf(message, "Level %d elf has:", thisguy->get_level());
                mytext.write_xy(DETAIL_LM+1, DETAIL_LD(0)+1, message, 10, 1);
                mytext.write_xy(DETAIL_LM, DETAIL_LD(0), message, DARK_BLUE, 1);
@@ -3481,7 +3481,7 @@ Sint32 create_detail_menu(guy *arg1)
                    WR(8 ,"  and packs a big punch.");
                }
                break;
-           case FAMILY_ARCHER:
+           case GUY_ARCHER:
                sprintf(message, "Level %d archer has:", thisguy->get_level());
                mytext.write_xy(DETAIL_LM+1, DETAIL_LD(0)+1, message, 10, 1);
                mytext.write_xy(DETAIL_LM, DETAIL_LD(0), message, DARK_BLUE, 1);
@@ -3516,7 +3516,7 @@ Sint32 create_detail_menu(guy *arg1)
                    WR(8 ,"                        ");
                }
                break;
-           case FAMILY_MAGE:
+           case GUY_MAGE:
                sprintf(message, "Level %d Mage has:", thisguy->get_level());
                mytext.write_xy(DETAIL_LM+1, DETAIL_LD(0)+1, message, 10, 1);
                mytext.write_xy(DETAIL_LM, DETAIL_LD(0), message, DARK_BLUE, 1);
@@ -3572,7 +3572,7 @@ Sint32 create_detail_menu(guy *arg1)
                    WR(11,"  means a bigger effect.");
                }
                break;
-           case FAMILY_ARCHMAGE:
+           case GUY_ARCHMAGE:
                sprintf(message, "Level %d ArchMage has:", thisguy->get_level());
                mytext.write_xy(DETAIL_LM+1, DETAIL_LD(0)+1, message, 10, 1);
                mytext.write_xy(DETAIL_LM, DETAIL_LD(0), message, DARK_BLUE, 1);
@@ -3609,7 +3609,7 @@ Sint32 create_detail_menu(guy *arg1)
                }
                break;
 
-           case FAMILY_CLERIC:
+           case GUY_CLERIC:
                sprintf(message, "Level %d Cleric has:", thisguy->get_level());
                mytext.write_xy(DETAIL_LM+1, DETAIL_LD(0)+1, message, 10, 1);
                mytext.write_xy(DETAIL_LM, DETAIL_LD(0), message, DARK_BLUE, 1);
@@ -3648,7 +3648,7 @@ Sint32 create_detail_menu(guy *arg1)
                    WR(11,"  your own EXP to cast! ");
                }
                break;
-           case FAMILY_DRUID:
+           case GUY_DRUID:
                sprintf(message, "Level %d Druid has:", thisguy->get_level());
                mytext.write_xy(DETAIL_LM+1, DETAIL_LD(0)+1, message, 10, 1);
                mytext.write_xy(DETAIL_LM, DETAIL_LD(0), message, DARK_BLUE, 1);
@@ -3685,7 +3685,7 @@ Sint32 create_detail_menu(guy *arg1)
                    WR(9 ,"  invisible enemies.    ");
                }
                break;
-           case FAMILY_THIEF:
+           case GUY_THIEF:
                sprintf(message, "Level %d Thief has:", thisguy->get_level());
                mytext.write_xy(DETAIL_LM+1, DETAIL_LD(0)+1, message, 10, 1);
                mytext.write_xy(DETAIL_LM, DETAIL_LD(0), message, DARK_BLUE, 1);
@@ -3722,7 +3722,7 @@ Sint32 create_detail_menu(guy *arg1)
                    WR(9 ,"  your foes.            ");
                }
                break;
-           case FAMILY_ORC:
+           case GUY_ORC:
                sprintf(message, "Level %d Orc has:", thisguy->get_level());
                mytext.write_xy(DETAIL_LM+1, DETAIL_LD(0)+1, message, 10, 1);
                mytext.write_xy(DETAIL_LM, DETAIL_LD(0), message, DARK_BLUE, 1);

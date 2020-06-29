@@ -203,8 +203,8 @@ short radar::draw(LevelData* data)
             oborder = ob->query_order();
 			do_show = 0; // don't show, by default
 			if ((oborder == ORDER_LIVING || oborder == ORDER_WEAPON
-			            || (oborder == ORDER_TREASURE && (ob->query_family() == FAMILY_LIFE_GEM))
-			            || (oborder == ORDER_TREASURE && (ob->query_family() == FAMILY_EXIT))
+			            || (oborder == ORDER_TREASURE && (ob->query_family() == TRES_LIFE_GEM))
+			            || (oborder == ORDER_TREASURE && (ob->query_family() == TRES_EXIT))
 			            || (oborder == ORDER_GENERATOR && can_see)
 			           )
 			        && (obteam==ob->team_num || ob->invisibility_left < 1 || can_see)
@@ -290,19 +290,19 @@ short radar::draw(LevelData* data)
 				{
 					switch (obfamily)
 					{
-						case FAMILY_GOLD_BAR:
+						case TRES_GOLD_BAR:
 							do_show = (short) (YELLOW + random(5));
 							break;
-						case FAMILY_SILVER_BAR:
+						case TRES_SILVER_BAR:
 							do_show = (short) (GREY + random(5));
 							break;
-						case FAMILY_DRUMSTICK:
+						case TRES_DRUMSTICK:
 							do_show = (short) (COLOR_BROWN + random(2));
 							break;
-						case FAMILY_MAGIC_POTION:
-						case FAMILY_INVIS_POTION:
-						case FAMILY_INVULNERABLE_POTION:
-						case FAMILY_FLIGHT_POTION:
+						case TRES_MAGIC_POTION:
+						case TRES_INVIS_POTION:
+						case TRES_INVULNERABLE_POTION:
+						case TRES_FLIGHT_POTION:
 							do_show = (short) (COLOR_BLUE + random(5));
 							break;
 						default:
@@ -310,7 +310,7 @@ short radar::draw(LevelData* data)
 							break;
 					}
 				}
-				if (obfamily == FAMILY_EXIT || obfamily == FAMILY_TELEPORTER)
+				if (obfamily == TRES_EXIT || obfamily == TRES_TELEPORTER)
 					do_show = (short) LIGHT_BLUE + random(7);
 			}
 			if (!on_screen( (short) ((ob->xpos+1)/GRID_SIZE),

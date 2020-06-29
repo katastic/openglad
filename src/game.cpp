@@ -124,8 +124,8 @@ short load_saved_game(const char *filename, screen  *myscreen)
 				myfam = w->query_family();
 				myord = w->query_order();
 				if ( ( (w->team_num==0 || w->myguy) && myord==ORDER_LIVING) || //living team member
-				        (myord==ORDER_TREASURE && myfam==FAMILY_EXIT) || // exit
-				        (myord==ORDER_TREASURE && myfam==FAMILY_TELEPORTER)  // teleporters
+				        (myord==ORDER_TREASURE && myfam==TRES_EXIT) || // exit
+				        (myord==ORDER_TREASURE && myfam==TRES_TELEPORTER)  // teleporters
 				   )
 				{
 					// do nothing; legal guy
@@ -144,8 +144,8 @@ short load_saved_game(const char *filename, screen  *myscreen)
 				myfam = w->query_family();
 				myord = w->query_order();
 				if ( (w->team_num==0 && myord==ORDER_LIVING) || //living team member
-				        (myord==ORDER_TREASURE && myfam==FAMILY_EXIT) || // exit
-				        (myord==ORDER_TREASURE && myfam==FAMILY_TELEPORTER)  // teleporters
+				        (myord==ORDER_TREASURE && myfam==TRES_EXIT) || // exit
+				        (myord==ORDER_TREASURE && myfam==TRES_TELEPORTER)  // teleporters
 
 				   )
 				{
@@ -165,8 +165,8 @@ short load_saved_game(const char *filename, screen  *myscreen)
 				myfam = w->query_family();
 				myord = w->query_order();
 				if ( (w->team_num==0 && myord==ORDER_LIVING) || //living team member
-				        (myord==ORDER_TREASURE && myfam==FAMILY_EXIT) || // exit
-				        (myord==ORDER_TREASURE && myfam==FAMILY_TELEPORTER)  // teleporters
+				        (myord==ORDER_TREASURE && myfam==TRES_EXIT) || // exit
+				        (myord==ORDER_TREASURE && myfam==TRES_TELEPORTER)  // teleporters
 
 				   )
 				{

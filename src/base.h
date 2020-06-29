@@ -200,96 +200,98 @@ char* read_one_line(SDL_RWops *infile, short length);
 #define ORDER_BUTTON1 6
 
 // Living families
-#define FAMILY_SOLDIER 0
-#define FAMILY_ELF 1
-#define FAMILY_ARCHER 2
-#define FAMILY_MAGE 3
-#define FAMILY_SKELETON 4
-#define FAMILY_CLERIC 5
-#define FAMILY_FIREELEMENTAL 6
-#define FAMILY_FAERIE 7
-#define FAMILY_SLIME 8
-#define FAMILY_SMALL_SLIME 9
-#define FAMILY_MEDIUM_SLIME 10
-#define FAMILY_THIEF 11
-#define FAMILY_GHOST 12
-#define FAMILY_DRUID 13
-#define FAMILY_ORC   14
-#define FAMILY_BIG_ORC 15
-#define FAMILY_BARBARIAN 16
-#define FAMILY_SUMMONER 17 //HAS TO BE right BEFORE ARCHMAGE. looks like there's a bug if you add a character after empty data (like tower) with no picker stats
+#define GUY_SOLDIER 0
+#define GUY_ELF 1
+#define GUY_ARCHER 2
+#define GUY_MAGE 3
+#define GUY_SKELETON 4
+#define GUY_CLERIC 5
+#define GUY_FIREELEMENTAL 6
+#define GUY_FAERIE 7
+#define GUY_SLIME 8
+#define GUY_SMALL_SLIME 9
+#define GUY_MEDIUM_SLIME 10
+#define GUY_THIEF 11
+#define GUY_GHOST 12
+#define GUY_DRUID 13
+#define GUY_ORC   14
+#define GUY_BIG_ORC 15
+#define GUY_BARBARIAN 16
+#define GUY_SUMMONER 17 //HAS TO BE right BEFORE ARCHMAGE. looks like there's a bug if you add a character after empty data (like tower) with no picker stats
 // See [guy.cpp:84]
-#define FAMILY_BUILDER 18
-#define FAMILY_ARCHMAGE 19 	//17
-#define FAMILY_GOLEM 20 	//18
-#define FAMILY_GIANT_SKELETON 21 //19
-#define FAMILY_TOWER1 22 //20
+#define GUY_BUILDER 18
+#define GUY_ARCHMAGE 19 	//17
+#define GUY_GOLEM 20 	//18
+#define GUY_GIANT_SKELETON 21 //19
+#define GUY_TOWER1 22 //20
 
-#define NUM_FAMILIES 23  // # of families; make sure to change the
+#define NUM_GUYS 23  // # of families; make sure to change the
 // SIZE_FAMILIES in loader.cpp as well
 // (or your code will act weird)
 
-#define PIX(a,b) (NUM_FAMILIES*a+b)
+#define PIX(a,b) (NUM_GUYS*a+b)
 
 //Weapon families
-#define FAMILY_KNIFE 0
-#define FAMILY_ROCK 1
-#define FAMILY_ARROW 2
-#define FAMILY_FIREBALL 3
-#define FAMILY_TREE 4
-#define FAMILY_METEOR 5
-#define FAMILY_SPRINKLE 6
-#define FAMILY_BONE 7
-#define FAMILY_BLOOD 8
-#define FAMILY_BLOB 9
-#define FAMILY_FIRE_ARROW 10
-#define FAMILY_LIGHTNING 11
-#define FAMILY_GLOW 12
-#define FAMILY_WAVE 13
-#define FAMILY_WAVE2 14
-#define FAMILY_WAVE3 15
-#define FAMILY_CIRCLE_PROTECTION 16
-#define FAMILY_HAMMER 17
-#define FAMILY_DOOR 18
-#define FAMILY_BOULDER 19
+#define WEAP_KNIFE 0
+#define WEAP_ROCK 1
+#define WEAP_ARROW 2
+#define WEAP_FIREBALL 3
+#define WEAP_TREE 4
+#define WEAP_METEOR 5
+#define WEAP_SPRINKLE 6
+#define WEAP_BONE 7
+#define WEAP_BLOOD 8
+#define WEAP_BLOB 9
+#define WEAP_FIRE_ARROW 10
+#define WEAP_LIGHTNING 11
+#define WEAP_GLOW 12
+#define WEAP_WAVE 13
+#define WEAP_WAVE2 14
+#define WEAP_WAVE3 15
+#define WEAP_CIRCLE_PROTECTION 16
+#define WEAP_HAMMER 17
+#define WEAP_DOOR 18
+#define WEAP_BOULDER 19
+#define NUM_WEAPONS 20
 
 // Treasure families
-#define FAMILY_STAIN 0
-#define FAMILY_DRUMSTICK 1
-#define FAMILY_GOLD_BAR 2
-#define FAMILY_SILVER_BAR 3
-#define FAMILY_MAGIC_POTION 4
-#define FAMILY_INVIS_POTION 5
-#define FAMILY_INVULNERABLE_POTION 6
-#define FAMILY_FLIGHT_POTION 7
-#define FAMILY_EXIT 8
-#define FAMILY_TELEPORTER 9
-#define FAMILY_LIFE_GEM 10 // generated upon death
-#define FAMILY_KEY 11
-#define FAMILY_SPEED_POTION 12
-#define MAX_TREASURE 12          // # of biggest treasure..
+#define TRES_STAIN 0
+#define TRES_DRUMSTICK 1
+#define TRES_GOLD_BAR 2
+#define TRES_SILVER_BAR 3
+#define TRES_MAGIC_POTION 4
+#define TRES_INVIS_POTION 5
+#define TRES_INVULNERABLE_POTION 6
+#define TRES_FLIGHT_POTION 7
+#define TRES_EXIT 8
+#define TRES_TELEPORTER 9
+#define TRES_LIFE_GEM 10 // generated upon death
+#define TRES_KEY 11
+#define TRES_SPEED_POTION 12
+#define MAX_TREASURE 12   // # of biggest treasure..  (why not +1?!?!?!?!)
+#define NUM_TREASURES 13 //kat
 
 // Generator families
-#define FAMILY_TENT 0  // skeletons
-#define FAMILY_TOWER 1 // mages
-#define FAMILY_BONES 2 // ghosts
-#define FAMILY_TREEHOUSE 3 // elves :)
+#define GEN_TENT 0  // skeletons
+#define GEN_TOWER 1 // mages
+#define GEN_BONES 2 // ghosts
+#define GEN_TREEHOUSE 3 // elves :)
 
 // FX families
-//#define FAMILY_STAIN 0
-#define FAMILY_EXPAND 0
-#define FAMILY_GHOST_SCARE 1
-#define FAMILY_BOMB 2
-#define FAMILY_EXPLOSION 3      // Bombs, etc.
-#define FAMILY_FLASH 4          // Used for teleporter effects
-#define FAMILY_MAGIC_SHIELD 5   // revolving protective shield
-#define FAMILY_KNIFE_BACK  6    // Returning blade
-#define FAMILY_BOOMERANG  7     // Circling boomerang
-#define FAMILY_CLOUD 8          // purple poison cloud
-#define FAMILY_MARKER 9         // Marker for Mages Teleport
-#define FAMILY_CHAIN 10         // 'Chain lightning' effect
-#define FAMILY_DOOR_OPEN 11     // The open door
-#define FAMILY_HIT 12           // Show when hit
+//#define FX_STAIN 0
+#define FX_EXPAND 0
+#define FX_GHOST_SCARE 1
+#define FX_BOMB 2
+#define FX_EXPLOSION 3      // Bombs, etc.
+#define FX_FLASH 4          // Used for teleporter effects
+#define FX_MAGIC_SHIELD 5   // revolving protective shield
+#define FX_KNIFE_BACK  6    // Returning blade
+#define FX_BOOMERANG  7     // Circling boomerang
+#define FX_CLOUD 8          // purple poison cloud
+#define FX_MARKER 9         // Marker for Mages Teleport
+#define FX_CHAIN 10         // 'Chain lightning' effect
+#define FX_DOOR_OPEN 11     // The open door
+#define FX_HIT 12           // Show when hit
 
 // Special families
 #define FAMILY_RESERVED_TEAM 0

@@ -531,7 +531,7 @@ short new_score_panel(screen *myscreen, short do_it)
 //	(void)bm;
 	char draw_button;  // do we draw a button background?
 	char text_color;
-	static char namelist[NUM_FAMILIES][20] =
+	static char namelist[NUM_GUYS][20] =
 	    { "SOLDIER", "ELF", "ARCHER", "MAGE",
 	      "SKELETON", "CLERIC", "ELEMENTAL",
 	      "FAERIE", "SLIME", "SLIME", "SLIME",

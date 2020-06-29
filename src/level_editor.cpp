@@ -785,10 +785,10 @@ public:
 
 
     SelectionInfo()
-        : valid(false), x(0), y(0), w(GRID_SIZE), h(GRID_SIZE), order(ORDER_LIVING), family(FAMILY_SOLDIER), level(1), target(NULL)
+        : valid(false), x(0), y(0), w(GRID_SIZE), h(GRID_SIZE), order(ORDER_LIVING), family(GUY_SOLDIER), level(1), target(NULL)
     {}
     SelectionInfo(walker* target)
-        : valid(false), x(0), y(0), w(GRID_SIZE), h(GRID_SIZE), order(ORDER_LIVING), family(FAMILY_SOLDIER), level(1), target(target)
+        : valid(false), x(0), y(0), w(GRID_SIZE), h(GRID_SIZE), order(ORDER_LIVING), family(GUY_SOLDIER), level(1), target(target)
     {
         set(target);
     }
@@ -802,7 +802,7 @@ public:
         w = GRID_SIZE;
         h = GRID_SIZE;
         order = ORDER_LIVING;
-        family = FAMILY_SOLDIER;
+        family = GUY_SOLDIER;
         level = 1;
     }
     void set(walker* target)
@@ -1394,7 +1394,7 @@ void LevelEditorData::activate_mode_button(SimpleButton* button)
                 if(e->family > 0)
                     e->family--;
                 else
-                    e->family = NUM_FAMILIES-1;
+                    e->family = NUM_GUYS-1;
                 level->myloader->set_walker(obj, e->order, e->family);
                 obj->ani_type = ANI_WALK;
                 obj->transform_to(e->order, e->family);
@@ -1413,7 +1413,7 @@ void LevelEditorData::activate_mode_button(SimpleButton* button)
             walker* obj = e->get_object(level);
             if(obj != NULL && obj->query_order() == ORDER_LIVING)
             {
-                if(e->family+1 < NUM_FAMILIES)
+                if(e->family+1 < NUM_GUYS)
                     e->family++;
                 else
                     e->family = 0;
@@ -1551,7 +1551,7 @@ void get_connected_level_exits(int current_level, const std::list<int>& levels, 
     for(auto e = d.fxlist.begin(); e != d.fxlist.end(); ++e)
     {
         walker* w = *e;
-        if(w->query_order() == ORDER_TREASURE && w->query_family() == FAMILY_EXIT && w->stats != NULL)
+        if(w->query_order() == ORDER_TREASURE && w->query_family() == TRES_EXIT && w->stats != NULL)
             exits.insert(w->stats->level);
     }
 
@@ -1687,12 +1687,12 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
     else
         {blood_string = "REMAINS";}
 
-	const char* treasures[NUM_FAMILIES] =
+	const char* treasures[NUM_TREASURES+1] =   //FOUND A BUG. was MAX_FAMILIES. AND, why needs +1??? What's 'CC'??
 	    { blood_string, "DRUMSTICK", "GOLD", "SILVER",
 	      "MAGIC", "INVIS", "INVULN", "FLIGHT",
 	      "EXIT", "TELEPORTER", "LIFE GEM", "KEY", "SPEED", "CC",
 	    };
-	const char* weapons[NUM_FAMILIES] =
+	const char* weapons[NUM_WEAPONS] = //FOUND A BUG. was MAX_FAMILIES
 	    { "KNIFE", "ROCK", "ARROW", "FIREBALL",
 	      "TREE", "METEOR", "SPRINKLE", "BONE",
 	      blood_string, "BLOB", "FIRE ARROW", "LIGHTNING",
@@ -1700,12 +1700,14 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
 	      "PROTECTION", "HAMMER", "DOOR",
 	    };
 
-	static char livings[NUM_FAMILIES][20] =
+	static char livings[NUM_GUYS][20] =
 	    {  "SOLDIER", "ELF", "ARCHER", "MAGE",
 	       "SKELETON", "CLERIC", "ELEMENTAL",
 	       "FAERIE", "L SLIME", "S SLIME", "M SLIME",
 	       "THIEF", "GHOST", "DRUID", "ORC",
-	       "ORC CAPTAIN", "BARBARIAN", "ARCHMAGE",
+	       "ORC CAPTAIN", "BARBARIAN", 
+           "SUMMONER", "BUILDER"
+           "ARCHMAGE",
 	       "GOLEM", "G SKELETON", "TOWER1",
 	    };
 
@@ -1748,16 +1750,16 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
                 else if (e->order == ORDER_GENERATOR)
                     switch (e->family)      // who are we?
                     {
-                        case FAMILY_TENT:
+                        case GEN_TENT:
                             strcat(message, "TENT");
                             break;
-                        case FAMILY_TOWER:
+                        case GEN_TOWER:
                             strcat(message, "MAGE TOWER");
                             break;
-                        case FAMILY_BONES:
+                        case GEN_BONES:
                             strcat(message, "BONEPILE");
                             break;
-                        case FAMILY_TREEHOUSE:
+                        case GEN_TREEHOUSE:
                             strcat(message, "TREEHOUSE");
                             break;
                         default:
@@ -1791,19 +1793,19 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
                     sprintf(message, "LEVEL: %u", e->level);
                     break;
                 case ORDER_TREASURE:
-                    if(e->family == FAMILY_GOLD_BAR || e->family == FAMILY_SILVER_BAR)
+                    if(e->family == TRES_GOLD_BAR || e->family == TRES_SILVER_BAR)
                         sprintf(message, "VALUE: %u", e->level);
-                    else if(e->family == FAMILY_KEY)
+                    else if(e->family == TRES_KEY)
                         sprintf(message, "DOOR ID: %u", e->level);
-                    else if(e->family == FAMILY_TELEPORTER)
+                    else if(e->family == TRES_TELEPORTER)
                         sprintf(message, "GROUP: %u", e->level);
-                    else if(e->family == FAMILY_EXIT)
+                    else if(e->family == TRES_EXIT)
                         sprintf(message, "EXIT TO: %u", e->level);
-                    else if(e->family != FAMILY_STAIN)
+                    else if(e->family != TRES_STAIN)
                         sprintf(message, "POWER: %u", e->level);
                     break;
                 case ORDER_WEAPON:
-                    if(e->family == FAMILY_DOOR)
+                    if(e->family == WEAP_DOOR)
                         sprintf(message, "DOOR ID: %u", e->level);
                     else
                         sprintf(message, "POWER: %u", e->level);
@@ -1830,16 +1832,16 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
         else if (object_brush.order == ORDER_GENERATOR)
             switch (object_brush.family)      // who are we?
             {
-                case FAMILY_TENT:
+                case GEN_TENT:
                     strcat(message, "TENT");
                     break;
-                case FAMILY_TOWER:
+                case GEN_TOWER:
                     strcat(message, "MAGE TOWER");
                     break;
-                case FAMILY_BONES:
+                case GEN_BONES:
                     strcat(message, "BONEPILE");
                     break;
-                case FAMILY_TREEHOUSE:
+                case GEN_TREEHOUSE:
                     strcat(message, "TREEHOUSE");
                     break;
                 default:
@@ -1865,19 +1867,19 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
                 sprintf(message, "LEVEL: %u", object_brush.level);
                 break;
             case ORDER_TREASURE:
-                if(object_brush.family == FAMILY_GOLD_BAR || object_brush.family == FAMILY_SILVER_BAR)
+                if(object_brush.family == TRES_GOLD_BAR || object_brush.family == TRES_SILVER_BAR)
                     sprintf(message, "VALUE: %u", object_brush.level);
-                else if(object_brush.family == FAMILY_KEY)
+                else if(object_brush.family == TRES_KEY)
                     sprintf(message, "DOOR ID: %u", object_brush.level);
-                else if(object_brush.family == FAMILY_TELEPORTER)
+                else if(object_brush.family == TRES_TELEPORTER)
                     sprintf(message, "GROUP: %u", object_brush.level);
-                else if(object_brush.family == FAMILY_EXIT)
+                else if(object_brush.family == TRES_EXIT)
                     sprintf(message, "EXIT TO: %u", object_brush.level);
-                else if(object_brush.family != FAMILY_STAIN)
+                else if(object_brush.family != TRES_STAIN)
                     sprintf(message, "POWER: %u", object_brush.level);
                 break;
             case ORDER_WEAPON:
-                if(object_brush.family == FAMILY_DOOR)
+                if(object_brush.family == WEAP_DOOR)
                     sprintf(message, "DOOR ID: %u", object_brush.level);
                 else
                     sprintf(message, "POWER: %u", object_brush.level);
@@ -1947,7 +1949,7 @@ Sint32 LevelEditorData::display_panel(screen* myscreen)
         // Background
         myscreen->draw_box(lm+25, PIX_TOP-16-1, lm+25+GRID_SIZE, PIX_TOP-16-1+GRID_SIZE, PURE_BLACK, 1, 1);
         // Guy
-        walker* newob = level->add_ob(ORDER_LIVING, FAMILY_ELF);
+        walker* newob = level->add_ob(ORDER_LIVING, GUY_ELF);
         newob->setxy(lm+25 + level->topx, PIX_TOP-16-1 + level->topy);
         newob->set_data(level->myloader->graphics[PIX(object_brush.order, object_brush.family)]);
         level->myloader->set_walker(newob, object_brush.order, object_brush.family);
@@ -3029,7 +3031,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
                 }
                 else if (keystates[KEYSTATE_r]) // (re)name the current object
                 {
-                    newob = level->add_ob(ORDER_LIVING, FAMILY_ELF);
+                    newob = level->add_ob(ORDER_LIVING, GUY_ELF);
                     newob->setxy(windowx, windowy);
                     if (some_hit(windowx, windowy, newob, level))
                     {
@@ -3049,7 +3051,7 @@ void LevelEditorData::mouse_up(int mx, int my, int old_mx, int old_my, bool& don
                     rect_selecting = false;
                     if(mx < 245-4 || my > L_D(7)-2)
                     {
-                        newob = level->add_ob(ORDER_LIVING, FAMILY_ELF);
+                        newob = level->add_ob(ORDER_LIVING, GUY_ELF);
                         newob->setxy(windowx, windowy);
                         if (some_hit(windowx, windowy, newob, level))
                         {
@@ -3242,7 +3244,7 @@ void LevelEditorData::set_terrain(int x, int y, unsigned char terrain)
 walker* LevelEditorData::get_object(int x, int y)
 {
     walker* result = NULL;
-    walker* newob = level->add_ob(ORDER_LIVING, FAMILY_ELF);
+    walker* newob = level->add_ob(ORDER_LIVING, GUY_ELF);
     newob->setxy(x, y);
     if (some_hit(x, y, newob, level))
     {
@@ -3420,7 +3422,7 @@ Sint32 level_editor()
 	redraw = 1;  // Redraw right away
 
 	object_pane.clear();
-	for(int i = 0; i < NUM_FAMILIES; i++)
+	for(int i = 0; i < NUM_GUYS; i++)
     {
         object_pane.push_back(ObjectType(ORDER_LIVING, i));
     }
@@ -3433,7 +3435,7 @@ Sint32 level_editor()
         object_pane.push_back(ObjectType(ORDER_GENERATOR, i));
     }
 
-    object_pane.push_back(ObjectType(ORDER_WEAPON, FAMILY_DOOR));
+    object_pane.push_back(ObjectType(ORDER_WEAPON, WEAP_DOOR));
     object_pane.push_back(ObjectType(ORDER_SPECIAL, FAMILY_RESERVED_TEAM));
 
 	// Minimap

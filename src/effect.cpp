@@ -61,11 +61,11 @@ short effect::act()
 	// Any special actions ..
 	switch (family) // determine what to do..
 	{
-		case FAMILY_GHOST_SCARE:
+		case FX_GHOST_SCARE:
 			if (owner)
 				center_on(owner);
 			break;
-		case FAMILY_MAGIC_SHIELD: // revolve around owner
+		case FX_MAGIC_SHIELD: // revolve around owner
 			if (!owner || owner->dead)
 			{
 				dead = 1;
@@ -172,7 +172,7 @@ short effect::act()
 				death();
 			}
 			break; // end of magic shield case
-		case FAMILY_BOOMERANG: // fighter's boomerang
+		case FX_BOOMERANG: // fighter's boomerang
 			// Zardus: FIX: if the drawcycle is in its >253s, the boomerang dies. This will fix the bug where
 			// the boomerang comes back to 0 (owner) after spiraling around all the way if the owner has
 			// that good of an ability (to keep its life so high). This caps boomerang ability, though... Another
@@ -287,7 +287,7 @@ short effect::act()
 				death();
 			}
 			break; // end of boomerang case
-		case FAMILY_KNIFE_BACK: // returning blade
+		case FX_KNIFE_BACK: // returning blade
 			if (!owner || owner->dead)
 			{
 				dead = 1;
@@ -326,7 +326,7 @@ short effect::act()
 						yd = owner->ypos - ypos;
 				}
 				setworldxy(worldx+xd, worldy+yd);
-				newob = myscreen->level_data.add_ob(ORDER_WEAPON, FAMILY_KNIFE);
+				newob = myscreen->level_data.add_ob(ORDER_WEAPON, WEAP_KNIFE);
 				newob->damage = damage;
 				newob->owner = owner;
 				newob->team_num = team_num;
@@ -352,7 +352,7 @@ short effect::act()
 				dead = 1;
 			}
 			break;
-		case FAMILY_CLOUD: // poison cloud
+		case FX_CLOUD: // poison cloud
 			if (lifetime > 0)
 				lifetime--;
 			else
@@ -394,7 +394,7 @@ short effect::act()
 				stats->add_command(COMMAND_WALK, (short) random(20), (short) xd, (short) yd);
 			}
 			break; // end of cloud
-		case FAMILY_CHAIN: // chain lightning ..
+		case FX_CHAIN: // chain lightning ..
 			if (!leader || lineofsight<1 || !owner) // lost our leader, etc.? kill us ..
 			{
 				dead = 1;
@@ -406,7 +406,7 @@ short effect::act()
 			         leader->xpos, leader->ypos, leader->sizex, leader->sizey))
 			{
 				// Do things ..
-				newob = myscreen->level_data.add_ob(ORDER_FX, FAMILY_EXPLOSION);
+				newob = myscreen->level_data.add_ob(ORDER_FX, FX_EXPLOSION);
 				if (!newob)
 				{
 					dead = 1;
@@ -439,7 +439,7 @@ short effect::act()
 					    walker* w = *e;
 						if (w != leader && w->skip_exit<1) // don't hit current guy, etc.
 						{
-							newob = myscreen->level_data.add_ob(ORDER_FX, FAMILY_CHAIN);
+							newob = myscreen->level_data.add_ob(ORDER_FX, FX_CHAIN);
 							if (!newob)
 								return 0; // failsafe
                             
@@ -505,22 +505,22 @@ short effect::act()
 			}
 			setworldxy(worldx+xd, worldy+yd);
 			return 1;  // so as not to animate, etc.
-			//break; // end of FAMILY_CHAIN
+			//break; // end of FX_CHAIN
 
-		case FAMILY_DOOR_OPEN:
+		case FX_DOOR_OPEN:
 
-			// Here is how doors work.  They start out as a FAMILY_DOOR
+			// Here is how doors work.  They start out as a FX_DOOR
 			//  from ORDER_WEAPON under the weaplist.  When the door is
 			//  collided with, the obmap marks the door as dead, and spawns
-			//  the FAMILY_DOOR_OPEN on the weaplist (this object).  It
+			//  the FX_DOOR_OPEN on the weaplist (this object).  It
 			//  animates ANI_DOOR_OPEN, and when it is done, it dies and
-			//  spawns a FAMILY_DOOR_OPEN on the fxlist.  The amusing part
+			//  spawns a FX_DOOR_OPEN on the fxlist.  The amusing part
 			//  is that now that it is on the fxlist, it won't act anymore,
 			//  thus preventing it from continuously respawning itself.
 
 			if (ani_type != ANI_WALK)
 				return animate();
-			newob = myscreen->level_data.add_fx_ob(ORDER_FX, FAMILY_DOOR_OPEN);
+			newob = myscreen->level_data.add_fx_ob(ORDER_FX, FX_DOOR_OPEN);
 			if (!newob)
 				break;
 			newob->ani_type = ANI_WALK;
@@ -563,11 +563,11 @@ short effect::animate()
 
 	switch (family)
 	{
-		case FAMILY_MAGIC_SHIELD:
-		case FAMILY_BOOMERANG:
-		case FAMILY_KNIFE_BACK:
-		case FAMILY_CLOUD:
-		case FAMILY_MARKER:
+		case FX_MAGIC_SHIELD:
+		case FX_BOOMERANG:
+		case FX_KNIFE_BACK:
+		case FX_CLOUD:
+		case FX_MARKER:
 			if (ani[curdir+ani_type*NUM_FACINGS][cycle] == -1)
 				cycle = 0;
 			break;
@@ -599,7 +599,7 @@ short effect::death()
 
 	switch (family)
 	{
-		case FAMILY_GHOST_SCARE: // the ghost's scare
+		case FX_GHOST_SCARE: // the ghost's scare
 			if (!owner || owner->dead)
 				return 0;
 			foelist = myscreen->find_foes_in_range(myscreen->level_data.oblist, 50+(10*owner->stats->level),
@@ -628,12 +628,12 @@ short effect::death()
 			} // end of cycle through scare list
 			
 			break;  // end of ghost scare
-		case FAMILY_BOMB: // Burning bomb
+		case FX_BOMB: // Burning bomb
 			if (!owner || owner->dead)
 				owner = this;
 			if (on_screen())
 				myscreen->soundp->play_sound(SOUND_EXPLODE);
-			newob = myscreen->level_data.add_ob(ORDER_FX, FAMILY_EXPLOSION, 1);
+			newob = myscreen->level_data.add_ob(ORDER_FX, FX_EXPLOSION, 1);
 			newob->owner = owner;
 			newob->stats->hitpoints = 0;
 			newob->stats->level = owner->stats->level;
@@ -643,7 +643,7 @@ short effect::death()
 			newob->damage = damage;
 			break;
 
-		case FAMILY_EXPLOSION: // the bomb's explosion
+		case FX_EXPLOSION: // the bomb's explosion
 			if (!owner || owner->dead)
 				owner = this;
 			// Set the max distance for a bomb ..

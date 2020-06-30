@@ -70,7 +70,7 @@ short living::act()
 			death();
 			return 0;
 		}
-		if (lifetime-- < 1)
+		if (--lifetime < 1) //KAT: bug this would just go to zero, right? It was a POST-INCREMENT bug.
 		{
 			dead = 1;
 			return death();
@@ -521,7 +521,8 @@ walker * living::do_summon(char whatfamily, unsigned short lifetime)
 	newob = myscreen->level_data.add_ob(ORDER_LIVING, whatfamily);
 	newob->owner = this;
 	newob->lifetime = lifetime;
-	newob->transform_to(ORDER_LIVING, whatfamily);
+	newob->transform_to(ORDER_LIVING, whatfamily);	
+	newob->is_a_summon = true;
 	//  Log("\n\nSummoned %d, life %d\n", whatfamily, lifetime);
 
 	return newob;

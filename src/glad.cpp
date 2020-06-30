@@ -532,12 +532,30 @@ short new_score_panel(screen *myscreen, short do_it)
 	char draw_button;  // do we draw a button background?
 	char text_color;
 	static char namelist[NUM_GUYS][20] =
-	    { "SOLDIER", "ELF", "ARCHER", "MAGE",
-	      "SKELETON", "CLERIC", "ELEMENTAL",
-	      "FAERIE", "SLIME", "SLIME", "SLIME",
-	      "THIEF", "GHOST", "DRUID", "ORC",
-	      "ORC CAPTAIN", "BARBARIAN", "ARCHMAGE",
-	      "GOLEM", "GIANT SKEL", "TOWER",
+	    { 
+		"SOLDIER", 
+		"ELF", 
+		"ARCHER", 
+		"MAGE", 
+		"SKELETON", 
+		"CLERIC", 
+		"ELEMENTAL", 
+		"FAERIE", 
+		"SLIME", 
+		"SLIME", 
+		"SLIME", 
+		"THIEF", 
+		"GHOST", 
+		"DRUID", 
+		"ORC",
+	    "ORC CAPTAIN", 
+		"BARBARIAN", 
+		"SUMMONER", 
+		"BUILDER", 
+		"ARCHMAGE",
+		"GOLEM", 
+		"GIANT SKEL", 
+		"TOWER",
 	    };
 
 	Uint32 myscore;
@@ -558,35 +576,6 @@ short new_score_panel(screen *myscreen, short do_it)
 		rm = myscreen->viewob[player]->endx - OVERSCAN_PADDING; //right
 		bm = myscreen->viewob[player]->endy - OVERSCAN_PADDING; //bottom
 
-		//if(player == 3)
-          //  {
-            // [P=3] [401 301] [799 599] [w398 h298]
-         //   printf("[P=%d] [%d %d] [%d %d] [w%d h%d]\n", player, lm, tm, rm, bm, rm-lm, bm-tm);
-        //    tm -= 300;
-          //  lm -= 300;
-
-            //}
-/*
-4-player
-    [P=0] [0     0] [398 298] HERE WE GO? the Y isn't lined up...
-    [P=1] [0   400] [798 298]
-    [P=2] [301   0] [398 599]
-    [P=3] [301 401] [799 599]
-
-    [manually rounded for easier]
-    [P=0] [0     0] [400 300]   --p0 is top left
-    [P=1] [0   400] [800 300]   --p1 is lower left
-    [P=2] [300   0] [400 600]   --p3 is top-right
-    [P=3] [300 400] [800 600]   --p4 is lower-right +
-
-
-    [P=0] [0 0]     [298 398] [w398 h298]
-    [P=1] [0 400]   [298 798] [w398 h298]
-    [P=2] [301 0]   [599 398] [w398 h298]
-    [P=3] [301 401] [599 799] [w398 h298]
-
-    width/heights all work out (within a pixel or two)!
-*/
 //printf("[P=%d] [%d %d] [%d %d] [w%d h%d]\n", player, lm, tm, rm, bm, rm-lm, bm-tm);
 		if (control && !control->dead && control->user == player)
 		{

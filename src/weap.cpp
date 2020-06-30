@@ -34,8 +34,6 @@ weap::~weap()
 
 short weap::act()
 {
-	
-
 	// Make sure everyone we're pointing to is valid
 	if (foe && foe->dead)
 		foe = NULL;
@@ -255,7 +253,6 @@ short weap::animate()
 	//       Log("weap ani_type = %d\n", ani_type);
 	//       ani_type = 0;
 	//  }
-
 	switch (family)
 	{
 		case WEAP_TREE:

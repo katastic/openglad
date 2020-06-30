@@ -2447,7 +2447,6 @@ short walker::special()
 short walker::teleport()
 {
 	short newx,newy;
-	Sint32 distance;
 
 	// First check to see if we have a marker to go to
 	// NOTE: it must be a bit away from us ..
@@ -2462,8 +2461,9 @@ short walker::teleport()
 		   )
 		{
 			// Found our marker!
-			if (myscreen->query_passable(ob->xpos, ob->ypos, this)
-			        && (distance = distance_to_ob(ob) > 64) ) //KAT whoever wrote this deserves to be slapped
+			bool can_make = myscreen->query_passable(ob->xpos, ob->ypos, this);
+			short distance = distance_to_ob(ob);
+			if (can_make && distance > 64 ) 
 			{
 				center_on(ob);
 				ob->lifetime--;
@@ -2967,7 +2967,7 @@ short walker::death()
 	walker  *newob = NULL;
 	Sint32 i;
 
-	if(is_a_summon)
+	if(is_a_summon) //this is HARDCODED for all summons!!!!
 		{
 		owner->stats->special_cost[1] -= 25;
 		if(owner->stats->special_cost[1] < 25)owner->stats->special_cost[1] = 25;
@@ -4648,7 +4648,10 @@ int walker::special_archmage()
 						strcpy(message, myguy->name);
 					else
 						strcpy(message, "ArchMage");
-					snprintf(tempstr, sizeof(tempstr), "%s has controlled %d men", message, didheal);
+					{
+					int n = snprintf(tempstr, sizeof(tempstr), "%s has controlled %d men", message, didheal);
+					if(n < 0){}
+					}
 					myscreen->do_notify(tempstr, this);
 
 					generic2 = stats->magicpoints - stats->special_cost[(int)current_special];
@@ -4672,7 +4675,7 @@ int walker::special_archmage()
 int walker::special_fireelemental()
 {
 	int tempx, tempy;
-	int lastx, lasty;
+	
 	switch (current_special)
 			{
 				case 1:  // lots o' fireballs
@@ -4874,9 +4877,14 @@ int walker::special_thief()
 						else
 							strcpy(message, "Thief");
 						if (generic2) // then we actually failed to charm
-							snprintf(tempstr, sizeof(tempstr), "%s failed to charm!", message);
-						else
-							snprintf(tempstr, sizeof(tempstr), "%s charmed an opponent!", message);
+							{
+							int n = snprintf(tempstr, sizeof(tempstr), "%s failed to charm!", message);
+							if(n<0){}
+							}
+						else{
+							int n = snprintf(tempstr, sizeof(tempstr), "%s charmed an opponent!", message);
+							if(n<0){}
+							}
 						myscreen->do_notify(tempstr, this);
 						busy += 10; // takes a while
 						break; // end of Charm Opponent
@@ -4971,12 +4979,10 @@ return 1;
 
 int walker::special_druid()
 {
-	walker* tempwalk;
+	
 	walker* newob;
 	walker* alive;
-	short howmany;
-	short didheal;
-	char message[80];
+	short howmany;	
 
 	switch (current_special)
 			{
@@ -5029,6 +5035,7 @@ int walker::special_druid()
                     {
                         std::list<walker*> newlist = myscreen->find_friends_in_range(myscreen->level_data.oblist,
                                   60, &howmany, this);
+						short didheal;
                         didheal = 0;
                         if (howmany > 1) // some friends here ..
                         {
@@ -5039,6 +5046,7 @@ int walker::special_druid()
                                 if (newob != this) // not for ourselves
                                 {
                                     // First see if this person already has protection (slow)
+									walker* tempwalk;
                                     tempwalk = NULL;
                                     for(auto f = myscreen->level_data.oblist.begin(); f != myscreen->level_data.oblist.end(); f++)
                                     {
@@ -5086,6 +5094,7 @@ int walker::special_druid()
                                 return 0; // everyone was okay; don't charge us
                             else
                             {
+								char message[80];
                                 // Inform screen/view to print a message ..
                                 if (didheal == 1)
                                     snprintf(message, sizeof(message),  "Druid protected 1 man!");

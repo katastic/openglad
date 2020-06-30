@@ -3868,7 +3868,8 @@ int walker::special_builder()
 					walker* f = myscreen->level_data.add_ob(ORDER_LIVING, GUY_FAERIE);
 					if(f)
 						{
-						f->setxy(xpos+(rand()%50)-25, ypos+(rand()%50)-25);
+						const int WIDTH = 200;
+						f->setxy(xpos+(rand()%WIDTH)-WIDTH/2, ypos+(rand()%WIDTH)-WIDTH/2);
 						f->team_num = team_num;
 						f->owner = this;
 						f->lifetime = 50 + stats->level*2;

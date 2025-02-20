@@ -1838,7 +1838,8 @@ bool video::save_screenshot()
 	static int i = 1;
 	char buf[200];
     #ifndef USE_BMP_SCREENSHOT
-	snprintf(buf, 200, "screenshot%d.png", i);
+//	snprintf(buf, 200, "screenshot%d.png", i); // screw your libpng dependency
+    snprintf(buf, 200, "screenshot%d.bmp", i);
 	#else
 	snprintf(buf, 200, "screenshot%d.bmp", i);
 	#endif
@@ -1853,7 +1854,7 @@ bool video::save_screenshot()
 
     Log("Saving screenshot: %s\n", buf);
 
-	
+
 //    #ifndef USE_BMP_SCREENSHOT
     // Make it safe to save (convert alpha channel)
     //surf = SDL_PNGFormatAlpha(surf); // undefined reference to `SDL_PNGFormatAlpha'

@@ -8,6 +8,7 @@ Features I changed because I'm amazing:
  - Night mode, because I was bored one weekend. Visual only but adds cool ambiance. [status: Needs config toggle and criterea such as % chance to activate, or occurs every 2/3/4/5 levels.]
  - Blood/gore on hit, because I felt like it. [status: works last I checked. Can't remember if it occludes against walls.]
  - Custom classes which broke the game saves (objectID's are hardcoded with towers being the last unit) that I need to remove since I got bored and never finished it. [status: UNRESOLVED]
+ - Removed libpng and png screenshot support because this is a dumb dependency to add and force people to track the windows binaries for the exact version.
 
 TOFIX:
  - In addition to notes above, I need to reverse any other commits that were "game mods" as opposed to just enhanced features and merge whatever upstream commits there are.

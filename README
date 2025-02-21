@@ -1,0 +1,15 @@
+This is NOT the main branch you want here:
+
+https://github.com/openglad/openglad
+
+Features I changed because I'm amazing:
+ - Custom resolutions because I don't use a 13" CRT in 1996 anymore, and, again because I'm amazing, the user elements scale based on dimensions instead of just hard coding them. [Mostly complete]
+ - Found and removed the bug the main branch introduced that broke armor and summoned faery lifetimes. [upstream fixes this now]
+ - Night mode, because I was bored one weekend. Visual only but adds cool ambiance. [status: Needs config toggle and criterea such as % chance to activate, or occurs every 2/3/4/5 levels.]
+ - Blood/gore on hit, because I felt like it. [status: works last I checked. Can't remember if it occludes against walls.]
+ - Custom classes which broke the game saves (objectID's are hardcoded with towers being the last unit) that I need to remove since I got bored and never finished it. [status: UNRESOLVED]
+
+TOFIX:
+ - In addition to notes above, I need to reverse any other commits that were "game mods" as opposed to just enhanced features and merge whatever upstream commits there are.
+
+Last update 2/21/2025
